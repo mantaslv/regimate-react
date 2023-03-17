@@ -1,6 +1,9 @@
 {
   "name": "frontend",
-  "proxy": "http://localhost:4000",
+  "proxy": {
+    "development": "http://localhost:4000",
+    "production": ""
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

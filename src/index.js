@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './app';
 import { WorkoutsContextProvider } from './context/workoutsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
