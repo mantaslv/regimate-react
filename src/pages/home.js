@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import WorkoutDetails from "../components/workoutDetails";
 import WorkoutForm from "../components/workoutForm";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
-import apiBaseUrl from "../api";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
@@ -11,9 +10,11 @@ const Home = () => {
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const res = await fetch(apiBaseUrl + '/api/workouts', {
+            const res = await fetch(window.env.API_URL + '/api/workouts', {
+                mode: 'cors',
                 headers: {
-                    'Authorization': `Bearer ${user.token}`
+                    'Authorization': `Bearer ${user.token}`,
+                    credentials: 'include'
                 }
             });
             const json = await res.json();
