@@ -1,9 +1,5 @@
-const apiBaseUrl = () => {
-  if (process.env.NODE_ENV === 'production') {
-    return "https://regimate.onrender.com/";
-  } else {
-    return "";
-  };
-};
+const apiBaseUrl = process.env.NODE_ENV === 'production'
+  ? "https://regimate.onrender.com/"
+  : "";
 
 export default apiBaseUrl;
