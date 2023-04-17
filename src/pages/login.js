@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Alert } from '@mui/material';
 
 const theme = createTheme();
 
@@ -45,9 +46,7 @@ const Login = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {error && (
-              <Typography variant="body2" color="error" sx={{ mb: 1 }}>
-                {error}
-              </Typography>
+              <Alert severity="error">{error}</Alert>
             )}
             <TextField
               margin="normal"

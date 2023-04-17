@@ -45,9 +45,7 @@ const Signup = () => {
               </Typography>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 {error && (
-                  <Typography variant="body2" color="error" sx={{ mb: 1 }}>
-                    {error}
-                  </Typography>
+                  <Alert severity="error">{error}</Alert>
                 )}
                 <TextField
                   margin="normal"
