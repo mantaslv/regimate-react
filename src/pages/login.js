@@ -41,7 +41,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {error && (
@@ -80,7 +80,7 @@ const Login = () => {
               disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
-            Sign In
+            Log In
             </Button>
             
             <Grid container justifyContent="center" alignItems="center"> 
