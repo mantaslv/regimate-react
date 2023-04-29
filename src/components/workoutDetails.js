@@ -49,40 +49,30 @@ const WorkoutDetails = ({ workout }) => {
     }));
 
     return (
-        <>
-            {/* <div className="workout-details">
-                <h4>{workout.title}</h4>
-                <p><strong>Load (kg): </strong>{workout.load}</p>
-                <p><strong>Sets: </strong>{workout.sets}</p>
-                <p><strong>Reps: </strong>{workout.reps}</p>
-                <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
-                <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
-            </div> */}
-            <Card>
-                <CardHeader 
-                    title={workout.title}
-                    subheader={formattedDate}
-                    action={
-                        <IconButton aria-label="delete" onClick={handleClick}>
-                            <DeleteOutlineOutlinedIcon />
-                        </IconButton>
-                    }
-                />
-                <CardContent>
-                    <Grid container spacing={2}>
-                        <Grid item md={4}>
-                            <Item>Load (kg): {workout.load}</Item>
-                        </Grid>
-                        <Grid item md={4}>
-                            <Item>Sets: {workout.sets}</Item>
-                        </Grid>
-                        <Grid item md={4}>
-                            <Item>Reps: {workout.reps}</Item>
-                        </Grid>
+        <Card>
+            <CardHeader 
+                title={workout.title}
+                subheader={formattedDate}
+                action={
+                    <IconButton aria-label="delete" onClick={handleClick}>
+                        <DeleteOutlineOutlinedIcon />
+                    </IconButton>
+                }
+            />
+            <CardContent>
+                <Grid container spacing={2}>
+                    <Grid item md={4}>
+                        <Item>Load (kg): {workout.load}</Item>
                     </Grid>
-                </CardContent>
-            </Card>
-        </>
+                    <Grid item md={4}>
+                        <Item>Sets: {workout.sets}</Item>
+                    </Grid>
+                    <Grid item md={4}>
+                        <Item>Reps: {workout.reps}</Item>
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
     );
 };
 
