@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Alert, Box, Button, TextField } from "@mui/material";
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const WorkoutForm = () => {
     const { dispatch } = useWorkoutsContext();
@@ -50,44 +52,76 @@ const WorkoutForm = () => {
     };
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a new workout</h3>
-
-            <label>Exercise Title:</label>
-            <input 
-                type="text" 
-                onChange={(e) => setTitle(e.target.value)} 
-                value={title} 
-                className={emptyFields.includes('title') ? 'error' : ''}
+        <Box 
+            component="form" 
+            onSubmit={handleSubmit}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+        >
+            {error && (
+                <Alert severity="error">{error}</Alert>
+            )}
+            <TextField
+                margin="normal"
+                variant="filled"
+                required
+                fullWidth
+                id="title"
+                label="Exercise Title"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
             />
-
-            <label>Load (in kg):</label>
-            <input 
-                type="number" 
-                onChange={(e) => setLoad(e.target.value)} 
+            <TextField
+                margin="normal"
+                variant="filled"
+                required
+                fullWidth
+                id="load"
+                label="Load (in kg)"
+                name="load"
                 value={load}
-                className={emptyFields.includes('load') ? 'error' : ''}
+                onChange={(e) => setLoad(e.target.value)}
+                type="number"
             />
-
-            <label>Sets:</label>
-            <input 
-                type="number" 
-                onChange={(e) => setSets(e.target.value)} 
+            <TextField
+                margin="normal"
+                variant="filled"
+                required
+                fullWidth
+                id="sets"
+                label="Sets"
+                name="sets"
                 value={sets}
-                className={emptyFields.includes('sets') ? 'error' : ''}
+                onChange={(e) => setSets(e.target.value)}
+                type="number"
             />
-
-            <label>Reps:</label>
-            <input 
-                type="number" 
-                onChange={(e) => setReps(e.target.value)} 
+            <TextField
+                margin="normal"
+                variant="filled"
+                required
+                fullWidth
+                id="reps"
+                label="Reps"
+                name="reps"
                 value={reps}
-                className={emptyFields.includes('reps') ? 'error' : ''}
+                onChange={(e) => setReps(e.target.value)}
+                type="number"
             />
-
-            <button>Add Workout</button>
-            {error && <div className="error">{error}</div>}
-        </form>
+            <Button
+                className="mt-3"
+                type="submit"
+                variant="contained"
+                startIcon={<AddTaskIcon />}
+                sx={{ mt: 2 }}
+            >
+                Add Workout
+            </Button>
+        </Box>
     )
 };
 
