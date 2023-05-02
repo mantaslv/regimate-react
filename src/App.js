@@ -6,22 +6,40 @@ import Navbar from './components/navbar';
 import Signup from './pages/signup';
 import Login from './pages/login';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#fafafa',
+        },
+        secondary: {
+            main: '#49c5b6',
+        },
+        background: {
+            default: '#212121',
+        },
+        text: {
+            primary: '#49c5b6',
+        },
+    },
+});
+
 const App = () => {
     const { user } = useAuthContext();
 
     return (
-        <div className="App">
+        <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Navbar />
-                <div className='pages'>
-                    <Routes>
-                        <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
-                        <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
-                        <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
+                    <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
+                    <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
+                </Routes>
             </BrowserRouter>
-        </div>
+        </ThemeProvider>    
     );
 };
 
