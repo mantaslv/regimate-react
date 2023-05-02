@@ -7,6 +7,7 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 const theme = createTheme({
     palette: {
@@ -24,6 +25,15 @@ const theme = createTheme({
             primary: '#49c5b6',
         },
     },
+    components: {
+        MuiTextField: {
+            defaultProps: {
+                sx: {
+                    background: 'white',
+                },
+            },
+        },
+    },
 });
 
 const App = () => {
@@ -31,14 +41,18 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <BrowserRouter>
-                <Navbar />
-                <Routes>
-                    <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
-                    <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
-                    <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
-                </Routes>
-            </BrowserRouter>
+            <div style={{ backgroundColor: theme.palette.background.default }}>
+                <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
+                    <BrowserRouter>
+                        <Navbar />
+                        <Routes>
+                            <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
+                            <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
+                            <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
+                        </Routes>
+                    </BrowserRouter>
+                </Box>
+            </div>
         </ThemeProvider>    
     );
 };

@@ -1,5 +1,4 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
-import { formatDistanceToNow } from "date-fns";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Card, CardContent, CardHeader, Grid, IconButton, Paper } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';

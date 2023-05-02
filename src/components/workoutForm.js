@@ -13,7 +13,7 @@ const WorkoutForm = () => {
     const [sets, setSets] = useState('');
     const [reps, setReps] = useState('');
     const [error, setError] = useState(null);
-    const [emptyFields, setEmptyFields] = useState([]);
+    // const [emptyFields, setEmptyFields] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ const WorkoutForm = () => {
 
         if (!res.ok) {
             setError(json.error);
-            setEmptyFields(json.emptyFields);
+            // setEmptyFields(json.emptyFields);
         };
         if (res.ok) {
             setTitle('');
@@ -45,7 +45,7 @@ const WorkoutForm = () => {
             setSets('');
             setReps('');
             setError(null);
-            setEmptyFields([]);
+            // setEmptyFields([]);
             console.log("new workout added!");
             dispatch({type: 'CREATE_WORKOUT', payload: json})
         };
@@ -69,6 +69,7 @@ const WorkoutForm = () => {
                 variant="filled"
                 required
                 fullWidth
+                sx={{ backgroundColor: 'white' }}
                 id="title"
                 label="Exercise Title"
                 name="title"

@@ -31,7 +31,7 @@ const Home = () => {
     }, [dispatch, user]);
 
     return (
-        <Box sx={{ marginTop: 8}}>
+        <Box sx={{ marginTop: 10}}>
             <Grid container spacing={4}>
                 <Grid item md={9} spacing={2}>
                     <Box sx={{ overflowY: "auto" }}>
