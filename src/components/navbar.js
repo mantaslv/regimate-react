@@ -14,19 +14,17 @@ const Navbar = () => {
     return (
         <header>
             <AppBar position="fixed">
-                <Container maxWidth="xl">
+                <Container maxWidth="lg">
                     <Toolbar disableGutters>
-                        <FitnessCenterIcon sx={{ display: 'flex', mr: 1 }} />
+                        <FitnessCenterIcon  sx={{ display: 'flex', mr: 1 }} />
                         <Typography
-                            variant="h6"
+                            variant="h5"
                             noWrap
                             component="a"
                             href="/"
                             sx={{
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
                                 textDecoration: 'none',

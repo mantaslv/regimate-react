@@ -5,6 +5,7 @@ import Home from './pages/home';
 import Navbar from './components/navbar';
 import Signup from './pages/signup';
 import Login from './pages/login';
+import AddWorkout from './pages/addWorkout';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
@@ -13,10 +14,10 @@ const theme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#fafafa',
+            main: '#009688',
         },
         secondary: {
-            main: '#009688',
+            main: '#fafafa',
         },
         background: {
             default: '#212121',
@@ -24,11 +25,14 @@ const theme = createTheme({
         text: {
             primary: '#009688',
         },
-        input: {
-            background: '#009688', // Change background shade of text field to light red
-        },
     },
-    
+    typography: {
+        fontFamily: 'Roboto Mono',
+        fontWeightLight: 400,
+        fontWeightRegular: 500,
+        fontWeightMedium: 600,
+        fontWeightBold: 700,
+    },
 });
 
 const App = () => {
@@ -36,18 +40,17 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div style={{ backgroundColor: theme.palette.background.default }}>
-                <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
-                    <BrowserRouter>
-                        <Navbar />
-                        <Routes>
-                            <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
-                            <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
-                            <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
-                        </Routes>
-                    </BrowserRouter>
-                </Box>
-            </div>
+            <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
+                <BrowserRouter>
+                    <Navbar />
+                    <Routes>
+                        <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
+                        <Route path='/add-workout' element={<AddWorkout />} />
+                        <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
+                        <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
+                    </Routes>
+                </BrowserRouter>
+            </Box>
         </ThemeProvider>    
     );
 };

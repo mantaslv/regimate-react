@@ -50,7 +50,7 @@ const WorkoutDetails = ({ workout }) => {
     return (
         <Card>
             <CardHeader 
-                title={workout.title}
+                title= {workout.title}
                 subheader={formattedDate}
                 action={
                     <IconButton aria-label="delete" onClick={handleClick}>
@@ -61,13 +61,13 @@ const WorkoutDetails = ({ workout }) => {
             <CardContent>
                 <Grid container spacing={2}>
                     <Grid item md={4}>
-                        <Item>Load (kg): {workout.load}</Item>
+                        <Item elevation={3}>Load (kg): {workout.load}</Item>
                     </Grid>
                     <Grid item md={4}>
-                        <Item>Sets: {workout.sets}</Item>
+                        <Item elevation={3}>Sets: {workout.sets}</Item>
                     </Grid>
                     <Grid item md={4}>
-                        <Item>Reps: {workout.reps}</Item>
+                        <Item elevation={3}>Reps: {workout.reps}</Item>
                     </Grid>
                 </Grid>
             </CardContent>

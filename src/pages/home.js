@@ -33,17 +33,19 @@ const Home = () => {
     return (
         <Box sx={{ marginTop: 10}}>
             <Grid container spacing={4}>
-                <Grid item md={9} spacing={2}>
+                <Grid item md={9}>
                     <Box sx={{ overflowY: "auto" }}>
-                        {workouts && workouts.map((workout) => (
-                            <Grid item md={12} sx={{ mb: 2 }}>
-                                <WorkoutDetails key={workout._id} workout={workout} />
-                            </Grid>
-                        ))}
+                        <Grid item md={12} >
+                            {workouts && workouts.map((workout) => (
+                                <Box key={workout._id} sx={{ mt: 2 }}>
+                                    <WorkoutDetails workout={workout} />
+                                </Box>
+                            ))}
+                        </Grid>
                     </Box>
                 </Grid>
                 <Grid item md={3} >
-                    <Box sx={{ position: "sticky", top: 85 }}>
+                    <Box sx={{ position: "sticky", top: 100 }}>
                         <WorkoutForm />
                     </Box>
                 </Grid>
