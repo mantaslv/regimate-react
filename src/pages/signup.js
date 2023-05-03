@@ -27,68 +27,71 @@ const Signup = () => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs" sx={{ marginTop: 12}}>
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">Sign up</Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        {error && (
-                            <Alert severity="error">{error}</Alert>
-                        )}
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            autoComplete="email"
-                            autoFocus
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            disabled={isLoading}
-                            sx={{ mt: 3, mb: 2 }}
-                        >Sign Up</Button>
-                        
-                        <Grid container justifyContent="center" alignItems="center"> 
-                            <Grid item>
-                                <Link href="/login" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
+        <Container component="main" maxWidth="xs" sx={{ marginTop: 12}}>
+            <CssBaseline />
+            <Box
+                padding={4}
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    backgroundColor: 'white',
+                    borderRadius: 2
+                }}
+            >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">Sign up</Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    {error && (
+                        <Alert severity="error">{error}</Alert>
+                    )}
+                    <TextField
+                        margin="normal"
+                        variant='filled'
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="email"
+                        autoFocus
+                    />
+                    <TextField
+                        margin="normal"
+                        variant='filled'
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        disabled={isLoading}
+                        sx={{ mt: 3, mb: 2 }}
+                    >Sign Up</Button>
+                    
+                    <Grid container justifyContent="center" alignItems="center"> 
+                        <Grid item>
+                            <Link href="/login" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
                         </Grid>
-                    </Box>
+                    </Grid>
                 </Box>
-            </Container>
-        </ThemeProvider>
+            </Box>
+        </Container>
     );
 };
 

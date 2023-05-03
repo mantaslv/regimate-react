@@ -16,24 +16,19 @@ const theme = createTheme({
             main: '#fafafa',
         },
         secondary: {
-            main: '#49c5b6',
+            main: '#009688',
         },
         background: {
             default: '#212121',
         },
         text: {
-            primary: '#49c5b6',
+            primary: '#009688',
+        },
+        input: {
+            background: '#009688', // Change background shade of text field to light red
         },
     },
-    components: {
-        MuiTextField: {
-            defaultProps: {
-                sx: {
-                    background: 'white',
-                },
-            },
-        },
-    },
+    
 });
 
 const App = () => {

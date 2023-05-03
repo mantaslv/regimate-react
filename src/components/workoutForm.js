@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Alert, Box, Button, TextField } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const WorkoutForm = () => {
@@ -55,12 +55,27 @@ const WorkoutForm = () => {
         <Box 
             component="form" 
             onSubmit={handleSubmit}
+            padding={2}
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                backgroundColor: 'white',
+                borderRadius: 1,
             }}
         >
+            <Typography
+            sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                color: 'inherit',
+                textDecoration: 'none',
+                flexGrow: 1
+            }}>
+                Add Workout
+            </Typography>
             {error && (
                 <Alert severity="error">{error}</Alert>
             )}
@@ -69,13 +84,13 @@ const WorkoutForm = () => {
                 variant="filled"
                 required
                 fullWidth
-                sx={{ backgroundColor: 'white' }}
                 id="title"
                 label="Exercise Title"
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
+                
             />
             <TextField
                 margin="normal"
