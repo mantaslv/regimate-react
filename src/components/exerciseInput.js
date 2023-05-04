@@ -6,10 +6,10 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 const ExerciseInput = () => {
     const [exerciseName, setExerciseName] = useState("");
     const [exerciseChosen, setExerciseChosen] = useState(false);
-    const [sets, setSets] = useState([{weight1: "", reps1: ""}]);
+    const [sets, setSets] = useState([{weight: "", reps: ""}]);
 
     const handleAddSet = () => {
-        setSets([...sets, {weight1: "", reps1: ""}]);
+        setSets([...sets, {weight: "", reps: ""}]);
     };
 
     const handleInputChange = (setIndex, event) => {
@@ -57,16 +57,15 @@ const ExerciseInput = () => {
                     {exerciseName !== "" && (
                         <>
                             {sets.map((set, setIndex) => (
-
                                 <Grid container spacing={2} padding={2} alignItems="center" key={setIndex}>
                                     <Grid item sx={{ ml: 1}}>
                                         <Typography variant="h6">{`Set ${setIndex + 1}`}</Typography>
                                     </Grid>
                                     <Grid item>
-                                        <TextField label="Weight (kg)" name="weight1" value={set.weight1} onChange={(event) => handleInputChange(setIndex, event)}/>
+                                        <TextField label="Weight (kg)" name="weight" value={set.weight} onChange={(event) => handleInputChange(setIndex, event)}/>
                                     </Grid>
                                     <Grid item>
-                                        <TextField label="Reps" name="reps1" value={set.reps1} onChange={(event) => handleInputChange(setIndex, event)}/>
+                                        <TextField label="Reps" name="reps" value={set.reps} onChange={(event) => handleInputChange(setIndex, event)}/>
                                     </Grid>
                                     <Grid item>
                                         <Button variant="contained" disabled={sets.length === 1} color="error" onClick={() => handleRemoveSet(setIndex)}><RemoveCircleIcon/></Button>

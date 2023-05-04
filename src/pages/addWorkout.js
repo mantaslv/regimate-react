@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import ExerciseInput from "../components/exerciseInput";
+import { useState } from "react";
 
 const AddWorkout = () => {
+    const [exercises, setExercises] = useState(1);
 
     return (
         <Box sx={{ mt: 10 }}>
