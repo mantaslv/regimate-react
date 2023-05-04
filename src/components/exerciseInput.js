@@ -52,32 +52,39 @@ const ExerciseInput = () => {
                                 }}/>
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" onClick={() => setExerciseChosen(true)}>Confirm</Button>
+                                <Button variant="contained" disabled={exerciseName === ""} onClick={() => setExerciseChosen(true)}>Confirm</Button>
                             </Grid>
                         </>
                     )}
-                    <Grid item>
-                        <Button variant="contained" onClick={() => handleAddSet()}>Add set</Button>
-                    </Grid>
-                    {sets.map((set, setIndex) => (
-                        <Grid container spacing={2} padding={2} alignItems="center" key={setIndex}>
-                            <Grid item sx={{ ml: 1}}>
-                                <Typography variant="h6">{`Set ${setIndex + 1}`}</Typography>
+                    {exerciseName !== "" && (
+                        <>
+                            {sets.map((set, setIndex) => (
+
+                                <Grid container spacing={2} padding={2} alignItems="center" key={setIndex}>
+                                    <Grid item sx={{ ml: 1}}>
+                                        <Typography variant="h6">{`Set ${setIndex + 1}`}</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField label="Weight (kg)" name="weight1" value={set.weight1} onChange={(event) => handleInputChange(setIndex, event)}/>
+                                    </Grid>
+                                    <Grid item>
+                                        <TextField label="Reps" name="reps1" value={set.reps1} onChange={(event) => handleInputChange(setIndex, event)}/>
+                                    </Grid>
+                                    {/* <Grid item>
+                                        <Button variant="contained" onClick={() => handleRemoveSet(setIndex)}><AddTaskIcon/></Button>
+                                    </Grid> */}
+                                    <Grid item>
+                                        <Button variant="contained" disabled={sets.length === 1} color="error" onClick={() => handleRemoveSet(setIndex)}><RemoveCircleIcon/></Button>
+                                    </Grid>
+                                </Grid>
+                            ))}
+                            <Grid container spacing={2} alignItems="center">
+                                <Grid item sx={{ ml: 4, mt: 1}}>
+                                    <Button variant="contained" onClick={() => handleAddSet()}>Add set</Button>
+                                </Grid>
                             </Grid>
-                            <Grid item>
-                                <TextField label="Weight (kg)" name="weight1" value={set.weight1} onChange={(event) => handleInputChange(setIndex, event)}/>
-                            </Grid>
-                            <Grid item>
-                                <TextField label="Reps" name="reps1" value={set.reps1} onChange={(event) => handleInputChange(setIndex, event)}/>
-                            </Grid>
-                            {/* <Grid item>
-                                <Button variant="contained" onClick={() => handleRemoveSet(setIndex)}><AddTaskIcon/></Button>
-                            </Grid> */}
-                            <Grid item>
-                                <Button variant="contained" color="error" onClick={() => handleRemoveSet(setIndex)}><RemoveCircleIcon/></Button>
-                            </Grid>
-                        </Grid>
-                    ))}
+                        </>
+                    )}
                 </Grid>
             </CardContent>
         </Card>
