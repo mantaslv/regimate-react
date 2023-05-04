@@ -2,7 +2,6 @@ import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/mat
 import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const ExerciseInput = () => {
     const [exerciseName, setExerciseName] = useState("");
@@ -18,7 +17,6 @@ const ExerciseInput = () => {
         const newSets = [...sets];
         newSets[setIndex][name] = value;
         setSets(newSets);
-        console.log(sets);
     };
 
     const handleRemoveSet = (setIndex) => {
@@ -70,9 +68,6 @@ const ExerciseInput = () => {
                                     <Grid item>
                                         <TextField label="Reps" name="reps1" value={set.reps1} onChange={(event) => handleInputChange(setIndex, event)}/>
                                     </Grid>
-                                    {/* <Grid item>
-                                        <Button variant="contained" onClick={() => handleRemoveSet(setIndex)}><AddTaskIcon/></Button>
-                                    </Grid> */}
                                     <Grid item>
                                         <Button variant="contained" disabled={sets.length === 1} color="error" onClick={() => handleRemoveSet(setIndex)}><RemoveCircleIcon/></Button>
                                     </Grid>
