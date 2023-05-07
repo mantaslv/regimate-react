@@ -18,6 +18,18 @@ export const exercisesReducer = (state, action) => {
                 ...state,
                 exercises: [...state.exercises, action.payload ],
             };
+        case "UPDATE_SETS":
+            const { exerciseName, updatedSets } = action.payload;
+            const updatedExercises = state.exercises.map((exercise) => {
+                if (exercise.exerciseName === exerciseName) {
+                    return { ...exercise, sets: updatedSets };
+                }
+                return exercise;
+            });
+            return {
+                ...state,
+                exercises: updatedExercises,
+            };
         default:
             return state;
     }

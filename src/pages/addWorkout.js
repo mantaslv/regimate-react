@@ -9,6 +9,7 @@ const AddWorkout = () => {
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="white">New Workout</Typography>
             <ExerciseInput/>
+            <ExerciseInput/>
         </Box>
     );
 };
