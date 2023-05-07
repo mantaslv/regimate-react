@@ -6,7 +6,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Grid } from "@mui/material";
 
 const Home = () => {
-    const { workouts, dispatch} = useWorkoutsContext();
+    const { workouts, dispatch } = useWorkoutsContext();
     const {user} = useAuthContext();
 
     useEffect(() => {

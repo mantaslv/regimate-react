@@ -2,8 +2,11 @@ import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/mat
 import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const ExerciseInput = () => {
+    const { dispatch } = useWorkoutsContext();
+
     const [exerciseName, setExerciseName] = useState("");
     const [exerciseChosen, setExerciseChosen] = useState(false);
     const [sets, setSets] = useState([{weight: "", reps: ""}]);
@@ -25,6 +28,10 @@ const ExerciseInput = () => {
         setSets(newSets);
     };
 
+    const handleNameSubmit = () => {
+        setExerciseChosen(true);
+    };
+
     return (
         <Card sx={{ mt: 2 }}>
             <CardContent>
@@ -38,7 +45,7 @@ const ExerciseInput = () => {
                                 <Typography variant="h5">{exerciseName}</Typography>
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" onClick={() => setExerciseChosen(false)}><EditIcon/></Button>
+                                <Button variant="contained" ><EditIcon/></Button>
                             </Grid>
                         </>
                     ) : (
@@ -50,11 +57,11 @@ const ExerciseInput = () => {
                                 }}/>
                             </Grid>
                             <Grid item>
-                                <Button variant="contained" disabled={exerciseName === ""} onClick={() => setExerciseChosen(true)}>Confirm</Button>
+                                <Button variant="contained" disabled={exerciseName === ""} onClick={() => handleNameSubmit()}>Confirm</Button>
                             </Grid>
                         </>
                     )}
-                    {exerciseName !== "" && (
+                    {exerciseChosen && (
                         <>
                             {sets.map((set, setIndex) => (
                                 <Grid container spacing={2} padding={2} alignItems="center" key={setIndex}>
