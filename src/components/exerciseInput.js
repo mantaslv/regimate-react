@@ -2,10 +2,10 @@ import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/mat
 import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useExercisesContext } from "../hooks/useExercisesContext";
 
 const ExerciseInput = () => {
-    const { dispatch } = useWorkoutsContext();
+    const { exercises, dispatch } = useExercisesContext();
 
     const [exerciseName, setExerciseName] = useState("");
     const [exerciseChosen, setExerciseChosen] = useState(false);
@@ -29,8 +29,11 @@ const ExerciseInput = () => {
     };
 
     const handleNameSubmit = () => {
+        const newExercise = { exerciseName, sets: [] };
+        dispatch({ type: "ADD_EXERCISE", payload: newExercise });
         setExerciseChosen(true);
     };
+
 
     return (
         <Card sx={{ mt: 2 }}>
@@ -38,6 +41,7 @@ const ExerciseInput = () => {
                 <Grid container spacing={3} alignItems="center">
                     <Grid item >
                         <Typography variant="h5">1.</Typography>
+                        <Button onClick={() => console.log(exercises)}>CONSOLE LOG</Button>
                     </Grid>
                     {exerciseChosen ? (
                         <>
@@ -51,10 +55,7 @@ const ExerciseInput = () => {
                     ) : (
                         <>
                             <Grid item>
-                                <TextField label="Exercise Name" name="name" value={exerciseName} onChange={(event) => {
-                                    const { value } = event.target;
-                                    setExerciseName(value);
-                                }}/>
+                                <TextField label="Exercise Name" name="name" value={exerciseName} onChange={(event) => setExerciseName(event.target.value)}/>
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" disabled={exerciseName === ""} onClick={() => handleNameSubmit()}>Confirm</Button>

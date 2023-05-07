@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
+import { ExercisesContextProvider } from './context/exercisesContext';
 
 import Home from './pages/home';
 import Navbar from './components/navbar';
@@ -45,7 +46,7 @@ const App = () => {
                     <Navbar />
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
-                        <Route path='/add-workout' element={<AddWorkout />} />
+                        <Route path='/add-workout' element={<ExercisesContextProvider><AddWorkout /></ExercisesContextProvider>} />
                         <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
                     </Routes>
