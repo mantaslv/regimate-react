@@ -3,6 +3,7 @@ import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useExercisesContext } from "../hooks/useExercisesContext";
+import SetInput from "./setInput";
 
 const ExerciseInput = () => {
     const { exercises, dispatch } = useExercisesContext();
@@ -65,20 +66,7 @@ const ExerciseInput = () => {
                     {exerciseChosen && (
                         <>
                             {sets.map((set, setIndex) => (
-                                <Grid container spacing={2} padding={2} alignItems="center" key={setIndex}>
-                                    <Grid item sx={{ ml: 1}}>
-                                        <Typography variant="h6">{`Set ${setIndex + 1}`}</Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField label="Weight (kg)" name="weight" value={set.weight} onChange={(event) => handleInputChange(setIndex, event)}/>
-                                    </Grid>
-                                    <Grid item>
-                                        <TextField label="Reps" name="reps" value={set.reps} onChange={(event) => handleInputChange(setIndex, event)}/>
-                                    </Grid>
-                                    <Grid item>
-                                        <Button variant="contained" disabled={sets.length === 1} color="error" onClick={() => handleRemoveSet(setIndex)}><RemoveCircleIcon/></Button>
-                                    </Grid>
-                                </Grid>
+                                <SetInput key={setIndex}/>
                             ))}
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item sx={{ ml: 4, mt: 1}}>
