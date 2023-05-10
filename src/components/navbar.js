@@ -33,11 +33,18 @@ const Navbar = () => {
                         >REGIMATE</Typography>
                         <Box sx={{ display: 'flex' }}>
                             {user && (
-                                <Button
-                                    key="logout"
-                                    onClick={handleClick}
-                                    sx={{ color: 'white', my: 2, display: 'block' }}
-                                >Log out</Button>
+                                <>
+                                    <Button
+                                        key="new-workout"
+                                        href="/new-workout"
+                                        sx={{ color: 'white', my: 2, display: 'block' }}
+                                    >New Workout</Button>
+                                    <Button
+                                        key="logout"
+                                        onClick={handleClick}
+                                        sx={{ color: 'white', my: 2, display: 'block' }}
+                                    >Log out</Button>
+                                </>
                             )}
                             {!user && (
                                 <>
