@@ -1,6 +1,8 @@
 import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Set from "./Set";
+import { SetContextProvider } from "../context/setContext";
 
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const { state, dispatch } = useExerciseContext();
@@ -38,6 +40,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
                     <Grid item md={2}>
                         <Button variant="contained" onClick={() => console.log(state)}>console log</Button>
                     </Grid>
+                    <SetContextProvider><Set/></SetContextProvider>
                 </Grid>
             </CardContent>
         </Card>

@@ -1,7 +1,7 @@
 import { SetContext } from "../context/setContext";
 import { useContext } from "react";
 
-export const useSetsContext = () => {
+export const useSetContext = () => {
     const context = useContext(SetContext);
 
     if (!context) {
