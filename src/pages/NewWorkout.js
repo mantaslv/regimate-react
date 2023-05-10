@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import Exercise from "../components/ExerciseComponent";
+import Exercise from "../components/Exercise";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 
 const NewWorkout = () => {

@@ -1,15 +1,15 @@
 import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Set from "./SetComponent";
+import Set from "./Set";
 import { SetContextProvider } from "../context/setContext";
 
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
-    const { state, dispatch } = useExerciseContext();
+    const { state: { exerciseName, sets }, dispatch } = useExerciseContext();
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        const updatedExercise = { ...state, [name]: value };
+        const { exerciseName, value } = event.target;
+        const updatedExercise = { ...sets, [exerciseName]: value };
         dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
         onExerciseChange(updatedExercise);
     };
@@ -18,30 +18,34 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
         onExerciseDelete();
     };
 
+    const handleExerciseNameChange = (event) => {
+        dispatch({ type: "SET_EXERCISE_NAME", payload: event.target });
+    };
+    
+    const addSet = () => {
+        dispatch({ type: "ADD_SET" });
+    };
+
     return (
         <Card sx={{ mt: 2 }}>
             <CardContent>
                 <Grid container spacing={1} alignItems="center">
                     <Grid item md={3}>
-                        <TextField label="Exercise Name" name="name" value={exercise.name} onChange={handleInputChange} />
-                    </Grid>
-                    <Grid item md={2}>
-                        <TextField label="Sets" name="sets" value={exercise.sets} onChange={handleInputChange} />
-                    </Grid>
-                    <Grid item md={2}>
-                        <TextField label="Reps" name="reps" value={exercise.reps} onChange={handleInputChange} />
-                    </Grid>
-                    <Grid item md={2}>
-                        <TextField label="Weight (kg)" name="weight" value={exercise.weight} onChange={handleInputChange} />
+                        <TextField label="Exercise Name" name="exerciseName" onChange={handleExerciseNameChange} />
                     </Grid>
                     <Grid item md={1}>
                         <Button variant="contained" color="error" onClick={handleDeleteExercise}><RemoveCircleIcon/></Button>
                     </Grid>
                     <Grid item md={2}>
-                        <Button variant="contained" onClick={() => console.log(state)}>console log</Button>
+                        <Button variant="contained" onClick={() => console.log(exerciseName, sets)}>console log</Button>
                     </Grid>
-                    <SetContextProvider><Set/></SetContextProvider>
                 </Grid>
+                {sets && sets.map((set, index) => (
+                    <SetContextProvider key={index}>
+                        <Set />
+                    </SetContextProvider>
+                ))}
+                <Button variant="contained" onClick={addSet}>Add Set</Button>
             </CardContent>
         </Card>
     );

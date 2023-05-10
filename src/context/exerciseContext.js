@@ -2,12 +2,24 @@ import { createContext, useReducer } from "react";
 
 export const ExerciseContext = createContext();
 
-const initialState = { name: "", sets: "", reps: "", weight: "" };
+const emptySet = { weight: "", reps: "" };
+
+const initialState = { exerciseName: "", sets: [emptySet] };
 
 export const exerciseReducer = (state, action) => {
     switch (action.type) {
+        case "ADD_SET":
+            return {
+                ...state,
+                sets: [...state.sets, emptySet]
+            };
         case "SET_EXERCISE":
             return action.payload;
+        case "SET_EXERCISE_NAME":
+            return {
+                ...state,
+                exerciseName: action.payload.value
+            }
         case "UPDATE_SET":
             return {
                 ...state,

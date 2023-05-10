@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const WorkoutContext = createContext();
 
-const emptyExercise = { name: "", sets: "", reps: "", weight: "" };
+const emptyExercise = { exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
 const initialState = {
     exercises: [emptyExercise]
