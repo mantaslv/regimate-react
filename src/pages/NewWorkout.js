@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import Exercise from "../components/Exercise";
 import { ExerciseContextProvider } from "../context/exerciseContext";
@@ -31,8 +31,14 @@ const NewWorkout = () => {
                     />
                 </ExerciseContextProvider>
             ))}
-            <Button variant="contained" onClick={addExercise}>Add Exercise</Button>
-            <Button variant="contained" onClick={() => console.log(exercises)}>console log</Button>
+            <Grid container spacing={2} marginTop={0}>
+                <Grid item>
+                    <Button variant="contained" onClick={addExercise}>Add Exercise</Button>
+                </Grid>
+                <Grid item>
+                    <Button variant="contained" onClick={() => console.log(exercises)}>console log</Button>
+                </Grid>
+            </Grid>
         </Box>
     );
 };
