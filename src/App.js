@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
-import { ExercisesContextProvider } from './context/exercisesContext';
 
 import Home from './pages/home';
 import Navbar from './components/navbar';
 import Signup from './pages/signup';
 import Login from './pages/login';
-import AddWorkout from './pages/addWorkout';
+import NewWorkout from './pages/NewWorkout';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { WorkoutContextProvider } from './context/workoutContext';
 
 const theme = createTheme({
     palette: {
@@ -46,7 +46,7 @@ const App = () => {
                     <Navbar />
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
-                        <Route path='/add-workout' element={<ExercisesContextProvider><AddWorkout /></ExercisesContextProvider>} />
+                        <Route path='/new-workout' element={<WorkoutContextProvider><NewWorkout /></WorkoutContextProvider>} />
                         <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
                     </Routes>
