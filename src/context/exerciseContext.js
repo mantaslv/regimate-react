@@ -8,6 +8,20 @@ export const exerciseReducer = (state, action) => {
     switch (action.type) {
         case "SET_EXERCISE":
             return action.payload;
+        case "UPDATE_SET":
+            return {
+                ...state,
+                sets: state.sets.map((set, index) =>
+                    index === action.payload.index
+                        ? { ...set, ...action.payload.set }
+                        : set
+                )
+            };
+        case "REMOVE_SET":
+            return {
+                ...state,
+                sets: state.sets.filter((set, index) => index !== action.payload)
+            };
         default:
             return state;
     }

@@ -10,12 +10,18 @@ const NewWorkout = () => {
         dispatch({ type: "ADD_EXERCISE" });
     };
 
+    const handleExerciseChange = (exercise, index) => {
+        
+        dispatch({ type: "SET_EXERCISES", payload: { exercise, index } });
+        console.log(exercise, index);
+    };
+
     return (
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="white">New Workout</Typography>
             {exercises && exercises.map((exercise, index) => (
                 <ExerciseContextProvider key={index}>
-                    <Exercise/>
+                    <Exercise onExerciseChange={(exercise) => handleExerciseChange(exercise, index)}/>
                 </ExerciseContextProvider>
             ))}
             <Button variant="contained" onClick={addExercise}>Add Exercise</Button>

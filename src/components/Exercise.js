@@ -1,13 +1,14 @@
 import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 
-const Exercise = () => {
+const Exercise = ({ onExerciseChange }) => {
     const { state, dispatch } = useExerciseContext();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         const updatedExercise = { ...state, [name]: value };
         dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
+        onExerciseChange(updatedExercise);
       };
 
     return (
