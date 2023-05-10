@@ -11,7 +11,9 @@ const initialState = {
 export const workoutReducer = (state, action) => {
     switch (action.type) {
         case "ADD_EXERCISE":
-            return { exercises: [...state.exercises, emptyExercise] };
+            return {
+                exercises: [...state.exercises, emptyExercise]
+            };
         case "SET_EXERCISES":
             return {
                 exercises: state.exercises.map((exercise, index) =>
@@ -19,6 +21,10 @@ export const workoutReducer = (state, action) => {
                         ? action.payload.exercise
                         : exercise
                 )
+            };
+        case "DELETE_EXERCISE":
+            return {
+                exercises: state.exercises.filter((_, index) => index !== action.payload.index)
             };
         default:
             return state;
