@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Set from "./Set";
+import Set from "./SetComponent";
 import { SetContextProvider } from "../context/setContext";
 
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
