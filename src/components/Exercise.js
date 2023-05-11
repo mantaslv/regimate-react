@@ -44,7 +44,11 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     };
 
     const handleSetDelete = (index) => {
-        dispatch({ type: "DELETE_SET", payload: { index } });
+        const updatedExercise = {
+            ...state,
+            sets: state.sets.filter((_, contextIndex) => contextIndex !== index)
+        }
+        updateExercise(updatedExercise);
     }
 
     return (
