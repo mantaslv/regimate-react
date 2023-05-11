@@ -41,9 +41,9 @@ Once the application has started, you can access it by navigating to http://loca
 
 Regimate-React was built using the following technologies:
 
-    ReactJS
-    React Router
-    Material UI
+- ReactJS
+- React Router
+- Material UI
 
 ## Contributing
 
