@@ -1,8 +1,8 @@
 # Regimate-Web
 
-Regimate-Web is a web application built using ReactJS, designed to provide an easy way for users to create and manage their daily routines.
+Regimate-Web is a web application built using ReactJS, designed to provide an easy way for users to create and manage their workouts.
 
-The application provides users with a simple and intuitive interface for creating and editing their routines, as well as tracking their progress towards their goals. Users can create tasks, assign them to specific days of the week, set reminders and track their progress with easy-to-use progress bars.
+The application provides users with a simple and intuitive interface for recording their workouts and saves them in database so they can be accessed anywhere.
 
 ## Table of Contents
 
