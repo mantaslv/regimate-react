@@ -7,6 +7,8 @@ import { SetContextProvider } from "../context/setContext";
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const { state: { exerciseName, sets }, dispatch, state } = useExerciseContext();
 
+    const emptySet = { weight: "", reps: "" };
+
     const handleDeleteExercise = () => {
         onExerciseDelete();
     };
@@ -19,11 +21,25 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     };
     
     const addSet = () => {
-        dispatch({ type: "ADD_SET" });
+        const updatedExercise = {
+            ...state,
+            sets: [...state.sets, emptySet]
+        };
+        dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
+        onExerciseChange(updatedExercise);
     };
 
     const handleSetChange = (set, index) => {
-        dispatch({ type: "SET_SETS", payload: { set, index } });
+        const updatedExercise = {
+            ...state,
+            sets: state.sets.map((contextSet, contextIndex) =>
+                contextIndex === index
+                    ? set
+                    : contextSet
+            )
+        };
+        dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
+        onExerciseChange(updatedExercise);
     };
 
     return (
