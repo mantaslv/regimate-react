@@ -5,21 +5,17 @@ import Set from "./Set";
 import { SetContextProvider } from "../context/setContext";
 
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
-    const { state: { exerciseName, sets }, dispatch } = useExerciseContext();
-
-    // const handleInputChange = (event) => {
-    //     const { exerciseName, value } = event.target;
-    //     const updatedExercise = { ...sets, [exerciseName]: value };
-    //     dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
-    //     onExerciseChange(updatedExercise);
-    // };
+    const { state: { exerciseName, sets }, dispatch, state } = useExerciseContext();
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
     };
 
-    const handleExerciseNameChange = (event) => {
-        dispatch({ type: "SET_EXERCISE_NAME", payload: event.target });
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        const updatedExercise = { ...state, [name]: value };
+        dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
+        onExerciseChange(updatedExercise);
     };
     
     const addSet = () => {
@@ -27,7 +23,6 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     };
 
     const handleSetChange = (set, index) => {
-        console.log(set, index);
         dispatch({ type: "SET_SETS", payload: { set, index } });
     };
 
@@ -36,7 +31,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
             <CardContent>
                 <Grid container spacing={1} alignItems="center">
                     <Grid item md={3}>
-                        <TextField label="Exercise Name" name="exerciseName" onChange={handleExerciseNameChange} />
+                        <TextField label="Exercise Name" name="exerciseName" onChange={handleInputChange} />
                     </Grid>
                     <Grid item md={1}>
                         <Button variant="contained" color="error" onClick={handleDeleteExercise}><RemoveCircleIcon/></Button>

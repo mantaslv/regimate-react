@@ -4,14 +4,6 @@ import { useSetContext } from "../hooks/useSetContext";
 const Set = ({ onSetChange}) => {
     const { state, dispatch } = useSetContext();
 
-    const handleWeightChange = (event) => {
-        dispatch({ type: 'SET_WEIGHT', payload: event.target.value });
-    };
-    
-    const handleRepsChange = (event) => {
-        dispatch({ type: 'SET_REPS', payload: event.target.value });
-    };
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         const updatedSet = { ...state, [name]: value };

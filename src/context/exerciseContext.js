@@ -15,11 +15,6 @@ export const exerciseReducer = (state, action) => {
             };
         case "SET_EXERCISE":
             return action.payload;
-        case "SET_EXERCISE_NAME":
-            return {
-                ...state,
-                exerciseName: action.payload.value
-            }
         case "SET_SETS":
             return {
                 ...state,
