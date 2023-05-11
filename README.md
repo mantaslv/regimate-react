@@ -1,6 +1,6 @@
-# Regimate-React
+# Regimate-Web
 
-Regimate-React is a web application built using ReactJS, designed to provide an easy way for users to create and manage their daily routines.
+Regimate-Web is a web application built using ReactJS, designed to provide an easy way for users to create and manage their daily routines.
 
 The application provides users with a simple and intuitive interface for creating and editing their routines, as well as tracking their progress towards their goals. Users can create tasks, assign them to specific days of the week, set reminders and track their progress with easy-to-use progress bars.
 
@@ -21,13 +21,13 @@ The application provides users with a simple and intuitive interface for creatin
 
 ## Installation
 
-To install Regimate-React, follow these steps:
+To install Regimate-Web, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/mantaslv/regimate-react.git`
-2. Navigate to the project directory: `cd regimate-react`
+1. Clone the repository: `git clone https://github.com/mantaslv/regimate-web.git`
+2. Navigate to the project directory: `cd regimate-web`
 3. Install the dependencies: `npm install`
 
-Regimate-React requires the Regimate API to be running in order to function. To run the API, follow these steps:
+Regimate-Web requires the Regimate API to be running in order to function. To run the API, follow these steps:
 
 1. Clone the API repository: `git clone https://github.com/mantaslv/regimate-api.git`
 2. Navigate to the API directory: `cd regimate-api`
@@ -46,7 +46,7 @@ Once the application has started, you can access it by navigating to http://loca
 
 ## Technologies Used
 
-Regimate-React was built using the following technologies:
+Regimate-Web was built using the following technologies:
 
 - ReactJS
 - React Router
