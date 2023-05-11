@@ -24,10 +24,10 @@ export const exerciseReducer = (state, action) => {
                         : set
                 )
             };
-        case "REMOVE_SET":
+        case "DELETE_SET":
             return {
                 ...state,
-                sets: state.sets.filter((set, index) => index !== action.payload)
+                sets: state.sets.filter((_, index) => index !== action.payload.index)
             };
         default:
             return state;

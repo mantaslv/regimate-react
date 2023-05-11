@@ -36,7 +36,7 @@ const NewWorkout = () => {
                     <Button variant="contained" onClick={addExercise}>Add Exercise</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" onClick={() => console.log(exercises)}>console log</Button>
+                    <Button variant="contained" onClick={() => console.log(exercises)}>console log workout</Button>
                 </Grid>
             </Grid>
         </Box>
