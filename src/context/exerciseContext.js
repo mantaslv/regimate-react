@@ -20,12 +20,12 @@ export const exerciseReducer = (state, action) => {
                 ...state,
                 exerciseName: action.payload.value
             }
-        case "UPDATE_SET":
+        case "SET_SETS":
             return {
                 ...state,
                 sets: state.sets.map((set, index) =>
                     index === action.payload.index
-                        ? { ...set, ...action.payload.set }
+                        ? action.payload.set
                         : set
                 )
             };

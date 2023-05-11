@@ -10,6 +10,8 @@ export const setReducer = (state, action) => {
             return { ...state, weight: action.payload }
         case "SET_REPS":
             return { ...state, reps: action.payload }
+        case "SET_SET":
+            return action.payload;
         default:
             return state;
     };

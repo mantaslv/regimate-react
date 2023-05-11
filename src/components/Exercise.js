@@ -7,12 +7,12 @@ import { SetContextProvider } from "../context/setContext";
 const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const { state: { exerciseName, sets }, dispatch } = useExerciseContext();
 
-    const handleInputChange = (event) => {
-        const { exerciseName, value } = event.target;
-        const updatedExercise = { ...sets, [exerciseName]: value };
-        dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
-        onExerciseChange(updatedExercise);
-    };
+    // const handleInputChange = (event) => {
+    //     const { exerciseName, value } = event.target;
+    //     const updatedExercise = { ...sets, [exerciseName]: value };
+    //     dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
+    //     onExerciseChange(updatedExercise);
+    // };
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
@@ -24,6 +24,11 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     
     const addSet = () => {
         dispatch({ type: "ADD_SET" });
+    };
+
+    const handleSetChange = (set, index) => {
+        console.log(set, index);
+        dispatch({ type: "SET_SETS", payload: { set, index } });
     };
 
     return (
@@ -42,7 +47,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
                 </Grid>
                 {sets && sets.map((set, index) => (
                     <SetContextProvider key={index}>
-                        <Set />
+                        <Set index={index} onSetChange={(set) => handleSetChange(set, index)}/>
                     </SetContextProvider>
                 ))}
                 <Button variant="contained" onClick={addSet}>Add Set</Button>

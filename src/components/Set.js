@@ -1,7 +1,7 @@
 import { Grid, TextField, Button } from "@mui/material";
 import { useSetContext } from "../hooks/useSetContext";
 
-const Set = () => {
+const Set = ({ onSetChange}) => {
     const { state, dispatch } = useSetContext();
 
     const handleWeightChange = (event) => {
@@ -12,20 +12,27 @@ const Set = () => {
         dispatch({ type: 'SET_REPS', payload: event.target.value });
     };
 
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        const updatedSet = { ...state, [name]: value };
+        dispatch({ type: "SET_SET", payload: updatedSet });
+        onSetChange(updatedSet);
+    };
+
     return (
         <Grid container spacing={2} padding={2} alignItems="center">
             <Grid item>
                 <TextField
                     label="Weight (kg)" 
                     name="weight" 
-                    onChange={handleWeightChange}
+                    onChange={handleInputChange}
                 />
             </Grid>
             <Grid item>
                 <TextField 
                     label="Reps" 
                     name="reps" 
-                    onChange={handleRepsChange}
+                    onChange={handleInputChange}
                 />
             </Grid>
             <Grid item>
