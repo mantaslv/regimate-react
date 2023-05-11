@@ -27,6 +27,13 @@ To install Regimate-React, follow these steps:
 2. Navigate to the project directory: `cd regimate-react`
 3. Install the dependencies: `npm install`
 
+Regimate-React requires the Regimate API to be running in order to function. To run the API, follow these steps:
+
+1. Clone the API repository: `git clone https://github.com/mantaslv/regimate-api.git`
+2. Navigate to the API directory: `cd regimate-api`
+3. Install the dependencies: `npm install`
+4. Start the API server: `npm run dev`
+
 ## Usage
 
 To start the application, run the following command:
