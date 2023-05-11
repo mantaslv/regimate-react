@@ -32,7 +32,7 @@ To install Regimate-React, follow these steps:
 To start the application, run the following command:
 
 ```bash
-npm start
+npm run dev
 ```
 
 Once the application has started, you can access it by navigating to http://localhost:3000 in your web browser.
