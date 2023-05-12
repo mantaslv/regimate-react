@@ -56,7 +56,11 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
             <CardContent>
                 <Grid container spacing={1} alignItems="center">
                     <Grid item md={3}>
-                        <TextField label="Exercise Name" name="exerciseName" value={exercise.exerciseName} onChange={handleInputChange} />
+                        <TextField 
+                            label="Exercise Name" 
+                            name="exerciseName" 
+                            
+                            onChange={handleInputChange} />
                     </Grid>
                 </Grid>
                 {sets && sets.map((set, index) => (
@@ -64,6 +68,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
                         <Set 
                             index={index} 
                             set={set} 
+                            value={exercise}
                             onSetChange={(set) => handleSetChange(set, index)}
                             onSetDelete={() => handleSetDelete(index)}
                         />

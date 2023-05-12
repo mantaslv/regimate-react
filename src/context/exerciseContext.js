@@ -10,11 +10,6 @@ export const exerciseReducer = (state, action) => {
     switch (action.type) {
         case "SET_EXERCISE":
             return action.payload;
-        case "DELETE_SET":
-            return {
-                ...state,
-                sets: state.sets.filter((_, index) => index !== action.payload.index)
-            };
         default:
             return state;
     }

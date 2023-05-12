@@ -2,7 +2,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useSetContext } from "../hooks/useSetContext";
 
-const Set = ({ set, onSetChange, onSetDelete }) => {
+const Set = ({ index, set, onSetChange, onSetDelete }) => {
     const { state, dispatch } = useSetContext();
 
     const handleInputChange = (event) => {
