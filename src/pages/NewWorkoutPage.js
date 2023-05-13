@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import Exercise from "../components/Exercise";
+import Exercise from "../components/ExerciseComponent";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 
 const NewWorkout = () => {
