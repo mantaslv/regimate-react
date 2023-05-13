@@ -1,8 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
 import { createContext, useReducer } from "react";
 
 export const WorkoutContext = createContext();
 
-const emptyExercise = { name: "", sets: "", reps: "", weight: "" };
+const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
 const initialState = {
     exercises: [emptyExercise]
@@ -10,6 +11,8 @@ const initialState = {
 
 export const workoutReducer = (state, action) => {
     switch (action.type) {
+        case "SET_WORKOUT":
+            return action.payload;
         case "ADD_EXERCISE":
             return {
                 exercises: [...state.exercises, emptyExercise]

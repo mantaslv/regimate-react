@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import WorkoutDetails from "../components/WorkoutDetails";
-import WorkoutForm from "../components/WorkoutForm";
+import WorkoutDetails from "../components/WorkoutDetailsComponent";
+import WorkoutForm from "../components/WorkoutFormComponent";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Grid } from "@mui/material";

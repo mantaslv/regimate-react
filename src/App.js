@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import NewWorkout from './pages/NewWorkout';
+import Home from './pages/HomePage';
+import Navbar from './components/NavbarComponent';
+import Signup from './pages/SignupPage';
+import Login from './pages/LoginPage';
+import NewWorkout from './pages/NewWorkoutPage';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';

@@ -6,10 +6,8 @@ const initialState = { weight: "", reps: "" };
 
 export const setReducer = (state, action) => {
     switch (action.type) {
-        case "SET_WEIGHT":
-            return { ...state, weight: action.payload }
-        case "SET_REPS":
-            return { ...state, reps: action.payload }
+        case "SET_SET":
+            return action.payload;
         default:
             return state;
     };
