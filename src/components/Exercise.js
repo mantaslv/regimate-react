@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -8,7 +9,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
 
-    const emptySet = { weight: "", reps: "" };
+    const emptySet = { id: uuidv4(), weight: "", reps: "" };
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
@@ -17,6 +18,7 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const updateExercise = (updatedExercise) => {
         dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
         onExerciseChange(updatedExercise);
+        console.log(updatedExercise);
     };
 
     const handleInputChange = (event) => {
@@ -28,28 +30,28 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const addSet = () => {
         const updatedExercise = {
             ...state,
-            sets: [...state.sets, emptySet]
+            sets: [...sets, emptySet]
         };
         updateExercise(updatedExercise);
     };
 
-    const handleSetChange = (set, index) => {
+    const handleSetChange = (updatedSet, id) => {
         const updatedExercise = {
             ...state,
-            sets: state.sets.map((contextSet, contextIndex) =>
-                contextIndex === index ? set : contextSet
+            sets: sets.map((contextSet) =>
+                contextSet.id === id ? { id, ...updatedSet} : contextSet
             )
         };
         updateExercise(updatedExercise);
     };
 
-    const handleSetDelete = (index) => {
+    const handleSetDelete = (id) => {
         const updatedExercise = {
             ...state,
-            sets: state.sets.filter((_, contextIndex) => contextIndex !== index)
+            sets: sets.filter((set) => set.id !== id)
         }
         updateExercise(updatedExercise);
-    }
+    };
 
     return (
         <Card sx={{ mt: 2 }}>
@@ -63,14 +65,12 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
                             onChange={handleInputChange} />
                     </Grid>
                 </Grid>
-                {sets && sets.map((set, index) => (
-                    <SetContextProvider key={index}>
+                {sets && sets.map((set) => (
+                    <SetContextProvider key={set.id}>
                         <Set 
-                            index={index} 
                             set={set} 
-                            value={exercise}
-                            onSetChange={(set) => handleSetChange(set, index)}
-                            onSetDelete={() => handleSetDelete(index)}
+                            onSetChange={(updatedSet) => handleSetChange(updatedSet, set.id)}
+                            onSetDelete={() => handleSetDelete(set.id)}
                         />
                     </SetContextProvider>
                 ))}

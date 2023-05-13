@@ -1,8 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
 import { createContext, useReducer } from "react";
 
 export const WorkoutContext = createContext();
 
-const emptyExercise = { exerciseName: "", sets: [{ reps: "", weight: "" }] };
+const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
 const initialState = {
     exercises: [emptyExercise]

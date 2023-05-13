@@ -16,14 +16,15 @@ const NewWorkout = () => {
 
     const addExercise = () => {
         const updatedWorkout = {
-            exercises: [...exercises, { ...emptyExercise, id: uuidv4() }]        };
+            exercises: [...exercises, emptyExercise] 
+        };
         updateWorkout(updatedWorkout);
     };
 
-    const handleExerciseChange = (exercise, id) => {
+    const handleExerciseChange = (updatedExercise, id) => {
         const updatedWorkout = {
             exercises: exercises.map((contextExercise) =>
-                contextExercise.id === id ? exercise : contextExercise
+                contextExercise.id === id ? { id, ...updatedExercise } : contextExercise
             )
         };
         updateWorkout(updatedWorkout);
@@ -42,9 +43,8 @@ const NewWorkout = () => {
             {exercises && exercises.map((exercise) => (
                 <ExerciseContextProvider key={exercise.id}>
                     <Exercise
-                        key={exercise.id}
                         exercise={exercise}
-                        onExerciseChange={(exercise) => handleExerciseChange(exercise)}
+                        onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
                         onExerciseDelete={() => handleExerciseDelete(exercise.id)}
                     />
                 </ExerciseContextProvider>
