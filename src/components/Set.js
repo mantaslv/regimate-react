@@ -2,7 +2,7 @@ import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useSetContext } from "../hooks/useSetContext";
 
-const Set = ({ index, set, onSetChange, onSetDelete }) => {
+const Set = ({ set, onSetChange, onSetDelete }) => {
     const { state, dispatch } = useSetContext();
 
     const handleInputChange = (event) => {
@@ -22,7 +22,6 @@ const Set = ({ index, set, onSetChange, onSetDelete }) => {
                 <TextField
                     label="Weight (kg)" 
                     name="weight"
-                    value={set.weight}
                     onChange={handleInputChange}
                 />
             </Grid>
@@ -30,7 +29,6 @@ const Set = ({ index, set, onSetChange, onSetDelete }) => {
                 <TextField 
                     label="Reps" 
                     name="reps" 
-                    value={set.reps}
                     onChange={handleInputChange}
                 />
             </Grid>

@@ -5,7 +5,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Set from "./Set";
 import { SetContextProvider } from "../context/setContext";
 
-const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
+const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
 
@@ -18,7 +18,6 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
     const updateExercise = (updatedExercise) => {
         dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
         onExerciseChange(updatedExercise);
-        console.log(updatedExercise);
     };
 
     const handleInputChange = (event) => {
@@ -61,7 +60,6 @@ const Exercise = ({ exercise, onExerciseChange, onExerciseDelete }) => {
                         <TextField 
                             label="Exercise Name" 
                             name="exerciseName" 
-                            
                             onChange={handleInputChange} />
                     </Grid>
                 </Grid>
