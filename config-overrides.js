@@ -9,12 +9,10 @@ module.exports = function override(config, env) {
     if (env === 'development') {
         config.plugins.push(new webpack.DefinePlugin({
             'process.env.REACT_APP_API_URL': JSON.stringify('http://localhost:4000'),
-            'process.env.PUBLIC_URL': JSON.stringify('http://localhost:3000')
         }));
     } else if (env === 'production') {
         config.plugins.push(new webpack.DefinePlugin({
             'process.env.REACT_APP_API_URL': JSON.stringify('https://regimate.onrender.com'),
-            'process.env.PUBLIC_URL': JSON.stringify('https://regimate.netlify.app/')
         }));
     }
     return config;
