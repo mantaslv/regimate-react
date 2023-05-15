@@ -36,7 +36,7 @@ const Navbar = () => {
                                 <>
                                     <Button
                                         key="new-workout"
-                                        href="/new-workout"
+                                        href={`${process.env.PUBLIC_URL}/new-workout`}
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >New Workout</Button>
                                     <Button
