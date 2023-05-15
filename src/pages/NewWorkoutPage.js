@@ -37,6 +37,10 @@ const NewWorkout = () => {
         updateWorkout(updatedWorkout);
     };
 
+    const completeWorkout = () => {
+
+    };
+
     return (
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="white">New Workout</Typography>
@@ -44,17 +48,31 @@ const NewWorkout = () => {
                 <ExerciseContextProvider key={exercise.id}>
                     <Exercise
                         exercise={exercise}
-                        onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
+                        onExerciseChange={(updatedExercise) => 
+                            handleExerciseChange(updatedExercise, exercise.id)
+                        }
                         onExerciseDelete={() => handleExerciseDelete(exercise.id)}
                     />
                 </ExerciseContextProvider>
             ))}
             <Grid container spacing={2} marginTop={0}>
                 <Grid item>
-                    <Button variant="contained" onClick={addExercise}>Add Exercise</Button>
+                    <Button 
+                        variant="contained"
+                        onClick={addExercise}
+                    >Add Exercise</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant="contained" onClick={() => console.log(exercises)}>console log workout</Button>
+                    <Button 
+                        variant="contained"
+                        onClick={completeWorkout}
+                    >Complete Workout</Button>
+                </Grid>
+                <Grid item>
+                    <Button 
+                        variant="contained" 
+                        onClick={() => console.log(exercises)}
+                    >console log workout</Button>
                 </Grid>
             </Grid>
         </Box>
