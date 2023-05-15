@@ -3,10 +3,14 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import Exercise from "../components/ExerciseComponent";
 import { ExerciseContextProvider } from "../context/exerciseContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from 'react-router-dom';
 
 const NewWorkout = () => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
+    const { user } = useAuthContext();
+    const navigate = useNavigate();
 
     const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
@@ -37,8 +41,24 @@ const NewWorkout = () => {
         updateWorkout(updatedWorkout);
     };
 
-    const completeWorkout = () => {
+    const completeWorkout = async () => {
+        const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
+            method: 'POST',
+            body: JSON.stringify(state),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        });
+        const json = await res.json();
+        console.log(json);
 
+        if (!res.ok) {
+            console.log(json);
+        };
+        if (res.ok) {
+            navigate('/');
+        };
     };
 
     return (
