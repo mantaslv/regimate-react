@@ -42,7 +42,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
-                <BrowserRouter basename={process.env.PUBLIC_URL} >
+                <BrowserRouter>
                     <Navbar />
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
