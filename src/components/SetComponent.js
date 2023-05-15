@@ -1,8 +1,10 @@
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useSetContext } from "../hooks/useSetContext";
+import { useExerciseContext } from "../hooks/useExerciseContext";
 
-const Set = ({ set, onSetChange, onSetDelete }) => {
+const Set = ({ onSetChange, onSetDelete }) => {
+    const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
 
     const handleInputChange = (event) => {
@@ -33,7 +35,12 @@ const Set = ({ set, onSetChange, onSetDelete }) => {
                 />
             </Grid>
             <Grid item md={1}>
-                <Button variant="contained" color="error" onClick={handleDeleteSet}><RemoveCircleIcon/></Button>
+                <Button 
+                    variant="contained" 
+                    color="error" 
+                    onClick={handleDeleteSet}
+                    disabled={exerciseState.sets.length <= 1}
+                ><RemoveCircleIcon/></Button>
             </Grid>
             <Grid item>
                 <Button 

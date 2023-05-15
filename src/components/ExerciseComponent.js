@@ -88,7 +88,10 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                         ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" onClick={() => console.log( exerciseName, sets)}>console log exercise</Button>
+                        <Button 
+                            variant="contained"
+                            onClick={() => console.log( exerciseName, sets)}
+                        >console log exercise</Button>
                     </Grid>
                 </Grid>
             </CardContent>
