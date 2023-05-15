@@ -4,8 +4,10 @@ import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Set from "./SetComponent";
 import { SetContextProvider } from "../context/setContext";
+import { useWorkoutContext } from "../hooks/useWorkoutContext";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
+    const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
 
@@ -81,11 +83,12 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                             variant="contained" 
                             color="error" 
                             onClick={handleDeleteExercise}
+                            disabled={workoutState.exercises.length <= 1}
                             sx={{ justifyContent: "space-between" }}
                         ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" onClick={() => console.log(exerciseName, sets)}>console log exercise</Button>
+                        <Button variant="contained" onClick={() => console.log( exerciseName, sets)}>console log exercise</Button>
                     </Grid>
                 </Grid>
             </CardContent>
