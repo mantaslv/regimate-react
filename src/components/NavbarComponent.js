@@ -31,14 +31,19 @@ const Navbar = () => {
                                 flexGrow: 1
                             }}
                         >REGIMATE</Typography>
-                        <Box sx={{ display: 'flex' }}>
+                        <Box sx={{ display: 'flex', gap: 2 }}>
                             {user && (
                                 <>
                                     <Button
                                         key="new-workout"
-                                        href="new-workout"
+                                        href="/new-workout"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >New Workout</Button>
+                                    <Button
+                                        key="workouts"
+                                        href="/workouts"
+                                        sx={{ color: 'white', my: 2, display: 'block' }}
+                                    >Workouts</Button>
                                     <Button
                                         key="logout"
                                         onClick={handleClick}
