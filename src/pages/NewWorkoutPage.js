@@ -57,7 +57,7 @@ const NewWorkout = () => {
             console.log(json);
         };
         if (res.ok) {
-            navigate('/');
+            navigate('/workouts');
         };
     };
 
