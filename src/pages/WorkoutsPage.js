@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Grid } from "@mui/material";
 
 const Workouts = () => {
     const {user} = useAuthContext();
@@ -24,12 +24,46 @@ const Workouts = () => {
         };
     }, [workouts, user]);
 
+    const options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+
     return (
         <Box sx={{ marginTop: 10}}>
-            <Button 
-                variant="contained"
-                onClick={() => console.log(workouts)}
-            >console log workouts</Button>
+            {workouts && workouts.map((workout, index) => (
+                <Card id={index} sx={{ mt: 1 }}>
+                    <CardHeader
+                        title="Workout"
+                        subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
+                    />
+                    <CardContent>
+                        <Grid container>
+                            <Grid item>
+                                <Button 
+                                    variant="contained"
+                                    onClick={() => console.log(workout.exercises)}
+                                >console log exercises</Button>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            ))}
+            <Grid container spacing={1} marginTop={0}>
+                <Grid item>
+                    <Button 
+                        variant="contained"
+                        onClick={() => console.log(workouts)}
+                    >console log workouts</Button>
+                </Grid>
+            </Grid>
+
+            
         </Box>
     );
 };
