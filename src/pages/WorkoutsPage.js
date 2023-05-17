@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Box, Button, Card, CardContent, CardHeader, Grid } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Grid, Paper } from "@mui/material";
+import { styled } from '@mui/material/styles';
 
 const Workouts = () => {
     const {user} = useAuthContext();
@@ -34,23 +35,42 @@ const Workouts = () => {
         hour12: true
     };
 
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
     return (
         <Box sx={{ marginTop: 10}}>
-            {workouts && workouts.map((workout, index) => (
-                <Card id={index} sx={{ mt: 1 }}>
+            {workouts && workouts.map((workout) => (
+                <Card id={workout._id} sx={{ mt: 1 }}>
                     <CardHeader
                         title="Workout"
                         subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
                     />
                     <CardContent>
-                        <Grid container>
-                            <Grid item>
-                                <Button 
-                                    variant="contained"
-                                    onClick={() => console.log(workout.exercises)}
-                                >console log exercises</Button>
+                        {workout.exercises.map((exercise) => (
+                            <Grid container id={exercise._id} sx={{ mb: 3 }}>
+                                {exercise.sets.map((set, index) => (
+                                    <Grid container id={set._id} spacing={2} sx={{ mt: 1 }}>
+                                        <Grid item md={4}>
+                                            {index === 0 && (
+                                                <Item elevation={3}>{exercise.exerciseName}</Item>
+                                            )}
+                                        </Grid>
+                                        <Grid item md={4}>
+                                            <Item elevation={3}>Load (kg): {set.weight}</Item>
+                                        </Grid>
+                                        <Grid item md={4}>
+                                            <Item elevation={3}>Reps: {set.reps}</Item>
+                                        </Grid>
+                                    </Grid>
+                                ))}
                             </Grid>
-                        </Grid>
+                        ))}
                     </CardContent>
                 </Card>
             ))}
