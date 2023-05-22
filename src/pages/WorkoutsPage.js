@@ -56,7 +56,7 @@ const Workouts = () => {
                             <Grid container id={exercise._id} sx={{ mb: 3 }}>
                                 {exercise.sets.map((set, index) => (
                                     <Grid container id={set._id} spacing={2} sx={{ mt: 1 }}>
-                                        <Grid item md={4}>
+                                        <Grid item sm= {4} md={4}>
                                             {index === 0 && (
                                                 <Item elevation={3}>{exercise.exerciseName}</Item>
                                             )}
