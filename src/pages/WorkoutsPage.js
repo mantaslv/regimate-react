@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Button, Card, CardContent, CardHeader, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { styled } from '@mui/material/styles';
 
 const Workouts = () => {
     const {user} = useAuthContext();
