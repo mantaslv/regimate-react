@@ -72,10 +72,10 @@ const Workouts = () => {
                                         >
                                             <TableCell>{exercise.exerciseName}</TableCell>
                                             <TableCell align="center">{exercise.sets.length}</TableCell>
-                                            <TableCell align="center">{exercise.sets[0] && exercise.sets[0].reps} x {exercise.sets[0] && exercise.sets[0].weight}kg</TableCell>
-                                            <TableCell align="center">{exercise.sets[1] && exercise.sets[1].reps} x {exercise.sets[1] && exercise.sets[1].weight}kg</TableCell>
-                                            <TableCell align="center">{exercise.sets[2] && exercise.sets[2].reps} x {exercise.sets[2] && exercise.sets[2].weight}kg</TableCell>
-                                            <TableCell align="center">{exercise.sets[3] && exercise.sets[3].reps} x {exercise.sets[3] && exercise.sets[3].weight}kg</TableCell>
+                                            <TableCell align="center">{exercise.sets[0] && `${exercise.sets[0].reps} x ${exercise.sets[0].weight}kg`}</TableCell>
+                                            <TableCell align="center">{exercise.sets[1] && `${exercise.sets[1].reps} x ${exercise.sets[1].weight}kg`}</TableCell>
+                                            <TableCell align="center">{exercise.sets[2] && `${exercise.sets[2].reps} x ${exercise.sets[2].weight}kg`}</TableCell>
+                                            <TableCell align="center">{exercise.sets[3] && `${exercise.sets[3].reps} x ${exercise.sets[3].weight}kg`}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
