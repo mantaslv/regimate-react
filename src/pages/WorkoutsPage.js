@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Box, Button, Card, CardContent, CardHeader, Grid, Paper } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { styled } from '@mui/material/styles';
 
 const Workouts = () => {
@@ -23,7 +23,7 @@ const Workouts = () => {
         if (user) {
             fetchWorkouts();
         };
-    }, [workouts, user]);
+    }, [user]);
 
     const options = {
         weekday: 'long',
@@ -45,6 +45,7 @@ const Workouts = () => {
 
     return (
         <Box sx={{ marginTop: 10}}>
+            
             {workouts && workouts.map((workout) => (
                 <Card id={workout._id} sx={{ mt: 1 }}>
                     <CardHeader
@@ -52,25 +53,34 @@ const Workouts = () => {
                         subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
                     />
                     <CardContent>
-                        {workout.exercises.map((exercise) => (
-                            <Grid container id={exercise._id} sx={{ mb: 3 }}>
-                                {exercise.sets.map((set, index) => (
-                                    <Grid container id={set._id} spacing={2} sx={{ mt: 1 }}>
-                                        <Grid item sm= {4} md={4}>
-                                            {index === 0 && (
-                                                <Item elevation={3}>{exercise.exerciseName}</Item>
-                                            )}
-                                        </Grid>
-                                        <Grid item md={4}>
-                                            <Item elevation={3}>Load (kg): {set.weight}</Item>
-                                        </Grid>
-                                        <Grid item md={4}>
-                                            <Item elevation={3}>Reps: {set.reps}</Item>
-                                        </Grid>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        ))}
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Exercise</TableCell>
+                                        <TableCell align="center">Sets</TableCell>
+                                        <TableCell align="center">Set 1</TableCell>
+                                        <TableCell align="center">Set 2</TableCell>
+                                        <TableCell align="center">Set 3</TableCell>
+                                        <TableCell align="center">Set 4</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {workout.exercises.map((exercise) => (
+                                        <TableRow
+                                            key={exercise._id}  
+                                        >
+                                            <TableCell>{exercise.exerciseName}</TableCell>
+                                            <TableCell align="center">{exercise.sets.length}</TableCell>
+                                            <TableCell align="center">{exercise.sets[0] && exercise.sets[0].reps} x {exercise.sets[0] && exercise.sets[0].weight}kg</TableCell>
+                                            <TableCell align="center">{exercise.sets[1] && exercise.sets[1].reps} x {exercise.sets[1] && exercise.sets[1].weight}kg</TableCell>
+                                            <TableCell align="center">{exercise.sets[2] && exercise.sets[2].reps} x {exercise.sets[2] && exercise.sets[2].weight}kg</TableCell>
+                                            <TableCell align="center">{exercise.sets[3] && exercise.sets[3].reps} x {exercise.sets[3] && exercise.sets[3].weight}kg</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </CardContent>
                 </Card>
             ))}
