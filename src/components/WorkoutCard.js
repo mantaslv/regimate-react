@@ -1,10 +1,30 @@
-import { Card, CardContent, CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutCard = ({ workout, sx }) => {
     const  { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
+
+    const handleClick = async () => {
+        if (!user) {
+            return
+        };
+
+        const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts/' + workout._id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        });
+        const json = await res.json();
+
+        if (res.ok) {
+            dispatch({type: 'DELETE_WORKOUT', payload: json})
+        };
+    };
 
     const options = {
         weekday: 'long',
@@ -21,6 +41,11 @@ const WorkoutCard = ({ workout, sx }) => {
             <CardHeader
                 title="Workout"
                 subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
+                action={
+                    <IconButton aria-label="delete" onClick={handleClick}>
+                        <DeleteOutlineOutlinedIcon />
+                    </IconButton>
+                }
             />
             <CardContent>
                 <TableContainer component={Paper} elevation={3}>
@@ -40,7 +65,7 @@ const WorkoutCard = ({ workout, sx }) => {
                                 <TableRow
                                     key={exercise._id}  
                                 >
-                                    <TableCell>{index+1}) {exercise.exerciseName}</TableCell>
+                                    <TableCell>{index + 1}) {exercise.exerciseName}</TableCell>
                                     <TableCell align="center">{exercise.sets.length}</TableCell>
                                     <TableCell align="center">{exercise.sets[0] && `${exercise.sets[0].reps} x ${exercise.sets[0].weight}kg`}</TableCell>
                                     <TableCell align="center">{exercise.sets[1] && `${exercise.sets[1].reps} x ${exercise.sets[1].weight}kg`}</TableCell>
