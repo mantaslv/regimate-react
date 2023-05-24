@@ -13,8 +13,8 @@ const Navbar = () => {
 
     return (
         <header>
-            <AppBar position="fixed">
-                <Container maxWidth="lg">
+            <AppBar position="fixed" >
+                <Container maxWidth="lg" sx={{ ml: '240px' }}>
                     <Toolbar disableGutters>
                         <FitnessCenterIcon  sx={{ display: 'flex', mr: 1 }} />
                         <Typography
