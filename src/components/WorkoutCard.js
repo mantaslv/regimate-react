@@ -1,7 +1,11 @@
 import { Card, CardContent, CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutCard = ({ workout, sx }) => {
-    
+    const  { dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
+
     const options = {
         weekday: 'long',
         day: 'numeric',
@@ -19,7 +23,7 @@ const WorkoutCard = ({ workout, sx }) => {
                 subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
             />
             <CardContent>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} elevation={3}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -32,11 +36,11 @@ const WorkoutCard = ({ workout, sx }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {workout.exercises.map((exercise) => (
+                            {workout.exercises.map((exercise, index) => (
                                 <TableRow
                                     key={exercise._id}  
                                 >
-                                    <TableCell>{exercise.exerciseName}</TableCell>
+                                    <TableCell>{index+1}) {exercise.exerciseName}</TableCell>
                                     <TableCell align="center">{exercise.sets.length}</TableCell>
                                     <TableCell align="center">{exercise.sets[0] && `${exercise.sets[0].reps} x ${exercise.sets[0].weight}kg`}</TableCell>
                                     <TableCell align="center">{exercise.sets[1] && `${exercise.sets[1].reps} x ${exercise.sets[1].weight}kg`}</TableCell>
