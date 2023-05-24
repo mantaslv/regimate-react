@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 const WorkoutCard = ({ workout, sx }) => {
+    
     const options = {
         weekday: 'long',
         day: 'numeric',
