@@ -11,6 +11,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { WorkoutContextProvider } from './context/workoutContext';
 import Workouts from './pages/WorkoutsPage';
+import SideNav from './components/SideNav';
 
 const theme = createTheme({
     palette: {
@@ -45,6 +46,7 @@ const App = () => {
             <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
                 <BrowserRouter>
                     <Navbar />
+                    <SideNav />
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
                         <Route path='/new-workout' element={user ? <WorkoutContextProvider><NewWorkout /></WorkoutContextProvider> : <Navigate to="/login" />} />

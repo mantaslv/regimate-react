@@ -1,26 +1,39 @@
-import { Box, Drawer } from '@mui/material'
-import React from 'react'
-
-const drawerWidth = 240;
+import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { AddCircle, Article, Home, Logout } from '@mui/icons-material';
 
 const SideNav = () => {
-  return (
-    <Box sx={{ display: 'flex' }}>
-        <Drawer
-            sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-            },
-            }}
-            variant="permanent"
-            anchor="left"
-        >
+    return (
+        <Drawer variant="permanent">
+            <Box sx={{ width: 240, backgroundColor: 'primary' }}>
+                <List>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Home />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItemButton>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Article />
+                        </ListItemIcon>
+                        <ListItemText primary="Workouts" />
+                    </ListItemButton>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <AddCircle />
+                        </ListItemIcon>
+                        <ListItemText primary="Add Workout" />
+                    </ListItemButton>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <Logout />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItemButton>
+                </List>
+            </Box>
         </Drawer>
-    </Box>
-  )
-}
+    );
+};
 
 export default SideNav;
