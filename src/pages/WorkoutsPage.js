@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Button, Grid } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const Workouts = () => {
-    const {user} = useAuthContext();
-    const [workouts, setWorkouts] = useState([]);
+    const { workouts, dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -17,13 +18,16 @@ const Workouts = () => {
                 }
             });
             const json = await res.json();
-            setWorkouts(json);
+
+            if (res.ok) {
+                dispatch({type: 'SET_WORKOUTS', payload: json});
+            };
         };
 
         if (user) {
             fetchWorkouts();
         };
-    }, [user]);
+    }, [dispatch, user]);
 
     return (
         <Box sx={{ mt: 10, mb: 2}}>   
