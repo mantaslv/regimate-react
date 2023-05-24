@@ -62,8 +62,20 @@ const WorkoutCard = ({ workout, sx }) => {
                         <DeleteOutlineOutlinedIcon />
                     </IconButton>
                 }
+                sx={{ pb: 0 }}
             />
-            <CardContent>
+            {showAlert && (
+                <Alert severity="warning" sx={{ mt: 2 }}>
+                    Are you sure you want to delete this workout?
+                    <Button variant="outlined" onClick={handleConfirmDelete} sx={{ ml: 2 }}>
+                        Delete
+                    </Button>
+                    <Button variant="outlined" onClick={handleCancelDelete} sx={{ ml: 2 }}>
+                        Cancel
+                    </Button>
+                </Alert>
+            )}
+            <CardContent >
                 <TableContainer component={Paper} elevation={3}>
                     <Table>
                         <TableHead>
@@ -93,17 +105,7 @@ const WorkoutCard = ({ workout, sx }) => {
                     </Table>
                 </TableContainer>
             </CardContent>
-            {showAlert && (
-                <Alert severity="warning" sx={{ mt: 2 }}>
-                    Are you sure you want to delete this workout?
-                    <Button variant="outlined" onClick={handleConfirmDelete} sx={{ ml: 2 }}>
-                        Delete
-                    </Button>
-                    <Button variant="outlined" onClick={handleCancelDelete} sx={{ ml: 2 }}>
-                        Cancel
-                    </Button>
-                </Alert>
-            )}
+            
         </Card>
     );
 };
