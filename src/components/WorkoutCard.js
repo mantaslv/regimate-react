@@ -1,13 +1,23 @@
-import { Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useState } from "react";
 
 const WorkoutCard = ({ workout, sx }) => {
     const  { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleClick = async () => {
+        if (!user) {
+            return
+        };
+
+        setShowAlert(true);
+    };
+
+    const handleConfirmDelete = async () => {
         if (!user) {
             return
         };
@@ -24,6 +34,12 @@ const WorkoutCard = ({ workout, sx }) => {
         if (res.ok) {
             dispatch({type: 'DELETE_WORKOUT', payload: json})
         };
+
+        setShowAlert(false);
+    };
+
+    const handleCancelDelete = () => {
+        setShowAlert(false);
     };
 
     const options = {
@@ -77,6 +93,17 @@ const WorkoutCard = ({ workout, sx }) => {
                     </Table>
                 </TableContainer>
             </CardContent>
+            {showAlert && (
+                <Alert severity="warning" sx={{ mt: 2 }}>
+                    Are you sure you want to delete this workout?
+                    <Button variant="outlined" onClick={handleConfirmDelete} sx={{ ml: 2 }}>
+                        Delete
+                    </Button>
+                    <Button variant="outlined" onClick={handleCancelDelete} sx={{ ml: 2 }}>
+                        Cancel
+                    </Button>
+                </Alert>
+            )}
         </Card>
     );
 };
