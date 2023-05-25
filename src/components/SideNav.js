@@ -1,11 +1,28 @@
-import { Box, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import { AddCircle, Article, FitnessCenter, Home, Logout } from '@mui/icons-material';
+import { 
+    Box, 
+    Divider, 
+    Drawer, 
+    List, 
+    ListItemButton, 
+    ListItemIcon, 
+    ListItemText, 
+    Typography 
+} from '@mui/material';
+import { FitnessCenter, Logout } from '@mui/icons-material';
+import { items } from '../layouts/config';
+import { useLogout } from '../hooks/useLogout';
 
 const SideNav = () => {
+    const { logout } = useLogout();
+
+    const handleClick = () => {
+        logout();
+    };
+
     return (
         <Drawer variant="permanent">
             <Box sx={{ width: 240 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', p: 2.6 }}>
                     <FitnessCenter sx={{ display: 'flex', mr: 1 }} />
                     <Typography
                         variant="h5"
@@ -24,33 +41,29 @@ const SideNav = () => {
                         REGIMATE
                     </Typography>
                 </Box>
-                
-                <List>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Home />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Article />
-                        </ListItemIcon>
-                        <ListItemText primary="Workouts" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <AddCircle />
-                        </ListItemIcon>
-                        <ListItemText primary="Add Workout" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Logout />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" />
-                    </ListItemButton>
-                </List>
+
+                <Divider sx={{ borderColor: 'neutral.700' }} />
+                <Box
+                    component="nav"
+                    sx={{ flexGrow: 1, px: 2, py: 1}}
+                >
+                    <List>
+                        {items.map((item) => (
+                            <ListItemButton key={item.title} href={item.path}>
+                                <ListItemIcon>
+                                    {item.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={item.title} />
+                            </ListItemButton>
+                        ))}
+                        <ListItemButton onClick={handleClick}>
+                            <ListItemIcon>
+                                <Logout/>
+                            </ListItemIcon>
+                            <ListItemText primary="Log Out" />
+                        </ListItemButton>
+                    </List>
+                </Box>
             </Box>
         </Drawer>
     );
