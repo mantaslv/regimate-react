@@ -3,6 +3,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
+import { dateOptions } from "./dateOptions";
 
 const WorkoutCard = ({ workout, sx }) => {
     const  { dispatch } = useWorkoutsContext();
@@ -42,21 +43,11 @@ const WorkoutCard = ({ workout, sx }) => {
         setShowAlert(false);
     };
 
-    const options = {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-
     return (
         <Card sx={sx} >
             <CardHeader
                 title="Workout"
-                subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', options)}
+                subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', dateOptions)}
                 action={
                     <IconButton aria-label="delete" onClick={handleClick}>
                         <DeleteOutlineOutlinedIcon />

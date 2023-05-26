@@ -3,6 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Card, CardContent, CardHeader, Grid, IconButton, Paper } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { styled } from '@mui/material/styles';
+import { dateOptions } from "./dateOptions";
 
 const WorkoutDetails = ({ workout }) => {
     const  { dispatch } = useWorkoutsContext();
@@ -27,17 +28,7 @@ const WorkoutDetails = ({ workout }) => {
         };
     };
 
-    const options = {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-
-    const formattedDate = new Date(workout.createdAt).toLocaleDateString('en-GB', options);
+    const formattedDate = new Date(workout.createdAt).toLocaleDateString('en-GB', dateOptions);
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
