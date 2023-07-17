@@ -75,24 +75,28 @@ const NewWorkout = () => {
                     />
                 </ExerciseContextProvider>
             ))}
-            <Grid container spacing={2} marginTop={0}>
-                <Grid item>
-                    <Button 
-                        variant="contained"
-                        onClick={addExercise}
-                    >Add Exercise</Button>
+            <Grid container >
+                <Grid item container spacing={2} marginTop={0} md={8}>
+                    <Grid item>
+                        <Button 
+                            variant="contained"
+                            onClick={addExercise}
+                        >Add Exercise</Button>
+                    </Grid>
+                    <Grid item>
+                        <Button 
+                            variant="contained"
+                            onClick={completeWorkout}
+                        >Complete Workout</Button>
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <Button 
-                        variant="contained"
-                        onClick={completeWorkout}
-                    >Complete Workout</Button>
-                </Grid>
-                <Grid item>
-                    <Button 
-                        variant="contained" 
-                        onClick={() => console.log(exercises)}
-                    >console log workout</Button>
+                <Grid item container spacing={2} marginTop={0} md={4} justifyContent="flex-end">
+                    <Grid item>
+                        <Button 
+                            variant="contained" 
+                            onClick={() => console.log(exercises)}
+                        >console log workout</Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Box>

@@ -66,8 +66,6 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 label="Exercise Name"
                                 name="exerciseName"
                                 onChange={handleInputChange}
@@ -88,24 +86,28 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                         />
                     </SetContextProvider>
                 ))}
-                <Grid container spacing={1} marginTop={0} alignItems="center">
-                    <Grid item>
-                        <Button variant="contained" onClick={addSet}>Add Set</Button>
+                <Grid container>
+                    <Grid item container md={8} spacing={1} marginTop={0} alignItems="center">
+                        <Grid item>
+                            <Button variant="contained" onClick={addSet}>Add Set</Button>
+                        </Grid>
+                        <Grid item>
+                            <Button 
+                                variant="contained" 
+                                color="error" 
+                                onClick={handleDeleteExercise}
+                                disabled={workoutState.exercises.length <= 1}
+                                sx={{ justifyContent: "space-between" }}
+                            ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Button 
-                            variant="contained" 
-                            color="error" 
-                            onClick={handleDeleteExercise}
-                            disabled={workoutState.exercises.length <= 1}
-                            sx={{ justifyContent: "space-between" }}
-                        ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
-                    </Grid>
-                    <Grid item>
-                        <Button 
-                            variant="contained"
-                            onClick={() => console.log( exerciseName, sets)}
-                        >console log exercise</Button>
+                    <Grid item container md={4} spacing={1} marginTop={0} alignItems="center" justifyContent="flex-end">
+                        <Grid item>
+                            <Button 
+                                variant="contained"
+                                onClick={() => console.log( exerciseName, sets)}
+                            >console log exercise</Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CardContent>
