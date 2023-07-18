@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
-import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+
 import Set from "./SetComponent";
+import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 
@@ -96,7 +97,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                         <Grid item>
                             <Button 
                                 variant="contained"
-                                onClick={() => console.log( exerciseName, sets)}
+                                onClick={() => console.log(exerciseName, sets)}
                             >console log exercise</Button>
                         </Grid>
                     </Grid>
