@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { Autocomplete, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Set from "./SetComponent";
