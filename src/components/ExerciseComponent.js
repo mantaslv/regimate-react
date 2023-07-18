@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Autocomplete, Button, Card, CardContent, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Set from "./SetComponent";
@@ -22,9 +22,8 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
         onExerciseChange(updatedExercise);
     };
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        const updatedExercise = { ...state, [name]: value };
+    const handleInputChange = (event, value) => {
+        const updatedExercise = { ...state, exerciseName: value };
         updateExercise(updatedExercise);
     };
     
@@ -59,22 +58,14 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
             <CardContent>
                 <Grid container spacing={1} alignItems="center">
                     <Grid item md={3}>
-                        {/* <TextField 
-                            label="Exercise Name" 
-                            name="exerciseName" 
-                            onChange={handleInputChange} /> */}
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Select Exercise</InputLabel>
-                            <Select
-                                label="Exercise Name"
-                                name="exerciseName"
-                                onChange={handleInputChange}
-                            >
-                                <MenuItem value="Bench Press">Bench Press</MenuItem>
-                                <MenuItem value="Back Squat">Back Squat</MenuItem>
-                                <MenuItem value="Pull Ups">Pull Ups</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <Autocomplete
+                            disablePortal
+                            options={options}
+                            name="exerciseName"
+                            onChange={handleInputChange}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label="Exercise Name" />}
+                        />
                     </Grid>
                 </Grid>
                 {sets && sets.map((set) => (
@@ -114,5 +105,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
         </Card>
     );
 };
+
+const options = ['Bench Press', 'Back Squats', 'Pull Ups'];
 
 export default Exercise;
