@@ -1,16 +1,20 @@
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid"
 import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-import Set from "./SetComponent";
+import SetComponent from "./SetComponent";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
+    const { user } = useAuthContext();
+    const [options, setOptions] = useState([])
 
     const emptySet = { id: uuidv4(), weight: "", reps: "" };
 
@@ -54,6 +58,34 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
         updateExercise(updatedExercise);
     };
 
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
+                mode: 'cors',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    credentials: 'include'
+                }
+            });
+            const json = await res.json();
+
+            if (res.ok) {
+                const uniqueExerciseNames = Array.from(
+                    new Set(
+                        json.flatMap(workout => 
+                            workout.exercises.map(exercise => exercise.exerciseName)
+                        )
+                    )
+                );
+                setOptions(uniqueExerciseNames)
+            };
+        };
+
+        if (user) {
+            fetchWorkouts();
+        };
+    }, [user]);
+
     return (
         <Card sx={{ mt: 2 }}>
             <CardContent>
@@ -71,7 +103,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                 </Grid>
                 {sets && sets.map((set) => (
                     <SetContextProvider key={set.id}>
-                        <Set 
+                        <SetComponent 
                             set={set} 
                             onSetChange={(updatedSet) => handleSetChange(updatedSet, set.id)}
                             onSetDelete={() => handleSetDelete(set.id)}
@@ -106,7 +138,5 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
         </Card>
     );
 };
-
-const options = ['Bench Press', 'Back Squats', 'Pull Ups'];
 
 export default Exercise;
