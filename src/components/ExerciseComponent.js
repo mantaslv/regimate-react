@@ -93,9 +93,10 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                     <Grid item md={3}>
                         <Autocomplete
                             disablePortal
+                            freeSolo
                             options={options}
                             name="exerciseName"
-                            onChange={handleInputChange}
+                            onInputChange={handleInputChange}
                             sx={{ width: 300 }}
                             renderInput={(params) => <TextField {...params} label="Exercise Name" />}
                         />
