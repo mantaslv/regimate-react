@@ -74,7 +74,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                     new Set(
                         json.flatMap(workout => 
                             workout.exercises.map(exercise => exercise.exerciseName)
-                        )
+                        ).sort()
                     )
                 );
                 setOptions(uniqueExerciseNames)
