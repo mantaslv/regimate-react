@@ -3,14 +3,11 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
-import { useLogout } from "../hooks/useLogout";
 
 const Workouts = () => {
     const { workouts, dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
     const [loading, setLoading] = useState(true);
-
-    const { logout } = useLogout();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -26,15 +23,13 @@ const Workouts = () => {
 
                 if (res.ok) {
                     dispatch({type: 'SET_WORKOUTS', payload: json});
-                } else {
-                    logout();
                 }
 
                 setLoading(false);
             } catch(error) {
                 console.error("Error fetching workouts:", error);
                 setLoading(false);
-            }
+            };
         };
 
         if (user) {
