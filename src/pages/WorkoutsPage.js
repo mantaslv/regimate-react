@@ -1,27 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const Workouts = () => {
     const { workouts, dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
-                mode: 'cors',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                    credentials: 'include'
-                }
-            });
-            const json = await res.json();
+            try {
+                const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
+                    mode: 'cors',
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`,
+                        credentials: 'include'
+                    }
+                });
+                const json = await res.json();
 
-            if (res.ok) {
-                dispatch({type: 'SET_WORKOUTS', payload: json});
-            };
+                if (res.ok) {
+                    dispatch({type: 'SET_WORKOUTS', payload: json});
+                }
+
+                setLoading(false);
+            } catch(error) {
+                console.error("Error fetching workouts:", error);
+                setLoading(false);
+            }
         };
 
         if (user) {
@@ -31,9 +39,21 @@ const Workouts = () => {
 
     return (
         <Box sx={{ mt: 10, mb: 2}}>   
-            {workouts && workouts.map((workout) => (
-                <WorkoutCard key={workout._id} workout={workout} sx={{ mb: 2 }} />
-            ))}
+            {loading ? (
+                <Box sx={{ display: 'flex' }}>
+                    <CircularProgress />
+                </Box>
+            ) : workouts && workouts.length > 0 ? (
+                <>
+                    {workouts.map((workout) => (
+                        <WorkoutCard key={workout._id} workout={workout} sx={{ mb: 2 }} />
+                    ))}
+                </> 
+            ) : (
+                <Typography variant="body1" color="white" align="center">
+                    No workouts found.
+                </Typography>
+            )}
             <Grid container spacing={1} marginTop={0}>
                 <Grid item>
                     <Button 
