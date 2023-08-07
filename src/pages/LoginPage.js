@@ -10,11 +10,14 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Alert } from '@mui/material';
+import { Alert, FormControl, IconButton, InputAdornment } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false)
     const { login, error, isLoading } = useLogin();
 
     const handleSubmit = async (e) => {
@@ -67,9 +70,22 @@ const Login = () => {
                         label="Password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        type="password"
+                        type={showPassword? "text" : "password"}
                         id="password"
                         autoComplete="current-password"
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  onMouseDown={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }}
                     />
                     <Button
                         type="submit"
