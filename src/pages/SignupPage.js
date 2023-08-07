@@ -10,11 +10,14 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Alert } from '@mui/material';
+import { Alert, IconButton, InputAdornment } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false)
     const {signup, error, isLoading} = useSignup();
 
     const handleSubmit = async (e) => {
@@ -59,17 +62,30 @@ const Signup = () => {
                         autoFocus
                     />
                     <TextField
-                        margin="normal"
                         variant='filled'
+                        margin="normal"
                         required
                         fullWidth
                         name="password"
                         label="Password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        type="password"
+                        type={showPassword? "text" : "password"}
                         id="password"
                         autoComplete="current-password"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        onMouseDown={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <Button
                         type="submit"
