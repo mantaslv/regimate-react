@@ -75,17 +75,17 @@ const Login = () => {
                         autoComplete="current-password"
                         InputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label="toggle password visibility"
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  onMouseDown={() => setShowPassword(!showPassword)}
-                                >
-                                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                                </IconButton>
-                              </InputAdornment>
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        onMouseDown={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                    </IconButton>
+                                </InputAdornment>
                             )
-                          }}
+                        }}
                     />
                     <Button
                         type="submit"
