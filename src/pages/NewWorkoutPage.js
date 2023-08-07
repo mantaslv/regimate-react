@@ -77,7 +77,7 @@ const NewWorkout = () => {
                     '& .MuiFilledInput-underline:before': {
                         borderBottomColor: theme.palette.primary.main,
                     },
-                  }}
+                }}
             />
             {exercises && exercises.map((exercise) => (
                 <ExerciseContextProvider key={exercise.id}>
