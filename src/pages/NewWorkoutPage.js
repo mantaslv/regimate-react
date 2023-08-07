@@ -69,14 +69,13 @@ const NewWorkout = () => {
             <TextField label="Workout Name" variant="filled"  
                 sx={{
                     '& label': {
-                      color: theme.palette.primary.main, // Change label color to white
+                        color: theme.palette.primary.main,
                     },
                     '& .MuiFilledInput-root': {
-                        backgroundColor: "#323232", // Use primary main color for input background
-                      },
-                
+                            backgroundColor: "#323232",
+                    },
                     '& .MuiFilledInput-underline:before': {
-                      borderBottomColor: theme.palette.primary.main, // Change bottom line color when not focused
+                        borderBottomColor: theme.palette.primary.main,
                     },
                   }}
             />
