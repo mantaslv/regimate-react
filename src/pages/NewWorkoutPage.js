@@ -1,16 +1,18 @@
 import { v4 as uuidv4 } from "uuid";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import Exercise from "../components/ExerciseComponent";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from "@emotion/react";
 
 const NewWorkout = () => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
@@ -63,7 +65,21 @@ const NewWorkout = () => {
 
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="white">New Workout</Typography>
+            <Typography variant="h5" color="white" marginBottom={2}>New Workout</Typography>
+            <TextField label="Workout Name" variant="filled"  
+                sx={{
+                    '& label': {
+                      color: theme.palette.primary.main, // Change label color to white
+                    },
+                    '& .MuiFilledInput-root': {
+                        backgroundColor: "#323232", // Use primary main color for input background
+                      },
+                
+                    '& .MuiFilledInput-underline:before': {
+                      borderBottomColor: theme.palette.primary.main, // Change bottom line color when not focused
+                    },
+                  }}
+            />
             {exercises && exercises.map((exercise) => (
                 <ExerciseContextProvider key={exercise.id}>
                     <Exercise
