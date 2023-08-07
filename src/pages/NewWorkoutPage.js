@@ -65,7 +65,7 @@ const NewWorkout = () => {
 
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="white" marginBottom={2}>New Workout</Typography>
+            <Typography variant="h5" color="white" marginBottom={1} sx={{ textAlign: 'center' }}>New Workout</Typography>
             <TextField label="Workout Name" variant="filled"  
                 sx={{
                     '& label': {
