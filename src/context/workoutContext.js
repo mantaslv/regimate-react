@@ -6,6 +6,7 @@ export const WorkoutContext = createContext();
 const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
 const initialState = {
+    workoutName: "", 
     exercises: [emptyExercise]
 };
 
@@ -13,22 +14,6 @@ export const workoutReducer = (state, action) => {
     switch (action.type) {
         case "SET_WORKOUT":
             return action.payload;
-        case "ADD_EXERCISE":
-            return {
-                exercises: [...state.exercises, emptyExercise]
-            };
-        case "SET_EXERCISES":
-            return {
-                exercises: state.exercises.map((exercise, index) =>
-                    index === action.payload.index
-                        ? action.payload.exercise
-                        : exercise
-                )
-            };
-        case "DELETE_EXERCISE":
-            return {
-                exercises: state.exercises.filter((_, index) => index !== action.payload.index)
-            };
         default:
             return state;
     }
