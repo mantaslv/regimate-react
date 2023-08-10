@@ -11,6 +11,28 @@ export const exerciseReducer = (state, action) => {
     switch (action.type) {
         case "SET_EXERCISE":
             return action.payload;
+        case "ADD_SET":
+            return {
+                ...state,
+                sets: [...state.sets, { id: uuidv4(), weight: "", reps: "" }]
+            };
+        case "DELETE_SET":
+            return {
+                ...state,
+                sets: state.sets.filter((set) => set.id !== action.payload)
+            };
+        case "UPDATE_SET":
+            return {
+                ...state,
+                sets: state.sets.map((set) =>
+                    set.id === action.payload.id ? { ...set, ...action.payload.changes } : set
+                )
+            };
+        case "UPDATE_EXERCISE_NAME":
+            return {
+                ...state,
+                exerciseName: action.payload
+            };
         default:
             return state;
     }
