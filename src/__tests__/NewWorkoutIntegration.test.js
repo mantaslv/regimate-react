@@ -5,20 +5,22 @@ import { ExerciseContextProvider } from '../context/exerciseContext';
 import { WorkoutContextProvider } from '../context/workoutContext';
 import WorkoutComponent from '../components/WorkoutComponent';
 
-beforeAll(() => {
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-});
-
-afterAll(() => {
-    console.log.mockRestore();
-});
-
 test('Integration Test: Entering set values updates context states', () => {
-    const { getByLabelText, getByText } = render(
+    let capturedContextState;
+
+    const handleContextStateChange = (newContextState) => {
+        capturedContextState = newContextState;
+    };
+
+    const { getByLabelText } = render(
         <WorkoutContextProvider>
             <ExerciseContextProvider>
                 <SetContextProvider>
-                    <WorkoutComponent exerciseList={['Squat']} theme={{ palette: { primary: { main: '#000000' }}}}/>
+                    <WorkoutComponent 
+                        exerciseList={['Squat']} 
+                        theme={{ palette: { primary: { main: '#000000' }}}}
+                        onContextStateChange={handleContextStateChange}
+                    />
                 </SetContextProvider>
             </ExerciseContextProvider>
         </WorkoutContextProvider>
@@ -30,10 +32,5 @@ test('Integration Test: Entering set values updates context states', () => {
     fireEvent.change(weightInput, { target: { value: '50' } });
     fireEvent.change(repsInput, { target: { value: '10' } });
 
-    const consoleLogButton = getByText('console log workout');
-    fireEvent.click(consoleLogButton);
-
-    const consoleLogMessages = console.log.mock.calls;
-
-    expect(consoleLogMessages[0][0][0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
+    expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
 });
