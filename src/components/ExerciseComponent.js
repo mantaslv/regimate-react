@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid"
 import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -7,14 +6,11 @@ import SetComponent from "./SetComponent";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import { useAuthContext } from "../hooks/useAuthContext";
 
-const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
+const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
-    const { user } = useAuthContext();
-    const [options, setOptions] = useState([])
 
     const emptySet = { id: uuidv4(), weight: "", reps: "" };
 
@@ -58,34 +54,6 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
         updateExercise(updatedExercise);
     };
 
-    useEffect(() => {
-        const fetchWorkouts = async () => {
-            const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
-                mode: 'cors',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                    credentials: 'include'
-                }
-            });
-            const json = await res.json();
-
-            if (res.ok) {
-                const uniqueExerciseNames = Array.from(
-                    new Set(
-                        json.flatMap(workout => 
-                            workout.exercises.map(exercise => exercise.exerciseName)
-                        ).sort()
-                    )
-                );
-                setOptions(uniqueExerciseNames)
-            };
-        };
-
-        if (user) {
-            fetchWorkouts();
-        };
-    }, [user]);
-
     return (
         <Card sx={{ mt: 2 }}>
             <CardContent>
@@ -94,7 +62,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete }) => {
                         <Autocomplete
                             disablePortal
                             freeSolo
-                            options={options}
+                            options={exerciseList}
                             name="exerciseName"
                             onInputChange={handleInputChange}
                             sx={{ width: 300 }}

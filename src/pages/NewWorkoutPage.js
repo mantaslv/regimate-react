@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/WorkoutComponent'
+import { useEffect, useState } from "react";
 
 const NewWorkoutPage = () => {
     const { state } = useWorkoutContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
+
+    const [exerciseList, setExerciseList] = useState([])
 
     const completeWorkout = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
@@ -30,10 +33,38 @@ const NewWorkoutPage = () => {
         };
     };
 
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
+                mode: 'cors',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    credentials: 'include'
+                }
+            });
+            const json = await res.json();
+
+            if (res.ok) {
+                const uniqueExerciseNames = Array.from(
+                    new Set(
+                        json.flatMap(workout => 
+                            workout.exercises.map(exercise => exercise.exerciseName)
+                        ).sort()
+                    )
+                );
+                setExerciseList(uniqueExerciseNames)
+            };
+        };
+
+        if (user) {
+            fetchWorkouts();
+        };
+    }, [user]);
+
     return (
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="white" sx={{ textAlign: 'center' }}>New Workout</Typography>
-            <WorkoutComponent />
+            <WorkoutComponent exerciseList={exerciseList}/>
             <Grid container >
                 <Grid item container spacing={2} marginTop={0} md={8}>
                     <Grid item>

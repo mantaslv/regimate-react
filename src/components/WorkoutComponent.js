@@ -6,7 +6,7 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 
-const WorkoutComponent = () => {
+const WorkoutComponent = ({exerciseList}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
     const theme = useTheme();
@@ -63,6 +63,7 @@ const WorkoutComponent = () => {
                             handleExerciseChange(updatedExercise, exercise.id)
                         }
                         onExerciseDelete={() => handleExerciseDelete(exercise.id)}
+                        exerciseList={exerciseList}
                     />
                 </ExerciseContextProvider>
             ))}
