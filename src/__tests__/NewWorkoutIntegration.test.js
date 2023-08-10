@@ -26,16 +26,19 @@ test('Integration Test: Entering set values updates context states', () => {
         </WorkoutContextProvider>
     );
 
+    const workoutNameInput = getByLabelText('Workout Name');
     const exerciseNameInput = getByLabelText('Exercise Name');
     const weightInput = getByLabelText('Weight (kg)');
     const repsInput = getByLabelText('Reps');
 
+    fireEvent.change(workoutNameInput, { target: { value: 'Leg Day' } });
     fireEvent.change(exerciseNameInput, { target: { value: 'Squats' } });
     fireEvent.change(weightInput, { target: { value: '50' } });
     fireEvent.change(repsInput, { target: { value: '10' } });
 
     console.log(capturedContextState)
 
-    expect(capturedContextState[0]).toEqual(expect.objectContaining({ exerciseName: 'Squats' }));
     expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
+    expect(capturedContextState[0]).toEqual(expect.objectContaining({ exerciseName: 'Squats' }));
+    // expect(capturedContextState).toEqual(expect.objectContaining({ workoutName: 'Leg Day' }));
 });
