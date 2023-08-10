@@ -14,6 +14,18 @@ const Set = ({ onSetChange, onSetDelete }) => {
         onSetChange(updatedSet);
     };
 
+    // const handleWeightChange = (event) => {
+    //     const newWeight = event.target.value;
+    //     dispatch({ type: "SET_WEIGHT", payload: newWeight });
+    //     onSetChange(state);
+    // };
+
+    // const handleRepsChange = (event) => {
+    //     const newReps = event.target.value;
+    //     dispatch({ type: "SET_REPS", payload: newReps });
+    //     onSetChange(state);
+    // };
+
     const handleDeleteSet = () => {
         onSetDelete();
     };
