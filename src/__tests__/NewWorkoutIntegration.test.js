@@ -5,11 +5,6 @@ import { ExerciseContextProvider } from '../context/exerciseContext';
 import { WorkoutContextProvider } from '../context/workoutContext';
 import WorkoutComponent from '../components/WorkoutComponent';
 
-jest.mock('@emotion/react', () => ({
-    ...jest.requireActual('@emotion/react'),
-    useTheme: () => ({ palette: { primary: { main: '#000000' }}}),
-}));
-
 beforeAll(() => {
     jest.spyOn(console, 'log').mockImplementation(() => {});
 });
@@ -23,7 +18,7 @@ test('Integration Test: Entering set values updates context states', () => {
         <WorkoutContextProvider>
             <ExerciseContextProvider>
                 <SetContextProvider>
-                    <WorkoutComponent exerciseList={['Squat']}/>
+                    <WorkoutComponent exerciseList={['Squat']} theme={{ palette: { primary: { main: '#000000' }}}}/>
                 </SetContextProvider>
             </ExerciseContextProvider>
         </WorkoutContextProvider>

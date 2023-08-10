@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from "@emotion/react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -10,6 +11,7 @@ const NewWorkoutPage = () => {
     const { state } = useWorkoutContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const [exerciseList, setExerciseList] = useState([])
 
@@ -64,7 +66,7 @@ const NewWorkoutPage = () => {
     return (
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="white" sx={{ textAlign: 'center' }}>New Workout</Typography>
-            <WorkoutComponent exerciseList={exerciseList}/>
+            <WorkoutComponent exerciseList={exerciseList} theme={theme}/>
             <Grid container >
                 <Grid item container spacing={2} marginTop={0} md={8}>
                     <Grid item>

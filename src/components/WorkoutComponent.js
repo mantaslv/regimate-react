@@ -1,15 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { useTheme } from "@emotion/react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 
-const WorkoutComponent = ({exerciseList}) => {
+const WorkoutComponent = ({exerciseList, theme}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
-    const theme = useTheme();
 
     const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
 
