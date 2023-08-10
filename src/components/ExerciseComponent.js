@@ -27,6 +27,11 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
         const updatedExercise = { ...state, exerciseName: value };
         updateExercise(updatedExercise);
     };
+
+    // const handleInputChange = (event, value) => {
+    //     dispatch({ type: "UPDATE_EXERCISE_NAME", payload: value });
+
+    // };
     
     const addSet = () => {
         const updatedExercise = {
@@ -53,6 +58,19 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
         }
         updateExercise(updatedExercise);
     };
+
+    // const addSet = () => {
+    //     dispatch({ type: "ADD_SET" });
+    // };
+    
+    // const handleSetChange = (updatedSet, id) => {
+    //     dispatch({ type: "UPDATE_SET", payload: { id, changes: updatedSet } });
+    //     onExerciseChange(state);
+    // };
+    
+    // const handleSetDelete = (id) => {
+    //     dispatch({ type: "DELETE_SET", payload: id });
+    // };
 
     return (
         <Card sx={{ mt: 2 }}>
