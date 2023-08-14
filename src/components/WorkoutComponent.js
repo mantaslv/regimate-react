@@ -1,5 +1,5 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
 import { useEffect } from "react";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import TerminalIcon from '@mui/icons-material/Terminal';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
@@ -41,7 +41,7 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                         color: theme.palette.primary.main,
                     },
                     '& .MuiFilledInput-root': {
-                            backgroundColor: "#323232",
+                        backgroundColor: "#323232",
                     },
                     '& .MuiFilledInput-underline:before': {
                         borderBottomColor: theme.palette.primary.main,
