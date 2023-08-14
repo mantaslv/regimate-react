@@ -7,8 +7,6 @@ const initialState = { exerciseName: "", sets: [{ id: uuidv4(), weight: "", reps
 
 export const exerciseReducer = (state, action) => {
     switch (action.type) {
-        case "SET_EXERCISE":
-            return action.payload;
         case "ADD_SET":
             return {
                 ...state,
@@ -37,10 +35,7 @@ export const exerciseReducer = (state, action) => {
 };
 
 export const ExerciseContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(
-        exerciseReducer,
-        initialState
-    );
+    const [state, dispatch] = useReducer(exerciseReducer, initialState);
 
     return (
         <ExerciseContext.Provider value={{ state, dispatch }}>
