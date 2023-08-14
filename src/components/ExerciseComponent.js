@@ -13,8 +13,6 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     const { dispatch, state } = useExerciseContext();
     const { exerciseName, sets } = state;
 
-    const emptySet = { id: uuidv4(), weight: "", reps: "" };
-
     const handleDeleteExercise = () => {
         onExerciseDelete();
     };
@@ -31,35 +29,15 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
 
     // const handleInputChange = (event, value) => {
     //     dispatch({ type: "UPDATE_EXERCISE_NAME", payload: value });
-
     // };
-    
+
     const addSet = () => {
-        const updatedExercise = {
-            ...state,
-            sets: [...sets, emptySet]
-        };
-        updateExercise(updatedExercise);
+        dispatch({ type: "ADD_SET" });
     };
-
-    const handleSetChange = (updatedSet, id) => {
-        const updatedExercise = {
-            ...state,
-            sets: sets.map((contextSet) =>
-                contextSet.id === id ? { id, ...updatedSet} : contextSet
-            )
-        };
-        updateExercise(updatedExercise);
-    };
-
-    // const addSet = () => {
-    //     dispatch({ type: "ADD_SET" });
-    // };
     
-    // const handleSetChange = (updatedSet, id) => {
-    //     dispatch({ type: "UPDATE_SET", payload: { id, changes: updatedSet } });
-    //     onExerciseChange(state);
-    // };
+    const handleSetChange = (updatedSet, id) => {
+        dispatch({ type: "UPDATE_SET", payload: { id, changes: updatedSet } });
+    };
     
     const handleSetDelete = (id) => {
         dispatch({ type: "DELETE_SET", payload: id });
