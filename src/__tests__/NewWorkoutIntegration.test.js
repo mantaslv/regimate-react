@@ -17,7 +17,7 @@ test('Integration Test: Entering set values updates context states', async () =>
             <ExerciseContextProvider>
                 <SetContextProvider>
                     <WorkoutComponent 
-                        exerciseList={['Squats', 'Dips']} 
+                        exerciseList={['Squats']} 
                         theme={{ palette: { primary: { main: '#000000' }}}}
                         onContextStateChange={handleContextStateChange}
                     />
@@ -50,7 +50,6 @@ test('Integration Test: Entering set values updates context states', async () =>
     expect(capturedContextState.exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: '55', reps: '8' }));
 
     fireEvent.click(getByText('Add Exercise'));
-
     fireEvent.change(getAllByLabelText('Weight (kg)')[1], { target: { value: '20' } });
     fireEvent.change(getAllByLabelText('Reps')[1], { target: { value: '10' } });
     
