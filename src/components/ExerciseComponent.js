@@ -48,7 +48,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
                             name="exerciseName"
                             onInputChange={handleInputChange}
                             sx={{ width: 300 }}
-                            renderInput={(params) => <TextField {...params} label="Exercise Name" />}
+                            renderInput={(params) => <TextField {...params} label="Exercise Name" data-testid="exercise-input"/>}
                         />
                     </Grid>
                 </Grid>
@@ -73,6 +73,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
                                 onClick={handleDeleteExercise}
                                 disabled={workoutState.exercises.length <= 1}
                                 sx={{ justifyContent: "space-between" }}
+                                aria-label="Delete Exercise"
                             ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
                         </Grid>
                     </Grid>

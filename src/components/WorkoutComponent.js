@@ -1,17 +1,13 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
+import { useEffect } from "react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
-import { useEffect } from "react";
 
 const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
-
-    const updateWorkout = (updatedWorkout) => {
-        dispatch({ type: "SET_WORKOUT", payload: updatedWorkout });
-    };
 
     const addExercise = () => {
         dispatch({ type: "ADD_EXERCISE" });
@@ -22,10 +18,7 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
     };
 
     const handleExerciseDelete = (id) => {
-        const updatedWorkout = {
-            exercises: exercises.filter((exercise) => exercise.id !== id)
-        }
-        updateWorkout(updatedWorkout);
+        dispatch({ type: "DELETE_EXERCISE", payload: id });
     };
 
     useEffect(() => {
