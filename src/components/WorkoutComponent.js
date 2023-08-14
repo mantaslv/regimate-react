@@ -60,21 +60,21 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                     />
                 </ExerciseContextProvider>
             ))}
-                <Grid container spacing={2} marginTop={0}>
-                    <Grid item>
-                        <Button 
-                            variant="contained"
-                            onClick={addExercise}
-                        >Add Exercise</Button>
-                    </Grid>
-                    <Grid item>
-                        <Button 
-                            variant="contained" 
-                            onClick={() => console.log(state)}
-                            title="Click to console log this workout"
-                        ><TerminalIcon/></Button>
-                    </Grid>
+            <Grid container spacing={2} marginTop={0}>
+                <Grid item>
+                    <Button 
+                        variant="contained"
+                        onClick={addExercise}
+                    >Add Exercise</Button>
                 </Grid>
+                <Grid item>
+                    <Button 
+                        variant="contained" 
+                        onClick={() => console.log(state)}
+                        title="Click to console log this workout"
+                    ><TerminalIcon/></Button>
+                </Grid>
+            </Grid>
         </Box>
     );
 };
