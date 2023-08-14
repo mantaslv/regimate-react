@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import TerminalIcon from '@mui/icons-material/Terminal';
+
 import { useSetContext } from "../hooks/useSetContext";
 import { useExerciseContext } from "../hooks/useExerciseContext";
-import { useEffect } from "react";
 
 const Set = ({ onSetChange, onSetDelete }) => {
     const { state: exerciseState } = useExerciseContext();
@@ -27,8 +29,7 @@ const Set = ({ onSetChange, onSetDelete }) => {
     };
 
     return (
-        <Grid container >
-            <Grid container item md={8} spacing={2} paddingY={2} alignItems="center">
+            <Grid container spacing={2} paddingY={1} alignItems="center">
                 <Grid item>
                     <TextField
                         label="Weight (kg)" 
@@ -50,18 +51,17 @@ const Set = ({ onSetChange, onSetDelete }) => {
                         onClick={handleDeleteSet}
                         disabled={exerciseState.sets.length <= 1}
                         aria-label="Delete Set"
+                        title="Click to remove this set"
                     ><RemoveCircleIcon/></Button>
                 </Grid>
-            </Grid>
-            <Grid container item md={4} spacing={2} paddingY={2} alignItems="center" justifyContent="flex-end">
-                <Grid item >
+                <Grid item md={1}>
                     <Button 
-                        variant="contained" 
+                        variant="contained"
+                        title="Click to console log this set"
                         onClick={() => console.log(state)}
-                    >console log set</Button>
+                    ><TerminalIcon /></Button>
                 </Grid>
             </Grid>
-        </Grid>
     );
 };
 
