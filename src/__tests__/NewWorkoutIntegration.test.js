@@ -35,7 +35,7 @@ test('Integration Test: Entering set values updates context states', async () =>
     expect(capturedContextState.exercises[0].sets.length).toEqual(1);
     expect(capturedContextState.exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
     expect(capturedContextState.exercises[0]).toEqual(expect.objectContaining({ exerciseName: 'Squats' }));
-    // expect(capturedContextState).toEqual(expect.objectContaining({ workoutName: 'Leg Day' }));
+    expect(capturedContextState.workoutName).toEqual('Leg Day');
 
     fireEvent.click(getByText('Add Set'));
     fireEvent.change(getAllByLabelText('Weight (kg)')[1], { target: { value: '55' } });

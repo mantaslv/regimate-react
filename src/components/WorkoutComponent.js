@@ -9,6 +9,10 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
+    const handleWorkoutNameChange = (event) => {
+        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: event.target.value });
+    };
+
     const addExercise = () => {
         dispatch({ type: "ADD_EXERCISE" });
     };
@@ -27,7 +31,10 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
 
     return (
         <Box>
-            <TextField label="Workout Name" variant="filled"  
+            <TextField 
+                label="Workout Name" 
+                variant="filled"
+                onChange={handleWorkoutNameChange}
                 sx={{
                     '& label': {
                         color: theme.palette.primary.main,
@@ -65,7 +72,7 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                     <Grid item>
                         <Button 
                             variant="contained" 
-                            onClick={() => console.log(exercises)}
+                            onClick={() => console.log(state)}
                         >console log workout</Button>
                     </Grid>
                 </Grid>
