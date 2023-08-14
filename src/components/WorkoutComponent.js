@@ -1,5 +1,6 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useEffect } from "react";
+import TerminalIcon from '@mui/icons-material/Terminal';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
@@ -59,24 +60,21 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                     />
                 </ExerciseContextProvider>
             ))}
-            <Grid container >
-                <Grid item container spacing={2} marginTop={0} md={8}>
+                <Grid container spacing={2} marginTop={0}>
                     <Grid item>
                         <Button 
                             variant="contained"
                             onClick={addExercise}
                         >Add Exercise</Button>
                     </Grid>
-                </Grid>
-                <Grid item container spacing={2} marginTop={0} md={4} justifyContent="flex-end">
                     <Grid item>
                         <Button 
                             variant="contained" 
                             onClick={() => console.log(state)}
-                        >console log workout</Button>
+                            title="Click to console log this workout"
+                        ><TerminalIcon/></Button>
                     </Grid>
                 </Grid>
-            </Grid>
         </Box>
     );
 };
