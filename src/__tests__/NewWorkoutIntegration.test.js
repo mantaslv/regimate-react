@@ -28,19 +28,19 @@ test('Integration Test: Entering set values updates context states', () => {
 
     const workoutNameInput = getByLabelText('Workout Name');
     const exerciseNameInput = getByLabelText('Exercise Name');
-    const addSetButton = getByText('Add Set');
 
     fireEvent.change(workoutNameInput, { target: { value: 'Leg Day' } });
     fireEvent.change(exerciseNameInput, { target: { value: 'Squats' } });
     fireEvent.change(getAllByLabelText('Weight (kg)')[0], { target: { value: '50' } });
     fireEvent.change(getAllByLabelText('Reps')[0], { target: { value: '10' } });
 
+    expect(capturedContextState.length).toEqual(1);
     expect(capturedContextState[0].sets.length).toEqual(1);
     expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
     expect(capturedContextState[0]).toEqual(expect.objectContaining({ exerciseName: 'Squats' }));
     // expect(capturedContextState).toEqual(expect.objectContaining({ workoutName: 'Leg Day' }));
 
-    fireEvent.click(addSetButton);
+    fireEvent.click(getByText('Add Set'));
     fireEvent.change(getAllByLabelText('Weight (kg)')[1], { target: { value: '55' } });
     fireEvent.change(getAllByLabelText('Reps')[1], { target: { value: '8' } });
 
@@ -48,7 +48,12 @@ test('Integration Test: Entering set values updates context states', () => {
     expect(capturedContextState[0].sets[1]).toEqual(expect.objectContaining({ weight: '55', reps: '8' }));
     
     fireEvent.click(getAllByLabelText('Delete Set')[0]);
-    
+
     expect(capturedContextState[0].sets.length).toEqual(1);
     expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '55', reps: '8' }));
+
+    console.log(capturedContextState);
+
+    fireEvent.click(getByText('Add Exercise'));
+    expect(capturedContextState.length).toEqual(2);
 });

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { Box, Button, Grid, TextField } from "@mui/material";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
@@ -9,17 +8,12 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
-    const emptyExercise = { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] };
-
     const updateWorkout = (updatedWorkout) => {
         dispatch({ type: "SET_WORKOUT", payload: updatedWorkout });
     };
 
     const addExercise = () => {
-        const updatedWorkout = {
-            exercises: [...exercises, emptyExercise] 
-        };
-        updateWorkout(updatedWorkout);
+        dispatch({ type: "ADD_EXERCISE" });
     };
 
     const handleExerciseChange = (updatedExercise, id) => {
