@@ -24,7 +24,7 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
         };
         updateWorkout(updatedWorkout);
 
-        onContextStateChange(updatedWorkout.exercises)
+        onContextStateChange(updatedWorkout)
     };
 
     const handleExerciseDelete = (id) => {
