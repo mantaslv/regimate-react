@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import TerminalIcon from '@mui/icons-material/Terminal';
 
 import SetComponent from "./SetComponent";
 import { useExerciseContext } from "../hooks/useExerciseContext";
@@ -39,7 +40,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     return (
         <Card sx={{ mt: 2 }}>
             <CardContent>
-                <Grid container spacing={1} alignItems="center">
+                <Grid container spacing={1} alignItems="center" paddingBottom={1}>
                     <Grid item md={3}>
                         <Autocomplete
                             disablePortal
@@ -61,31 +62,29 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
                         />
                     </SetContextProvider>
                 ))}
-                <Grid container>
-                    <Grid item container md={8} spacing={1} marginTop={0} alignItems="center">
-                        <Grid item>
-                            <Button variant="contained" onClick={addSet}>Add Set</Button>
-                        </Grid>
-                        <Grid item>
-                            <Button 
-                                variant="contained" 
-                                color="error" 
-                                onClick={handleDeleteExercise}
-                                disabled={workoutState.exercises.length <= 1}
-                                sx={{ justifyContent: "space-between" }}
-                                aria-label="Delete Exercise"
-                            ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
-                        </Grid>
+                <Grid container spacing={1} marginTop={0} alignItems="center">
+                    <Grid item>
+                        <Button variant="contained" onClick={addSet}>Add Set</Button>
                     </Grid>
-                    <Grid item container md={4} spacing={1} marginTop={0} alignItems="center" justifyContent="flex-end">
-                        <Grid item>
-                            <Button 
-                                variant="contained"
-                                onClick={() => console.log(exerciseName, sets)}
-                            >console log exercise</Button>
-                        </Grid>
+                    <Grid item>
+                        <Button 
+                            variant="contained" 
+                            color="error" 
+                            onClick={handleDeleteExercise}
+                            disabled={workoutState.exercises.length <= 1}
+                            sx={{ justifyContent: "space-between" }}
+                            aria-label="Delete Exercise"
+                            title="Click to remove this exercise"
+                        ><RemoveCircleIcon sx={{ mr: 1 }} />DELETE EXERCISE</Button>
                     </Grid>
-                </Grid>
+                    <Grid item>
+                        <Button 
+                            variant="contained"
+                            title="Click to console log this exercise"
+                            onClick={() => console.log(exerciseName, sets)}
+                        ><TerminalIcon /></Button>
+                    </Grid>
+                </Grid>  
             </CardContent>
         </Card>
     );
