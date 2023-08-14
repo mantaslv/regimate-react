@@ -46,7 +46,7 @@ const WorkoutCard = ({ workout, sx }) => {
     return (
         <Card sx={sx} >
             <CardHeader
-                title="Workout"
+                title={workout.workoutName === "" ? "Workout" : workout.workoutName}
                 subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', dateOptions)}
                 action={
                     <IconButton aria-label="delete" onClick={handleClick}>
