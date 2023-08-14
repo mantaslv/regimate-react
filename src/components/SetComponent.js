@@ -2,29 +2,25 @@ import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useSetContext } from "../hooks/useSetContext";
 import { useExerciseContext } from "../hooks/useExerciseContext";
+import { useEffect } from "react";
 
 const Set = ({ onSetChange, onSetDelete }) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        const updatedSet = { ...state, [name]: value };
-        dispatch({ type: "SET_SET", payload: updatedSet });
-        onSetChange(updatedSet);
+    const handleWeightChange = (event) => {
+        const newWeight = event.target.value;
+        dispatch({ type: "SET_WEIGHT", payload: newWeight });
     };
 
-    // const handleWeightChange = (event) => {
-    //     const newWeight = event.target.value;
-    //     dispatch({ type: "SET_WEIGHT", payload: newWeight });
-    //     onSetChange(state);
-    // };
+    const handleRepsChange = (event) => {
+        const newReps = event.target.value;
+        dispatch({ type: "SET_REPS", payload: newReps });
+    };
 
-    // const handleRepsChange = (event) => {
-    //     const newReps = event.target.value;
-    //     dispatch({ type: "SET_REPS", payload: newReps });
-    //     onSetChange(state);
-    // };
+    useEffect(() => {
+        onSetChange(state);
+    }, [state])
 
     const handleDeleteSet = () => {
         onSetDelete();
@@ -37,14 +33,14 @@ const Set = ({ onSetChange, onSetDelete }) => {
                     <TextField
                         label="Weight (kg)" 
                         name="weight"
-                        onChange={handleInputChange}
+                        onChange={handleWeightChange}
                     />
                 </Grid>
                 <Grid item>
                     <TextField 
                         label="Reps" 
                         name="reps" 
-                        onChange={handleInputChange}
+                        onChange={handleRepsChange}
                     />
                 </Grid>
                 <Grid item md={1}>
