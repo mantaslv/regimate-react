@@ -6,6 +6,7 @@ import SetComponent from "./SetComponent";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import { useEffect } from "react";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     const { state: workoutState } = useWorkoutContext();
@@ -51,14 +52,6 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
         updateExercise(updatedExercise);
     };
 
-    const handleSetDelete = (id) => {
-        const updatedExercise = {
-            ...state,
-            sets: sets.filter((set) => set.id !== id)
-        }
-        updateExercise(updatedExercise);
-    };
-
     // const addSet = () => {
     //     dispatch({ type: "ADD_SET" });
     // };
@@ -68,9 +61,13 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     //     onExerciseChange(state);
     // };
     
-    // const handleSetDelete = (id) => {
-    //     dispatch({ type: "DELETE_SET", payload: id });
-    // };
+    const handleSetDelete = (id) => {
+        dispatch({ type: "DELETE_SET", payload: id });
+    };
+
+    useEffect(() => {
+        onExerciseChange(state);
+    }, [state]);
 
     return (
         <Card sx={{ mt: 2 }}>

@@ -12,7 +12,7 @@ test('Integration Test: Entering set values updates context states', () => {
         capturedContextState = newContextState;
     };
 
-    const { getByLabelText } = render(
+    const { getAllByLabelText, getByLabelText, getByText } = render(
         <WorkoutContextProvider>
             <ExerciseContextProvider>
                 <SetContextProvider>
@@ -28,17 +28,23 @@ test('Integration Test: Entering set values updates context states', () => {
 
     const workoutNameInput = getByLabelText('Workout Name');
     const exerciseNameInput = getByLabelText('Exercise Name');
-    const weightInput = getByLabelText('Weight (kg)');
-    const repsInput = getByLabelText('Reps');
+    const addSetButton = getByText('Add Set');
 
     fireEvent.change(workoutNameInput, { target: { value: 'Leg Day' } });
     fireEvent.change(exerciseNameInput, { target: { value: 'Squats' } });
-    fireEvent.change(weightInput, { target: { value: '50' } });
-    fireEvent.change(repsInput, { target: { value: '10' } });
-
-    console.log(capturedContextState)
+    fireEvent.change(getAllByLabelText('Weight (kg)')[0], { target: { value: '50' } });
+    fireEvent.change(getAllByLabelText('Reps')[0], { target: { value: '10' } });
+    
+    fireEvent.click(addSetButton);
+    fireEvent.change(getAllByLabelText('Weight (kg)')[1], { target: { value: '55' } });
+    fireEvent.change(getAllByLabelText('Reps')[1], { target: { value: '8' } });
 
     expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '50', reps: '10' }));
+    expect(capturedContextState[0].sets[1]).toEqual(expect.objectContaining({ weight: '55', reps: '8' }));
     expect(capturedContextState[0]).toEqual(expect.objectContaining({ exerciseName: 'Squats' }));
     // expect(capturedContextState).toEqual(expect.objectContaining({ workoutName: 'Leg Day' }));
+
+    fireEvent.click(getAllByLabelText('Delete Set')[0]);
+    expect(capturedContextState[0].sets.length).toEqual(1);
+    expect(capturedContextState[0].sets[0]).toEqual(expect.objectContaining({ weight: '55', reps: '8' }));
 });

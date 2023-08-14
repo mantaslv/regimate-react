@@ -49,6 +49,7 @@ const Set = ({ onSetChange, onSetDelete }) => {
                         color="error" 
                         onClick={handleDeleteSet}
                         disabled={exerciseState.sets.length <= 1}
+                        aria-label="Delete Set"
                     ><RemoveCircleIcon/></Button>
                 </Grid>
             </Grid>
