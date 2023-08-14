@@ -1,4 +1,4 @@
-import { render, fireEvent, waitFor, getAllByTestId, queryAllByTestId } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { SetContextProvider } from '../context/setContext';
 import { ExerciseContextProvider } from '../context/exerciseContext';
@@ -12,7 +12,7 @@ test('Integration Test: Entering set values updates context states', async () =>
         capturedContextState = newContextState;
     };
 
-    const { getAllByLabelText, getByLabelText, getByText, queryAllByTestId } = render(
+    const { getAllByLabelText, getByLabelText, getByText } = render(
         <WorkoutContextProvider>
             <ExerciseContextProvider>
                 <SetContextProvider>
