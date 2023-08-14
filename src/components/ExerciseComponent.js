@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid"
+import { useEffect } from "react";
 import { Autocomplete, Button, Card, CardContent, Grid, TextField } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
@@ -6,7 +6,6 @@ import SetComponent from "./SetComponent";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import { useEffect } from "react";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
     const { state: workoutState } = useWorkoutContext();
@@ -17,19 +16,9 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList }) => {
         onExerciseDelete();
     };
 
-    const updateExercise = (updatedExercise) => {
-        dispatch({ type: "SET_EXERCISE", payload: updatedExercise });
-        onExerciseChange(updatedExercise);
+    const handleInputChange = (_, value) => {
+        dispatch({ type: "UPDATE_EXERCISE_NAME", payload: value });
     };
-
-    const handleInputChange = (event, value) => {
-        const updatedExercise = { ...state, exerciseName: value };
-        updateExercise(updatedExercise);
-    };
-
-    // const handleInputChange = (event, value) => {
-    //     dispatch({ type: "UPDATE_EXERCISE_NAME", payload: value });
-    // };
 
     const addSet = () => {
         dispatch({ type: "ADD_SET" });
