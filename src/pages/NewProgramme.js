@@ -15,6 +15,7 @@ const NewProgrammePage = () => {
                 value={splitToggle} 
                 exclusive 
                 onChange={handleSplitToggle}
+                sx={{ display: 'flex', justifyContent: 'center' }}
             >
                 {Array.from({ length: 4 }, (_, i) => 
                     <ToggleButton key={i} value={i}>
