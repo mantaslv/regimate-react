@@ -1,12 +1,9 @@
-import { useTheme } from "@emotion/react";
 import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
 
 const NewProgrammePage = () => {
     const [splitToggle, setSplitToggle] = useState(0);
     
-    const theme = useTheme();
-
     const handleSplitToggle = (_, chosenSplit) => {
         setSplitToggle(chosenSplit)
     };
