@@ -37,26 +37,18 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                 variant="filled"
                 onChange={handleWorkoutNameChange}
                 sx={{
-                    '& label': {
-                        color: theme.palette.primary.main,
-                    },
-                    '& .MuiFilledInput-root': {
-                        backgroundColor: "#323232",
-                    },
-                    '& .MuiFilledInput-underline:before': {
-                        borderBottomColor: theme.palette.primary.main,
-                    },
+                    '& label': { color: theme.palette.primary.main },
+                    '& .MuiFilledInput-root': { backgroundColor: "#323232" },
+                    '& .MuiFilledInput-underline:before': { borderBottomColor: theme.palette.primary.main }
                 }}
             />
             {exercises && exercises.map((exercise) => (
                 <ExerciseContextProvider key={exercise.id}>
                     <Exercise
                         exercise={exercise}
-                        onExerciseChange={(updatedExercise) => 
-                            handleExerciseChange(updatedExercise, exercise.id)
-                        }
-                        onExerciseDelete={() => handleExerciseDelete(exercise.id)}
                         exerciseList={exerciseList}
+                        onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
+                        onExerciseDelete={() => handleExerciseDelete(exercise.id)}
                     />
                 </ExerciseContextProvider>
             ))}
