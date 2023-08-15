@@ -11,8 +11,16 @@ const NewProgrammePage = () => {
     return (
         <Box sx={{ mt: 10 }}>
             <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>New Programme</Typography>
-            <ToggleButtonGroup  value={splitToggle} exclusive onChange={handleSplitToggle}>
-                {Array.from({ length: 4 }, (_, i) => <ToggleButton key={i} value={i}>{i+3}-Day Split</ToggleButton>)}
+            <ToggleButtonGroup 
+                value={splitToggle} 
+                exclusive 
+                onChange={handleSplitToggle}
+            >
+                {Array.from({ length: 4 }, (_, i) => 
+                    <ToggleButton key={i} value={i}>
+                        {i+3}-Day Split
+                    </ToggleButton>
+                )}
             </ToggleButtonGroup>
         </Box>
     );
