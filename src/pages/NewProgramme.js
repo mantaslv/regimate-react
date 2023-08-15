@@ -1,9 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { useState } from "react";
 
 const NewProgrammePage = () => {
+    const [splitToggle, setSplitToggle] = useState(0);
+    
+    const theme = useTheme();
+
+    const handleSplitToggle = (_, chosenSplit) => {
+        setSplitToggle(chosenSplit)
+    };
+
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="white" sx={{ textAlign: 'center', mb: 1 }}>New Programme</Typography>
+            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>New Programme</Typography>
+            <ToggleButtonGroup  value={splitToggle} exclusive onChange={handleSplitToggle}>
+                {Array.from({ length: 4 }, (_, i) => <ToggleButton key={i} value={i}>{i+3}-Day Split</ToggleButton>)}
+            </ToggleButtonGroup>
         </Box>
     );
 };
