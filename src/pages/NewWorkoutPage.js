@@ -65,8 +65,8 @@ const NewWorkoutPage = () => {
 
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="white" sx={{ textAlign: 'center', mb: 1 }}>New Workout</Typography>
-            <WorkoutComponent exerciseList={exerciseList} theme={theme}/>
+            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>New Workout</Typography>
+            <WorkoutComponent exerciseList={exerciseList}/>
             <Grid container >
                 <Grid item container spacing={2} marginTop={0} md={8}>
                     <Grid item>

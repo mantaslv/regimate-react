@@ -6,7 +6,7 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 
-const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}) => {
+const WorkoutComponent = ({exerciseList, onContextStateChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
@@ -36,11 +36,7 @@ const WorkoutComponent = ({exerciseList, theme, onContextStateChange = () => {}}
                 label="Workout Name" 
                 variant="filled"
                 onChange={handleWorkoutNameChange}
-                sx={{
-                    '& label': { color: theme.palette.primary.main },
-                    '& .MuiFilledInput-root': { backgroundColor: "#323232" },
-                    '& .MuiFilledInput-underline:before': { borderBottomColor: theme.palette.primary.main }
-                }}
+                
             />
             {exercises && exercises.map((exercise) => (
                 <ExerciseContextProvider key={exercise.id}>

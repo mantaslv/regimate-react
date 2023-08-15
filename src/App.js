@@ -22,9 +22,7 @@ const theme = createTheme({
         secondary: {
             main: '#ffb300',
         },
-        background: {
-            default: '#212121',
-        },
+        
         text: {
             primary: '#009688',
         },
