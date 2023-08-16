@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardHeader, Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardHeader, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useState } from "react";
 import ExerciseSelector from "./ExerciseSelector";
