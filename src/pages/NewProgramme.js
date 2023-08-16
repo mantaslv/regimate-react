@@ -1,5 +1,6 @@
-import { Autocomplete, Box, Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const NewProgrammePage = () => {
     const [split, setSplit] = useState(0);
@@ -33,7 +34,7 @@ const NewProgrammePage = () => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 borderRadius: '16px',
-                                border: '1px solid',
+                                border: '3px solid',
                                 borderColor: 'grey.400',
                                 backgroundColor: 'white',
                                 color: 'black',
@@ -41,8 +42,24 @@ const NewProgrammePage = () => {
                                 width: '80%'
                             }}
                         >
-                            <Typography>Day {i + 1}</Typography>
-                            <Autocomplete
+                            <Typography color="grey.700">Day {i + 1}</Typography>
+                            <Button
+                                sx={{
+                                    margin: 1,
+                                    borderRadius: '16px',
+                                    border: '3px dashed',
+                                    borderColor: 'grey.400',
+                                    width: '95%'
+                                }}
+                            >
+                                <AddCircleOutlineIcon
+                                    sx={{
+                                        color: 'grey.400',
+                                        fontSize: 30
+                                    }}
+                                />
+                            </Button>
+                            {/* <Autocomplete
                                 disablePortal
                                 freeSolo
                                 options={['squats']}
@@ -50,7 +67,7 @@ const NewProgrammePage = () => {
                                 onInputChange={() => {}}
                                 sx={{ width: '100%', mt: 1 }}
                                 renderInput={(params) => <TextField {...params} label="Exercise Name" data-testid="exercise-input"/>}
-                            />
+                            /> */}
                         </Box>
                     </Grid>
                 )}
