@@ -24,7 +24,7 @@ const NewProgrammePage = () => {
             </ToggleButtonGroup>
             <Grid container marginY={1} spacing={3} justifyContent="center" alignItems="center" textAlign="center">
                 {Array.from({ length: split + 3 }, (_, i) => 
-                    <Grid item md={2}>
+                    <Grid item md={split === 0 ? 4 : split === 1 ? 3 : 2}>
                         <DaySplit index={i}/>
                     </Grid>
                 )}
