@@ -16,7 +16,7 @@ const NewProgrammePage = () => {
                 value={split} 
                 exclusive 
                 onChange={handleSplitToggle}
-                sx={{ display: 'flex', justifyContent: 'center' }}
+                sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}
             >
                 {Array.from({ length: 4 }, (_, i) => 
                     <ToggleButton key={i} value={i}>
@@ -49,7 +49,7 @@ const NewProgrammePage = () => {
                                     borderRadius: '16px',
                                     border: '3px dashed',
                                     borderColor: 'grey.400',
-                                    width: '95%'
+                                    width: '100%'
                                 }}
                             >
                                 <AddCircleOutlineIcon
