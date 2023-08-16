@@ -1,27 +1,17 @@
 import { Box, Button, Card, CardHeader, Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useState } from "react";
-
-const exercises = ["Front Squats", "Back Squats", "Dips", "Push Ups", "Pull Ups", "Plank"];
+import ExerciseSelector from "./ExerciseSelector";
 
 const DaySplit = ({ index }) => {
     const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
     const [chosenExercises, setChosenExercises] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-
-    const filteredExercises = exercises.filter(exercise =>
-        exercise.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
 
     const handleExerciseSelection = (exercise) => {
         setChosenExercises(prevChosenExercises => [...prevChosenExercises, exercise]);
         setOpenExerciseSelector(false);
     };
-
+    
     return(
         <Box
             sx={{
@@ -65,23 +55,11 @@ const DaySplit = ({ index }) => {
             >
                 <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }} />
             </Button>
-            <Dialog 
-                open={openExerciseSelector} 
-                onClose={() => setOpenExerciseSelector(false)}
-                slotProps={{ backdrop: { sx: { backgroundColor: 'rgba(0, 0, 0, 0.1)' } } }}
-            >
-                <DialogTitle>Select Exercise</DialogTitle>
-                <DialogContent>
-                    <TextField label="Search" value={searchTerm} onChange={handleSearchChange} sx={{ mt: 1 }}/>
-                    <List>
-                        {filteredExercises.map(e => 
-                            <ListItemButton key={e} onClick={() => handleExerciseSelection(e)}>
-                                <ListItemText primary={e}/>
-                            </ListItemButton>
-                        )}
-                    </List>
-                </DialogContent>
-            </Dialog>
+            <ExerciseSelector 
+                openExerciseSelector={openExerciseSelector} 
+                setOpenExerciseSelector={setOpenExerciseSelector}
+                handleExerciseSelection={handleExerciseSelection}
+            />
         </Box>
     )
 }
