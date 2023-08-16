@@ -40,7 +40,10 @@ const DaySplit = ({ index }) => {
                         width: '100%'
                     }}
                 >
-                    <CardHeader title={e} color="primary"/>
+                    <CardHeader 
+                        title={<Typography variant="h6" fontSize={16}>{e}</Typography>} 
+                        color="primary"
+                    />
                 </Card>
             )}
             <Button
