@@ -1,12 +1,25 @@
-import { Autocomplete, Box, Button, Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, DialogTitle, Grid, List, ListItemButton, ListItemText, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
+const exercises = ["Front Squats", "Back Squats", "Dips", "Push Ups", "Pull Ups", "Plank"];
+
 const NewProgrammePage = () => {
     const [split, setSplit] = useState(0);
+    const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [day1, setDay1] = useState([])
     
     const handleSplitToggle = (_, chosenSplit) => {
         setSplit(chosenSplit)
+    };
+
+    const filteredExercises = exercises.filter(exercise =>
+        exercise.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
     };
 
     return (
@@ -44,6 +57,7 @@ const NewProgrammePage = () => {
                         >
                             <Typography color="grey.700">Day {i + 1}</Typography>
                             <Button
+                                onClick={() => setOpenExerciseSelector(true)}
                                 sx={{
                                     margin: 1,
                                     borderRadius: '16px',
@@ -59,15 +73,23 @@ const NewProgrammePage = () => {
                                     }}
                                 />
                             </Button>
-                            {/* <Autocomplete
-                                disablePortal
-                                freeSolo
-                                options={['squats']}
-                                name="exerciseName"
-                                onInputChange={() => {}}
-                                sx={{ width: '100%', mt: 1 }}
-                                renderInput={(params) => <TextField {...params} label="Exercise Name" data-testid="exercise-input"/>}
-                            /> */}
+                            <Dialog 
+                                open={openExerciseSelector} 
+                                onClose={() => setOpenExerciseSelector(false)}
+                                slotProps={{ backdrop: { sx: { backgroundColor: 'rgba(0, 0, 0, 0.1)' } } }}
+                            >
+                                <DialogTitle>Select Exercise</DialogTitle>
+                                <DialogContent>
+                                    <TextField label="Search" value={searchTerm} onChange={handleSearchChange} sx={{ mt: 1 }}/>
+                                    <List>
+                                        {filteredExercises.map(e => 
+                                            <ListItemButton>
+                                                <ListItemText primary={e}/>
+                                            </ListItemButton>
+                                        )}
+                                    </List>
+                                </DialogContent>
+                            </Dialog>
                         </Box>
                     </Grid>
                 )}
