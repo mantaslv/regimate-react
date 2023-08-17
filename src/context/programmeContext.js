@@ -3,19 +3,25 @@ import { createContext, useReducer } from "react";
 
 export const ProgrammeContext = createContext();
 
+const generateNewWorkout = () => ({
+    id: uuidv4(),
+    workoutName: "",
+    exercises: [
+        {
+            exerciseName: "",
+            sets: [
+                {
+                    reps: "",
+                    weight: ""
+                }
+            ]
+        }
+    ]
+});
+
 const initialState = {
     programmeName: "",
-    workouts: [{ 
-        id: uuidv4(), 
-        workoutName: "",
-        exercises: [{ 
-            exerciseName: "", 
-            sets: [{ 
-                reps: "", 
-                weight: "" 
-            }] 
-        }]
-    }]
+    workouts: [generateNewWorkout()]
 };
 
 export const programmeReducer = (state, action) => {
@@ -30,17 +36,7 @@ export const programmeReducer = (state, action) => {
                 ...state,
                 workouts: [
                     ...state.workouts, 
-                    { 
-                        id: uuidv4(), 
-                        workoutName: "",
-                        exercises: [{ 
-                            exerciseName: "", 
-                            sets: [{ 
-                                reps: "", 
-                                weight: "" 
-                            }] 
-                        }]
-                    }
+                    generateNewWorkout()
                 ]
             };
         case "UPDATE_WORKOUT":
