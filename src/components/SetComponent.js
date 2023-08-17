@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import TerminalIcon from '@mui/icons-material/Terminal';
 
 import { useSetContext } from "../hooks/useSetContext";
 import { useExerciseContext } from "../hooks/useExerciseContext";
+import ConsoleLogButton from "./ConsoleLogButton";
 
 const Set = ({ onSetChange, onSetDelete }) => {
     const { state: exerciseState } = useExerciseContext();
@@ -55,11 +55,7 @@ const Set = ({ onSetChange, onSetDelete }) => {
                     ><RemoveCircleIcon/></Button>
                 </Grid>
                 <Grid item md={1}>
-                    <Button 
-                        variant="contained"
-                        title="Click to console log this set"
-                        onClick={() => console.log(state)}
-                    ><TerminalIcon /></Button>
+                    <ConsoleLogButton print={state} info="set"/>
                 </Grid>
             </Grid>
     );

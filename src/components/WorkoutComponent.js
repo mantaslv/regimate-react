@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import TerminalIcon from '@mui/icons-material/Terminal';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
+import ConsoleLogButton from "./ConsoleLogButton";
 
 const WorkoutComponent = ({programme=false, index, exerciseList, onContextStateChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
@@ -99,11 +99,7 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onContextStateC
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button 
-                            variant="contained" 
-                            onClick={() => console.log(state)}
-                            title="Click to console log this workout"
-                        ><TerminalIcon/></Button>
+                        <ConsoleLogButton print={state} info="workout"/>
                     </Grid>
                 </Grid>
             </Box>

@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import TerminalIcon from '@mui/icons-material/Terminal';
 
 import SetComponent from "./SetComponent";
 import ExerciseSelector from "./ExerciseSelector";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import ConsoleLogButton from "./ConsoleLogButton";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=false }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
-    const { exerciseName, sets } = state;
+    const { sets } = state;
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
 
     const handleDeleteExercise = () => {
@@ -105,13 +105,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Button 
-                                variant="contained"
-                                title="Click to console log this exercise"
-                                onClick={() => console.log(exerciseName, sets)}
-                            >
-                                <TerminalIcon/>
-                            </Button>
+                            <ConsoleLogButton print={state} info="exercise"/>
                         </Grid>
                     </Grid>  
                 </CardContent>

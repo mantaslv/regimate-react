@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import ConsoleLogButton from "../components/ConsoleLogButton";
 
 const Workouts = () => {
     const { workouts, dispatch } = useWorkoutsContext();
@@ -56,10 +57,7 @@ const Workouts = () => {
             )}
             <Grid container spacing={1} marginTop={0}>
                 <Grid item>
-                    <Button 
-                        variant="contained"
-                        onClick={() => console.log(workouts)}
-                    >console log workouts</Button>
+                    <ConsoleLogButton print={state} info="workouts"/>
                 </Grid>
             </Grid>
         </Box>
