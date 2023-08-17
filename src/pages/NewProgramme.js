@@ -1,8 +1,12 @@
-import { Box, Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Button, Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
 import DaySplit from "../components/daySplit";
+import { useProgrammeContext } from "../hooks/useProgrammeContext";
+import TerminalIcon from '@mui/icons-material/Terminal';
+
 
 const NewProgrammePage = () => {
+    const { state } = useProgrammeContext();
     const [split, setSplit] = useState(0);
     
     const handleSplitToggle = (_, chosenSplit) => {
@@ -44,6 +48,11 @@ const NewProgrammePage = () => {
                     </Grid>
                 )}
             </Grid>
+            <Button
+                variant="contained" 
+                onClick={() => console.log(state)}
+                title="Click to console log this workout"
+            ><TerminalIcon/></Button>
         </Box>
     );
 };
