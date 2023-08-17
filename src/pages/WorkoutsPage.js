@@ -57,7 +57,7 @@ const Workouts = () => {
             )}
             <Grid container spacing={1} marginTop={0}>
                 <Grid item>
-                    <ConsoleLogButton print={state} info="workouts"/>
+                    <ConsoleLogButton print={workouts} info="workouts"/>
                 </Grid>
             </Grid>
         </Box>
