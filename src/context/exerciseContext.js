@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 
 export const ExerciseContext = createContext();
 
-const initialState = { exerciseName: "", sets: [{ id: uuidv4(), weight: "", reps: "" }] };
+const initialState = { exerciseName: "", sets: [] };
 
 export const exerciseReducer = (state, action) => {
     switch (action.type) {

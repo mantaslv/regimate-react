@@ -1,9 +1,9 @@
 import { Box, Button, Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
-import DaySplit from "../components/daySplit";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import TerminalIcon from '@mui/icons-material/Terminal';
-
+import { WorkoutContextProvider } from "../context/workoutContext";
+import WorkoutComponent from "../components/WorkoutComponent";
 
 const NewProgrammePage = () => {
     const { state } = useProgrammeContext();
@@ -15,14 +15,10 @@ const NewProgrammePage = () => {
 
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography 
-                variant="h5" 
-                color="primary" 
-                sx={{ textAlign: 'center', mb: 1 }}
-            >
+            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
                 New Programme
             </Typography>
-            <ToggleButtonGroup 
+            <ToggleButtonGroup
                 value={split} 
                 exclusive 
                 onChange={handleSplitToggle}
@@ -42,9 +38,11 @@ const NewProgrammePage = () => {
                 alignItems="top" 
                 textAlign="center"
             >
-                {Array.from({ length: split + 3 }, (_, i) => 
-                    <Grid key={i} item md={split === 0 ? 4 : split === 1 ? 3 : 2}>
-                        <DaySplit index={i}/>
+                {state.workouts.slice(0, split + 3).map((_, i) =>
+                    <Grid item key={i} md={split === 0 ? 4 : split === 1 ? 3 : 2}>
+                        <WorkoutContextProvider>
+                            <WorkoutComponent exerciseList={["Squat"]} programme={true} index={i}/>
+                        </WorkoutContextProvider>
                     </Grid>
                 )}
             </Grid>

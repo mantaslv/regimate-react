@@ -2,7 +2,7 @@ import { createContext, useReducer } from "react";
 
 export const SetContext = createContext();
 
-const initialState = { weight: "", reps: "" };
+const initialState = {};
 
 export const setReducer = (state, action) => {
     switch (action.type) {

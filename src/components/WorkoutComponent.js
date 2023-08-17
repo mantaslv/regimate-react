@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import TerminalIcon from '@mui/icons-material/Terminal';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 
-const WorkoutComponent = ({exerciseList, onContextStateChange = () => {}}) => {
+const WorkoutComponent = ({programme=false, index, exerciseList, onContextStateChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
@@ -30,41 +31,84 @@ const WorkoutComponent = ({exerciseList, onContextStateChange = () => {}}) => {
         onContextStateChange(state)
     }, [state])
 
-    return (
-        <Box>
-            <TextField 
-                label="Workout Name" 
-                variant="filled"
-                onChange={handleWorkoutNameChange}
-                
-            />
-            {exercises && exercises.map((exercise) => (
-                <ExerciseContextProvider key={exercise.id}>
-                    <Exercise
-                        exercise={exercise}
-                        exerciseList={exerciseList}
-                        onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
-                        onExerciseDelete={() => handleExerciseDelete(exercise.id)}
-                    />
-                </ExerciseContextProvider>
-            ))}
-            <Grid container spacing={2} marginTop={0}>
-                <Grid item>
-                    <Button 
-                        variant="contained"
-                        onClick={addExercise}
-                    >Add Exercise</Button>
+    if (programme) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column', 
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '16px',
+                    border: '3px solid',
+                    borderColor: 'grey.400',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    padding: '8px 16px',
+                    width: '80%'
+                }}
+            >
+                <Typography color="grey.700">Day {index + 1}</Typography>
+                {exercises && exercises.map((exercise) => (
+                    <ExerciseContextProvider key={exercise.id}>
+                        <Exercise
+                            exercise={exercise}
+                            exerciseList={exerciseList}
+                            onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
+                            onExerciseDelete={() => handleExerciseDelete(exercise.id)}
+                            programme={true}
+                        />
+                    </ExerciseContextProvider>
+                ))}
+                <Button
+                    onClick={addExercise}
+                    sx={{
+                        margin: 1,
+                        borderRadius: '16px',
+                        border: `3px dashed`,
+                        borderColor: `grey.400`,
+                        width: '100%'
+                    }}
+                >
+                    <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
+                </Button>
+            </Box>
+        )
+    } else {
+        return (
+            <Box>
+                <TextField 
+                    label="Workout Name" 
+                    variant="filled"
+                    onChange={handleWorkoutNameChange}
+                />
+                {exercises && exercises.map((exercise) => (
+                    <ExerciseContextProvider key={exercise.id}>
+                        <Exercise
+                            exercise={exercise}
+                            exerciseList={exerciseList}
+                            onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
+                            onExerciseDelete={() => handleExerciseDelete(exercise.id)}
+                        />
+                    </ExerciseContextProvider>
+                ))}
+                <Grid container spacing={2} marginTop={0}>
+                    <Grid item>
+                        <Button variant="contained" onClick={addExercise}>
+                            Add Exercise
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button 
+                            variant="contained" 
+                            onClick={() => console.log(state)}
+                            title="Click to console log this workout"
+                        ><TerminalIcon/></Button>
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <Button 
-                        variant="contained" 
-                        onClick={() => console.log(state)}
-                        title="Click to console log this workout"
-                    ><TerminalIcon/></Button>
-                </Grid>
-            </Grid>
-        </Box>
-    );
+            </Box>
+        );
+    };
 };
 
 export default WorkoutComponent;

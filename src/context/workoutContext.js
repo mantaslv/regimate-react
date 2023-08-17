@@ -5,7 +5,7 @@ export const WorkoutContext = createContext();
 
 const initialState = {
     workoutName: "", 
-    exercises: [{ id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] }]
+    exercises: []
 };
 
 export const workoutReducer = (state, action) => {
