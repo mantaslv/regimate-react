@@ -21,7 +21,7 @@ const generateNewWorkout = () => ({
 
 const initialState = {
     programmeName: "",
-    workouts: [generateNewWorkout()]
+    workouts: [generateNewWorkout(), generateNewWorkout(), generateNewWorkout()]
 };
 
 export const programmeReducer = (state, action) => {
