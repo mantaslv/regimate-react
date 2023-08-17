@@ -1,15 +1,16 @@
-import { Box, Button, Card, CardHeader, Typography } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
-import ExerciseSelector from "./ExerciseSelector";
+import ProgrammeExerciseCard from "./ProgrammeExerciseCard";
 
 const DaySplit = ({ index }) => {
-    const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
-    const [chosenExercises, setChosenExercises] = useState([]);
+    const [chosenExercises, setChosenExercises] = useState(["+"]);
 
-    const handleExerciseSelection = (exercise) => {
-        setChosenExercises(prevChosenExercises => [...prevChosenExercises, exercise]);
-        setOpenExerciseSelector(false);
+    const handleChosenExercises = (exercise, i) => {
+        const updatedExercises = [...chosenExercises];
+        updatedExercises[i] = exercise;
+        updatedExercises.push("+");
+        setChosenExercises(updatedExercises);
+        console.log(chosenExercises);
     };
     
     return(
@@ -29,37 +30,9 @@ const DaySplit = ({ index }) => {
             }}
         >
             <Typography color="grey.700">Day {index + 1}</Typography>
-            {chosenExercises && chosenExercises.map(e => 
-                <Button
-                    onClick={() => setOpenExerciseSelector(true)}
-                    sx={{
-                        margin: 1,
-                        borderRadius: '16px',
-                        border: '3px solid',
-                        borderColor: 'grey.200',
-                        width: '100%'
-                    }}
-                >
-                    <Typography variant="h6" fontSize={16}>{e}</Typography>
-                </Button>
+            {chosenExercises && chosenExercises.map((e, i) => 
+                <ProgrammeExerciseCard key={i} handleChosenExercises={(exercise, i) => handleChosenExercises(exercise, i)}/>
             )}
-            <Button
-                onClick={() => setOpenExerciseSelector(true)}
-                sx={{
-                    margin: 1,
-                    borderRadius: '16px',
-                    border: '3px dashed',
-                    borderColor: 'grey.400',
-                    width: '100%'
-                }}
-            >
-                <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }} />
-            </Button>
-            <ExerciseSelector 
-                openExerciseSelector={openExerciseSelector} 
-                setOpenExerciseSelector={setOpenExerciseSelector}
-                handleExerciseSelection={handleExerciseSelection}
-            />
         </Box>
     )
 }

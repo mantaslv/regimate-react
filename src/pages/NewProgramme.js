@@ -39,7 +39,7 @@ const NewProgrammePage = () => {
                 textAlign="center"
             >
                 {Array.from({ length: split + 3 }, (_, i) => 
-                    <Grid item md={split === 0 ? 4 : split === 1 ? 3 : 2}>
+                    <Grid key={i} item md={split === 0 ? 4 : split === 1 ? 3 : 2}>
                         <DaySplit index={i}/>
                     </Grid>
                 )}
