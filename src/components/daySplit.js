@@ -30,21 +30,18 @@ const DaySplit = ({ index }) => {
         >
             <Typography color="grey.700">Day {index + 1}</Typography>
             {chosenExercises && chosenExercises.map(e => 
-                <Card 
-                    variant="outlined"
+                <Button
+                    onClick={() => setOpenExerciseSelector(true)}
                     sx={{
                         margin: 1,
                         borderRadius: '16px',
-                        border: '2px solid',
-                        borderColor: 'grey.400',
+                        border: '3px solid',
+                        borderColor: 'grey.200',
                         width: '100%'
                     }}
                 >
-                    <CardHeader 
-                        title={<Typography variant="h6" fontSize={16}>{e}</Typography>} 
-                        color="primary"
-                    />
-                </Card>
+                    <Typography variant="h6" fontSize={16}>{e}</Typography>
+                </Button>
             )}
             <Button
                 onClick={() => setOpenExerciseSelector(true)}
