@@ -21,7 +21,7 @@ const generateNewWorkout = () => ({
 
 const initialState = {
     programmeName: "",
-    workouts: [generateNewWorkout(), generateNewWorkout(), generateNewWorkout()]
+    workouts: Array.from({ length: 6 }, () => generateNewWorkout())
 };
 
 export const programmeReducer = (state, action) => {
