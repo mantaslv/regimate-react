@@ -18,15 +18,50 @@ const initialState = {
     }]
 };
 
-export const workoutReducer = (state, action) => {
+export const programmeReducer = (state, action) => {
     switch (action.type) {
+        case "UPDATE_PROGRAMME_NAME":
+            return {
+                ...state,
+                programmeName: action.payload
+            };
+        case "ADD_WORKOUT":
+            return {
+                ...state,
+                workouts: [
+                    ...state.workouts, 
+                    { 
+                        id: uuidv4(), 
+                        workoutName: "",
+                        exercises: [{ 
+                            exerciseName: "", 
+                            sets: [{ 
+                                reps: "", 
+                                weight: "" 
+                            }] 
+                        }]
+                    }
+                ]
+            };
+        case "UPDATE_WORKOUT":
+            return {
+                ...state,
+                workouts: state.workouts.map((workout) => 
+                    workout.id === action.payload.id ? { ...workout, ...action.payload.changes} : workout
+                )
+            };
+        case "DELETE_WORKOUT":
+            return {
+                ...state,
+                workouts: state.workouts.filter((workout) => workout.id !== action.payload)
+            };
         default:
             return state;
     };
 };
 
 export const ProgrammeContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(workoutReducer, initialState);
+    const [state, dispatch] = useReducer(programmeReducer, initialState);
 
     return (
         <ProgrammeContext.Provider value={{ state, dispatch }}>
