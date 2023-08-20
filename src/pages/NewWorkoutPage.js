@@ -1,6 +1,5 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from "@emotion/react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -11,7 +10,6 @@ const NewWorkoutPage = () => {
     const { state } = useWorkoutContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const theme = useTheme();
 
     const [exerciseList, setExerciseList] = useState([])
 
