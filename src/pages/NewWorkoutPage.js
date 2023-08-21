@@ -63,15 +63,16 @@ const NewWorkoutPage = () => {
 
     return (
         <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>New Workout</Typography>
+            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
+                New Workout
+            </Typography>
             <WorkoutComponent exerciseList={exerciseList}/>
-            <Grid container >
+            <Grid container>
                 <Grid item container spacing={2} marginTop={0} md={8}>
                     <Grid item>
-                        <Button 
-                            variant="contained"
-                            onClick={completeWorkout}
-                        >Complete Workout</Button>
+                        <Button variant="contained" onClick={completeWorkout}>
+                            Complete Workout
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
