@@ -19,7 +19,7 @@ test('Integration Test: Entering set values updates context states', async () =>
                     <WorkoutComponent 
                         exerciseList={['Squats']} 
                         theme={{ palette: { primary: { main: '#000000' }}}}
-                        onContextStateChange={handleContextStateChange}
+                        onWorkoutChange={handleContextStateChange}
                     />
                 </SetContextProvider>
             </ExerciseContextProvider>

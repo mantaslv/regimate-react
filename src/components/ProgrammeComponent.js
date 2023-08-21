@@ -6,11 +6,15 @@ import WorkoutComponent from "../components/WorkoutComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
 const ProgrammeComponent = () => {
-    const { state } = useProgrammeContext();
+    const { state, dispatch } = useProgrammeContext();
     const [split, setSplit] = useState(0);
     
     const handleSplitToggle = (_, chosenSplit) => {
         setSplit(chosenSplit)
+    };
+
+    const handleWorkoutChange = (updatedWorkout, id) => {
+        dispatch({ type: "UPDATE_WORKOUT", payload: { id, changes: updatedWorkout } });
     };
 
     return (
@@ -38,10 +42,15 @@ const ProgrammeComponent = () => {
                 alignItems="top" 
                 textAlign="center"
             >
-                {state.workouts.slice(0, split + 3).map((_, i) =>
-                    <Grid item key={i} md={split === 0 ? 4 : split === 1 ? 3 : 2}>
+                {state.workouts.slice(0, split + 3).map((workout, i) =>
+                    <Grid item key={workout.id} md={split === 0 ? 4 : split === 1 ? 3 : 2}>
                         <WorkoutContextProvider>
-                            <WorkoutComponent exerciseList={["Squat"]} programme={true} index={i}/>
+                            <WorkoutComponent 
+                                exerciseList={["Squat"]} 
+                                programme={true} 
+                                index={i}
+                                onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
+                            />
                         </WorkoutContextProvider>
                     </Grid>
                 )}

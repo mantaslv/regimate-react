@@ -7,7 +7,7 @@ import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const WorkoutComponent = ({programme=false, index, exerciseList, onContextStateChange = () => {}}) => {
+const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
@@ -28,7 +28,7 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onContextStateC
     };
 
     useEffect(() => {
-        onContextStateChange(state)
+        onWorkoutChange(state);
     }, [state])
 
     if (programme) {
