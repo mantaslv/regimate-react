@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Grid, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
