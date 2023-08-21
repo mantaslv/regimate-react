@@ -1,7 +1,6 @@
-import { Box, Button, Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import { Box, Grid, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import TerminalIcon from '@mui/icons-material/Terminal';
 import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "../components/WorkoutComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
