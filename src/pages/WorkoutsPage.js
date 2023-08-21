@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import ConsoleLogButton from "../components/ConsoleLogButton";
 
 const Workouts = () => {
-    const { workouts, dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
     const [loading, setLoading] = useState(true);
+    const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -23,8 +22,8 @@ const Workouts = () => {
                 const json = await res.json();
 
                 if (res.ok) {
-                    dispatch({type: 'SET_WORKOUTS', payload: json});
-                }
+                    setWorkouts(json);
+                };
 
                 setLoading(false);
             } catch(error) {
@@ -36,7 +35,7 @@ const Workouts = () => {
         if (user) {
             fetchWorkouts();
         };
-    }, [dispatch, user]);
+    }, [user]);
 
     return (
         <Box sx={{ mt: 11, mb: 2}}>   
