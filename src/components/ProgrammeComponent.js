@@ -4,6 +4,7 @@ import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import TerminalIcon from '@mui/icons-material/Terminal';
 import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "../components/WorkoutComponent";
+import ConsoleLogButton from "./ConsoleLogButton";
 
 const ProgrammeComponent = () => {
     const { state } = useProgrammeContext();
@@ -46,11 +47,7 @@ const ProgrammeComponent = () => {
                     </Grid>
                 )}
             </Grid>
-            <Button
-                variant="contained" 
-                onClick={() => console.log(state)}
-                title="Click to console log this workout"
-            ><TerminalIcon/></Button>
+            <ConsoleLogButton print={state} info="workout"/>
         </Box>
     );
 };
