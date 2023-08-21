@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const exercises = ["Front Squats", "Back Squats", "Dips", "Push Ups", "Pull Ups", "Plank"];
 
-const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection }) => {
+const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const filteredExercises = exercises.filter(exercise =>
@@ -14,10 +14,15 @@ const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handl
         setSearchTerm(event.target.value);
     };
 
+    const handleCloseDialog = () => {
+        setOpenExerciseSelector(false);
+        handleDeleteExercise();
+    };
+
     return(
         <Dialog 
             open={openExerciseSelector} 
-            onClose={() => setOpenExerciseSelector(false)}
+            onClose={handleCloseDialog}
             slotProps={{ backdrop: { sx: { backgroundColor: 'rgba(0, 0, 0, 0.1)' } } }}
         >
             <DialogTitle>Select Exercise</DialogTitle>

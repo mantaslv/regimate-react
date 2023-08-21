@@ -48,6 +48,17 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
         onExerciseChange(state);
     }, [state]);
 
+    if (state.exerciseName === "") {
+        return (
+            <ExerciseSelector 
+                openExerciseSelector={openExerciseSelector} 
+                setOpenExerciseSelector={setOpenExerciseSelector}
+                handleExerciseSelection={handleInputChange}
+                handleDeleteExercise={handleDeleteExercise}
+            />
+        );
+    };
+
     if (programme) {
         return (
             <>
@@ -90,6 +101,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                     openExerciseSelector={openExerciseSelector} 
                     setOpenExerciseSelector={setOpenExerciseSelector}
                     handleExerciseSelection={handleInputChange}
+                    handleDeleteExercise={handleDeleteExercise}
                 />
             </>
         )
@@ -106,6 +118,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                                 openExerciseSelector={openExerciseSelector} 
                                 setOpenExerciseSelector={setOpenExerciseSelector}
                                 handleExerciseSelection={handleInputChange}
+                                handleDeleteExercise={handleDeleteExercise}
                             />
                         </Grid>
                     </Grid>
