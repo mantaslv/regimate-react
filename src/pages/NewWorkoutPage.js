@@ -67,15 +67,9 @@ const NewWorkoutPage = () => {
                 New Workout
             </Typography>
             <WorkoutComponent exerciseList={exerciseList}/>
-            <Grid container>
-                <Grid item container spacing={2} marginTop={0} md={8}>
-                    <Grid item>
-                        <Button variant="contained" onClick={completeWorkout}>
-                            Complete Workout
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <Button variant="contained" onClick={completeWorkout} sx={{ mt: 1 }}>
+                Complete Workout
+            </Button>
         </Box>
     );
 };
