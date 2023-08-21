@@ -22,10 +22,7 @@ const ProgrammeComponent = () => {
     };
 
     return (
-        <Box sx={{ mt: 10 }}>
-            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
-                New Programme
-            </Typography>
+        <>
             <ToggleButtonGroup
                 value={split} 
                 exclusive 
@@ -65,7 +62,7 @@ const ProgrammeComponent = () => {
                 )}
             </Grid>
             <ConsoleLogButton print={state} info="workout"/>
-        </Box>
+        </>
     );
 };
 
