@@ -6,17 +6,7 @@ export const ProgrammeContext = createContext();
 const generateNewWorkout = () => ({
     id: uuidv4(),
     workoutName: "",
-    exercises: [
-        {
-            exerciseName: "",
-            sets: [
-                {
-                    reps: "",
-                    weight: ""
-                }
-            ]
-        }
-    ]
+    exercises: []
 });
 
 const initialState = {
