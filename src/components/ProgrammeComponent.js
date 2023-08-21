@@ -1,4 +1,4 @@
-import { Grid, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
@@ -23,39 +23,42 @@ const ProgrammeComponent = () => {
 
     return (
         <>
-            <ToggleButtonGroup
-                value={split} 
-                exclusive 
-                onChange={handleSplitToggle}
-                sx={{ display: 'flex', justifyContent: 'center', margin: 2 }}
-            >
-                {Array.from({ length: 4 }, (_, i) => 
-                    <ToggleButton key={i} value={i}>
-                        {i+3}-Day Split
-                    </ToggleButton>
-                )}
-            </ToggleButtonGroup>
-            <TextField
-                label="Programme Name"
-                variant="standard"
-                onChange={handleProgrammeNameChange}
-            />
-            <Grid 
-                container 
-                spacing={3} 
-                justifyContent="center" 
-                alignItems="top" 
-                textAlign="center"
-                sx={{ mt: 0, mb: 1 }}
-            >
+            <Grid container alignItems="center">
+                <Grid item md={3}>
+                    <TextField
+                        label="Programme Name"
+                        onChange={handleProgrammeNameChange}
+                        sx={{ width: '100%' }}
+                    />
+                </Grid>
+                <Grid item md={9} container justifyContent="flex-end" alignItems="center">
+                    <Grid item>
+                        <Typography variant="h6" color="primary" margin={1}>Split</Typography>
+                    </Grid>
+                    <Grid item>
+                        <ToggleButtonGroup
+                            value={split} 
+                            exclusive 
+                            onChange={handleSplitToggle}
+                        >
+                            {Array.from({ length: 4 }, (_, i) => 
+                                <ToggleButton key={i} value={i}>
+                                    {i+3}-Day
+                                </ToggleButton>
+                            )}
+                        </ToggleButtonGroup>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
                 {state.workouts.slice(0, split + 3).map((workout, i) =>
-                    <Grid item key={workout.id} md={split === 0 ? 4 : split === 1 ? 3 : 2}>
+                    <Grid item key={workout.id} md={12 / (split + 3)}>
                         <WorkoutContextProvider>
                             <WorkoutComponent 
-                                exerciseList={["Squat"]} 
-                                programme={true} 
                                 index={i}
+                                programme={true}
                                 onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
+                                exerciseList={["Squat"]} 
                             />
                         </WorkoutContextProvider>
                     </Grid>
