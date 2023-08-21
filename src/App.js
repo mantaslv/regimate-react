@@ -14,6 +14,7 @@ import Workouts from './pages/WorkoutsPage';
 import NewProgrammePage from './pages/NewProgrammePage';
 import WorkoutDesignPage from './pages/WorkoutDesignPage';
 import { ProgrammeContextProvider } from './context/programmeContext';
+import Programmes from './pages/ProgrammesPage';
 
 const theme = createTheme({
     palette: {
@@ -52,6 +53,7 @@ const App = () => {
                         <Route path='/workout-design' element={user ? <WorkoutDesignPage/> : <Navigate to="/login" />} />
                         <Route path='/new-programme' element={user ? <ProgrammeContextProvider><NewProgrammePage/></ProgrammeContextProvider> : <Navigate to="/login" />} />
                         <Route path='/workouts' element={user ? <Workouts /> : <Navigate to="/login" />} />
+                        <Route path='/programmes' element={user ? <Programmes /> : <Navigate to="/login" />} />
                         <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup />: <Navigate to="/" />} />
                     </Routes>

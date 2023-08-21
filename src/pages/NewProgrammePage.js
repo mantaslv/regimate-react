@@ -25,7 +25,7 @@ const NewProgrammePage = () => {
             console.log(json);
         };
         if (res.ok) {
-            navigate('/workouts');
+            navigate('/programmes');
         };
     };
 

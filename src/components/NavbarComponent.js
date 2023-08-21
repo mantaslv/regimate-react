@@ -55,6 +55,11 @@ const Navbar = () => {
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >Workouts</Button>
                                     <Button
+                                        key="programmes"
+                                        href="/programmes"
+                                        sx={{ color: 'white', my: 2, display: 'block' }}
+                                    >Programmes</Button>
+                                    <Button
                                         key="logout"
                                         onClick={handleClick}
                                         sx={{ color: 'white', my: 2, display: 'block' }}
