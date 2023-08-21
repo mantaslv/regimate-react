@@ -36,6 +36,14 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
         dispatch({ type: "DELETE_SET", payload: id });
     };
 
+    if (!programme) {
+        useEffect(() => {
+            if(!openExerciseSelector && sets.length === 0) {
+                addSet();
+            }
+        }, [openExerciseSelector]);
+    };
+
     useEffect(() => {
         onExerciseChange(state);
     }, [state]);
