@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Button, ButtonGroup, Card, CardContent, Grid, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import SetComponent from "./SetComponent";
@@ -51,18 +51,41 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
     if (programme) {
         return (
             <>
-                <Button
-                    onClick={() => setOpenExerciseSelector(true)}
+                <ButtonGroup
                     sx={{
                         margin: 1,
-                        borderRadius: '16px',
-                        border: `3px solid`,
-                        borderColor: `grey.200`,
-                        width: '100%'
+                        width: '100%',
                     }}
                 >
-                    <Typography variant="h6" fontSize={16}>{state.exerciseName}</Typography>
-                </Button>
+                    <Button
+                        onClick={() => setOpenExerciseSelector(true)}
+                        sx={{
+                            borderRadius: '16px',
+                            border: `3px solid`,
+                            borderColor: `grey.200`,
+                            width: '100%',
+                            "&:hover": {
+                                border: `3px solid`,
+                            },
+                        }}
+                    >
+                        <Typography variant="h6" fontSize={16}>{state.exerciseName}</Typography>
+                    </Button>
+                    <Button
+                        size="small"
+                        onClick={handleDeleteExercise}
+                        sx={{
+                            borderRadius: '16px',
+                            border: `3px solid`,
+                            borderColor: `grey.200`,
+                            "&:hover": {
+                                border: `3px solid`,
+                            },
+                        }}
+                    >
+                        <RemoveCircleIcon/>
+                    </Button>
+                </ButtonGroup>
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
                     setOpenExerciseSelector={setOpenExerciseSelector}
