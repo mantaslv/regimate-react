@@ -38,12 +38,9 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                     display: 'flex',
                     flexDirection: 'column', 
                     alignItems: 'center',
-                    justifyContent: 'center',
                     borderRadius: '16px',
                     border: '3px solid',
                     borderColor: 'grey.400',
-                    backgroundColor: 'white',
-                    color: 'black',
                     padding: '8px 16px',
                     width: '80%'
                 }}
