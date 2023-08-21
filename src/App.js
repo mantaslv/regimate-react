@@ -11,7 +11,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { WorkoutContextProvider } from './context/workoutContext';
 import Workouts from './pages/WorkoutsPage';
-import NewProgrammePage from './pages/NewProgramme';
+import NewProgrammePage from './pages/NewProgrammePage';
 import WorkoutDesignPage from './pages/WorkoutDesignPage';
 import { ProgrammeContextProvider } from './context/programmeContext';
 
