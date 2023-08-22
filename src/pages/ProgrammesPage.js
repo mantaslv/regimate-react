@@ -3,6 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import ConsoleLogButton from "../components/ConsoleLogButton";
+import ProgrammeCard from "../components/ProgrammeCard";
 
 const Programmes = () => {
     const { user } = useAuthContext();
@@ -46,21 +47,7 @@ const Programmes = () => {
             ) : programmes && programmes.length > 0 ? (
                 <>
                     {programmes.map((programme) => (
-                        <Grid container key={programme._id} marginBottom={2}>
-                            <Grid item>
-                                <Typography>{programme.programmeName}</Typography>
-                            </Grid>
-                            {programme.workouts.map((workout) => 
-                                <Grid item container key={workout._id}>
-                                    {workout.exercises.map((exercise) => (
-                                        <Grid item key={exercise._id}>
-                                            <Typography>{exercise.exerciseName}</Typography>
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                                
-                            )}
-                        </Grid>
+                        <ProgrammeCard key={programme._id} programme={programme}/>
                     ))}
                 </> 
             ) : (
