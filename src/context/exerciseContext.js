@@ -5,12 +5,18 @@ export const ExerciseContext = createContext();
 
 const initialState = { exerciseName: "", sets: [] };
 
+const generateNewSet = (reps) => ({
+    id: uuidv4(),
+    reps: reps,
+    weight: ""
+});
+
 export const exerciseReducer = (state, action) => {
     switch (action.type) {
         case "ADD_SET":
             return {
                 ...state,
-                sets: [...state.sets, { id: uuidv4(), weight: "", reps: "" }]
+                sets: [...state.sets, generateNewSet("")]
             };
         case "DELETE_SET":
             return {
@@ -28,6 +34,11 @@ export const exerciseReducer = (state, action) => {
             return {
                 ...state,
                 exerciseName: action.payload
+            };
+        case "UPDATE_PROGRAMME_SETS":
+            return {
+                ...state,
+                sets: Array.from({ length: action.payload.sets }, () => generateNewSet(action.payload.reps))
             };
         default:
             return state;

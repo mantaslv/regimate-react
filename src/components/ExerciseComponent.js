@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button, Card, CardContent, CardHeader, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import SetComponent from "./SetComponent";
 import ExerciseSelector from "./ExerciseSelector";
@@ -9,6 +8,7 @@ import { useExerciseContext } from "../hooks/useExerciseContext";
 import { SetContextProvider } from "../context/setContext";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import ConsoleLogButton from "./ConsoleLogButton";
+import SetsRepsInput from "./SetsRepsInput";
 
 const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=false }) => {
     const { state: workoutState } = useWorkoutContext();
@@ -37,6 +37,14 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
         dispatch({ type: "DELETE_SET", payload: id });
     };
 
+    const handleOpenSelector = () => {
+        setOpenExerciseSelector(true)
+    };
+
+    const handleSetsRepsChange = (sets, reps) => {
+        dispatch({ type: "UPDATE_PROGRAMME_SETS", payload: { sets, reps } });
+    };
+
     if (!programme) {
         useEffect(() => {
             if(!openExerciseSelector && sets.length === 0) {
@@ -63,31 +71,20 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
 
     if (programme) {
         return (
-            <Card sx={{ 
-                borderRadius: '10px', 
-                border: '3px solid grey.200', 
-                width: '100%', 
-                backgroundColor: '#009688',
+            <Card sx={{
                 margin: 0.8,
+                width: '100%', 
+                borderRadius: '10px',
+                backgroundColor: '#009688',
+                border: '3px solid grey.200',
             }}>
                 <CardHeader
                     title={
-                        <Button 
-                            onClick={() => setOpenExerciseSelector(true)} 
-                            sx={{ 
-                                mt: -1,
-                                borderRadius: '10px',
-                                minWidth: 0, 
-                            }}>
+                        <Button onClick={handleOpenSelector} sx={{ mt: -1, minWidth: 0, borderRadius: '10px' }}>
                             <Typography 
                                 variant="h6" 
                                 fontSize={18}
-                                sx={{ 
-                                    color: 'white',
-                                    '&:hover': {
-                                        color: 'grey.400',
-                                    },
-                                }}
+                                sx={{ color: 'white', '&:hover': { color: 'grey.400' } }}
                             >
                                 {state.exerciseName}
                             </Typography>
@@ -98,21 +95,11 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                             <RemoveCircleIcon fontSize="small"/>
                         </IconButton>
                     }
-                    sx={{ m: -1, mb: -2 }}
+                    sx={{ m: -1.5, mb: -3.5 }}
                 />
-                {/* <Button sx={{ 
-                    color: 'white', 
-                    backgroundColor: '#007368', 
-                    borderRadius: '10px', 
-                    margin: 1, 
-                    '&:hover': {
-                        backgroundColor: '#008579',
-                    }, 
-                }}>
-                    <Typography variant="h6" fontSize={18} textTransform="none" sx={{ margin: -1 }}>
-                        4 x 8
-                    </Typography>
-                </Button> */}
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <SetsRepsInput handleSetsRepsChange={handleSetsRepsChange}/>
+                </Box>
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
                     setOpenExerciseSelector={setOpenExerciseSelector}
