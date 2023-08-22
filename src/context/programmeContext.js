@@ -11,6 +11,7 @@ const generateNewWorkout = () => ({
 
 const initialState = {
     programmeName: "",
+    daySplit: 3,
     workouts: Array.from({ length: 6 }, () => generateNewWorkout())
 };
 
@@ -20,6 +21,11 @@ export const programmeReducer = (state, action) => {
             return {
                 ...state,
                 programmeName: action.payload
+            };
+        case "UPDATE_PROGRAMME_SPLIT":
+            return {
+                ...state,
+                daySplit: action.payload
             };
         case "ADD_WORKOUT":
             return {

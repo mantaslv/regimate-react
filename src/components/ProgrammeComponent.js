@@ -10,7 +10,8 @@ const ProgrammeComponent = () => {
     const [split, setSplit] = useState(0);
     
     const handleSplitToggle = (_, chosenSplit) => {
-        setSplit(chosenSplit)
+        setSplit(chosenSplit);
+        dispatch({ type: "UPDATE_PROGRAMME_SPLIT", payload: chosenSplit + 3});
     };
 
     const handleProgrammeNameChange = (event) => {
