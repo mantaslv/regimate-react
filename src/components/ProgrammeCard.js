@@ -7,6 +7,14 @@ const ProgrammeCard = ({ programme, sx }) => {
     const { user } = useAuthContext();
     const [showAlert, setShowAlert] = useState(false);
 
+    let maxExerciseCount = 0;
+
+    programme.workouts.forEach(workout => {
+        if (workout.exercises.length > maxExerciseCount) {
+            maxExerciseCount = workout.exercises.length;
+        };
+    });
+
     const handleClick = async () => {
         if (!user) {
             return
@@ -64,15 +72,6 @@ const ProgrammeCard = ({ programme, sx }) => {
                 </Alert>
             )}
             <CardContent>
-                {/* {programme.workouts.map((workout) => 
-                    <Grid container key={workout._id}>
-                        {workout.exercises.map((exercise) => (
-                            <Grid item key={exercise._id}>
-                                <Typography>{exercise.exerciseName}</Typography>
-                            </Grid>
-                        ))}
-                    </Grid>
-                )} */}
                 <TableContainer component={Paper} elevation={3}>
                     <Table>
                         <TableHead>
@@ -83,20 +82,15 @@ const ProgrammeCard = ({ programme, sx }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
-                                {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
-                                    <TableCell align="center">
-                                        {workout.exercises[0].exerciseName} {workout.exercises[0].sets.length}x{workout.exercises[0].sets[0].reps}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                            <TableRow>
-                                {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
-                                    <TableCell align="center">
-                                        {workout.exercises[1].exerciseName} {workout.exercises[1].sets.length}x{workout.exercises[1].sets[0].reps}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
+                            {Array.from({ length: maxExerciseCount}, (_, i) => 
+                                <TableRow>
+                                    {programme.workouts.slice(0, programme.daySplit).map((workout) => (
+                                        <TableCell align="center">
+                                            {workout.exercises[i]?.exerciseName || ""} {workout.exercises[i]?.sets.length || ""}{workout.exercises[i] ? "x" : ""}{workout.exercises[i]?.sets[0].reps || ""}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
