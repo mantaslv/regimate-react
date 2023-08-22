@@ -56,6 +56,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                 setOpenExerciseSelector={setOpenExerciseSelector}
                 handleExerciseSelection={handleInputChange}
                 handleDeleteExercise={handleDeleteExercise}
+                exerciseNotYetChosen={true}
             />
         );
     };

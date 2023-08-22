@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const exercises = ["Front Squats", "Back Squats", "Dips", "Push Ups", "Pull Ups", "Plank"];
 
-const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise }) => {
+const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise, exercisePreviouslyChosen }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const filteredExercises = exercises.filter(exercise =>
@@ -16,7 +16,8 @@ const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handl
 
     const handleCloseDialog = () => {
         setOpenExerciseSelector(false);
-        handleDeleteExercise();
+        
+        if (exercisePreviouslyChosen) handleDeleteExercise();
     };
 
     return(
