@@ -76,13 +76,13 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                             sx={{ 
                                 mt: -1,
                                 borderRadius: '10px',
-                                
+                                minWidth: 0, 
                             }}>
                             <Typography 
                                 variant="h6" 
-                                fontSize={18} 
+                                fontSize={18}
                                 sx={{ 
-                                    color: 'white', 
+                                    color: 'white',
                                     '&:hover': {
                                         color: 'grey.400',
                                     },
