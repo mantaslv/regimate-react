@@ -1,6 +1,6 @@
-import { Alert, Button, Card, CardContent, CardHeader, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProgrammeCard = ({ programme, sx }) => {
@@ -48,8 +48,6 @@ const ProgrammeCard = ({ programme, sx }) => {
         setShowAlert(false);
     };
 
-    useEffect(() => {console.log(programme)}, [programme])
-
     return (
         <Card sx={sx}>
             <CardHeader 
@@ -77,22 +75,20 @@ const ProgrammeCard = ({ programme, sx }) => {
                         <TableHead>
                             <TableRow>
                                 {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
-                                    <TableCell align="center">Day {i + 1}</TableCell>
+                                    <TableCell key={i} align="center">Day {i + 1}</TableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {Array.from({ length: maxExerciseCount}, (_, i) => 
-                                <TableRow>
-                                    {programme.workouts.slice(0, programme.daySplit).map((workout) => (
-                                        <TableCell align="center">
-                                            {
-                                                workout.exercises[i]?.exerciseName || ""
-                                            }
-                                            {
+                                <TableRow key={i}>
+                                    {programme.workouts.slice(0, programme.daySplit).map((workout, cellIndex) => (
+                                        <TableCell key={cellIndex} align="center">
+                                            { workout.exercises[i]?.exerciseName || "" }
+                                            { 
                                                 workout.exercises[i]?.sets.length 
                                                 ? ` ${workout.exercises[i].sets.length}x${workout.exercises[i]?.sets[0].reps}` 
-                                                : ""
+                                                : "" 
                                             }
                                         </TableCell>
                                     ))}
