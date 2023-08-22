@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import ConsoleLogButton from "../components/ConsoleLogButton";
 import ProgrammeCard from "../components/ProgrammeCard";
 
