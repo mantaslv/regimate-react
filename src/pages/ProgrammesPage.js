@@ -46,7 +46,7 @@ const Programmes = () => {
             ) : programmes && programmes.length > 0 ? (
                 <>
                     {programmes.map((programme) => (
-                        <ProgrammeCard key={programme._id} programme={programme}/>
+                        <ProgrammeCard key={programme._id} programme={programme} sx={{ mb: 2 }}/>
                     ))}
                 </> 
             ) : (
