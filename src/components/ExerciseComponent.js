@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, ButtonGroup, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Button, Card, CardContent, CardHeader, Grid, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import SetComponent from "./SetComponent";
 import ExerciseSelector from "./ExerciseSelector";
@@ -61,53 +62,67 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
 
     if (programme) {
         return (
-            <>
-                <ButtonGroup
-                    sx={{
-                        margin: 1,
-                        width: '100%',
-                    }}
-                >
-                    <Button
-                        onClick={() => setOpenExerciseSelector(true)}
-                        sx={{
-                            borderRadius: '16px',
-                            border: `3px solid`,
-                            borderColor: `grey.200`,
-                            width: '100%',
-                            "&:hover": {
-                                border: `3px solid`,
-                            },
-                        }}
-                    >
-                        <Typography variant="h6" fontSize={16}>{state.exerciseName}</Typography>
-                    </Button>
-                    <Button
-                        size="small"
-                        onClick={handleDeleteExercise}
-                        sx={{
-                            borderRadius: '16px',
-                            border: `3px solid`,
-                            borderColor: `grey.200`,
-                            "&:hover": {
-                                border: `3px solid`,
-                            },
-                        }}
-                    >
-                        <RemoveCircleIcon/>
-                    </Button>
-                </ButtonGroup>
+            <Card sx={{ 
+                borderRadius: '10px', 
+                border: '3px solid grey.200', 
+                width: '100%', 
+                backgroundColor: '#009688',
+                margin: 0.8,
+            }}>
+                <CardHeader
+                    title={
+                        <Button 
+                            onClick={() => setOpenExerciseSelector(true)} 
+                            sx={{ 
+                                mt: -1,
+                                borderRadius: '10px',
+                                
+                            }}>
+                            <Typography 
+                                variant="h6" 
+                                fontSize={18} 
+                                sx={{ 
+                                    color: 'white', 
+                                    '&:hover': {
+                                        color: 'grey.400',
+                                    },
+                                }}
+                            >
+                                {state.exerciseName}
+                            </Typography>
+                        </Button>
+                    }
+                    action={
+                        <IconButton onClick={handleDeleteExercise}>
+                            <RemoveCircleIcon fontSize="small"/>
+                        </IconButton>
+                    }
+                    sx={{ m: -1, mb: -2 }}
+                />
+                {/* <Button sx={{ 
+                    color: 'white', 
+                    backgroundColor: '#007368', 
+                    borderRadius: '10px', 
+                    margin: 1, 
+                    '&:hover': {
+                        backgroundColor: '#008579',
+                    }, 
+                }}>
+                    <Typography variant="h6" fontSize={18} textTransform="none" sx={{ margin: -1 }}>
+                        4 x 8
+                    </Typography>
+                </Button> */}
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
                     setOpenExerciseSelector={setOpenExerciseSelector}
                     handleExerciseSelection={handleInputChange}
                     handleDeleteExercise={handleDeleteExercise}
                 />
-            </>
+            </Card>
         )
     } else {
         return (
-            <Card sx={{ mt: 2 }}>
+            <Card sx={{ mt: 2, backgroundColor: 'grey.200' }}>
                 <CardContent>
                     <Grid container spacing={1} alignItems="center" paddingBottom={1}>
                         <Grid item md={3}>
