@@ -86,7 +86,14 @@ const ProgrammeCard = ({ programme, sx }) => {
                                 <TableRow>
                                     {programme.workouts.slice(0, programme.daySplit).map((workout) => (
                                         <TableCell align="center">
-                                            {workout.exercises[i]?.exerciseName || ""} {workout.exercises[i]?.sets.length || ""}{workout.exercises[i] ? "x" : ""}{workout.exercises[i]?.sets[0].reps || ""}
+                                            {
+                                                workout.exercises[i]?.exerciseName || ""
+                                            }
+                                            {
+                                                workout.exercises[i]?.sets.length 
+                                                ? ` ${workout.exercises[i].sets.length}x${workout.exercises[i]?.sets[0].reps}` 
+                                                : ""
+                                            }
                                         </TableCell>
                                     ))}
                                 </TableRow>
