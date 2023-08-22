@@ -20,12 +20,11 @@ const theme = createTheme({
     palette: {
         mode: 'light',
         primary: {
-            main: '#009688',
+            main: 'ç',
         },
         secondary: {
             main: '#ffb300',
         },
-        
         text: {
             primary: '#009688',
         },
@@ -36,6 +35,9 @@ const theme = createTheme({
         fontWeightRegular: 500,
         fontWeightMedium: 600,
         fontWeightBold: 700,
+        h6: {
+            fontFamily: 'Roboto Condensed',
+        },
     },
 });
 
