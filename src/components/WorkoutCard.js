@@ -6,7 +6,7 @@ import { useState } from "react";
 import { dateOptions } from "./dateOptions";
 
 const WorkoutCard = ({ workout, sx }) => {
-    const  { dispatch } = useWorkoutsContext();
+    const { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
     const [showAlert, setShowAlert] = useState(false);
 
@@ -96,7 +96,6 @@ const WorkoutCard = ({ workout, sx }) => {
                     </Table>
                 </TableContainer>
             </CardContent>
-            
         </Card>
     );
 };
