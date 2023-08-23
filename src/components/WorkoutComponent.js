@@ -54,11 +54,13 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                         sx={{
                             m: 1,
                             width: '70%',
-                            color: 'white', 
+                            // color: 'white', 
                             borderRadius: '10px',
-                            backgroundColor: 'grey.600', 
+                            border: '2px solid',
+                            borderColor: `grey.300`,
+                            // backgroundColor: 'grey.600', 
                             '& input': { textAlign: 'center' },
-                            '&:hover': { backgroundColor: '#008579' },
+                            '&:hover': { backgroundColor: '#e6f2f1' },
                         }}
                     />
                 </Box>
