@@ -3,11 +3,13 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import ConsoleLogButton from "../components/ConsoleLogButton";
 import ProgrammeCard from "../components/ProgrammeCard";
+import { useProgrammesContext } from "../hooks/useProgrammesContext";
 
 const Programmes = () => {
     const { user } = useAuthContext();
+    const { state, dispatch } = useProgrammesContext();
+    const { programmes } = state;
     const [loading, setLoading] = useState(true);
-    const [programmes, setProgrammes] = useState([]);
 
     useEffect(() => {
         const fetchProgrammes = async () => {
@@ -22,7 +24,7 @@ const Programmes = () => {
                 const json = await res.json();
 
                 if (res.ok) {
-                    setProgrammes(json);
+                    dispatch({type: 'SET_PROGRAMMES', payload: json})
                 };
 
                 setLoading(false);

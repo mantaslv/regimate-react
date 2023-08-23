@@ -13,8 +13,9 @@ import { WorkoutContextProvider } from './context/workoutContext';
 import Workouts from './pages/WorkoutsPage';
 import NewProgrammePage from './pages/NewProgrammePage';
 import WorkoutDesignPage from './pages/WorkoutDesignPage';
-import { ProgrammeContextProvider } from './context/programmeContext';
+import { ProgrammesContextProvider } from './context/programmesContext';
 import Programmes from './pages/ProgrammesPage';
+import { ProgrammeContextProvider } from './context/programmeContext';
 
 const theme = createTheme({
     palette: {
@@ -55,7 +56,7 @@ const App = () => {
                         <Route path='/workout-design' element={user ? <WorkoutDesignPage/> : <Navigate to="/login" />} />
                         <Route path='/new-programme' element={user ? <ProgrammeContextProvider><NewProgrammePage/></ProgrammeContextProvider> : <Navigate to="/login" />} />
                         <Route path='/workouts' element={user ? <WorkoutContextProvider><Workouts/></WorkoutContextProvider> : <Navigate to="/login" />} />
-                        <Route path='/programmes' element={user ? <ProgrammeContextProvider><Programmes/></ProgrammeContextProvider> : <Navigate to="/login" />} />
+                        <Route path='/programmes' element={user ? <ProgrammesContextProvider><Programmes/></ProgrammesContextProvider> : <Navigate to="/login" />} />
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup/>: <Navigate to="/" />} />
                     </Routes>
