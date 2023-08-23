@@ -10,7 +10,6 @@ const Workouts = () => {
     const { state, dispatch } = useWorkoutsContext();
     const { workouts } = state;
     const [loading, setLoading] = useState(true);
-    // const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -23,8 +22,6 @@ const Workouts = () => {
                     }
                 });
                 const json = await res.json();
-
-                console.log(json);
 
                 if (res.ok) {
                     dispatch({type: 'SET_WORKOUTS', payload: json})
@@ -39,7 +36,6 @@ const Workouts = () => {
 
         if (user) {
             fetchWorkouts();
-            console.log(state);
         };
     }, [user]);
 
