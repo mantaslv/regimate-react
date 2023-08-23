@@ -77,23 +77,26 @@ const ProgrammeCard = ({ programme, sx }) => {
                         <TableHead>
                             <TableRow>
                                 {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
-                                    <TableCell key={i} align="center">Day {i + 1}</TableCell>
+                                    <TableCell key={i} align="center">
+                                        Day {i + 1}{ workout.workoutName !== "" && ` - ${workout.workoutName}` }
+                                    </TableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {Array.from({ length: maxExerciseCount}, (_, i) => 
                                 <TableRow key={i}>
-                                    {programme.workouts.slice(0, programme.daySplit).map((workout, cellIndex) => (
-                                        <TableCell key={cellIndex} align="center">
-                                            { workout.exercises[i]?.exerciseName || "" }
-                                            { 
-                                                workout.exercises[i]?.sets.length 
-                                                ? ` ${workout.exercises[i].sets.length}x${workout.exercises[i]?.sets[0].reps}` 
-                                                : "" 
-                                            }
-                                        </TableCell>
-                                    ))}
+                                    {programme.workouts.slice(0, programme.daySplit).map((workout, cellIndex) => {
+                                        const sets = workout.exercises[i]?.sets;
+                                        const firstSetReps = sets?.[0]?.reps;
+
+                                        return (
+                                            <TableCell key={cellIndex} align="center">
+                                                {workout.exercises[i]?.exerciseName || ""}
+                                                {sets?.length ? ` ${sets.length}x${firstSetReps}` : ""}
+                                            </TableCell>
+                                        );  
+                                    })}
                                 </TableRow>
                             )}
                         </TableBody>
