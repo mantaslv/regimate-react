@@ -1,17 +1,25 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/WorkoutComponent'
-import { useEffect, useState } from "react";
+import fetchExercises from "../components/fetchExercises";
 
 const NewWorkoutPage = () => {
     const { state } = useWorkoutContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const [exerciseList, setExerciseList] = useState([]);
 
-    const [exerciseList, setExerciseList] = useState([])
+    useEffect(() => {
+        if (user) {
+            fetchExercises(user.token)
+                .then(data => setExerciseList(data))
+                .catch(error => console.error("Error:", error));
+        }
+    }, [user]);
 
     const completeWorkout = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
@@ -32,34 +40,6 @@ const NewWorkoutPage = () => {
             navigate('/workouts');
         };
     };
-
-    useEffect(() => {
-        const fetchWorkouts = async () => {
-            const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
-                mode: 'cors',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`,
-                    credentials: 'include'
-                }
-            });
-            const json = await res.json();
-
-            if (res.ok) {
-                const uniqueExerciseNames = Array.from(
-                    new Set(
-                        json.flatMap(workout => 
-                            workout.exercises.map(exercise => exercise.exerciseName)
-                        ).sort()
-                    )
-                );
-                setExerciseList(uniqueExerciseNames)
-            };
-        };
-
-        if (user) {
-            fetchWorkouts();
-        };
-    }, [user]);
 
     return (
         <Box sx={{ mt: 10 }}>

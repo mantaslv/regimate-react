@@ -1,13 +1,25 @@
 import { Box, Button, Typography } from "@mui/material";
-import ProgrammeComponent from "../components/ProgrammeComponent";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import { useNavigate } from "react-router-dom";
+import ProgrammeComponent from "../components/ProgrammeComponent";
+import fetchExercises from "../components/fetchExercises";
 
 const NewProgrammePage = () => {
     const { state } = useProgrammeContext();
     const { user } = useAuthContext();
     const navigate = useNavigate();
+    const [exerciseList, setExerciseList] = useState([]);
+
+    useEffect(() => {
+        if (user) {
+            fetchExercises(user.token)
+                .then(data => setExerciseList(data))
+                .catch(error => console.error("Error:", error));
+        }
+    }, [user]);
 
     const saveProgramme = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {
@@ -34,7 +46,7 @@ const NewProgrammePage = () => {
             <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
                 New Programme
             </Typography>
-            <ProgrammeComponent/>
+            <ProgrammeComponent exerciseList={exerciseList}/>
             <br/>
             <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1 }}>
                 Save Programme

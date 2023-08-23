@@ -65,6 +65,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                 handleExerciseSelection={handleInputChange}
                 handleDeleteExercise={handleDeleteExercise}
                 exerciseNotYetChosen={true}
+                exerciseList={exerciseList}
             />
         );
     };
@@ -105,6 +106,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                     setOpenExerciseSelector={setOpenExerciseSelector}
                     handleExerciseSelection={handleInputChange}
                     handleDeleteExercise={handleDeleteExercise}
+                    exerciseList={exerciseList}
                 />
             </Card>
         )
@@ -122,6 +124,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                                 setOpenExerciseSelector={setOpenExerciseSelector}
                                 handleExerciseSelection={handleInputChange}
                                 handleDeleteExercise={handleDeleteExercise}
+                                exerciseList={exerciseList}
                             />
                         </Grid>
                     </Grid>

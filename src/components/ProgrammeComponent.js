@@ -5,7 +5,7 @@ import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "../components/WorkoutComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const ProgrammeComponent = () => {
+const ProgrammeComponent = ({ exerciseList }) => {
     const { state, dispatch } = useProgrammeContext();
     const [split, setSplit] = useState(0);
     
@@ -59,7 +59,7 @@ const ProgrammeComponent = () => {
                                 index={i}
                                 programme={true}
                                 onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
-                                exerciseList={["Squat"]} 
+                                exerciseList={exerciseList} 
                             />
                         </WorkoutContextProvider>
                     </Grid>

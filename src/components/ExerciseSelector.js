@@ -1,22 +1,10 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import fetchExercises from "./fetchExercises";
+import { useState } from "react";
 
-const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise, exerciseNotYetChosen }) => {
-    const { user } = useAuthContext();
+const ExerciseSelector = ({ exerciseList, openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise, exerciseNotYetChosen }) => {
     const [searchTerm, setSearchTerm] = useState("");
-    const [exercises, setExercises] = useState([]);
 
-    useEffect(() => {
-        if (user) {
-            fetchExercises(user.token)
-                .then(data => setExercises(data))
-                .catch(error => console.error("Error:", error));
-        }
-    }, [user]);
-
-    const filteredExercises = exercises.filter(exercise =>
+    const filteredExercises = exerciseList.filter(exercise =>
         exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
