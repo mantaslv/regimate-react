@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Input, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
@@ -45,7 +45,23 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                     width: '80%'
                 }}
             >
-                <Typography color="grey.700">Day {index + 1}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    <Typography color="grey.700" sx={{ mx: 1 }}>Day {index + 1}</Typography>
+                    <Input
+                        disableUnderline
+                        placeholder="workout name"
+                        onChange={handleWorkoutNameChange}
+                        sx={{
+                            m: 1,
+                            width: '70%',
+                            color: 'white', 
+                            borderRadius: '10px',
+                            backgroundColor: 'grey.600', 
+                            '& input': { textAlign: 'center' },
+                            '&:hover': { backgroundColor: '#008579' },
+                        }}
+                    />
+                </Box>
                 {exercises && exercises.map((exercise) => (
                     <ExerciseContextProvider key={exercise.id}>
                         <Exercise
