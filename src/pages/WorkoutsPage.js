@@ -3,11 +3,14 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
 import ConsoleLogButton from "../components/ConsoleLogButton";
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 const Workouts = () => {
     const { user } = useAuthContext();
+    const { state, dispatch } = useWorkoutsContext();
+    const { workouts } = state;
     const [loading, setLoading] = useState(true);
-    const [workouts, setWorkouts] = useState([]);
+    // const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -21,8 +24,10 @@ const Workouts = () => {
                 });
                 const json = await res.json();
 
+                console.log(json);
+
                 if (res.ok) {
-                    setWorkouts(json);
+                    dispatch({type: 'SET_WORKOUTS', payload: json})
                 };
 
                 setLoading(false);
@@ -34,6 +39,7 @@ const Workouts = () => {
 
         if (user) {
             fetchWorkouts();
+            console.log(state);
         };
     }, [user]);
 
