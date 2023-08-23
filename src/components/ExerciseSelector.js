@@ -1,8 +1,7 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-
-// const exercises = ["Front Squats", "Back Squats", "Dips", "Push Ups", "Pull Ups", "Plank"];
+import fetchExercises from "./fetchExercises";
 
 const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise, exerciseNotYetChosen }) => {
     const { user } = useAuthContext();
@@ -10,31 +9,11 @@ const ExerciseSelector = ({ openExerciseSelector, setOpenExerciseSelector, handl
     const [exercises, setExercises] = useState([]);
 
     useEffect(() => {
-        const fetchExercises = async () => {
-            try {
-                const res = await fetch(process.env.REACT_APP_API_URL + '/api/exercise-directory', {
-                    mode: 'cors',
-                    headers: {
-                        'Authorization': `Bearer ${user.token}`,
-                        credentials: 'include'
-                    }
-                });
-                const json = await res.json();
-
-                console.log(json);
-
-                if (res.ok) {
-                    setExercises(json);
-                };
-
-            } catch(error) {
-                console.error("Error fetching exercises:", error);
-            };
-        };
-
         if (user) {
-            fetchExercises();
-        };
+            fetchExercises(user.token)
+                .then(data => setExercises(data))
+                .catch(error => console.error("Error:", error));
+        }
     }, [user]);
 
     const filteredExercises = exercises.filter(exercise =>
