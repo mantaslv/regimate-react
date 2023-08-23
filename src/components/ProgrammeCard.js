@@ -2,9 +2,11 @@ import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table,
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useProgrammesContext } from "../hooks/useProgrammesContext";
 
 const ProgrammeCard = ({ programme, sx }) => {
     const { user } = useAuthContext();
+    const { dispatch } = useProgrammesContext();
     const [showAlert, setShowAlert] = useState(false);
 
     let maxExerciseCount = 0;
@@ -38,7 +40,7 @@ const ProgrammeCard = ({ programme, sx }) => {
         const json = await res.json();
 
         if (res.ok) {
-            //dispatch({type: 'DELETE_WORKOUT', payload: json})
+            dispatch({type: 'DELETE_PROGRAMME', payload: json})
         };
 
         setShowAlert(false);
