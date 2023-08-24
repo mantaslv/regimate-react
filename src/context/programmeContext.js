@@ -17,6 +17,8 @@ const initialState = {
 
 export const programmeReducer = (state, action) => {
     switch (action.type) {
+        case "SET_PROGRAMME":
+            return action.payload;
         case "UPDATE_PROGRAMME_NAME":
             return {
                 ...state,

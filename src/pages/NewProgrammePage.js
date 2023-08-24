@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -12,6 +12,13 @@ const NewProgrammePage = () => {
     const { user } = useAuthContext();
     const navigate = useNavigate();
     const [exerciseList, setExerciseList] = useState([]);
+    const [programmeData, setProgrammeData] = useState(null);
+
+    const location = useLocation();
+    const locationState = location.state || {};
+    const programmeDataFromState = locationState.programmeData || null;
+
+    
 
     useEffect(() => {
         if (user) {
@@ -19,7 +26,26 @@ const NewProgrammePage = () => {
                 .then(data => setExerciseList(data))
                 .catch(error => console.error("Error:", error));
         }
-    }, [user]);
+        
+        if (programmeDataFromState) {
+            setProgrammeData(programmeDataFromState);
+        };
+
+        // if (user && programmeIDFromState) {
+        //     console.log(programmeIDFromState);
+        //     fetch(process.env.REACT_APP_API_URL + '/api/programmes/' + programmeIDFromState, {
+        //         method: "GET",
+        //         headers: {
+        //             "Authorization": `Bearer ${user.token}`
+        //         }
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => setProgrammeData(data))
+        //     .catch(error => console.error("Error:", error));
+
+        //     console.log(programmeData);
+        // };
+    }, [user, programmeDataFromState]);
 
     const saveProgramme = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {
@@ -46,7 +72,7 @@ const NewProgrammePage = () => {
             <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
                 New Programme
             </Typography>
-            <ProgrammeComponent exerciseList={exerciseList}/>
+            <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             <br/>
             <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1 }}>
                 Save Programme

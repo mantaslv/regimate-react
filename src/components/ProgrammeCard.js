@@ -1,12 +1,15 @@
 import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammesContext } from "../hooks/useProgrammesContext";
+import { useNavigate } from "react-router-dom";
 
 const ProgrammeCard = ({ programme, sx }) => {
     const { user } = useAuthContext();
     const { dispatch } = useProgrammesContext();
+    const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
 
     let maxExerciseCount = 0;
@@ -17,7 +20,7 @@ const ProgrammeCard = ({ programme, sx }) => {
         };
     });
 
-    const handleClick = async () => {
+    const handleClickDelete = async () => {
         if (!user) {
             return
         };
@@ -50,14 +53,23 @@ const ProgrammeCard = ({ programme, sx }) => {
         setShowAlert(false);
     };
 
+    const handleClickEdit = () => {
+        navigate(`/new-programme/`, {state: { programmeData: programme } });
+    };
+
     return (
         <Card sx={sx}>
             <CardHeader 
                 title={programme.programmeName}
                 action={
-                    <IconButton aria-label="delete" onClick={handleClick}>
-                        <DeleteOutlineOutlinedIcon />
-                    </IconButton>
+                    <>
+                        <IconButton aria-label="edit" onClick={handleClickEdit}>
+                            <EditIcon/>
+                        </IconButton>
+                        <IconButton aria-label="delete" onClick={handleClickDelete}>
+                            <DeleteOutlineOutlinedIcon/>
+                        </IconButton>
+                    </>
                 }
             />
             {showAlert && (

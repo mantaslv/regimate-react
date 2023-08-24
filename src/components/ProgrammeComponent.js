@@ -1,13 +1,22 @@
 import { Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "../components/WorkoutComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const ProgrammeComponent = ({ exerciseList }) => {
+const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
     const [split, setSplit] = useState(0);
+
+    useEffect(() => {
+        if (programmeData) {
+            console.log(programmeData);
+            setSplit(programmeData.daySplit);
+            dispatch({ type: "SET_PROGRAMME", payload: programmeData });
+        }
+        
+    }, [programmeData, state]);
     
     const handleSplitToggle = (_, chosenSplit) => {
         setSplit(chosenSplit);
@@ -65,7 +74,7 @@ const ProgrammeComponent = ({ exerciseList }) => {
                     </Grid>
                 )}
             </Grid>
-            <ConsoleLogButton print={state} info="workout"/>
+            <ConsoleLogButton print={state} info="programme"/>
         </>
     );
 };

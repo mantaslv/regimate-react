@@ -87,6 +87,7 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                 >
                     <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
                 </Button>
+                <ConsoleLogButton print={state} info="workout"/>
             </Box>
         )
     } else {
