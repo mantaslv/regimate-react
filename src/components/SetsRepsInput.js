@@ -27,7 +27,7 @@ const SetsRepsInput = ({ handleSetsRepsChange }) => {
         <>
             <Typography 
                 variant="h6" 
-                fontSize={18} 
+                fontSize={15} 
                 fontWeight={500} 
                 textTransform="none" 
                 sx={{ color: 'white', mr: -0.5 }}
@@ -40,7 +40,8 @@ const SetsRepsInput = ({ handleSetsRepsChange }) => {
                 sx={{
                     m: 1,
                     width: 35,
-                    color: 'white', 
+                    fontSize: 15,
+                    color: 'white',
                     borderRadius: '10px',
                     backgroundColor: '#007368', 
                     '& input': { textAlign: 'center' },
@@ -49,7 +50,7 @@ const SetsRepsInput = ({ handleSetsRepsChange }) => {
             />
             <Typography 
                 variant="h6" 
-                fontSize={18} 
+                fontSize={15} 
                 fontWeight={500} 
                 textTransform="none" 
                 sx={{ color: 'white', mr: -0.5 }}
@@ -62,6 +63,7 @@ const SetsRepsInput = ({ handleSetsRepsChange }) => {
                 sx={{
                     m: 1,
                     width: 35,
+                    fontSize: 15,
                     color: 'white', 
                     borderRadius: '10px',
                     backgroundColor: '#007368', 

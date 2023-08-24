@@ -46,13 +46,13 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                    <Typography color="grey.700" sx={{ mx: 1 }}>Day {index + 1}</Typography>
+                    <Typography color="grey.700" >Day {index + 1}</Typography>
                     <Input
                         disableUnderline
                         placeholder="workout name"
                         onChange={handleWorkoutNameChange}
                         sx={{
-                            m: 1,
+                            // m: 1,
                             width: '70%',
                             // color: 'white', 
                             borderRadius: '10px',

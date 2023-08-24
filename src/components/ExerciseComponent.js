@@ -84,7 +84,10 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                         <Button onClick={handleOpenSelector} sx={{ mt: -1, minWidth: 0, borderRadius: '10px' }}>
                             <Typography 
                                 variant="h6" 
-                                fontSize={18}
+                                fontSize={15}
+                                fontWeight={600}
+                                textAlign="left"
+                                textTransform="none"
                                 sx={{ color: 'white', '&:hover': { color: 'grey.400' } }}
                             >
                                 {state.exerciseName}
@@ -96,7 +99,7 @@ const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=
                             <RemoveCircleIcon fontSize="small"/>
                         </IconButton>
                     }
-                    sx={{ m: -1.5, mb: -3.5 }}
+                    sx={{ m: -1.5, mb: -2.5 }}
                 />
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                     <SetsRepsInput handleSetsRepsChange={handleSetsRepsChange}/>

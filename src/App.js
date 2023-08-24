@@ -31,13 +31,13 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: 'Roboto Mono',
+        fontFamily: 'Roboto Condensed',
         fontWeightLight: 400,
         fontWeightRegular: 500,
         fontWeightMedium: 600,
         fontWeightBold: 700,
-        h6: {
-            fontFamily: 'Roboto Condensed',
+        h5: {
+            fontFamily: 'Roboto Mono',
         },
     },
 });
@@ -47,7 +47,7 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ mx: 'auto', maxWidth: '1080px', px: 2 }}>
+            <Box sx={{ mx: 'auto', maxWidth: '1600px', px: 2 }}>
                 <BrowserRouter>
                     <Navbar />
                     <Routes>
