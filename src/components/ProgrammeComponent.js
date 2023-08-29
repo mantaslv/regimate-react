@@ -1,5 +1,6 @@
 import { Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "../components/WorkoutComponent";
@@ -14,7 +15,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
             console.log(programmeData);
             setSplit(programmeData.daySplit);
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
-        }
+        };
         
     }, [programmeData, state]);
     
