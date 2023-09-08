@@ -18,34 +18,19 @@ const NewProgrammePage = () => {
     const locationState = location.state || {};
     const programmeDataFromState = locationState.programmeData || null;
 
-    
-
     useEffect(() => {
         if (user) {
             fetchExercises(user.token)
                 .then(data => setExerciseList(data))
                 .catch(error => console.error("Error:", error));
         }
-        
+    }, [user]);
+
+    useEffect(() => {
         if (programmeDataFromState) {
             setProgrammeData(programmeDataFromState);
         };
-
-        // if (user && programmeIDFromState) {
-        //     console.log(programmeIDFromState);
-        //     fetch(process.env.REACT_APP_API_URL + '/api/programmes/' + programmeIDFromState, {
-        //         method: "GET",
-        //         headers: {
-        //             "Authorization": `Bearer ${user.token}`
-        //         }
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => setProgrammeData(data))
-        //     .catch(error => console.error("Error:", error));
-
-        //     console.log(programmeData);
-        // };
-    }, [user, programmeDataFromState]);
+    }, [programmeDataFromState])
 
     const saveProgramme = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {

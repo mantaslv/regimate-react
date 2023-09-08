@@ -8,7 +8,7 @@ import ConsoleLogButton from "./ConsoleLogButton";
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
-    const [split, setSplit] = useState(0);
+    const [split, setSplit] = useState(3);
 
     useEffect(() => {
         if (programmeData) {
@@ -17,10 +17,10 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
         };
         
-    }, [programmeData, state]);
+    }, [programmeData]);
     
     const handleSplitToggle = (_, chosenSplit) => {
-        setSplit(chosenSplit);
+        setSplit(chosenSplit + 3);
         dispatch({ type: "UPDATE_PROGRAMME_SPLIT", payload: chosenSplit + 3});
     };
 
@@ -48,7 +48,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     </Grid>
                     <Grid item>
                         <ToggleButtonGroup
-                            value={split} 
+                            value={split - 3} 
                             exclusive 
                             onChange={handleSplitToggle}
                         >
@@ -62,8 +62,8 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                 </Grid>
             </Grid>
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
-                {state.workouts.slice(0, split + 3).map((workout, i) =>
-                    <Grid item key={workout.id} md={12 / (split + 3)}>
+                {state.workouts.slice(0, split).map((workout, i) =>
+                    <Grid item key={i} md={12 / (split)}>
                         <WorkoutContextProvider>
                             <WorkoutComponent 
                                 index={i}
