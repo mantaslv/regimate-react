@@ -52,13 +52,10 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                         placeholder="workout name"
                         onChange={handleWorkoutNameChange}
                         sx={{
-                            // m: 1,
                             width: '70%',
-                            // color: 'white', 
                             borderRadius: '10px',
                             border: '2px solid',
                             borderColor: `grey.300`,
-                            // backgroundColor: 'grey.600', 
                             '& input': { textAlign: 'center' },
                             '&:hover': { backgroundColor: '#e6f2f1' },
                         }}

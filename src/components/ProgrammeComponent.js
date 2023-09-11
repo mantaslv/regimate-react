@@ -63,7 +63,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
             </Grid>
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
                 {state.workouts.slice(0, split).map((workout, i) =>
-                    <Grid item key={i} md={12 / (split)}>
+                    <Grid item key={i} md={12 / split}>
                         <WorkoutContextProvider>
                             <WorkoutComponent 
                                 index={i}
