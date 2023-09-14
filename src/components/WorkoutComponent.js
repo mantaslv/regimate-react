@@ -49,6 +49,7 @@ const WorkoutComponent = ({
     useEffect(() => {
         if (initialWorkoutData) {
             setWorkoutName(initialWorkoutData.workoutName);
+            dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
         };
     }, [initialWorkoutData]);
 

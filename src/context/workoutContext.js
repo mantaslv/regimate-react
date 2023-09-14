@@ -10,6 +10,8 @@ const initialState = {
 
 export const workoutReducer = (state, action) => {
     switch (action.type) {
+        case "SET_WORKOUT":
+            return action.payload;
         case "UPDATE_WORKOUT_NAME":
             return {
                 ...state,
