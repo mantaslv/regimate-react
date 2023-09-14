@@ -14,13 +14,15 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     useEffect(() => {
         if (programmeData) {
             setProgrammeName(programmeData.programmeName);
-            console.log(programmeData);
+            // console.log(programmeData);
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
         };
         
     }, [programmeData]);
 
-    useEffect(() => {}, [state]);
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
 
     const handleAddWorkout = () => {
         dispatch({ type: "ADD_WORKOUT" });

@@ -41,6 +41,7 @@ const WorkoutComponent = ({
         onWorkoutDelete();
     };
 
+    // for testing purposes
     useEffect(() => {
         onWorkoutChange(state);
     }, [state])
