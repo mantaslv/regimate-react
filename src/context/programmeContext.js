@@ -48,8 +48,8 @@ export const programmeReducer = (state, action) => {
     };
 };
 
-export const ProgrammeContextProvider = ({ initialWorkoutData, children }) => {
-    const [state, dispatch] = useReducer(programmeReducer, initialWorkoutData || initialState);
+export const ProgrammeContextProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(programmeReducer, initialState);
 
     return (
         <ProgrammeContext.Provider value={{ state, dispatch }}>
