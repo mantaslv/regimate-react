@@ -44,13 +44,13 @@ const WorkoutComponent = ({
     // for testing purposes
     useEffect(() => {
         onWorkoutChange(state);
-    }, [state])
+    }, [state]);
 
     useEffect(() => {
         if (initialWorkoutData) {
             setWorkoutName(initialWorkoutData.workoutName);
         };
-    }, [initialWorkoutData])
+    }, [initialWorkoutData]);
 
     if (programme) {
         return (
