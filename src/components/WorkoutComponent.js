@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Grid, IconButton, Input, TextField } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -8,12 +8,21 @@ import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const WorkoutComponent = ({programme=false, exerciseList, onWorkoutDelete, onWorkoutChange = () => {}}) => {
+const WorkoutComponent = ({
+    programme=false,
+    exerciseList, 
+    onWorkoutDelete, 
+    initialWorkoutData, 
+    onWorkoutChange = () => {}
+}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
+    const [workoutName, setWorkoutName] = useState("");
 
     const handleWorkoutNameChange = (event) => {
-        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: event.target.value });
+        const newName = event.target.value;
+        setWorkoutName(newName);
+        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: newName });
     };
 
     const addExercise = () => {
@@ -36,6 +45,12 @@ const WorkoutComponent = ({programme=false, exerciseList, onWorkoutDelete, onWor
         onWorkoutChange(state);
     }, [state])
 
+    useEffect(() => {
+        if (initialWorkoutData) {
+            setWorkoutName(initialWorkoutData.workoutName);
+        };
+    }, [initialWorkoutData])
+
     if (programme) {
         return (
             <Box
@@ -54,6 +69,7 @@ const WorkoutComponent = ({programme=false, exerciseList, onWorkoutDelete, onWor
                     <Input
                         disableUnderline
                         placeholder="workout name"
+                        value={workoutName}
                         onChange={handleWorkoutNameChange}
                         sx={{
                             width: '70%',

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Grid, IconButton, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -9,11 +9,12 @@ import ConsoleLogButton from "./ConsoleLogButton";
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
+    const [programmeName, setProgrammeName] = useState("");
 
     useEffect(() => {
         if (programmeData) {
+            setProgrammeName(programmeData.programmeName);
             console.log(programmeData);
-            setSplit(programmeData.daySplit);
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
         };
         
@@ -30,7 +31,9 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     };
 
     const handleProgrammeNameChange = (event) => {
-        dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: event.target.value });
+        const newName = event.target.value;
+        setProgrammeName(newName);
+        dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: newName });
     };
 
     const handleWorkoutChange = (updatedWorkout, id) => {
@@ -43,6 +46,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                 <Grid item md={3}>
                     <TextField
                         label="Programme Name"
+                        value={programmeName}
                         onChange={handleProgrammeNameChange}
                         sx={{ width: '100%' }}
                     />
@@ -61,13 +65,14 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
                 {state.workouts.map((workout, i) =>
                     <Grid item key={workout.id} md={2}>
-                        <WorkoutContextProvider>
+                        <WorkoutContextProvider initialWorkoutData={programmeData && programmeData.workouts[i]}>
                             <WorkoutComponent 
                                 index={i}
                                 programme={true}
                                 onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
                                 exerciseList={exerciseList}
                                 onWorkoutDelete={() => handleDeleteWorkout(workout.id)}
+                                initialWorkoutData={programmeData && programmeData.workouts[i]}
                             />
                         </WorkoutContextProvider>
                     </Grid>
