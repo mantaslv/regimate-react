@@ -67,7 +67,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
                 {state.workouts.map((workout, i) =>
                     <Grid item key={workout.id} md={2}>
-                        <WorkoutContextProvider initialWorkoutData={programmeData && programmeData.workouts[i]}>
+                        <WorkoutContextProvider>
                             <WorkoutComponent 
                                 index={i}
                                 programme={true}
