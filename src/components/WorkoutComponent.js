@@ -1,13 +1,14 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Input, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Input, TextField } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange = () => {}}) => {
+const WorkoutComponent = ({programme=false, exerciseList, onWorkoutDelete, onWorkoutChange = () => {}}) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
 
@@ -25,6 +26,10 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
 
     const handleExerciseDelete = (id) => {
         dispatch({ type: "DELETE_EXERCISE", payload: id });
+    };
+
+    const handleDeleteWorkout = () => {
+        onWorkoutDelete();
     };
 
     useEffect(() => {
@@ -46,7 +51,6 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                    <Typography color="grey.700" >Day {index + 1}</Typography>
                     <Input
                         disableUnderline
                         placeholder="workout name"
@@ -60,6 +64,9 @@ const WorkoutComponent = ({programme=false, index, exerciseList, onWorkoutChange
                             '&:hover': { backgroundColor: '#e6f2f1' },
                         }}
                     />
+                    <IconButton onClick={handleDeleteWorkout}>
+                        <RemoveCircleIcon/>
+                    </IconButton>
                 </Box>
                 {exercises && exercises.map((exercise) => (
                     <ExerciseContextProvider key={exercise.id}>

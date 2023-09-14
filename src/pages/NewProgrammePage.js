@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../hooks/useAuthContext";

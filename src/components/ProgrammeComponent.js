@@ -1,5 +1,6 @@
-import { Grid, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
@@ -8,7 +9,6 @@ import ConsoleLogButton from "./ConsoleLogButton";
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
-    const [split, setSplit] = useState(3);
 
     useEffect(() => {
         if (programmeData) {
@@ -18,10 +18,15 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
         };
         
     }, [programmeData]);
-    
-    const handleSplitToggle = (_, chosenSplit) => {
-        setSplit(chosenSplit + 3);
-        dispatch({ type: "UPDATE_PROGRAMME_SPLIT", payload: chosenSplit + 3});
+
+    useEffect(() => {}, [state]);
+
+    const handleAddWorkout = () => {
+        dispatch({ type: "ADD_WORKOUT" });
+    };
+
+    const handleDeleteWorkout = (id) => {
+        dispatch({ type: "DELETE_WORKOUT", payload: id });
     };
 
     const handleProgrammeNameChange = (event) => {
@@ -47,29 +52,22 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                         <Typography variant="h6" color="primary" margin={1}>Split</Typography>
                     </Grid>
                     <Grid item>
-                        <ToggleButtonGroup
-                            value={split - 3} 
-                            exclusive 
-                            onChange={handleSplitToggle}
-                        >
-                            {Array.from({ length: 4 }, (_, i) => 
-                                <ToggleButton key={i} value={i}>
-                                    {i+3}-Day
-                                </ToggleButton>
-                            )}
-                        </ToggleButtonGroup>
+                        <IconButton onClick={handleAddWorkout}>
+                            <AddCircleOutlineIcon/>
+                        </IconButton>
                     </Grid>
                 </Grid>
             </Grid>
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
-                {state.workouts.slice(0, split).map((workout, i) =>
-                    <Grid item key={i} md={12 / split}>
+                {state.workouts.map((workout, i) =>
+                    <Grid item key={workout.id} md={2}>
                         <WorkoutContextProvider>
                             <WorkoutComponent 
                                 index={i}
                                 programme={true}
                                 onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
-                                exerciseList={exerciseList} 
+                                exerciseList={exerciseList}
+                                onWorkoutDelete={() => handleDeleteWorkout(workout.id)}
                             />
                         </WorkoutContextProvider>
                     </Grid>
