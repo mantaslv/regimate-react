@@ -41,17 +41,17 @@ const WorkoutComponent = ({
         onWorkoutDelete();
     };
 
-    // for testing purposes
-    useEffect(() => {
-        onWorkoutChange(state);
-    }, [state]);
-
     useEffect(() => {
         if (initialWorkoutData) {
             setWorkoutName(initialWorkoutData.workoutName);
             dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
         };
     }, [initialWorkoutData]);
+
+    // for testing purposes
+    useEffect(() => {
+        onWorkoutChange(state);
+    }, [state]);
 
     if (programme) {
         return (
