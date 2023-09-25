@@ -10,7 +10,11 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import ConsoleLogButton from "./ConsoleLogButton";
 import SetsRepsInput from "./SetsRepsInput";
 
-const Exercise = ({ onExerciseChange, onExerciseDelete, exerciseList, programme=false }) => {
+const Exercise = ({ 
+    onExerciseChange, 
+    onExerciseDelete, 
+    exerciseList, 
+    programme=false }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { sets } = state;
