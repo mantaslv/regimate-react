@@ -14,7 +14,8 @@ const Exercise = ({
     onExerciseChange, 
     onExerciseDelete, 
     exerciseList, 
-    programme=false
+    programme=false,
+    initialExerciseData
 }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
