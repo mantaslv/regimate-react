@@ -21,6 +21,7 @@ const Exercise = ({
     const { dispatch, state } = useExerciseContext();
     const { sets } = state;
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
+    const [exerciseData, setExerciseData] = useState([]);
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
