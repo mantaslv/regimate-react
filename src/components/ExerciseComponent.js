@@ -35,6 +35,7 @@ const Exercise = ({
     };
 
     const handleInputChange = (exerciseName) => {
+        setExerciseName(exerciseName);
         dispatch({ type: "UPDATE_EXERCISE_NAME", payload: exerciseName });
         setOpenExerciseSelector(false)
     };
