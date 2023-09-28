@@ -34,9 +34,9 @@ const Exercise = ({
         onExerciseDelete();
     };
 
-    const handleInputChange = (exerciseName) => {
-        setExerciseName(exerciseName);
-        dispatch({ type: "UPDATE_EXERCISE_NAME", payload: exerciseName });
+    const handleExerciseNameChange = (newName) => {
+        setExerciseName(newName);
+        dispatch({ type: "UPDATE_EXERCISE_NAME", payload: newName });
         setOpenExerciseSelector(false)
     };
 
@@ -77,7 +77,7 @@ const Exercise = ({
             <ExerciseSelector 
                 openExerciseSelector={openExerciseSelector} 
                 setOpenExerciseSelector={setOpenExerciseSelector}
-                handleExerciseSelection={handleInputChange}
+                handleExerciseSelection={handleExerciseNameChange}
                 handleDeleteExercise={handleDeleteExercise}
                 exerciseNotYetChosen={true}
                 exerciseList={exerciseList}
@@ -122,7 +122,7 @@ const Exercise = ({
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
                     setOpenExerciseSelector={setOpenExerciseSelector}
-                    handleExerciseSelection={handleInputChange}
+                    handleExerciseSelection={handleExerciseNameChange}
                     handleDeleteExercise={handleDeleteExercise}
                     exerciseList={exerciseList}
                 />
@@ -140,7 +140,7 @@ const Exercise = ({
                             <ExerciseSelector 
                                 openExerciseSelector={openExerciseSelector} 
                                 setOpenExerciseSelector={setOpenExerciseSelector}
-                                handleExerciseSelection={handleInputChange}
+                                handleExerciseSelection={handleExerciseNameChange}
                                 handleDeleteExercise={handleDeleteExercise}
                                 exerciseList={exerciseList}
                             />
