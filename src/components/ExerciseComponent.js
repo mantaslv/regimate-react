@@ -28,7 +28,7 @@ const Exercise = ({
             setExerciseData(initialExerciseData);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
-    });
+    }, [initialExerciseData]);
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
