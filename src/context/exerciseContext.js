@@ -13,6 +13,8 @@ const generateNewSet = (reps) => ({
 
 export const exerciseReducer = (state, action) => {
     switch (action.type) {
+        case "SET_EXERCISE":
+            return action.payload;
         case "ADD_SET":
             return {
                 ...state,
