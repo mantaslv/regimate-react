@@ -21,11 +21,11 @@ const Exercise = ({
     const { dispatch, state } = useExerciseContext();
     const { sets } = state;
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
-    const [exerciseData, setExerciseData] = useState([]);
+    const [exerciseName, setExerciseName] = useState("");
 
     useEffect(() => {
         if (initialExerciseData) {
-            setExerciseData(initialExerciseData);
+            setExerciseName(initialExerciseData.exerciseName);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
     }, [initialExerciseData]);
@@ -104,7 +104,7 @@ const Exercise = ({
                                 textTransform="none"
                                 sx={{ color: 'white', '&:hover': { color: 'grey.400' } }}
                             >
-                                {state.exerciseName}
+                                {exerciseName}
                             </Typography>
                         </Button>
                     }
