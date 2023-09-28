@@ -26,6 +26,7 @@ const Exercise = ({
     useEffect(() => {
         if (initialExerciseData) {
             setExerciseData(initialExerciseData);
+            dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
     });
 
