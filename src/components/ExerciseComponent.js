@@ -23,6 +23,12 @@ const Exercise = ({
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
     const [exerciseData, setExerciseData] = useState([]);
 
+    useEffect(() => {
+        if (initialExerciseData) {
+            setExerciseData(initialExerciseData);
+        };
+    });
+
     const handleDeleteExercise = () => {
         onExerciseDelete();
     };
