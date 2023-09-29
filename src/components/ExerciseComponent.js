@@ -26,6 +26,7 @@ const Exercise = ({
     useEffect(() => {
         if (initialExerciseData) {
             setExerciseName(initialExerciseData.exerciseName);
+            setOpenExerciseSelector(false);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
     }, [initialExerciseData]);
@@ -72,7 +73,7 @@ const Exercise = ({
         onExerciseChange(state);
     }, [state]);
 
-    if (state.exerciseName === "") {
+    if (exerciseName === "") {
         return (
             <ExerciseSelector 
                 openExerciseSelector={openExerciseSelector} 
