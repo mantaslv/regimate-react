@@ -26,6 +26,7 @@ const SetsRepsInput = ({ handleSetsRepsChange, initialExerciseData }) => {
     useEffect(() => {
         if (initialExerciseData) {
             setSets(initialExerciseData.sets.length);
+            setReps(initialExerciseData.sets[0].reps)
         };
     });
 
@@ -66,6 +67,7 @@ const SetsRepsInput = ({ handleSetsRepsChange, initialExerciseData }) => {
             </Typography>
             <Input
                 disableUnderline
+                value={reps}
                 onChange={handleRepsInputChange}
                 sx={{
                     m: 1,
