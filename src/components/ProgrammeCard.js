@@ -94,6 +94,7 @@ const ProgrammeCard = ({ programme, sx }) => {
                                 {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
                                     <TableCell key={i} align="center">
                                         Day {i + 1}{ workout.workoutName !== "" && ` - ${workout.workoutName}` }
+                                        <PlayCircleIcon/>
                                     </TableCell>
                                 ))}
                             </TableRow>
