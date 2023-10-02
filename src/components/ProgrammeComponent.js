@@ -14,7 +14,6 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     useEffect(() => {
         if (programmeData) {
             setProgrammeName(programmeData.programmeName);
-            // console.log(programmeData);
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
         };
         
