@@ -35,7 +35,7 @@ const NewProgrammePage = () => {
     const saveProgramme = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {
             method: 'POST',
-            body: JSON.stringify(state),
+            body: JSON.stringify({ programmeName: state.programmeName, workouts: state.workouts }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
