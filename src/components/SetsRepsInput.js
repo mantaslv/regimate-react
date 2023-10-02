@@ -1,7 +1,7 @@
 import { Input, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 
-const SetsRepsInput = ({ handleSetsRepsChange }) => {
+const SetsRepsInput = ({ handleSetsRepsChange, initialExerciseData }) => {
     const[sets, setSets] = useState(1);
     const[reps, setReps] = useState(1);
 
