@@ -118,7 +118,10 @@ const Exercise = ({
                     sx={{ m: -1.5, mb: -2.5 }}
                 />
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                    <SetsRepsInput handleSetsRepsChange={handleSetsRepsChange}/>
+                    <SetsRepsInput 
+                        handleSetsRepsChange={handleSetsRepsChange}
+                        initialExerciseData={initialExerciseData}
+                    />
                 </Box>
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
