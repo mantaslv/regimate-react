@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
@@ -93,7 +93,6 @@ const ProgrammeCard = ({ programme, sx }) => {
                                 {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
                                     <TableCell key={i} align="center">
                                         Day {i + 1}{ workout.workoutName !== "" && ` - ${workout.workoutName}` }
-                                        <PlayCircleIcon/>
                                     </TableCell>
                                 ))}
                             </TableRow>
@@ -114,7 +113,19 @@ const ProgrammeCard = ({ programme, sx }) => {
                                     })}
                                 </TableRow>
                             )}
+                            
                         </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
+                                    <TableCell key={i} align="center">
+                                        <Button variant="contained" endIcon={<PlayCircleIcon/>}>
+                                            Start Workout
+                                        </Button>
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableFooter>
                     </Table>
                 </TableContainer>
             </CardContent>
