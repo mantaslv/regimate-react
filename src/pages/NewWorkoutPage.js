@@ -57,7 +57,7 @@ const NewWorkoutPage = () => {
             <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
                 New Workout
             </Typography>
-            <WorkoutComponent exerciseList={exerciseList} workoutData={workoutData}/>
+            <WorkoutComponent exerciseList={exerciseList} initialWorkoutData={workoutData}/>
             <Button variant="contained" onClick={completeWorkout} sx={{ mt: 1 }}>
                 Complete Workout
             </Button>
