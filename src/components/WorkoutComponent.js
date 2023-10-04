@@ -117,7 +117,8 @@ const WorkoutComponent = ({
         return (
             <Box>
                 <TextField 
-                    label="Workout Name" 
+                    label="Workout Name"
+                    value={workoutName} 
                     variant="filled"
                     onChange={handleWorkoutNameChange}
                 />
