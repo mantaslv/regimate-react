@@ -150,12 +150,13 @@ const Exercise = ({
                             />
                         </Grid>
                     </Grid>
-                    {sets && sets.map((set) => (
+                    {sets && sets.map((set, i) => (
                         <SetContextProvider key={set.id}>
                             <SetComponent 
                                 set={set} 
                                 onSetChange={(updatedSet) => handleSetChange(updatedSet, set.id)}
                                 onSetDelete={() => handleSetDelete(set.id)}
+                                initialSetData={initialExerciseData && initialExerciseData.sets[i]}
                             />
                         </SetContextProvider>
                     ))}
