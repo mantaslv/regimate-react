@@ -59,6 +59,10 @@ const ProgrammeCard = ({ programme, sx }) => {
         navigate(`/new-programme/`, {state: { programmeData: programme } });
     };
 
+    const handleStartWorkout = (workout) => {
+        navigate(`/new-workout/`, {state: { workoutData: workout } });
+    };
+
     return (
         <Card sx={sx}>
             <CardHeader 
@@ -119,7 +123,7 @@ const ProgrammeCard = ({ programme, sx }) => {
                             <TableRow>
                                 {programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
                                     <TableCell key={i} align="center">
-                                        <Button variant="contained" endIcon={<PlayCircleIcon/>}>
+                                        <Button variant="contained" endIcon={<PlayCircleIcon/>} onClick={() => handleStartWorkout(workout)}>
                                             Start Workout
                                         </Button>
                                     </TableCell>
