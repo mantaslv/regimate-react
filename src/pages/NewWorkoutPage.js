@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
@@ -12,6 +12,10 @@ const NewWorkoutPage = () => {
     const { user } = useAuthContext();
     const navigate = useNavigate();
     const [exerciseList, setExerciseList] = useState([]);
+
+    const location = useLocation();
+    const locationState = location.state || {};
+    const workoutDataFromState = locationState.workoutData || null;
 
     useEffect(() => {
         if (user) {
