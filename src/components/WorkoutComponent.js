@@ -122,13 +122,14 @@ const WorkoutComponent = ({
                     variant="filled"
                     onChange={handleWorkoutNameChange}
                 />
-                {exercises && exercises.map((exercise) => (
+                {exercises && exercises.map((exercise, i) => (
                     <ExerciseContextProvider key={exercise.id}>
                         <Exercise
                             exercise={exercise}
                             exerciseList={exerciseList}
                             onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
                             onExerciseDelete={() => handleExerciseDelete(exercise.id)}
+                            initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
                         />
                     </ExerciseContextProvider>
                 ))}
