@@ -12,6 +12,7 @@ const NewWorkoutPage = () => {
     const { user } = useAuthContext();
     const navigate = useNavigate();
     const [exerciseList, setExerciseList] = useState([]);
+    const [workoutData, setWorkoutData] = useState(null);
 
     const location = useLocation();
     const locationState = location.state || {};
@@ -24,6 +25,12 @@ const NewWorkoutPage = () => {
                 .catch(error => console.error("Error:", error));
         }
     }, [user]);
+
+    useEffect(() => {
+        if (workoutDataFromState) {
+            setWorkoutData(workoutDataFromState);
+        };
+    }, [workoutDataFromState])
 
     const completeWorkout = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
