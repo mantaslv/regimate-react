@@ -6,7 +6,7 @@ import { useSetContext } from "../hooks/useSetContext";
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import ConsoleLogButton from "./ConsoleLogButton";
 
-const Set = ({ onSetChange, onSetDelete }) => {
+const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
 
