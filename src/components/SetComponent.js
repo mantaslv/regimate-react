@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
@@ -9,6 +9,13 @@ import ConsoleLogButton from "./ConsoleLogButton";
 const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
+    const [reps, setReps] = useState(0);
+
+    useEffect(() => {
+        if (initialSetData) {
+            setReps(initialSetData.reps)
+        };
+    }, [initialSetData]);
 
     const handleWeightChange = (event) => {
         const newWeight = event.target.value;
