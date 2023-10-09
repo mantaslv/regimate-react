@@ -10,6 +10,7 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
     const [reps, setReps] = useState(0);
+    const [weight, setWeight] = useState(0);
 
     useEffect(() => {
         if (initialSetData) {
