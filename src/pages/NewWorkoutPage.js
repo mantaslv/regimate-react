@@ -35,7 +35,7 @@ const NewWorkoutPage = () => {
     const completeWorkout = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
             method: 'POST',
-            body: JSON.stringify(state),
+            body: JSON.stringify({ id: state.id, workoutName: state.workoutName, exercises: state.exercises }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
