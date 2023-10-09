@@ -13,7 +13,8 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
 
     useEffect(() => {
         if (initialSetData) {
-            setReps(initialSetData.reps)
+            setReps(initialSetData.reps);
+            dispatch({ type: "SET_SET", payload: initialSetData });
         };
     }, [initialSetData]);
 
@@ -47,7 +48,8 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
                 <Grid item>
                     <TextField 
                         label="Reps" 
-                        name="reps" 
+                        name="reps"
+                        value={reps}
                         onChange={handleRepsChange}
                     />
                 </Grid>
