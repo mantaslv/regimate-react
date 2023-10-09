@@ -44,6 +44,7 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
                     <TextField
                         label="Weight (kg)" 
                         name="weight"
+                        value={weight}
                         onChange={handleWeightChange}
                     />
                 </Grid>
