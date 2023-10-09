@@ -22,6 +22,7 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
 
     const handleWeightChange = (event) => {
         const newWeight = event.target.value;
+        setWeight(newWeight);
         dispatch({ type: "SET_WEIGHT", payload: newWeight });
     };
 
