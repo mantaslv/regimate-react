@@ -28,6 +28,7 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
 
     const handleRepsChange = (event) => {
         const newReps = event.target.value;
+        setReps(newReps);
         dispatch({ type: "SET_REPS", payload: newReps });
     };
 
