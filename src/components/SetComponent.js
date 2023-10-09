@@ -15,6 +15,7 @@ const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
     useEffect(() => {
         if (initialSetData) {
             setReps(initialSetData.reps);
+            setWeight(initialSetData.weight);
             dispatch({ type: "SET_SET", payload: initialSetData });
         };
     }, [initialSetData]);
