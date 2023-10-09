@@ -1,13 +1,16 @@
 import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
 import { dateOptions } from "./dateOptions";
+import { useNavigate } from "react-router-dom";
 
 const WorkoutCard = ({ workout, sx }) => {
     const { dispatch } = useWorkoutsContext();
     const { user } = useAuthContext();
+    const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
 
     const handleClick = async () => {
@@ -43,15 +46,24 @@ const WorkoutCard = ({ workout, sx }) => {
         setShowAlert(false);
     };
 
+    const handleClickEdit = () => {
+        navigate(`/new-workout/`, {state: { workoutData: workout } });
+    };
+
     return (
         <Card sx={sx} >
             <CardHeader
                 title={workout.workoutName === "" ? "Workout" : workout.workoutName}
                 subheader={new Date(workout.createdAt).toLocaleDateString('en-GB', dateOptions)}
                 action={
-                    <IconButton aria-label="delete" onClick={handleClick}>
-                        <DeleteOutlineOutlinedIcon />
-                    </IconButton>
+                    <>
+                        <IconButton aria-label="edit" onClick={handleClickEdit}>
+                            <EditIcon/>
+                        </IconButton>
+                        <IconButton aria-label="delete" onClick={handleClick}>
+                            <DeleteOutlineOutlinedIcon />
+                        </IconButton>
+                    </>
                 }
                 sx={{ pb: 0 }}
             />
