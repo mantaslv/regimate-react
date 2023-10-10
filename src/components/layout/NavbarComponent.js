@@ -39,11 +39,6 @@ const Navbar = () => {
                                         href="/create-workout"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >New Workout</Button>
-                                    {/* <Button
-                                        key="workout-design"
-                                        href="/workout-design"
-                                        sx={{ color: 'white', my: 2, display: 'block' }}
-                                    >Workout Design</Button> */}
                                     <Button
                                         key="create-programme"
                                         href="/create-programme"
