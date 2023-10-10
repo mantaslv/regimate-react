@@ -1,21 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthContext } from './hooks/useAuthContext';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 import Home from './pages/HomePage';
 import Navbar from './components/layout/NavbarComponent';
 import Signup from './pages/SignupPage';
 import Login from './pages/LoginPage';
-import NewWorkout from './pages/NewWorkoutPage';
+import NewWorkout from './pages/CreateWorkoutPage';
+import NewProgrammePage from './pages/CreateProgrammePage';
+import Programmes from './pages/ViewProgrammesPage';
+import Workouts from './pages/ViewWorkoutsPage';
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { useAuthContext } from './hooks/useAuthContext';
 import { WorkoutContextProvider } from './context/workoutContext';
-import Workouts from './pages/WorkoutsPage';
-import NewProgrammePage from './pages/NewProgrammePage';
-import WorkoutDesignPage from './pages/WorkoutDesignPage';
 import { ProgrammesContextProvider } from './context/programmesContext';
-import Programmes from './pages/ProgrammesPage';
 import { ProgrammeContextProvider } from './context/programmeContext';
+
+import WorkoutDesignPage from './pages/WorkoutDesignPage';
 
 const theme = createTheme({
     palette: {
