@@ -16,8 +16,6 @@ import { WorkoutContextProvider } from './context/workoutContext';
 import { ProgrammesContextProvider } from './context/programmesContext';
 import { ProgrammeContextProvider } from './context/programmeContext';
 
-import WorkoutDesignPage from './pages/WorkoutDesignPage';
-
 const theme = createTheme({
     palette: {
         mode: 'light',
