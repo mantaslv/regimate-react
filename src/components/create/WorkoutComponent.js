@@ -3,10 +3,10 @@ import { Box, Button, Grid, IconButton, Input, TextField } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import { ExerciseContextProvider } from "../context/exerciseContext";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
+import { ExerciseContextProvider } from "../../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
-import ConsoleLogButton from "./ConsoleLogButton";
+import ConsoleLogButton from "../ConsoleLogButton";
 
 const WorkoutComponent = ({
     programme=false,

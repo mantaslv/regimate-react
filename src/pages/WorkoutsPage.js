@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import WorkoutCard from "../components/WorkoutCard";
+import WorkoutCard from "../components/view/WorkoutCard";
 import ConsoleLogButton from "../components/ConsoleLogButton";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 

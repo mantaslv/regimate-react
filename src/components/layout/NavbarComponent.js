@@ -1,5 +1,5 @@
-import { useLogout } from '../hooks/useLogout';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useLogout } from '../../hooks/useLogout';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 

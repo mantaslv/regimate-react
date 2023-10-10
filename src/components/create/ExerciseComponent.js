@@ -4,10 +4,10 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import SetComponent from "./SetComponent";
 import ExerciseSelector from "./ExerciseSelector";
-import { useExerciseContext } from "../hooks/useExerciseContext";
-import { SetContextProvider } from "../context/setContext";
-import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import ConsoleLogButton from "./ConsoleLogButton";
+import { useExerciseContext } from "../../hooks/useExerciseContext";
+import { SetContextProvider } from "../../context/setContext";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
+import ConsoleLogButton from "../ConsoleLogButton";
 import SetsRepsInput from "./SetsRepsInput";
 
 const Exercise = ({ 

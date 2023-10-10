@@ -5,8 +5,8 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import EditIcon from '@mui/icons-material/Edit';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useProgrammesContext } from "../hooks/useProgrammesContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useProgrammesContext } from "../../hooks/useProgrammesContext";
 
 const ProgrammeCard = ({ programme, sx }) => {
     const { user } = useAuthContext();

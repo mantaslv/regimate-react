@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Grid, IconButton, TextField, Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import { WorkoutContextProvider } from "../context/workoutContext";
-import WorkoutComponent from "../components/WorkoutComponent";
-import ConsoleLogButton from "./ConsoleLogButton";
+import { useProgrammeContext } from "../../hooks/useProgrammeContext";
+import { WorkoutContextProvider } from "../../context/workoutContext";
+import WorkoutComponent from "./WorkoutComponent";
+import ConsoleLogButton from "../ConsoleLogButton";
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();

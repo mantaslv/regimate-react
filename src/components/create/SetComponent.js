@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-import { useSetContext } from "../hooks/useSetContext";
-import { useExerciseContext } from "../hooks/useExerciseContext";
-import ConsoleLogButton from "./ConsoleLogButton";
+import { useSetContext } from "../../hooks/useSetContext";
+import { useExerciseContext } from "../../hooks/useExerciseContext";
+import ConsoleLogButton from "../ConsoleLogButton";
 
 const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
     const { state: exerciseState } = useExerciseContext();

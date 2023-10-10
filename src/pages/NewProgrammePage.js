@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import ProgrammeComponent from "../components/ProgrammeComponent";
+import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
 
 const NewProgrammePage = () => {

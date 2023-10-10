@@ -1,10 +1,10 @@
 import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
-import { dateOptions } from "../options/dateOptions";
+import { dateOptions } from "../../options/dateOptions";
 import { useNavigate } from "react-router-dom";
 
 const WorkoutCard = ({ workout, sx }) => {
