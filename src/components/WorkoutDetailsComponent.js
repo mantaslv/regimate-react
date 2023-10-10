@@ -3,7 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { Card, CardContent, CardHeader, Grid, IconButton, Paper } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { styled } from '@mui/material/styles';
-import { dateOptions } from "./dateOptions";
+import { dateOptions } from "../options/dateOptions";
 
 const WorkoutDetails = ({ workout }) => {
     const  { dispatch } = useWorkoutsContext();

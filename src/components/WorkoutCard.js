@@ -4,7 +4,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import EditIcon from '@mui/icons-material/Edit';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useState } from "react";
-import { dateOptions } from "./dateOptions";
+import { dateOptions } from "../options/dateOptions";
 import { useNavigate } from "react-router-dom";
 
 const WorkoutCard = ({ workout, sx }) => {

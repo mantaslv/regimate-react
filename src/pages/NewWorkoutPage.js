@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/WorkoutComponent'
-import fetchExercises from "../components/fetchExercises";
+import fetchExercises from "../logic/fetchExercises";
 
 const NewWorkoutPage = () => {
     const { state } = useWorkoutContext();
