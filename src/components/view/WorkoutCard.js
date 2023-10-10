@@ -47,7 +47,7 @@ const WorkoutCard = ({ workout, sx }) => {
     };
 
     const handleClickEdit = () => {
-        navigate(`/new-workout/`, {state: { workoutData: workout } });
+        navigate(`/create-workout/`, {state: { workoutData: workout } });
     };
 
     return (

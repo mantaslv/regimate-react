@@ -48,7 +48,7 @@ const NewWorkoutPage = () => {
             console.log(json);
         };
         if (res.ok) {
-            navigate('/workouts');
+            navigate('/view-workouts');
         };
     };
 

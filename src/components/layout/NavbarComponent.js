@@ -35,8 +35,8 @@ const Navbar = () => {
                             {user && (
                                 <>
                                     <Button
-                                        key="new-workout"
-                                        href="/new-workout"
+                                        key="create-workout"
+                                        href="/create-workout"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >New Workout</Button>
                                     {/* <Button
@@ -45,18 +45,18 @@ const Navbar = () => {
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >Workout Design</Button> */}
                                     <Button
-                                        key="new-programme"
-                                        href="/new-programme"
+                                        key="create-programme"
+                                        href="/create-programme"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >New Programme</Button>
                                     <Button
-                                        key="workouts"
-                                        href="/workouts"
+                                        key="view-workouts"
+                                        href="/view-workouts"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >Workouts</Button>
                                     <Button
-                                        key="programmes"
-                                        href="/programmes"
+                                        key="view-programmes"
+                                        href="/view-programmes"
                                         sx={{ color: 'white', my: 2, display: 'block' }}
                                     >Programmes</Button>
                                     <Button

@@ -48,7 +48,7 @@ const NewProgrammePage = () => {
             console.log(json);
         };
         if (res.ok) {
-            navigate('/programmes');
+            navigate('/view-programmes');
         };
     };
 
