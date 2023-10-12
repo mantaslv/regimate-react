@@ -1,24 +1,34 @@
-import { Box, Drawer } from '@mui/material'
-import React from 'react'
+import { Box, Drawer, Typography } from '@mui/material';
+import React from 'react';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+
 
 const drawerWidth = 240;
 
 const SideNav = () => {
     return (
-        <Box sx={{ display: 'flex' }}>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="permanent"
-                anchor="left"
-            >
-            </Drawer>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ p: 2 }}>
+                <Box href="/" sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <FitnessCenterIcon  sx={{ display: 'flex', mr: 1 }} />
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            flexGrow: 1
+                        }}
+                    >
+                        REGIMATE
+                    </Typography>
+                </Box>
+            </Box>
         </Box>
     )
 }
