@@ -4,6 +4,7 @@ import WorkoutForm from "../components/WorkoutFormComponent";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, Grid } from "@mui/material";
+import SideNav from "../components/layout/SideNav";
 
 const Home = () => {
     const { workouts, dispatch } = useWorkoutsContext();
@@ -32,6 +33,7 @@ const Home = () => {
 
     return (
         <Box sx={{ marginTop: 10}}>
+            <SideNav/>
             <Grid container spacing={4}>
                 <Grid item md={9}>
                     <Box sx={{ overflowY: "auto" }}>
