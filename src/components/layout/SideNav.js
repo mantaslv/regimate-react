@@ -1,4 +1,4 @@
-import { Box, Drawer, Typography } from '@mui/material';
+import { Box, Divider, Drawer, Typography } from '@mui/material';
 import React from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
@@ -29,6 +29,7 @@ const SideNav = () => {
                     </Typography>
                 </Box>
             </Box>
+            <Divider sx={{ borderColor: 'neutral.700' }} />
         </Box>
     )
 }
