@@ -1,13 +1,12 @@
-import { Box, Divider, Drawer, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import React from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-
 
 const drawerWidth = 240;
 
 const SideNav = () => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', width: drawerWidth }}>
             <Box sx={{ p: 2 }}>
                 <Box href="/" sx={{ display: 'inline-flex', alignItems: 'center' }}>
                     <FitnessCenterIcon  sx={{ display: 'flex', mr: 1 }} />
