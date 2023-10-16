@@ -1,6 +1,7 @@
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import React from 'react';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { items } from '../../options/navOptions';
 
 const drawerWidth = 240;
 
@@ -29,6 +30,15 @@ const SideNav = () => {
                 </Box>
             </Box>
             <Divider sx={{ borderColor: 'neutral.700' }} />
+            <Box sx={{ flexGrow: 1, px: 2, py: 3 }}>
+                <Stack>
+                    {items.map(item => (
+                        <Button href={item.path}>
+                            {item.title}
+                        </Button>
+                    ))}
+                </Stack>
+            </Box>
         </Box>
     )
 }
