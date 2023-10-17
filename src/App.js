@@ -17,31 +17,6 @@ import { WorkoutContextProvider } from './context/workoutContext';
 import { ProgrammesContextProvider } from './context/programmesContext';
 import { ProgrammeContextProvider } from './context/programmeContext';
 
-// const theme = createTheme({
-//     palette: {
-//         mode: 'light',
-//         primary: {
-//             main: '#009688',
-//         },
-//         secondary: {
-//             main: '#ffb300',
-//         },
-//         text: {
-//             primary: '#009688',
-//         },
-//     },
-//     typography: {
-//         fontFamily: 'Roboto Condensed',
-//         fontWeightLight: 400,
-//         fontWeightRegular: 500,
-//         fontWeightMedium: 600,
-//         fontWeightBold: 700,
-//         h5: {
-//             fontFamily: 'Roboto Mono',
-//         },
-//     },
-// });
-
 const theme = createTheme();
 
 const App = () => {
@@ -49,9 +24,9 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ mx: 'auto', maxWidth: '1600px', px: 2 }}>
+            <Navbar />
+            <Box sx={{ mx: 2, mt: 7 }}>
                 <BrowserRouter>
-                    <Navbar />
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
