@@ -17,7 +17,7 @@ const Navbar = () => {
             <AppBar position="fixed">
                 <Box sx={{ display: 'flex', mx: 2 }}>
                     <Box sx={{ p: 1, display: 'flex', flexGrow: 1 }}>
-                        <Box href="/" sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                        <Box sx={{ display: 'inline-flex', alignItems: 'center' }}>
                             <FitnessCenterIcon  sx={{ display: 'flex', mr: 1 }}/>
                             <Typography 
                                 variant="h5" 
