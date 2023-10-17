@@ -27,7 +27,7 @@ const Login = () => {
     };
 
     return (  
-        <Container component="main" maxWidth="xs" sx={{ marginTop: 12}}>
+        <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
                 padding={4}

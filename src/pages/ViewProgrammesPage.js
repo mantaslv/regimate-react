@@ -40,7 +40,7 @@ const Programmes = () => {
     }, [user]);
 
     return (
-        <Box sx={{ mt: 11, mb: 2}}>   
+        <Box sx={{ mb: 2 }}>   
             {loading ? (
                 <Box sx={{ display: 'flex' }}>
                     <CircularProgress />
