@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { createTheme } from './theme';
 
 import Home from './pages/HomePage';
 import Navbar from './components/layout/NavbarComponent';
@@ -16,30 +17,32 @@ import { WorkoutContextProvider } from './context/workoutContext';
 import { ProgrammesContextProvider } from './context/programmesContext';
 import { ProgrammeContextProvider } from './context/programmeContext';
 
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#009688',
-        },
-        secondary: {
-            main: '#ffb300',
-        },
-        text: {
-            primary: '#009688',
-        },
-    },
-    typography: {
-        fontFamily: 'Roboto Condensed',
-        fontWeightLight: 400,
-        fontWeightRegular: 500,
-        fontWeightMedium: 600,
-        fontWeightBold: 700,
-        h5: {
-            fontFamily: 'Roboto Mono',
-        },
-    },
-});
+// const theme = createTheme({
+//     palette: {
+//         mode: 'light',
+//         primary: {
+//             main: '#009688',
+//         },
+//         secondary: {
+//             main: '#ffb300',
+//         },
+//         text: {
+//             primary: '#009688',
+//         },
+//     },
+//     typography: {
+//         fontFamily: 'Roboto Condensed',
+//         fontWeightLight: 400,
+//         fontWeightRegular: 500,
+//         fontWeightMedium: 600,
+//         fontWeightBold: 700,
+//         h5: {
+//             fontFamily: 'Roboto Mono',
+//         },
+//     },
+// });
+
+const theme = createTheme();
 
 const App = () => {
     const { user } = useAuthContext();
