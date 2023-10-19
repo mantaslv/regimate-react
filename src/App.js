@@ -24,9 +24,9 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Navbar />
-            <Box sx={{ mx: 2, mt: 7 }}>
-                <BrowserRouter>
+            <BrowserRouter>
+                <Navbar />
+                <Box sx={{ mx: 2, mt: 7 }}>
                     <Routes>
                         <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
@@ -36,8 +36,8 @@ const App = () => {
                         <Route path='/view-workouts' element={user ? <WorkoutContextProvider><Workouts/></WorkoutContextProvider> : <Navigate to="/login" />} />
                         <Route path='/view-programmes' element={user ? <ProgrammesContextProvider><Programmes/></ProgrammesContextProvider> : <Navigate to="/login" />} />
                     </Routes>
-                </BrowserRouter>
-            </Box>
+                    </Box>
+            </BrowserRouter>
         </ThemeProvider>    
     );
 };
