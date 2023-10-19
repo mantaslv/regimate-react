@@ -32,7 +32,7 @@ const App = () => {
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup/>: <Navigate to="/" />} />
                         <Route path='/create-workout' element={user ? <WorkoutContextProvider><NewWorkout /></WorkoutContextProvider> : <Navigate to="/login" />} />
-                        <Route path='/create-programme' element={user ? <ProgrammeContextProvider><NewProgrammePage/></ProgrammeContextProvider> : <Navigate to="/login" />} />
+                        <Route path='/create-programme' element={<ProgrammeContextProvider><NewProgrammePage/></ProgrammeContextProvider>} />
                         <Route path='/view-workouts' element={user ? <WorkoutContextProvider><Workouts/></WorkoutContextProvider> : <Navigate to="/login" />} />
                         <Route path='/view-programmes' element={user ? <ProgrammesContextProvider><Programmes/></ProgrammesContextProvider> : <Navigate to="/login" />} />
                     </Routes>
