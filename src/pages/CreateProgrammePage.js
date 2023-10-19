@@ -19,12 +19,10 @@ const NewProgrammePage = () => {
     const programmeDataFromState = locationState.programmeData || null;
 
     useEffect(() => {
-        if (user) {
-            fetchExercises(user.token)
-                .then(data => setExerciseList(data))
-                .catch(error => console.error("Error:", error));
-        }
-    }, [user]);
+        fetchExercises()
+            .then(data => setExerciseList(data))
+            .catch(error => console.error("Error:", error));
+    }, []);
 
     useEffect(() => {
         if (programmeDataFromState) {

@@ -1,12 +1,6 @@
-const fetchExercises = async (userToken) => {
+const fetchExercises = async () => {
     try {
-        const res = await fetch(process.env.REACT_APP_API_URL + '/api/exercise-directory', {
-            mode: 'cors',
-            headers: {
-                'Authorization': `Bearer ${userToken}`,
-                credentials: 'include'
-            }
-        });
+        const res = await fetch(process.env.REACT_APP_API_URL + '/api/exercise-directory');
         const json = await res.json();
     
         if (res.ok) {
