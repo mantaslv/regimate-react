@@ -20,7 +20,7 @@ const Navbar = () => {
                         <Logo/>
                     </Box>
                     <Stack direction='row' gap={0.5} >
-                        {user && items.map(item => (
+                        {/* {user && items.map(item => (
                             <Button
                                 key={item.title}
                                 href={item.path}
@@ -28,7 +28,19 @@ const Navbar = () => {
                             >
                                 {item.title}
                             </Button>
-                        ))}
+                        ))} */}
+                        {items
+                            .filter(item => user ? item.authRequired !== null : !item.authRequired)
+                            .map(item => (
+                                <Button
+                                    key={item.title}
+                                    href={item.path}
+                                    sx={{ color: 'white', my: 0 }}
+                                >
+                                    {item.title}
+                                </Button>
+                            ))
+                        }
                         {user && (
                             <Button
                                 key="logout"
