@@ -6,6 +6,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
+import { downloadProgramme } from "../logic/downloadProgramme";
 
 const NewProgrammePage = () => {
     const { state } = useProgrammeContext();
@@ -62,7 +63,9 @@ const NewProgrammePage = () => {
                     Save Programme
                 </Button>
             )}
-            
+            <Button variant="contained" onClick={() => downloadProgramme(state)} sx={{ mt: 1 }}>
+                Download Programme
+            </Button>
         </Box>
     );
 };
