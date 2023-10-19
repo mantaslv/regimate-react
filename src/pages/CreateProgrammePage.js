@@ -59,7 +59,7 @@ const NewProgrammePage = () => {
             <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             <br/>
             {user && (
-                <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1 }}>
+                <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1, mr: 1 }}>
                     Save Programme
                 </Button>
             )}
