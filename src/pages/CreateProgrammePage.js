@@ -57,9 +57,12 @@ const NewProgrammePage = () => {
             </Typography>
             <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             <br/>
-            <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1 }}>
-                Save Programme
-            </Button>
+            {user && (
+                <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1 }}>
+                    Save Programme
+                </Button>
+            )}
+            
         </Box>
     );
 };
