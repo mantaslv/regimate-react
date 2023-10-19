@@ -16,7 +16,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <AppBar position="fixed">
+            <AppBar position="fixed" elevation={0}>
                 <Box sx={{ display: 'flex', mx: 2 }}>
                     <Box sx={{ p: 1, display: 'flex', flexGrow: 1 }}>
                         <Logo/>
