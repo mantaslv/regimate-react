@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import { createTheme } from './theme';
 
 import Home from './pages/HomePage';
-import Navbar from './components/layout/NavbarComponent';
+import Navbar from './components/layout/Navbar';
 import Signup from './pages/SignupPage';
 import Login from './pages/LoginPage';
 import NewWorkout from './pages/CreateWorkoutPage';
