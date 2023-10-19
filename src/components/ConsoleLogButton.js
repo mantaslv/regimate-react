@@ -3,8 +3,6 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 
 const ConsoleLogButton = ({ print, info }) => {
     if (process.env.NODE_ENV === 'development') {
-        return
-    } else {
         return (
             <Button
                 variant="contained" 
@@ -14,6 +12,8 @@ const ConsoleLogButton = ({ print, info }) => {
                 <TerminalIcon/>
             </Button>
         );
+    } else {
+        return;
     };
 };
 
