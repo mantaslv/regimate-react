@@ -32,22 +32,18 @@ const Navbar = () => {
                                 >
                                     {item.title}
                                     {location.pathname === item.path && (
-                                        <div
-                                            className="triangle" // Class for the triangle
-                                            style={{
-                                                width: 0,
-                                                height: 0,
-                                                borderBottom: '6px solid white',
-                                                borderLeft: '6px solid transparent',
-                                                borderRight: '6px solid transparent',
-                                                position: 'absolute',
-                                                bottom: 0,
-                                                left: '50%',
-                                                transform: 'translateX(-50%)', // Center horizontally
-                                            }}
-                                        />
+                                        <div style={{
+                                            width: 0,
+                                            height: 0,
+                                            bottom: 0,
+                                            left: '50%',
+                                            position: 'absolute',
+                                            transform: 'translateX(-50%)',
+                                            borderBottom: '6px solid white',
+                                            borderLeft: '6px solid transparent',
+                                            borderRight: '6px solid transparent',
+                                        }}/>
                                     )}
-                                    
                                 </Button>
                             ))
                         }
