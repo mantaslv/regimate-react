@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Grid, TextField, ButtonGroup, Button } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
@@ -18,10 +18,6 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
         };
         
     }, [programmeData]);
-
-    useEffect(() => {
-        console.log(state);
-    }, [state]);
 
     const handleAddWorkout = () => {
         dispatch({ type: "ADD_WORKOUT" });
@@ -43,24 +39,30 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
 
     return (
         <>
-            <Grid container alignItems="center">
-                <Grid item md={3}>
+            <Grid 
+                container 
+                display="flex" 
+                justifyContent="center" 
+                alignItems="center" 
+                spacing={4}
+            >
+                <Grid item>
                     <TextField
                         label="Programme Name"
                         value={programmeName}
-                        onChange={handleProgrammeNameChange}
                         sx={{ width: '100%' }}
+                        onChange={handleProgrammeNameChange}
                     />
                 </Grid>
-                <Grid item md={9} container justifyContent="flex-end" alignItems="center">
-                    <Grid item>
-                        <Typography variant="h6" color="primary" margin={1}>Split</Typography>
-                    </Grid>
-                    <Grid item>
-                        <IconButton onClick={handleAddWorkout}>
+                <Grid item>
+                    <ButtonGroup>
+                        <Button>
+                            {state.workouts.length}-Day Split
+                        </Button>
+                        <Button variant="contained" onClick={handleAddWorkout}>
                             <AddCircleOutlineIcon/>
-                        </IconButton>
-                    </Grid>
+                        </Button>
+                    </ButtonGroup>
                 </Grid>
             </Grid>
             <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
@@ -70,10 +72,12 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                             <WorkoutComponent 
                                 index={i}
                                 programme={true}
-                                onWorkoutChange={(updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)}
                                 exerciseList={exerciseList}
                                 onWorkoutDelete={() => handleDeleteWorkout(workout.id)}
                                 initialWorkoutData={programmeData && programmeData.workouts[i]}
+                                onWorkoutChange={
+                                    (updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)
+                                }
                             />
                         </WorkoutContextProvider>
                     </Grid>
