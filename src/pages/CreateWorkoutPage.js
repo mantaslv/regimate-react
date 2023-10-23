@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
