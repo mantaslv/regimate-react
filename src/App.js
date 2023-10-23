@@ -28,7 +28,8 @@ const App = () => {
                 <Navbar />
                 <Box sx={{ mx: 2, mt: 7 }}>
                     <Routes>
-                        <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} />
+                        {/* <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} /> */}
+                        <Route path='/' element={user ? <Navigate to="/view-programmes" /> : <Navigate to="/create-programme" />} />
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup/>: <Navigate to="/" />} />
                         <Route path='/create-workout' element={user ? <WorkoutContextProvider><NewWorkout /></WorkoutContextProvider> : <Navigate to="/login" />} />
