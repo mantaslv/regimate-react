@@ -14,6 +14,13 @@ export function createComponents(config) {
   const { palette } = config;
 
   return {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: palette.primary.dark
+        }
+      }
+    },
     MuiAvatar: {
       styleOverrides: {
         root: {
