@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Grid, IconButton, Input, TextField } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
-import { ExerciseContextProvider } from "../../context/exerciseContext";
-import Exercise from "./ExerciseComponent";
-import ConsoleLogButton from "../ConsoleLogButton";
 import { ProgrammeSplitCard } from "./ProgrammeSplitCard";
+import { WorkoutCard } from "./WorkoutCard";
 
 const WorkoutComponent = ({
     programme=false,
@@ -17,7 +11,6 @@ const WorkoutComponent = ({
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
-    const { exercises } = state;
     const [workoutName, setWorkoutName] = useState("");
 
     useEffect(() => {
@@ -54,47 +47,31 @@ const WorkoutComponent = ({
     if (programme) {
         return (
             <ProgrammeSplitCard
+                workoutState={state}
+                workoutName={workoutName}
+                exerciseList={exerciseList}
+                initialWorkoutData={initialWorkoutData}
                 handleWorkoutNameChange={handleWorkoutNameChange}
-                handleDeleteWorkout={handleDeleteWorkout}
                 handleExerciseChange={handleExerciseChange}
                 handleExerciseDelete={handleExerciseDelete}
-                initialWorkoutData={initialWorkoutData}
-                exerciseList={exerciseList}
+                handleDeleteWorkout={handleDeleteWorkout}
                 addExercise={addExercise}
-                workoutState={state}
             />
-        )
-    } else {
+        );
+    };
+    
+    if (!programme) {
         return (
-            <Box>
-                <TextField 
-                    label="Workout Name"
-                    value={workoutName} 
-                    variant="filled"
-                    onChange={handleWorkoutNameChange}
-                />
-                {exercises && exercises.map((exercise, i) => (
-                    <ExerciseContextProvider key={exercise.id}>
-                        <Exercise
-                            exercise={exercise}
-                            exerciseList={exerciseList}
-                            onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
-                            onExerciseDelete={() => handleExerciseDelete(exercise.id)}
-                            initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
-                        />
-                    </ExerciseContextProvider>
-                ))}
-                <Grid container spacing={2} marginTop={0}>
-                    <Grid item>
-                        <Button variant="contained" onClick={addExercise}>
-                            Add Exercise
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <ConsoleLogButton print={state} info="workout"/>
-                    </Grid>
-                </Grid>
-            </Box>
+            <WorkoutCard
+                workoutState={state}
+                workoutName={workoutName}
+                exerciseList={exerciseList}
+                initialWorkoutData={initialWorkoutData}
+                handleWorkoutNameChange={handleWorkoutNameChange}
+                handleExerciseChange={handleExerciseChange}
+                handleExerciseDelete={handleExerciseDelete}
+                addExercise={addExercise}
+            />
         );
     };
 };

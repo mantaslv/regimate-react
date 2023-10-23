@@ -8,13 +8,14 @@ import ConsoleLogButton from "../ConsoleLogButton";
 
 export const ProgrammeSplitCard = ({
     handleWorkoutNameChange,
-    handleDeleteWorkout,
     handleExerciseChange,
     handleExerciseDelete,
+    handleDeleteWorkout,
     initialWorkoutData,
-    addExercise,
     workoutState,
-    exerciseList
+    exerciseList,
+    addExercise,
+    workoutName
 }) => {
     return (
         <Box
@@ -33,7 +34,7 @@ export const ProgrammeSplitCard = ({
                 <Input
                     disableUnderline
                     placeholder="workout name"
-                    value={workoutState.workoutName}
+                    value={workoutName}
                     onChange={handleWorkoutNameChange}
                     sx={{
                         width: '70%',
