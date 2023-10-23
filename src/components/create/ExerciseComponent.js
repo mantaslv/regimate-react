@@ -73,22 +73,27 @@ const Exercise = ({
         onExerciseChange(state);
     }, [state]);
 
-    if (exerciseName === "") {
+    const ExerciseSelectorWithActions = ({ exerciseNotYetChosen}) => {
         return (
             <ExerciseSelector 
                 openExerciseSelector={openExerciseSelector} 
                 setOpenExerciseSelector={setOpenExerciseSelector}
                 handleExerciseSelection={handleExerciseNameChange}
                 handleDeleteExercise={handleDeleteExercise}
-                exerciseNotYetChosen={true}
+                exerciseNotYetChosen={exerciseNotYetChosen}
                 exerciseList={exerciseList}
             />
+        )
+    }
+
+    if (exerciseName === "") {
+        return (
+            <ExerciseSelectorWithActions exerciseNotYetChosen={true}/>
         );
     };
 
     if (programme) {
         return (
-            <>
             <Box sx={{ borderRadius: '10px', backgroundColor: '#6366F1', width: '100%', mt: 1 }}>
                 <Box sx={{ display: 'flex' }}>
                     <Box sx={{ display: 'flex', flexGrow: 1 }}>
@@ -102,7 +107,13 @@ const Exercise = ({
                                 fontWeight={600}
                                 textAlign="left"
                                 textTransform="none"
-                                sx={{ color: 'white', width: '100%', '&:hover': { color: 'grey.400' } }}
+                                sx={{ 
+                                    color: 'white', 
+                                    width: '100%', 
+                                    '&:hover': { 
+                                        color: 'grey.400' 
+                                    } 
+                                }}
                             >
                                 {exerciseName}
                             </Typography>
@@ -120,15 +131,8 @@ const Exercise = ({
                         initialExerciseData={initialExerciseData}
                     />
                 </Box>
-                <ExerciseSelector 
-                    openExerciseSelector={openExerciseSelector} 
-                    setOpenExerciseSelector={setOpenExerciseSelector}
-                    handleExerciseSelection={handleExerciseNameChange}
-                    handleDeleteExercise={handleDeleteExercise}
-                    exerciseList={exerciseList}
-                />
+                <ExerciseSelectorWithActions/>
             </Box>
-            </>
         )
     } else {
         return (
@@ -139,13 +143,7 @@ const Exercise = ({
                             <Button onClick={() => setOpenExerciseSelector(true)}>
                                 <Typography variant="h6" fontSize={16}>{state.exerciseName}</Typography>
                             </Button>
-                            <ExerciseSelector 
-                                openExerciseSelector={openExerciseSelector} 
-                                setOpenExerciseSelector={setOpenExerciseSelector}
-                                handleExerciseSelection={handleExerciseNameChange}
-                                handleDeleteExercise={handleDeleteExercise}
-                                exerciseList={exerciseList}
-                            />
+                            <ExerciseSelectorWithActions/>
                         </Grid>
                     </Grid>
                     {sets && sets.map((set, i) => (
