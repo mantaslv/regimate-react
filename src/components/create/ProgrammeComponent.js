@@ -64,9 +64,19 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     </ButtonGroup>
                 </Grid>
             </Grid>
-            <Grid container display="flex" justifyContent="center" spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
+            <Grid container display="flex" justifyContent="center" spacing={2} alignItems="top" sx={{ mt: 2, mb: 2 }}>
                 {state.workouts.map((workout, i) =>
-                    <Grid item key={workout.id} md={2}>
+                    <Grid item 
+                        key={workout.id} 
+                        md={2} 
+                        sx={{ 
+                            paddingRight: 2, 
+                            ...(i !== state.workouts.length - 1 && { 
+                                borderRight: '3px dashed',
+                                borderColor: 'grey.400'
+                            }) 
+                        }}
+                    >
                         <WorkoutContextProvider>
                             <WorkoutComponent 
                                 index={i}
