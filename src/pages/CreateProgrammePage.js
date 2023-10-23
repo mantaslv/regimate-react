@@ -7,6 +7,7 @@ import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
 import { downloadProgramme } from "../logic/downloadProgramme";
+import ConsoleLogButton from "../components/ConsoleLogButton";
 
 const NewProgrammePage = () => {
     const { state } = useProgrammeContext();
@@ -57,15 +58,17 @@ const NewProgrammePage = () => {
                 New Programme
             </Typography>
             <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
-            <br/>
-            {user && (
-                <Button variant="contained" onClick={saveProgramme} sx={{ mt: 1, mr: 1 }}>
-                    Save Programme
+            <Box display="flex" justifyContent="center">
+                {user && (
+                    <Button variant="contained" onClick={saveProgramme} sx={{ mr: 1 }}>
+                        Save Programme
+                    </Button>
+                )}
+                <Button variant="contained" onClick={() => downloadProgramme(state)}>
+                    Download Programme
                 </Button>
-            )}
-            <Button variant="contained" onClick={() => downloadProgramme(state)} sx={{ mt: 1 }}>
-                Download Programme
-            </Button>
+                <ConsoleLogButton print={state} info="programme" sx={{ ml: 1 }}/>
+            </Box>
         </Box>
     );
 };

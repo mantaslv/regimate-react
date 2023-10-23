@@ -5,7 +5,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../../context/workoutContext";
 import WorkoutComponent from "./WorkoutComponent";
-import ConsoleLogButton from "../ConsoleLogButton";
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
@@ -83,7 +82,6 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     </Grid>
                 )}
             </Grid>
-            <ConsoleLogButton print={state} info="programme"/>
         </>
     );
 };
