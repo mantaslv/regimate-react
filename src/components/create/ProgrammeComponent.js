@@ -65,7 +65,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     </ButtonGroup>
                 </Grid>
             </Grid>
-            <Grid container spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
+            <Grid container display="flex" justifyContent="center" spacing={2} alignItems="top" sx={{ mt: 0, mb: 2 }}>
                 {state.workouts.map((workout, i) =>
                     <Grid item key={workout.id} md={2}>
                         <WorkoutContextProvider>
