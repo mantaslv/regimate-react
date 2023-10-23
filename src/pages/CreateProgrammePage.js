@@ -54,9 +54,6 @@ const NewProgrammePage = () => {
 
     return (
         <Box>
-            <Typography variant="h5" color="primary" sx={{ textAlign: 'center', mb: 1 }}>
-                New Programme
-            </Typography>
             <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             <Box display="flex" justifyContent="center">
                 {user && (
