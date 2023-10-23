@@ -9,6 +9,7 @@ import { SetContextProvider } from "../../context/setContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import ConsoleLogButton from "../ConsoleLogButton";
 import SetsRepsInput from "./SetsRepsInput";
+import { ProgrammeExerciseCard } from "./ProgrammeExerciseCard";
 
 const Exercise = ({ 
     onExerciseChange, 
@@ -24,12 +25,24 @@ const Exercise = ({
     const [exerciseName, setExerciseName] = useState("");
 
     useEffect(() => {
+        onExerciseChange(state);
+    }, [state]);
+
+    useEffect(() => {
         if (initialExerciseData) {
             setExerciseName(initialExerciseData.exerciseName);
             setOpenExerciseSelector(false);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
     }, [initialExerciseData]);
+
+    if (!programme) {
+        useEffect(() => {
+            if(!openExerciseSelector && sets.length === 0) {
+                addSet();
+            }
+        }, [openExerciseSelector]);
+    };
 
     const handleDeleteExercise = () => {
         onExerciseDelete();
@@ -61,18 +74,6 @@ const Exercise = ({
         dispatch({ type: "UPDATE_PROGRAMME_SETS", payload: { sets, reps } });
     };
 
-    if (!programme) {
-        useEffect(() => {
-            if(!openExerciseSelector && sets.length === 0) {
-                addSet();
-            }
-        }, [openExerciseSelector]);
-    };
-
-    useEffect(() => {
-        onExerciseChange(state);
-    }, [state]);
-
     const ExerciseSelectorWithActions = ({ exerciseNotYetChosen}) => {
         return (
             <ExerciseSelector 
@@ -83,8 +84,8 @@ const Exercise = ({
                 exerciseNotYetChosen={exerciseNotYetChosen}
                 exerciseList={exerciseList}
             />
-        )
-    }
+        );
+    };
 
     if (exerciseName === "") {
         return (
@@ -94,46 +95,15 @@ const Exercise = ({
 
     if (programme) {
         return (
-            <Box sx={{ borderRadius: '10px', backgroundColor: '#6366F1', width: '100%', mt: 1 }}>
-                <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ display: 'flex', flexGrow: 1 }}>
-                        <Button 
-                            onClick={handleOpenSelector} 
-                            sx={{ minWidth: 0, borderRadius: '10px', ml: -0.5 }}
-                        >
-                            <Typography 
-                                variant="h6" 
-                                fontSize={13}
-                                fontWeight={600}
-                                textAlign="left"
-                                textTransform="none"
-                                sx={{ 
-                                    color: 'white', 
-                                    width: '100%', 
-                                    '&:hover': { 
-                                        color: 'grey.400' 
-                                    } 
-                                }}
-                            >
-                                {exerciseName}
-                            </Typography>
-                        </Button>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                        <IconButton onClick={handleDeleteExercise} sx={{ color: 'white' }}>
-                            <RemoveCircleIcon sx={{ ml: -1, mt: -0.5, mr: -0.5, fontSize: '16px' }}/>
-                        </IconButton>
-                    </Box>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: -1.5 }}>
-                    <SetsRepsInput 
-                        handleSetsRepsChange={handleSetsRepsChange}
-                        initialExerciseData={initialExerciseData}
-                    />
-                </Box>
-                <ExerciseSelectorWithActions/>
-            </Box>
-        )
+            <ProgrammeExerciseCard
+                exerciseName={exerciseName}
+                initialExerciseData={initialExerciseData}
+                exerciseSelector={<ExerciseSelectorWithActions/>}
+                handleDeleteExercise={handleDeleteExercise}
+                handleSetsRepsChange={handleSetsRepsChange}
+                handleOpenSelector={handleOpenSelector}
+            />
+        );
     } else {
         return (
             <Card sx={{ mt: 2, backgroundColor: 'grey.200' }}>
