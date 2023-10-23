@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { AppBar, Box, Button, Input } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -8,13 +8,16 @@ import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
 import { downloadProgramme } from "../logic/downloadProgramme";
 import ConsoleLogButton from "../components/ConsoleLogButton";
+import { Stack } from "@mui/system";
 
 const NewProgrammePage = () => {
-    const { state } = useProgrammeContext();
-    const { user } = useAuthContext();
     const navigate = useNavigate();
+    const { user } = useAuthContext();
+    const { state, dispatch } = useProgrammeContext();
+    
     const [exerciseList, setExerciseList] = useState([]);
     const [programmeData, setProgrammeData] = useState(null);
+    const [programmeName, setProgrammeName] = useState("Untitled Programme");
 
     const location = useLocation();
     const locationState = location.state || {};
@@ -29,8 +32,19 @@ const NewProgrammePage = () => {
     useEffect(() => {
         if (programmeDataFromState) {
             setProgrammeData(programmeDataFromState);
+            setProgrammeName(programmeDataFromState.programmeName);
         };
-    }, [programmeDataFromState])
+    }, [programmeDataFromState]);
+
+    const handleProgrammeNameChange = (event) => {
+        const newName = event.target.value;
+        setProgrammeName(newName);
+        dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: newName });
+    };
+
+    const handleAddWorkout = () => {
+        dispatch({ type: "ADD_WORKOUT" });
+    };
 
     const saveProgramme = async () => {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {
@@ -54,17 +68,66 @@ const NewProgrammePage = () => {
 
     return (
         <Box>
-            <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
-            <Box display="flex" justifyContent="center">
-                {user && (
-                    <Button variant="contained" onClick={saveProgramme} sx={{ mr: 1 }}>
-                        Save Programme
-                    </Button>
-                )}
-                <Button variant="contained" onClick={() => downloadProgramme(state)}>
-                    Download Programme
-                </Button>
-                <ConsoleLogButton print={state} info="programme" sx={{ ml: 1 }}/>
+            <AppBar 
+                position="fixed" 
+                sx={{ 
+                    top: '45px', 
+                    height: '45px', 
+                    backgroundColor: '#EBEEFE',
+                }}
+            >
+                <Box 
+                    sx={{ 
+                        height: '45px', 
+                        mx: 1, 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center' 
+                        }}
+                    >
+                    <Stack direction='row' gap={1}>
+                        <Input
+                            value={programmeName}
+                            hiddenlabel="true"
+                            variant="filled"
+                            size="small"
+                            onChange={handleProgrammeNameChange}
+                        />
+                        <Button 
+                            size="small" 
+                            variant="contained" 
+                            onClick={handleAddWorkout}
+                        >
+                            Add Workout
+                        </Button>
+                    </Stack>
+                    <Stack direction='row' gap={1}>
+                        {user && (
+                            <Button 
+                                size="small" 
+                                variant="contained" 
+                                onClick={saveProgramme}
+                            >
+                                Save Programme
+                            </Button>
+                        )}
+                        <Button 
+                            size="small" 
+                            variant="contained" 
+                            onClick={() => downloadProgramme(state)}
+                        >
+                            Download Programme
+                        </Button>
+                        <ConsoleLogButton 
+                            size="small" 
+                            print={state} 
+                            info="programme"
+                        />
+                    </Stack>
+                </Box>
+            </AppBar>
+            <Box sx={{ mt: '105px' }}>
+                <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             </Box>
         </Box>
     );

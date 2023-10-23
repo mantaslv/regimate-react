@@ -16,7 +16,7 @@ const Navbar = () => {
 
     return (
         <header>
-            <AppBar position="fixed" elevation={0}>
+            <AppBar position="fixed" elevation={0} sx={{ height: '45px' }}>
                 <Box sx={{ display: 'flex', mx: 2 }}>
                     <Box sx={{ p: 1, display: 'flex', flexGrow: 1 }}>
                         <Logo/>
@@ -39,9 +39,10 @@ const Navbar = () => {
                                             left: '50%',
                                             position: 'absolute',
                                             transform: 'translateX(-50%)',
-                                            borderBottom: '6px solid white',
-                                            borderLeft: '6px solid transparent',
-                                            borderRight: '6px solid transparent',
+                                            borderBottom: '8px solid white',
+                                            borderBottomColor: location.pathname.includes('create') ? '#EBEEFE' : 'white',
+                                            borderLeft: '8px solid transparent',
+                                            borderRight: '8px solid transparent',
                                         }}/>
                                     )}
                                 </Button>

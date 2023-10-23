@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import TerminalIcon from '@mui/icons-material/Terminal';
 
-const ConsoleLogButton = ({ print, info, sx }) => {
+const ConsoleLogButton = ({ print, info, sx, size }) => {
     if (process.env.NODE_ENV === 'development') {
         return (
             <Button
@@ -9,6 +9,7 @@ const ConsoleLogButton = ({ print, info, sx }) => {
                 onClick={() => console.log(print)}
                 title={`Click to console log this ${info}`}
                 sx={sx}
+                size={size}
             >
                 <TerminalIcon/>
             </Button>
