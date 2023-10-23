@@ -1,7 +1,14 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
 import { useState } from "react";
 
-const ExerciseSelector = ({ exerciseList, openExerciseSelector, setOpenExerciseSelector, handleExerciseSelection, handleDeleteExercise, exerciseNotYetChosen }) => {
+const ExerciseSelector = ({ 
+    exerciseList, 
+    openExerciseSelector, 
+    setOpenExerciseSelector, 
+    handleExerciseSelection, 
+    handleDeleteExercise, 
+    exerciseNotYetChosen 
+}) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const filteredExercises = exerciseList.filter(exercise =>

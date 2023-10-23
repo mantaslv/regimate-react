@@ -32,9 +32,7 @@ const Exercise = ({
 
     if (!programme) {
         useEffect(() => {
-            if(!openExerciseSelector && sets.length === 0) {
-                addSet();
-            }
+            if (!openExerciseSelector && sets.length === 0) addSet();
         }, [openExerciseSelector]);
     };
 
