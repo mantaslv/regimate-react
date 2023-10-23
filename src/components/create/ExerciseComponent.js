@@ -88,36 +88,33 @@ const Exercise = ({
 
     if (programme) {
         return (
-            <Card sx={{
-                margin: 0.8,
-                width: '100%', 
-                borderRadius: '10px',
-                backgroundColor: '#009688',
-                border: '3px solid grey.200',
-            }}>
-                <CardHeader
-                    title={
-                        <Button onClick={handleOpenSelector} sx={{ mt: -1, minWidth: 0, borderRadius: '10px' }}>
+            <>
+            <Box sx={{ borderRadius: '10px', backgroundColor: '#6366F1', width: '100%', mt: 1 }}>
+                <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex', flexGrow: 1 }}>
+                        <Button 
+                            onClick={handleOpenSelector} 
+                            sx={{ minWidth: 0, borderRadius: '10px', ml: -0.5 }}
+                        >
                             <Typography 
                                 variant="h6" 
-                                fontSize={15}
+                                fontSize={13}
                                 fontWeight={600}
                                 textAlign="left"
                                 textTransform="none"
-                                sx={{ color: 'white', '&:hover': { color: 'grey.400' } }}
+                                sx={{ color: 'white', width: '100%', '&:hover': { color: 'grey.400' } }}
                             >
                                 {exerciseName}
                             </Typography>
                         </Button>
-                    }
-                    action={
-                        <IconButton onClick={handleDeleteExercise}>
-                            <RemoveCircleIcon fontSize="small"/>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                        <IconButton onClick={handleDeleteExercise} sx={{ color: 'white' }}>
+                            <RemoveCircleIcon sx={{ ml: -1, mt: -0.5, mr: -0.5, fontSize: '16px' }}/>
                         </IconButton>
-                    }
-                    sx={{ m: -1.5, mb: -2.5 }}
-                />
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    </Box>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: -1.5 }}>
                     <SetsRepsInput 
                         handleSetsRepsChange={handleSetsRepsChange}
                         initialExerciseData={initialExerciseData}
@@ -130,7 +127,8 @@ const Exercise = ({
                     handleDeleteExercise={handleDeleteExercise}
                     exerciseList={exerciseList}
                 />
-            </Card>
+            </Box>
+            </>
         )
     } else {
         return (
