@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Input } from "@mui/material";
+import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -94,36 +94,28 @@ const NewProgrammePage = () => {
                             onChange={handleProgrammeNameChange}
                         />
                         <Button 
-                            size="small" 
-                            variant="contained" 
                             onClick={handleAddWorkout}
+                            variant="outlined"
+                            sx={{ height: '32px' }}
                         >
                             Add Workout
                         </Button>
                     </Stack>
-                    <Stack direction='row' gap={1}>
-                        {user && (
-                            <Button 
-                                size="small" 
-                                variant="contained" 
-                                onClick={saveProgramme}
-                            >
+                    <ButtonGroup sx={{ height: '32px' }}>
+                    {user && (
+                            <Button onClick={saveProgramme}>
                                 Save Programme
                             </Button>
                         )}
-                        <Button 
-                            size="small" 
-                            variant="contained" 
-                            onClick={() => downloadProgramme(state)}
-                        >
+                        <Button onClick={() => downloadProgramme(state)}>
                             Download Programme
                         </Button>
                         <ConsoleLogButton 
-                            size="small" 
-                            print={state} 
+                            print={state}
+                            variant="outlined"
                             info="programme"
                         />
-                    </Stack>
+                    </ButtonGroup>
                 </Box>
             </AppBar>
             <Box sx={{ mt: '105px' }}>
