@@ -7,39 +7,18 @@ import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { ExerciseContextProvider } from "../../context/exerciseContext";
 import Exercise from "./ExerciseComponent";
 import ConsoleLogButton from "../ConsoleLogButton";
+import { ProgrammeSplitCard } from "./ProgrammeSplitCard";
 
 const WorkoutComponent = ({
     programme=false,
     exerciseList, 
     onWorkoutDelete, 
     initialWorkoutData, 
-    onWorkoutChange = () => {}
+    onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const { exercises } = state;
     const [workoutName, setWorkoutName] = useState("");
-
-    const handleWorkoutNameChange = (event) => {
-        const newName = event.target.value;
-        setWorkoutName(newName);
-        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: newName });
-    };
-
-    const addExercise = () => {
-        dispatch({ type: "ADD_EXERCISE" });
-    };
-
-    const handleExerciseChange = (updatedExercise, id) => {
-        dispatch({ type: "UPDATE_EXERCISE", payload: { id, changes: updatedExercise } });
-    };
-
-    const handleExerciseDelete = (id) => {
-        dispatch({ type: "DELETE_EXERCISE", payload: id });
-    };
-
-    const handleDeleteWorkout = () => {
-        onWorkoutDelete();
-    };
 
     useEffect(() => {
         if (initialWorkoutData) {
@@ -48,65 +27,42 @@ const WorkoutComponent = ({
         };
     }, [initialWorkoutData]);
 
-    // for testing purposes
-    useEffect(() => {
-        onWorkoutChange(state);
-    }, [state]);
+    const handleDeleteWorkout = () => {
+        onWorkoutDelete();
+    };
+
+    const addExercise = () => {
+        dispatch({ type: "ADD_EXERCISE" });
+    };
+
+    const handleExerciseDelete = (id) => {
+        dispatch({ type: "DELETE_EXERCISE", payload: id });
+    };
+
+    const handleExerciseChange = (updatedExercise, id) => {
+        dispatch({ type: "UPDATE_EXERCISE", payload: { id, changes: updatedExercise } });
+    };
+
+    const handleWorkoutNameChange = (event) => {
+        const newName = event.target.value;
+        setWorkoutName(newName);
+        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: newName });
+    };
+
+    useEffect(() => onWorkoutChange(state), [state]); // for testing purposes
 
     if (programme) {
         return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column', 
-                    alignItems: 'center'
-                }}
-            >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-                    <Input
-                        disableUnderline
-                        placeholder="workout name"
-                        value={workoutName}
-                        onChange={handleWorkoutNameChange}
-                        sx={{
-                            width: '70%',
-                            borderRadius: '10px',
-                            border: '2px solid',
-                            borderColor: `grey.300`,
-                            '& input': { textAlign: 'center' },
-                            '&:hover': { backgroundColor: '#e6f2f1' },
-                        }}
-                    />
-                    <IconButton onClick={handleDeleteWorkout}>
-                        <RemoveCircleIcon/>
-                    </IconButton>
-                </Box>
-                {exercises && exercises.map((exercise, i) => (
-                    <ExerciseContextProvider key={exercise.id}>
-                        <Exercise
-                            exercise={exercise}
-                            exerciseList={exerciseList}
-                            onExerciseChange={(updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)}
-                            onExerciseDelete={() => handleExerciseDelete(exercise.id)}
-                            initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
-                            programme={true}
-                        />
-                    </ExerciseContextProvider>
-                ))}
-                <Button
-                    onClick={addExercise}
-                    sx={{
-                        margin: 1,
-                        borderRadius: '16px',
-                        border: `3px dashed`,
-                        borderColor: `grey.400`,
-                        width: '100%'
-                    }}
-                >
-                    <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
-                </Button>
-                <ConsoleLogButton print={state} info="workout"/>
-            </Box>
+            <ProgrammeSplitCard
+                handleWorkoutNameChange={handleWorkoutNameChange}
+                handleDeleteWorkout={handleDeleteWorkout}
+                handleExerciseChange={handleExerciseChange}
+                handleExerciseDelete={handleExerciseDelete}
+                initialWorkoutData={initialWorkoutData}
+                exerciseList={exerciseList}
+                addExercise={addExercise}
+                workoutState={state}
+            />
         )
     } else {
         return (
