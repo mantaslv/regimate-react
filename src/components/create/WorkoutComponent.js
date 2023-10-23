@@ -59,12 +59,7 @@ const WorkoutComponent = ({
                 sx={{
                     display: 'flex',
                     flexDirection: 'column', 
-                    alignItems: 'center',
-                    borderRadius: '16px',
-                    border: '3px solid',
-                    borderColor: 'grey.400',
-                    padding: '8px 16px',
-                    width: '80%'
+                    alignItems: 'center'
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
