@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-import SetsRepsInput from "./SetsRepsInput";
+import SetsRepsInput from "../programme/SetsRepsInput";
 
 export const ProgrammeExerciseCard = ({ 
     exerciseSelector, 

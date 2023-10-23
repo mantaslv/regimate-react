@@ -2,9 +2,9 @@ import { Box, Button, IconButton, Input } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-import { ExerciseContextProvider } from "../../context/exerciseContext";
-import Exercise from "./ExerciseComponent";
-import ConsoleLogButton from "../ConsoleLogButton";
+import { ExerciseContextProvider } from "../../../context/exerciseContext";
+import Exercise from "../ExerciseComponent";
+import ConsoleLogButton from "../../ConsoleLogButton";
 
 export const ProgrammeSplitCard = ({
     handleWorkoutNameChange,

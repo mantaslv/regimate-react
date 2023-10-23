@@ -1,7 +1,7 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { ExerciseContextProvider } from "../../context/exerciseContext";
-import Exercise from "./ExerciseComponent";
-import ConsoleLogButton from "../ConsoleLogButton";
+import { ExerciseContextProvider } from "../../../context/exerciseContext";
+import Exercise from "../ExerciseComponent";
+import ConsoleLogButton from "../../ConsoleLogButton";
 
 export const WorkoutCard = ({
     handleWorkoutNameChange,

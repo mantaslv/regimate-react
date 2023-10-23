@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
-import { ProgrammeSplitCard } from "./ProgrammeSplitCard";
-import { WorkoutCard } from "./WorkoutCard";
+import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
+import { WorkoutCard } from "./workout/WorkoutCard";
 
 const WorkoutComponent = ({
     programme=false,

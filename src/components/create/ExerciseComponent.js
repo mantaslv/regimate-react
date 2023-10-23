@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ExerciseSelector from "./ExerciseSelector";
 import { useExerciseContext } from "../../hooks/useExerciseContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
-import { ProgrammeExerciseCard } from "./ProgrammeExerciseCard";
-import { WorkoutExerciseCard } from "./WorkoutExerciseCard";
+import { ProgrammeExerciseCard } from "./programme/ProgrammeExerciseCard";
+import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
 
 const Exercise = ({
     exerciseList, 
