@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../../context/workoutContext";
 import WorkoutComponent from "./WorkoutComponent";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
@@ -12,8 +13,11 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
         if (programmeData) {
             dispatch({ type: "SET_PROGRAMME", payload: programmeData });
         };
-        
     }, [programmeData]);
+
+    const handleAddWorkout = () => {
+        dispatch({ type: "ADD_WORKOUT" });
+    };
 
     const handleDeleteWorkout = (id) => {
         dispatch({ type: "DELETE_WORKOUT", payload: id });
@@ -41,7 +45,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                         ...(i !== state.workouts.length - 1 && { 
                             borderRight: '3px dashed',
                             borderColor: 'grey.400'
-                        }) 
+                        })
                     }}
                 >
                     <WorkoutContextProvider>
@@ -58,6 +62,27 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     </WorkoutContextProvider>
                 </Grid>
             )}
+            {state.workouts.length < 6 &&
+                <Grid item>
+                    <Button 
+                        onClick={handleAddWorkout}
+                        sx={{ 
+                            m: -1, 
+                            border: '3px dashed', 
+                            borderColor: 'grey.400',
+                            borderRadius: '16px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                            maxWidth: '10px'
+                        }}
+                    >
+                        <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
+                    </Button>
+                    
+                </Grid>
+            }
         </Grid>
     );
 };
