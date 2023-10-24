@@ -12,9 +12,7 @@ const NamedInput = ({label, value, setVariable}) => {
         setVariable(filteredValue);
     };
 
-    useEffect(() => {
-        setVariableValue(value);
-    }, [value])
+    useEffect(() => setVariableValue(value), [value]);
 
     return (
         <>
@@ -43,13 +41,13 @@ const NamedInput = ({label, value, setVariable}) => {
                 }}
             />
         </>
-    )
-}
+    );
+};
 
 const SetsRepsInput = ({ 
     handleSetsRepsChange, 
     initialExerciseData, 
-    onInitialDataLoad, 
+    onInitialSetDataLoad, 
     initialDataLoaded 
 }) => {
     const[sets, setSets] = useState(1);
@@ -73,15 +71,14 @@ const SetsRepsInput = ({
             setSets(initialExerciseData.sets.length);
             setReps(initialExerciseData.sets[0].reps);
             setInitialSetDataLoaded(true);
-            
         };
     }, [initialExerciseData, initialDataLoaded]);
 
     useEffect(() => {
         if (initialSetDataLoaded) {
-            onInitialDataLoad();
+            onInitialSetDataLoad();
         };
-    }, [initialSetDataLoaded])
+    }, [initialSetDataLoaded]);
 
     return (
         <>

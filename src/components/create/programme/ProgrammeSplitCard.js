@@ -17,7 +17,7 @@ export const ProgrammeSplitCard = ({
     exerciseList,
     addExercise,
     workoutName,
-    onInitialDataLoad
+    onInitialSetDataLoad
 }) => {
     return (
         <Box
@@ -63,7 +63,7 @@ export const ProgrammeSplitCard = ({
                         onExerciseChange={
                             (updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)
                         }
-                        onInitialDataLoad={onInitialDataLoad}
+                        onInitialSetDataLoad={onInitialSetDataLoad}
                     />
                 </ExerciseContextProvider>
             ))}

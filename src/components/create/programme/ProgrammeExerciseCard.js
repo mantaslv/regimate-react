@@ -9,7 +9,7 @@ export const ProgrammeExerciseCard = ({
     initialExerciseData, 
     handleSetsRepsChange, 
     handleDeleteExercise,
-    onInitialDataLoad,
+    onInitialSetDataLoad,
     initialDataLoaded,
     exerciseName
 }) => {
@@ -70,11 +70,11 @@ export const ProgrammeExerciseCard = ({
                 <SetsRepsInput 
                     handleSetsRepsChange={handleSetsRepsChange}
                     initialExerciseData={initialExerciseData}
-                    onInitialDataLoad={onInitialDataLoad}
+                    onInitialSetDataLoad={onInitialSetDataLoad}
                     initialDataLoaded={initialDataLoaded}
                 />
             </Box>
             {exerciseSelector}
         </Box>
-    )
-}
+    );
+};

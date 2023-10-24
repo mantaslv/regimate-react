@@ -9,14 +9,14 @@ const WorkoutComponent = ({
     onWorkoutDelete, 
     initialWorkoutData,
     initialDataLoaded,
-    onInitialExercisesLoaded,
+    onInitialExerciseDataLoad,
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const [workoutName, setWorkoutName] = useState("");
     const [renderedComponentCount, setRenderedComponentCount] = useState(0);
 
-    const onInitialDataLoad = () => {
+    const onInitialSetDataLoad = () => {
         setRenderedComponentCount((count) => count + 1);
     };
 
@@ -24,7 +24,7 @@ const WorkoutComponent = ({
         console.log(workoutName, renderedComponentCount, state.exercises.length);
 
         if (initialWorkoutData && renderedComponentCount === initialWorkoutData.exercises.length) {
-            onInitialExercisesLoaded()
+            onInitialExerciseDataLoad()
         };
     }, [renderedComponentCount]);
 
@@ -72,7 +72,7 @@ const WorkoutComponent = ({
                 handleExerciseDelete={handleExerciseDelete}
                 handleDeleteWorkout={handleDeleteWorkout}
                 addExercise={addExercise}
-                onInitialDataLoad={onInitialDataLoad}
+                onInitialSetDataLoad={onInitialSetDataLoad}
             />
         );
     };

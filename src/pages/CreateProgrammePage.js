@@ -37,7 +37,7 @@ const NewProgrammePage = () => {
         };
     }, []);
 
-    const onInitialExercisesLoaded = () => {
+    const onInitialExerciseDataLoad = () => {
         setRenderedWorkoutsCount((count) => count + 1);   
     };
 
@@ -86,7 +86,7 @@ const NewProgrammePage = () => {
                     exerciseList={exerciseList} 
                     programmeData={programmeData}
                     initialDataLoaded={initialDataLoaded}
-                    onInitialExercisesLoaded={onInitialExercisesLoaded}
+                    onInitialExerciseDataLoad={onInitialExerciseDataLoad}
                 />
             </Box>
         </Box>
