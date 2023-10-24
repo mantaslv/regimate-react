@@ -28,7 +28,7 @@ const Exercise = ({
             setOpenExerciseSelector(false);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
-    }, [initialExerciseData]);
+    }, []);
 
     if (!programme) {
         useEffect(() => {

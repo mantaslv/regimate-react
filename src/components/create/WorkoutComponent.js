@@ -18,7 +18,7 @@ const WorkoutComponent = ({
             setWorkoutName(initialWorkoutData.workoutName);
             dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
         };
-    }, [initialWorkoutData]);
+    }, []);
 
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
