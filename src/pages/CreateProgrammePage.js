@@ -35,7 +35,7 @@ const NewProgrammePage = () => {
             setProgrammeName(programmeDataFromState.programmeName);
             setProgrammeData(programmeDataFromState);
         };
-    }, []);
+    }, [programmeDataFromState, initialDataLoaded]);
 
     const onInitialExerciseDataLoad = () => {
         setRenderedWorkoutsCount((count) => count + 1);   
