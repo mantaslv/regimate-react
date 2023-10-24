@@ -1,16 +1,16 @@
-import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
+import DownloadIcon from '@mui/icons-material/Download';
+import SaveIcon from '@mui/icons-material/Save';
+import { Stack } from "@mui/system";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import ProgrammeComponent from "../components/create/ProgrammeComponent";
-import fetchExercises from "../logic/fetchExercises";
 import { downloadProgramme } from "../logic/downloadProgramme";
+import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import ConsoleLogButton from "../components/ConsoleLogButton";
-import { Stack } from "@mui/system";
-import DownloadIcon from '@mui/icons-material/Download';
-import SaveIcon from '@mui/icons-material/Save';
+import fetchExercises from "../logic/fetchExercises";
 
 const NewProgrammePage = () => {
     const navigate = useNavigate();
@@ -35,8 +35,9 @@ const NewProgrammePage = () => {
         if (programmeDataFromState) {
             setProgrammeData(programmeDataFromState);
             setProgrammeName(programmeDataFromState.programmeName);
+            dispatch({ type: "SET_PROGRAMME", payload: programmeDataFromState });
         };
-    }, [programmeDataFromState]);
+    }, []);
 
     const handleProgrammeNameChange = (event) => {
         const newName = event.target.value;
@@ -53,15 +54,12 @@ const NewProgrammePage = () => {
                 'Authorization': `Bearer ${user.token}`
             }
         });
+
         const json = await res.json();
         console.log(json);
-
-        if (!res.ok) {
-            console.log(json);
-        };
-        if (res.ok) {
-            navigate('/view-programmes');
-        };
+        
+        if (!res.ok) console.log(json);
+        if (res.ok) navigate('/view-programmes');
     };
 
     return (

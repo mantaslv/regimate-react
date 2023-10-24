@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { Button, Grid } from "@mui/material";
-
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { WorkoutContextProvider } from "../../context/workoutContext";
 import WorkoutComponent from "./WorkoutComponent";
@@ -8,12 +6,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const ProgrammeComponent = ({ exerciseList, programmeData }) => {
     const { state, dispatch } = useProgrammeContext();
-
-    useEffect(() => {
-        if (programmeData) {
-            dispatch({ type: "SET_PROGRAMME", payload: programmeData });
-        };
-    }, [programmeData]);
 
     const handleAddWorkout = () => {
         dispatch({ type: "ADD_WORKOUT" });
@@ -80,7 +72,6 @@ const ProgrammeComponent = ({ exerciseList, programmeData }) => {
                     >
                         <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
                     </Button>
-                    
                 </Grid>
             }
         </Grid>
