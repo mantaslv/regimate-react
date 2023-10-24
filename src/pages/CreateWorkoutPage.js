@@ -10,6 +10,7 @@ import WorkoutComponent from '../components/create/WorkoutComponent'
 import fetchExercises from "../logic/fetchExercises";
 import { Stack } from "@mui/system";
 import ConsoleLogButton from "../components/ConsoleLogButton";
+import { CreateToolbar } from "../components/create/CreateToolbar";
 
 const NewWorkoutPage = () => {
     const { state, dispatch } = useWorkoutContext();
@@ -69,57 +70,19 @@ const NewWorkoutPage = () => {
 
     return (
         <Box>
-            <AppBar 
-                position="fixed" 
-                sx={{ 
-                    top: '45px', 
-                    height: '45px', 
-                    backgroundColor: '#EBEEFE',
-                }}
-            >
-                <Box 
-                    sx={{ 
-                        height: '45px', 
-                        mx: 3, 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center' 
-                        }}
-                    >
-                    <Stack direction='row' gap={1}>
-                        <Input
-                            value={workoutName}
-                            hiddenlabel="true"
-                            variant="filled"
-                            size="small"
-                            onChange={handleWorkoutNameChange}
-                        />
-                    </Stack>
-                    <ButtonGroup sx={{ height: '32px' }}>
-                    {user && (
-                            <Button 
-                                onClick={completeWorkout}
-                                title="Save workout"
-                            >
-                                <SaveIcon/>
-                            </Button>
-                        )}
-                        <Button 
-                            onClick={() => downloadProgramme(state)}
-                            title="Download workout"
-                        >
-                            <DownloadIcon/>
-                        </Button>
-                        <ConsoleLogButton 
-                            print={state}
-                            variant="outlined"
-                            info="workout"
-                        />
-                    </ButtonGroup>
-                </Box>
-            </AppBar>
+            <CreateToolbar
+                nameInputValue={workoutName}
+                handleNameInputChange={handleWorkoutNameChange}
+                stateType="workout"
+                saveState={completeWorkout}
+                state={state}
+            />
             <Box sx={{ my: '105px' }}>
-                <WorkoutComponent exerciseList={exerciseList} initialWorkoutData={workoutData}/>
+                <WorkoutComponent 
+                    exerciseList={exerciseList} 
+                    initialWorkoutData={workoutData}
+                    onWorkoutNameChange={handleWorkoutNameChange}
+                />
             </Box>
         </Box>
     );
