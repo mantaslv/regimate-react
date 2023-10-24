@@ -10,6 +10,7 @@ const Exercise = ({
     onExerciseChange, 
     onExerciseDelete, 
     initialExerciseData,
+    initialDataLoaded,
     programme=false
 }) => {
     const { state: workoutState } = useWorkoutContext();
@@ -23,12 +24,12 @@ const Exercise = ({
     }, [state]);
 
     useEffect(() => {
-        if (initialExerciseData) {
+        if (initialExerciseData && initialDataLoaded) {
             setExerciseName(initialExerciseData.exerciseName);
             setOpenExerciseSelector(false);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
-    }, []);
+    }, [initialDataLoaded]);
 
     if (!programme) {
         useEffect(() => {

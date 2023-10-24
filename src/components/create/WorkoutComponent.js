@@ -7,18 +7,21 @@ const WorkoutComponent = ({
     programme=false,
     exerciseList, 
     onWorkoutDelete, 
-    initialWorkoutData, 
+    initialWorkoutData,
+    initialDataLoaded,
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const [workoutName, setWorkoutName] = useState("");
 
     useEffect(() => {
-        if (programme && initialWorkoutData) {
+        if (programme && initialWorkoutData && initialDataLoaded) {
             setWorkoutName(initialWorkoutData.workoutName);
             dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
         };
-    }, []);
+    }, [initialDataLoaded]);
+
+    useEffect(() => console.log(initialDataLoaded), [initialDataLoaded])
 
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
@@ -50,6 +53,7 @@ const WorkoutComponent = ({
                 workoutState={state}
                 workoutName={workoutName}
                 exerciseList={exerciseList}
+                initialDataLoaded={initialDataLoaded}
                 initialWorkoutData={initialWorkoutData}
                 handleWorkoutNameChange={handleWorkoutNameChange}
                 handleExerciseChange={handleExerciseChange}

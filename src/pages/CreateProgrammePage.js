@@ -16,6 +16,7 @@ const NewProgrammePage = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [programmeData, setProgrammeData] = useState(null);
     const [programmeName, setProgrammeName] = useState("Untitled Programme");
+    const [initialDataLoaded, setInitialDataLoaded] = useState(false);
 
     const location = useLocation();
     const locationState = location.state || {};
@@ -32,8 +33,15 @@ const NewProgrammePage = () => {
             setProgrammeData(programmeDataFromState);
             setProgrammeName(programmeDataFromState.programmeName);
             dispatch({ type: "SET_PROGRAMME", payload: programmeDataFromState });
+            setInitialDataLoaded(true);
         };
     }, []);
+
+    useEffect(() => {
+        if (initialDataLoaded && programmeDataFromState) {
+            setInitialDataLoaded(false);
+        };
+    }, [state]);
 
     const handleProgrammeNameChange = (event) => {
         const newName = event.target.value;
@@ -68,7 +76,11 @@ const NewProgrammePage = () => {
                 state={state}
             />
             <Box sx={{ my: '105px' }}>
-                <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
+                <ProgrammeComponent 
+                    exerciseList={exerciseList} 
+                    programmeData={programmeData}
+                    initialDataLoaded={initialDataLoaded}
+                />
             </Box>
         </Box>
     );
