@@ -9,19 +9,24 @@ const WorkoutComponent = ({
     onWorkoutDelete, 
     initialWorkoutData,
     initialDataLoaded,
+    onInitialExercisesLoaded,
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const [workoutName, setWorkoutName] = useState("");
+    const [renderedComponentCount, setRenderedComponentCount] = useState(0);
+
+    const onInitialDataLoad = () => {
+        setRenderedComponentCount((count) => count + 1);
+    };
 
     useEffect(() => {
-        if (programme && initialWorkoutData && initialDataLoaded) {
-            setWorkoutName(initialWorkoutData.workoutName);
-            dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
-        };
-    }, [initialDataLoaded]);
+        console.log(workoutName, renderedComponentCount, state.exercises.length);
 
-    useEffect(() => console.log(initialDataLoaded), [initialDataLoaded])
+        if (initialWorkoutData && renderedComponentCount === initialWorkoutData.exercises.length) {
+            onInitialExercisesLoaded()
+        };
+    }, [renderedComponentCount]);
 
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
@@ -48,6 +53,13 @@ const WorkoutComponent = ({
     useEffect(() => onWorkoutChange(state), [state]); // for testing purposes
 
     if (programme) {
+        useEffect(() => {
+            if (initialWorkoutData && !initialDataLoaded) {
+                setWorkoutName(initialWorkoutData.workoutName);
+                dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
+            };
+        }, [initialWorkoutData, initialDataLoaded]);
+        
         return (
             <ProgrammeSplitCard
                 workoutState={state}
@@ -60,6 +72,7 @@ const WorkoutComponent = ({
                 handleExerciseDelete={handleExerciseDelete}
                 handleDeleteWorkout={handleDeleteWorkout}
                 addExercise={addExercise}
+                onInitialDataLoad={onInitialDataLoad}
             />
         );
     };

@@ -9,6 +9,8 @@ export const ProgrammeExerciseCard = ({
     initialExerciseData, 
     handleSetsRepsChange, 
     handleDeleteExercise,
+    onInitialDataLoad,
+    initialDataLoaded,
     exerciseName
 }) => {
     return (
@@ -68,6 +70,8 @@ export const ProgrammeExerciseCard = ({
                 <SetsRepsInput 
                     handleSetsRepsChange={handleSetsRepsChange}
                     initialExerciseData={initialExerciseData}
+                    onInitialDataLoad={onInitialDataLoad}
+                    initialDataLoaded={initialDataLoaded}
                 />
             </Box>
             {exerciseSelector}

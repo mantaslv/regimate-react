@@ -46,9 +46,15 @@ const NamedInput = ({label, value, setVariable}) => {
     )
 }
 
-const SetsRepsInput = ({ handleSetsRepsChange, initialExerciseData }) => {
+const SetsRepsInput = ({ 
+    handleSetsRepsChange, 
+    initialExerciseData, 
+    onInitialDataLoad, 
+    initialDataLoaded 
+}) => {
     const[sets, setSets] = useState(1);
     const[reps, setReps] = useState(1);
+    const[initialSetDataLoaded, setInitialSetDataLoaded] = useState(false)
 
     const handleSetsChange = (sets) => {
         setSets(sets);
@@ -63,11 +69,19 @@ const SetsRepsInput = ({ handleSetsRepsChange, initialExerciseData }) => {
     }, [sets, reps]);
 
     useEffect(() => {
-        if (initialExerciseData) {
+        if (initialExerciseData && !initialDataLoaded) {
             setSets(initialExerciseData.sets.length);
-            setReps(initialExerciseData.sets[0].reps)
+            setReps(initialExerciseData.sets[0].reps);
+            setInitialSetDataLoaded(true);
+            
         };
-    }, []);
+    }, [initialExerciseData, initialDataLoaded]);
+
+    useEffect(() => {
+        if (initialSetDataLoaded) {
+            onInitialDataLoad();
+        };
+    }, [initialSetDataLoaded])
 
     return (
         <>
