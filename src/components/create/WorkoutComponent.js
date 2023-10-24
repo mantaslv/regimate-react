@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
 import { WorkoutCard } from "./workout/WorkoutCard";
@@ -11,14 +11,6 @@ const WorkoutComponent = ({
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
-    const [workoutName, setWorkoutName] = useState("");
-
-    useEffect(() => {
-        if (initialWorkoutData) {
-            setWorkoutName(initialWorkoutData.workoutName);
-            dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
-        };
-    }, []);
 
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
@@ -36,22 +28,14 @@ const WorkoutComponent = ({
         dispatch({ type: "UPDATE_EXERCISE", payload: { id, changes: updatedExercise } });
     };
 
-    const handleWorkoutNameChange = (event) => {
-        const newName = event.target.value;
-        setWorkoutName(newName);
-        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: newName });
-    };
-
     useEffect(() => onWorkoutChange(state), [state]); // for testing purposes
 
     if (programme) {
         return (
             <ProgrammeSplitCard
                 workoutState={state}
-                workoutName={workoutName}
                 exerciseList={exerciseList}
                 initialWorkoutData={initialWorkoutData}
-                handleWorkoutNameChange={handleWorkoutNameChange}
                 handleExerciseChange={handleExerciseChange}
                 handleExerciseDelete={handleExerciseDelete}
                 handleDeleteWorkout={handleDeleteWorkout}
@@ -64,10 +48,8 @@ const WorkoutComponent = ({
         return (
             <WorkoutCard
                 workoutState={state}
-                workoutName={workoutName}
                 exerciseList={exerciseList}
                 initialWorkoutData={initialWorkoutData}
-                handleWorkoutNameChange={handleWorkoutNameChange}
                 handleExerciseChange={handleExerciseChange}
                 handleExerciseDelete={handleExerciseDelete}
                 addExercise={addExercise}

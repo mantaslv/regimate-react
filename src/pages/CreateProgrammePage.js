@@ -113,7 +113,7 @@ const NewProgrammePage = () => {
                     </ButtonGroup>
                 </Box>
             </AppBar>
-            <Box sx={{ mt: '105px' }}>
+            <Box sx={{ my: '105px' }}>
                 <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             </Box>
         </Box>
