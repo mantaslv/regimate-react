@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
-import DownloadIcon from '@mui/icons-material/Download';
-import SaveIcon from '@mui/icons-material/Save';
-import { Stack } from "@mui/system";
+import { Box } from "@mui/material";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import { downloadProgramme } from "../logic/downloadProgramme";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
-import ConsoleLogButton from "../components/ConsoleLogButton";
 import fetchExercises from "../logic/fetchExercises";
+import { CreateToolbar } from "../components/create/CreateToolbar";
 
 const NewProgrammePage = () => {
     const navigate = useNavigate();
@@ -64,55 +60,13 @@ const NewProgrammePage = () => {
 
     return (
         <Box>
-            <AppBar 
-                position="fixed" 
-                sx={{ 
-                    top: '45px', 
-                    height: '45px', 
-                    backgroundColor: '#EBEEFE',
-                }}
-            >
-                <Box 
-                    sx={{ 
-                        height: '45px', 
-                        mx: 3, 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
-                        alignItems: 'center' 
-                        }}
-                    >
-                    <Stack direction='row' gap={1}>
-                        <Input
-                            value={programmeName}
-                            hiddenlabel="true"
-                            variant="filled"
-                            size="small"
-                            onChange={handleProgrammeNameChange}
-                        />
-                    </Stack>
-                    <ButtonGroup sx={{ height: '32px' }}>
-                    {user && (
-                            <Button 
-                                onClick={saveProgramme}
-                                title="Save programme"
-                            >
-                                <SaveIcon/>
-                            </Button>
-                        )}
-                        <Button 
-                            onClick={() => downloadProgramme(state)}
-                            title="Download programme"
-                        >
-                            <DownloadIcon/>
-                        </Button>
-                        <ConsoleLogButton 
-                            print={state}
-                            variant="outlined"
-                            info="programme"
-                        />
-                    </ButtonGroup>
-                </Box>
-            </AppBar>
+            <CreateToolbar
+                nameInputValue={programmeName}
+                handleNameInputChange={handleProgrammeNameChange}
+                stateType="programme"
+                saveState={saveProgramme}
+                state={state}
+            />
             <Box sx={{ my: '105px' }}>
                 <ProgrammeComponent exerciseList={exerciseList} programmeData={programmeData}/>
             </Box>
