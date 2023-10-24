@@ -57,7 +57,7 @@ const NewProgrammePage = () => {
 
         const json = await res.json();
         console.log(json);
-        
+
         if (!res.ok) console.log(json);
         if (res.ok) navigate('/view-programmes');
     };
@@ -94,14 +94,14 @@ const NewProgrammePage = () => {
                     {user && (
                             <Button 
                                 onClick={saveProgramme}
-                                title="Save Programme"
+                                title="Save programme"
                             >
                                 <SaveIcon/>
                             </Button>
                         )}
                         <Button 
                             onClick={() => downloadProgramme(state)}
-                            title="Download Programme"
+                            title="Download programme"
                         >
                             <DownloadIcon/>
                         </Button>
@@ -119,5 +119,6 @@ const NewProgrammePage = () => {
         </Box>
     );
 };
+
 
 export default NewProgrammePage;
