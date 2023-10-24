@@ -12,12 +12,22 @@ export const ProgrammeExerciseCard = ({
     exerciseName
 }) => {
     return (
-        <Box sx={{ borderRadius: '10px', backgroundColor: '#6366F1', width: '100%', mt: 1 }}>
+        <Box sx={{ 
+            borderRadius: '10px', 
+            backgroundColor: '#6366F1', 
+            width: '100%', 
+            mt: 1 
+        }}>
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ display: 'flex', flexGrow: 1 }}>
                     <Button 
                         onClick={handleOpenSelector} 
-                        sx={{ minWidth: 0, borderRadius: '10px', ml: -0.5 }}
+                        sx={{ 
+                            minWidth: 0, 
+                            borderRadius: '10px', 
+                            p: -0.5, 
+                            mx: -0.5 
+                        }}
                     >
                         <Typography 
                             variant="h6" 
@@ -28,9 +38,7 @@ export const ProgrammeExerciseCard = ({
                             sx={{ 
                                 color: 'white', 
                                 width: '100%', 
-                                '&:hover': { 
-                                    color: 'grey.400' 
-                                } 
+                                '&:hover': { color: 'grey.400' } 
                             }}
                         >
                             {exerciseName}
@@ -38,12 +46,25 @@ export const ProgrammeExerciseCard = ({
                     </Button>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                    <IconButton onClick={handleDeleteExercise} sx={{ color: 'white' }}>
-                        <RemoveCircleIcon sx={{ ml: -1, mt: -0.5, mr: -0.5, fontSize: '16px' }}/>
+                    <IconButton 
+                        onClick={handleDeleteExercise} 
+                        sx={{ color: 'white' }}
+                    >
+                        <RemoveCircleIcon sx={{ 
+                            ml: -1, 
+                            mt: -0.5, 
+                            mr: -0.5, 
+                            fontSize: '16px' 
+                        }}/>
                     </IconButton>
                 </Box>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mt: -1.5 }}>
+            <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                alignItems: 'center', 
+                mt: -1.5 
+            }}>
                 <SetsRepsInput 
                     handleSetsRepsChange={handleSetsRepsChange}
                     initialExerciseData={initialExerciseData}
