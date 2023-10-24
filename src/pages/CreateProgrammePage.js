@@ -9,6 +9,8 @@ import fetchExercises from "../logic/fetchExercises";
 import { downloadProgramme } from "../logic/downloadProgramme";
 import ConsoleLogButton from "../components/ConsoleLogButton";
 import { Stack } from "@mui/system";
+import DownloadIcon from '@mui/icons-material/Download';
+import SaveIcon from '@mui/icons-material/Save';
 
 const NewProgrammePage = () => {
     const navigate = useNavigate();
@@ -40,10 +42,6 @@ const NewProgrammePage = () => {
         const newName = event.target.value;
         setProgrammeName(newName);
         dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: newName });
-    };
-
-    const handleAddWorkout = () => {
-        dispatch({ type: "ADD_WORKOUT" });
     };
 
     const saveProgramme = async () => {
@@ -79,7 +77,7 @@ const NewProgrammePage = () => {
                 <Box 
                     sx={{ 
                         height: '45px', 
-                        mx: 1, 
+                        mx: 3, 
                         display: 'flex', 
                         justifyContent: 'space-between', 
                         alignItems: 'center' 
@@ -93,22 +91,21 @@ const NewProgrammePage = () => {
                             size="small"
                             onChange={handleProgrammeNameChange}
                         />
-                        <Button 
-                            onClick={handleAddWorkout}
-                            variant="outlined"
-                            sx={{ height: '32px' }}
-                        >
-                            Add Workout
-                        </Button>
                     </Stack>
                     <ButtonGroup sx={{ height: '32px' }}>
                     {user && (
-                            <Button onClick={saveProgramme}>
-                                Save Programme
+                            <Button 
+                                onClick={saveProgramme}
+                                title="Save Programme"
+                            >
+                                <SaveIcon/>
                             </Button>
                         )}
-                        <Button onClick={() => downloadProgramme(state)}>
-                            Download Programme
+                        <Button 
+                            onClick={() => downloadProgramme(state)}
+                            title="Download Programme"
+                        >
+                            <DownloadIcon/>
                         </Button>
                         <ConsoleLogButton 
                             print={state}
