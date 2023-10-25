@@ -9,25 +9,13 @@ const WorkoutComponent = ({
     onWorkoutDelete, 
     initialWorkoutData,
     initialDataLoaded,
+    onInitialWorkoutDataLoad,
     onInitialExerciseDataLoad,
     onWorkoutChange = () => {} // for testing purposes
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const [workoutName, setWorkoutName] = useState("");
-    const [renderedComponentCount, setRenderedComponentCount] = useState(0);
-
-    const onInitialSetDataLoad = () => {
-        setRenderedComponentCount((count) => count + 1);
-    };
-
-    useEffect(() => {
-        console.log(workoutName, renderedComponentCount, state.exercises.length);
-
-        if (initialWorkoutData && renderedComponentCount === initialWorkoutData.exercises.length) {
-            onInitialExerciseDataLoad()
-        };
-    }, [renderedComponentCount]);
-
+    
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
     };
@@ -53,12 +41,26 @@ const WorkoutComponent = ({
     useEffect(() => onWorkoutChange(state), [state]); // for testing purposes
 
     if (programme) {
+        const [renderedExerciseCount, setRenderedExerciseCount] = useState(0);
+
         useEffect(() => {
             if (initialWorkoutData && !initialDataLoaded) {
                 setWorkoutName(initialWorkoutData.workoutName);
                 dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
             };
         }, [initialWorkoutData, initialDataLoaded]);
+
+        const onInitialExerciseDataLoad = () => {
+            setRenderedExerciseCount((count) => count + 1);
+        };
+
+        useEffect(() => {
+            console.log(workoutName, renderedExerciseCount, state.exercises.length);
+    
+            if (initialWorkoutData && renderedExerciseCount === initialWorkoutData.exercises.length) {
+                onInitialWorkoutDataLoad()
+            };
+        }, [renderedExerciseCount]);
         
         return (
             <ProgrammeSplitCard
@@ -86,6 +88,8 @@ const WorkoutComponent = ({
                 handleExerciseChange={handleExerciseChange}
                 handleExerciseDelete={handleExerciseDelete}
                 addExercise={addExercise}
+                onInitialExerciseDataLoad={onInitialExerciseDataLoad}
+                initialDataLoaded={initialDataLoaded}
             />
         );
     };

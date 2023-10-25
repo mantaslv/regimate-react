@@ -16,6 +16,8 @@ const NewWorkoutPage = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [workoutData, setWorkoutData] = useState(null);
     const [workoutName, setWorkoutName] = useState("Untitled Workout");
+    const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+    const [renderedExercisesCount, setRenderedExercisesCount] = useState(0);
 
     const location = useLocation();
     const locationState = location.state || {};
@@ -30,14 +32,24 @@ const NewWorkoutPage = () => {
     }, [user]);
 
     useEffect(() => {
-        if (workoutDataFromState) {
-            setWorkoutData(workoutDataFromState);
-            setWorkoutName(workoutDataFromState.workoutName);
+        if (workoutDataFromState && !initialDataLoaded) {
             dispatch({ type: "SET_WORKOUT", payload: workoutDataFromState });
+            setWorkoutName(workoutDataFromState.workoutName);
+            setWorkoutData(workoutDataFromState);
         };
+    }, [workoutDataFromState, initialDataLoaded]);
 
-        console.log(workoutDataFromState);
-    }, []);
+    const onInitialExerciseDataLoad = () => {
+        setRenderedExercisesCount((count) => count + 1);   
+    };
+
+    useEffect(() => {
+        console.log(workoutName, renderedExercisesCount, state.exercises.length);
+
+        if (workoutDataFromState && renderedExercisesCount === workoutDataFromState.exercises.length) {
+            setInitialDataLoaded(true);
+        };
+    }, [renderedExercisesCount]);
 
     const handleWorkoutNameChange = (event) => {
         const newName = event.target.value;
@@ -79,6 +91,8 @@ const NewWorkoutPage = () => {
                     exerciseList={exerciseList} 
                     initialWorkoutData={workoutData}
                     onWorkoutNameChange={handleWorkoutNameChange}
+                    onInitialExerciseDataLoad={onInitialExerciseDataLoad}
+                    initialDataLoaded={initialDataLoaded}
                 />
             </Box>
         </Box>

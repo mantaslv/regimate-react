@@ -11,7 +11,7 @@ const Exercise = ({
     onExerciseDelete, 
     initialExerciseData,
     initialDataLoaded,
-    onInitialSetDataLoad,
+    onInitialExerciseDataLoad,
     programme=false
 }) => {
     const { state: workoutState } = useWorkoutContext();
@@ -19,6 +19,20 @@ const Exercise = ({
     const { sets } = state;
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
     const [exerciseName, setExerciseName] = useState("");
+    const [renderedSetCount, setRenderedSetCount] = useState(0);
+    // const [initialExerciseDataLoaded, setExerciseSetDataLoaded] = useState(false);
+
+    const onInitialSetDataLoad = () => {
+        setRenderedSetCount((count) => count + 1);
+    };
+
+    useEffect(() => {
+        console.log(exerciseName, renderedSetCount, state.sets.length);
+
+        if (initialExerciseData && renderedSetCount === initialExerciseData.sets.length) {
+            onInitialExerciseDataLoad();
+        };
+    }, [renderedSetCount]);
 
     useEffect(() => {
         onExerciseChange(state);
@@ -114,6 +128,8 @@ const Exercise = ({
                 handleSetChange={handleSetChange}
                 handleSetDelete={handleSetDelete}
                 addSet={addSet}
+                onInitialSetDataLoad={onInitialSetDataLoad}
+                initialDataLoaded={initialDataLoaded}
             />
         );
     };

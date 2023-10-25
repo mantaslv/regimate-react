@@ -50,9 +50,9 @@ const SetsRepsInput = ({
     onInitialSetDataLoad, 
     initialDataLoaded 
 }) => {
-    const[sets, setSets] = useState(1);
-    const[reps, setReps] = useState(1);
-    const[initialSetDataLoaded, setInitialSetDataLoaded] = useState(false)
+    const [sets, setSets] = useState(1);
+    const [reps, setReps] = useState(1);
+    const [initialSetDataLoaded, setInitialSetDataLoaded] = useState(false);
 
     const handleSetsChange = (sets) => {
         setSets(sets);

@@ -13,7 +13,9 @@ export const WorkoutExerciseCard = ({
     handleSetChange,
     handleSetDelete,
     workoutState,
-    initialExerciseData
+    initialExerciseData,
+    initialDataLoaded,
+    onInitialSetDataLoad
 }) => {
     return (
         <Card sx={{ mt: 2, backgroundColor: 'grey.200' }}>
@@ -33,6 +35,8 @@ export const WorkoutExerciseCard = ({
                             onSetChange={(updatedSet) => handleSetChange(updatedSet, set.id)}
                             onSetDelete={() => handleSetDelete(set.id)}
                             initialSetData={initialExerciseData && initialExerciseData.sets[i]}
+                            onInitialSetDataLoad={onInitialSetDataLoad}
+                            initialDataLoaded={initialDataLoaded}
                         />
                     </SetContextProvider>
                 ))}

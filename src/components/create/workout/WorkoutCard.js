@@ -9,6 +9,8 @@ export const WorkoutCard = ({
     workoutState,
     exerciseList,
     addExercise,
+    onInitialExerciseDataLoad,
+    initialDataLoaded
 }) => {
     return (
         <Box>
@@ -22,6 +24,8 @@ export const WorkoutCard = ({
                         onExerciseChange={
                             (updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)
                         }
+                        onInitialExerciseDataLoad={onInitialExerciseDataLoad}
+                        initialDataLoaded={initialDataLoaded}
                     />
                 </ExerciseContextProvider>
             ))}

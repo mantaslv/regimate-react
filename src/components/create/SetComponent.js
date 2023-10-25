@@ -6,19 +6,33 @@ import { useSetContext } from "../../hooks/useSetContext";
 import { useExerciseContext } from "../../hooks/useExerciseContext";
 import ConsoleLogButton from "../ConsoleLogButton";
 
-const Set = ({ onSetChange, onSetDelete, initialSetData }) => {
+const Set = ({ 
+    onSetChange, 
+    onSetDelete, 
+    initialSetData, 
+    onInitialSetDataLoad, 
+    initialDataLoaded 
+}) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
     const [reps, setReps] = useState(0);
     const [weight, setWeight] = useState(0);
+    const [initialSetDataLoaded, setInitialSetDataLoaded] = useState(false);
 
     useEffect(() => {
-        if (initialSetData) {
+        if (initialSetData && !initialDataLoaded) {
             setReps(initialSetData.reps);
             setWeight(initialSetData.weight);
             dispatch({ type: "SET_SET", payload: initialSetData });
+            setInitialSetDataLoaded(true);
         };
     }, [initialSetData]);
+
+    useEffect(() => {
+        if (initialSetDataLoaded) {
+            onInitialSetDataLoad();
+        };
+    }, [initialSetDataLoaded]);
 
     const handleWeightChange = (event) => {
         const newWeight = event.target.value;
