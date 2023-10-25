@@ -76,7 +76,7 @@ const SetsRepsInput = ({
 
     useEffect(() => {
         if (initialSetDataLoaded) {
-            onInitialSetDataLoad();
+            Array.from({ length: sets }, () => onInitialSetDataLoad());
         };
     }, [initialSetDataLoaded]);
 

@@ -20,7 +20,6 @@ const Exercise = ({
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
     const [exerciseName, setExerciseName] = useState("");
     const [renderedSetCount, setRenderedSetCount] = useState(0);
-    // const [initialExerciseDataLoaded, setExerciseSetDataLoaded] = useState(false);
 
     const onInitialSetDataLoad = () => {
         setRenderedSetCount((count) => count + 1);

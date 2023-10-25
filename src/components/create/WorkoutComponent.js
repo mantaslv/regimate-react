@@ -58,7 +58,7 @@ const WorkoutComponent = ({
             console.log(workoutName, renderedExerciseCount, state.exercises.length);
     
             if (initialWorkoutData && renderedExerciseCount === initialWorkoutData.exercises.length) {
-                onInitialWorkoutDataLoad()
+                onInitialWorkoutDataLoad();
             };
         }, [renderedExerciseCount]);
         
@@ -74,7 +74,7 @@ const WorkoutComponent = ({
                 handleExerciseDelete={handleExerciseDelete}
                 handleDeleteWorkout={handleDeleteWorkout}
                 addExercise={addExercise}
-                onInitialSetDataLoad={onInitialSetDataLoad}
+                onInitialExerciseDataLoad={onInitialExerciseDataLoad}
             />
         );
     };
