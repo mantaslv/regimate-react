@@ -1,21 +1,18 @@
-import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
+import {  Box } from "@mui/material";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import DownloadIcon from '@mui/icons-material/Download';
-import SaveIcon from '@mui/icons-material/Save';
 
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/create/WorkoutComponent'
 import fetchExercises from "../logic/fetchExercises";
-import { Stack } from "@mui/system";
-import ConsoleLogButton from "../components/ConsoleLogButton";
 import { CreateToolbar } from "../components/create/CreateToolbar";
 
 const NewWorkoutPage = () => {
-    const { state, dispatch } = useWorkoutContext();
-    const { user } = useAuthContext();
     const navigate = useNavigate();
+    const { user } = useAuthContext();
+    const { state, dispatch } = useWorkoutContext();
+    
     const [exerciseList, setExerciseList] = useState([]);
     const [workoutData, setWorkoutData] = useState(null);
     const [workoutName, setWorkoutName] = useState("Untitled Workout");
