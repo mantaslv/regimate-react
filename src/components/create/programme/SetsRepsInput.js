@@ -48,7 +48,7 @@ const SetsRepsInput = ({
     handleSetsRepsChange, 
     initialExerciseData, 
     onInitialSetDataLoad, 
-    initialDataLoaded 
+    allInitialDataLoaded 
 }) => {
     const [sets, setSets] = useState(1);
     const [reps, setReps] = useState(1);
@@ -67,12 +67,12 @@ const SetsRepsInput = ({
     }, [sets, reps]);
 
     useEffect(() => {
-        if (initialExerciseData && !initialDataLoaded) {
+        if (initialExerciseData && !allInitialDataLoaded) {
             setSets(initialExerciseData.sets.length);
             setReps(initialExerciseData.sets[0].reps);
             setInitialSetDataLoaded(true);
         };
-    }, [initialExerciseData, initialDataLoaded]);
+    }, [initialExerciseData, allInitialDataLoaded]);
 
     useEffect(() => {
         if (initialSetDataLoaded) {

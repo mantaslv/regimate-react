@@ -12,7 +12,7 @@ export const ProgrammeSplitCard = ({
     handleExerciseDelete,
     handleDeleteWorkout,
     initialWorkoutData,
-    initialDataLoaded,
+    allInitialDataLoaded,
     workoutState,
     exerciseList,
     addExercise,
@@ -57,7 +57,7 @@ export const ProgrammeSplitCard = ({
                         programme={true}
                         exercise={exercise}
                         exerciseList={exerciseList}
-                        initialDataLoaded={initialDataLoaded}
+                        allInitialDataLoaded={allInitialDataLoaded}
                         initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
                         onExerciseDelete={() => handleExerciseDelete(exercise.id)}
                         onExerciseChange={

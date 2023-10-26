@@ -10,7 +10,7 @@ const Exercise = ({
     onExerciseChange, 
     onExerciseDelete, 
     initialExerciseData,
-    initialDataLoaded,
+    allInitialDataLoaded,
     onInitialExerciseDataLoad,
     programme=false
 }) => {
@@ -38,12 +38,12 @@ const Exercise = ({
     }, [state]);
 
     useEffect(() => {
-        if (initialExerciseData && !initialDataLoaded) {
+        if (initialExerciseData && !allInitialDataLoaded) {
             setExerciseName(initialExerciseData.exerciseName);
             setOpenExerciseSelector(false);
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
-    }, [initialExerciseData, initialDataLoaded]);
+    }, [initialExerciseData, allInitialDataLoaded]);
 
     if (!programme) {
         useEffect(() => {
@@ -110,7 +110,7 @@ const Exercise = ({
                 handleSetsRepsChange={handleSetsRepsChange}
                 handleOpenSelector={handleOpenSelector}
                 onInitialSetDataLoad={onInitialSetDataLoad}
-                initialDataLoaded={initialDataLoaded}
+                allInitialDataLoaded={allInitialDataLoaded}
             />
         );
     };
@@ -128,7 +128,7 @@ const Exercise = ({
                 handleSetDelete={handleSetDelete}
                 addSet={addSet}
                 onInitialSetDataLoad={onInitialSetDataLoad}
-                initialDataLoaded={initialDataLoaded}
+                allInitialDataLoaded={allInitialDataLoaded}
             />
         );
     };

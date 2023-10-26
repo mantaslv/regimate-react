@@ -16,7 +16,7 @@ const NewProgrammePage = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [programmeData, setProgrammeData] = useState(null);
     const [programmeName, setProgrammeName] = useState("Untitled Programme");
-    const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+    const [allInitialDataLoaded, setInitialDataLoaded] = useState(false);
     const [renderedWorkoutsCount, setRenderedWorkoutsCount] = useState(0);
 
     const location = useLocation();
@@ -30,12 +30,12 @@ const NewProgrammePage = () => {
     }, []);
 
     useEffect(() => {
-        if (programmeDataFromState && !initialDataLoaded) {
+        if (programmeDataFromState && !allInitialDataLoaded) {
             dispatch({ type: "SET_PROGRAMME", payload: programmeDataFromState });
             setProgrammeName(programmeDataFromState.programmeName);
             setProgrammeData(programmeDataFromState);
         };
-    }, [programmeDataFromState, initialDataLoaded]);
+    }, [programmeDataFromState, allInitialDataLoaded]);
 
     const onInitialWorkoutDataLoad = () => {
         setRenderedWorkoutsCount((count) => count + 1);   
@@ -85,7 +85,7 @@ const NewProgrammePage = () => {
                 <ProgrammeComponent 
                     exerciseList={exerciseList} 
                     programmeData={programmeData}
-                    initialDataLoaded={initialDataLoaded}
+                    allInitialDataLoaded={allInitialDataLoaded}
                     onInitialWorkoutDataLoad={onInitialWorkoutDataLoad}
                 />
             </Box>

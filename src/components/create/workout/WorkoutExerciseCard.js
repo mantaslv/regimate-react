@@ -14,7 +14,7 @@ export const WorkoutExerciseCard = ({
     handleSetDelete,
     workoutState,
     initialExerciseData,
-    initialDataLoaded,
+    allInitialDataLoaded,
     onInitialSetDataLoad
 }) => {
     return (
@@ -36,7 +36,7 @@ export const WorkoutExerciseCard = ({
                             onSetDelete={() => handleSetDelete(set.id)}
                             initialSetData={initialExerciseData && initialExerciseData.sets[i]}
                             onInitialSetDataLoad={onInitialSetDataLoad}
-                            initialDataLoaded={initialDataLoaded}
+                            allInitialDataLoaded={allInitialDataLoaded}
                         />
                     </SetContextProvider>
                 ))}

@@ -8,7 +8,7 @@ const WorkoutComponent = ({
     exerciseList, 
     onWorkoutDelete, 
     initialWorkoutData,
-    initialDataLoaded,
+    allInitialDataLoaded,
     onInitialWorkoutDataLoad,
     onInitialExerciseDataLoad,
     onWorkoutChange = () => {} // for testing purposes
@@ -44,11 +44,11 @@ const WorkoutComponent = ({
         const [renderedExerciseCount, setRenderedExerciseCount] = useState(0);
 
         useEffect(() => {
-            if (initialWorkoutData && !initialDataLoaded) {
+            if (initialWorkoutData && !allInitialDataLoaded) {
                 setWorkoutName(initialWorkoutData.workoutName);
                 dispatch({ type: "SET_WORKOUT", payload: initialWorkoutData });
             };
-        }, [initialWorkoutData, initialDataLoaded]);
+        }, [initialWorkoutData, allInitialDataLoaded]);
 
         const onInitialExerciseDataLoad = () => {
             setRenderedExerciseCount((count) => count + 1);
@@ -67,7 +67,7 @@ const WorkoutComponent = ({
                 workoutState={state}
                 workoutName={workoutName}
                 exerciseList={exerciseList}
-                initialDataLoaded={initialDataLoaded}
+                allInitialDataLoaded={allInitialDataLoaded}
                 initialWorkoutData={initialWorkoutData}
                 handleWorkoutNameChange={handleWorkoutNameChange}
                 handleExerciseChange={handleExerciseChange}
@@ -89,7 +89,7 @@ const WorkoutComponent = ({
                 handleExerciseDelete={handleExerciseDelete}
                 addExercise={addExercise}
                 onInitialExerciseDataLoad={onInitialExerciseDataLoad}
-                initialDataLoaded={initialDataLoaded}
+                allInitialDataLoaded={allInitialDataLoaded}
             />
         );
     };

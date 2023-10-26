@@ -4,7 +4,7 @@ import { WorkoutContextProvider } from "../../context/workoutContext";
 import WorkoutComponent from "./WorkoutComponent";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const ProgrammeComponent = ({ exerciseList, programmeData, initialDataLoaded, onInitialWorkoutDataLoad }) => {
+const ProgrammeComponent = ({ exerciseList, programmeData, allInitialDataLoaded, onInitialWorkoutDataLoad }) => {
     const { state, dispatch } = useProgrammeContext();
 
     const handleAddWorkout = () => {
@@ -47,7 +47,7 @@ const ProgrammeComponent = ({ exerciseList, programmeData, initialDataLoaded, on
                             exerciseList={exerciseList}
                             onWorkoutDelete={() => handleDeleteWorkout(workout.id)}
                             initialWorkoutData={programmeData && programmeData.workouts[i]}
-                            initialDataLoaded={initialDataLoaded}
+                            allInitialDataLoaded={allInitialDataLoaded}
                             onWorkoutChange={
                                 (updatedWorkout) => handleWorkoutChange(updatedWorkout, workout.id)
                             }

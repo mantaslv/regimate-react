@@ -11,7 +11,7 @@ const Set = ({
     onSetDelete, 
     initialSetData, 
     onInitialSetDataLoad, 
-    initialDataLoaded 
+    allInitialDataLoaded 
 }) => {
     const { state: exerciseState } = useExerciseContext();
     const { state, dispatch } = useSetContext();
@@ -20,13 +20,13 @@ const Set = ({
     const [initialSetDataLoaded, setInitialSetDataLoaded] = useState(false);
 
     useEffect(() => {
-        if (initialSetData && !initialDataLoaded) {
+        if (initialSetData && !allInitialDataLoaded) {
             setReps(initialSetData.reps);
             setWeight(initialSetData.weight);
             dispatch({ type: "SET_SET", payload: initialSetData });
             setInitialSetDataLoaded(true);
         };
-    }, [initialSetData]);
+    }, [initialSetData, allInitialDataLoaded]);
 
     useEffect(() => {
         if (initialSetDataLoaded) {
@@ -46,46 +46,53 @@ const Set = ({
         dispatch({ type: "SET_REPS", payload: newReps });
     };
 
-    useEffect(() => {
-        onSetChange(state);
-    }, [state])
-
     const handleDeleteSet = () => {
         onSetDelete();
     };
 
+    useEffect(() => {
+        onSetChange(state);
+    }, [state]);
+
     return (
-            <Grid container spacing={2} paddingY={1} alignItems="center">
-                <Grid item>
-                    <TextField
-                        label="Weight (kg)" 
-                        name="weight"
-                        value={weight}
-                        onChange={handleWeightChange}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField 
-                        label="Reps" 
-                        name="reps"
-                        value={reps}
-                        onChange={handleRepsChange}
-                    />
-                </Grid>
-                <Grid item md={1}>
-                    <Button 
-                        variant="contained" 
-                        color="error" 
-                        onClick={handleDeleteSet}
-                        disabled={exerciseState.sets.length <= 1}
-                        aria-label="Delete Set"
-                        title="Click to remove this set"
-                    ><RemoveCircleIcon/></Button>
-                </Grid>
-                <Grid item md={1}>
-                    <ConsoleLogButton print={state} info="set"/>
-                </Grid>
+        <Grid 
+            container 
+            spacing={2} 
+            paddingY={1} 
+            alignItems="center"
+        >
+            <Grid item>
+                <TextField
+                    label="Weight (kg)" 
+                    name="weight"
+                    value={weight}
+                    onChange={handleWeightChange}
+                />
             </Grid>
+            <Grid item>
+                <TextField 
+                    label="Reps" 
+                    name="reps"
+                    value={reps}
+                    onChange={handleRepsChange}
+                />
+            </Grid>
+            <Grid item md={1}>
+                <Button 
+                    variant="contained" 
+                    color="error" 
+                    onClick={handleDeleteSet}
+                    disabled={exerciseState.sets.length <= 1}
+                    aria-label="Delete Set"
+                    title="Click to remove this set"
+                >
+                    <RemoveCircleIcon/>
+                </Button>
+            </Grid>
+            <Grid item md={1}>
+                <ConsoleLogButton print={state} info="set"/>
+            </Grid>
+        </Grid>
     );
 };
 

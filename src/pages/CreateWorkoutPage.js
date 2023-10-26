@@ -16,7 +16,7 @@ const NewWorkoutPage = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [workoutData, setWorkoutData] = useState(null);
     const [workoutName, setWorkoutName] = useState("Untitled Workout");
-    const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+    const [allInitialDataLoaded, setInitialDataLoaded] = useState(false);
     const [renderedExercisesCount, setRenderedExercisesCount] = useState(0);
 
     const location = useLocation();
@@ -32,12 +32,12 @@ const NewWorkoutPage = () => {
     }, [user]);
 
     useEffect(() => {
-        if (workoutDataFromState && !initialDataLoaded) {
+        if (workoutDataFromState && !allInitialDataLoaded) {
             dispatch({ type: "SET_WORKOUT", payload: workoutDataFromState });
             setWorkoutName(workoutDataFromState.workoutName);
             setWorkoutData(workoutDataFromState);
         };
-    }, [workoutDataFromState, initialDataLoaded]);
+    }, [workoutDataFromState, allInitialDataLoaded]);
 
     const onInitialExerciseDataLoad = () => {
         setRenderedExercisesCount((count) => count + 1);   
@@ -92,7 +92,7 @@ const NewWorkoutPage = () => {
                     initialWorkoutData={workoutData}
                     onWorkoutNameChange={handleWorkoutNameChange}
                     onInitialExerciseDataLoad={onInitialExerciseDataLoad}
-                    initialDataLoaded={initialDataLoaded}
+                    allInitialDataLoaded={allInitialDataLoaded}
                 />
             </Box>
         </Box>
