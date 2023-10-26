@@ -17,25 +17,10 @@ const Exercise = ({
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { sets } = state;
+
     const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
     const [exerciseName, setExerciseName] = useState("");
     const [renderedSetCount, setRenderedSetCount] = useState(0);
-
-    const onInitialSetDataLoad = () => {
-        setRenderedSetCount((count) => count + 1);
-    };
-
-    useEffect(() => {
-        console.log(exerciseName, renderedSetCount, state.sets.length);
-
-        if (initialExerciseData && renderedSetCount === initialExerciseData.sets.length) {
-            onInitialExerciseDataLoad();
-        };
-    }, [renderedSetCount]);
-
-    useEffect(() => {
-        onExerciseChange(state);
-    }, [state]);
 
     useEffect(() => {
         if (initialExerciseData && !allInitialDataLoaded) {
@@ -44,6 +29,20 @@ const Exercise = ({
             dispatch({ type: "SET_EXERCISE", payload: initialExerciseData });
         };
     }, [initialExerciseData, allInitialDataLoaded]);
+
+    const onInitialSetDataLoad = () => {
+        setRenderedSetCount((count) => count + 1);
+    };
+
+    useEffect(() => {
+        if (initialExerciseData && renderedSetCount === initialExerciseData.sets.length) {
+            onInitialExerciseDataLoad();
+        };
+    }, [renderedSetCount]);
+
+    useEffect(() => {
+        onExerciseChange(state);
+    }, [state]);
 
     if (!programme) {
         useEffect(() => {

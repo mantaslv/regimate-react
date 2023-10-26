@@ -23,7 +23,9 @@ export const WorkoutExerciseCard = ({
                 <Grid container spacing={1} alignItems="center" paddingBottom={1}>
                     <Grid item md={3}>
                         <Button onClick={() => setOpenExerciseSelector(true)}>
-                            <Typography variant="h6" fontSize={16}>{exerciseState.exerciseName}</Typography>
+                            <Typography variant="h6" fontSize={16}>
+                                {exerciseState.exerciseName}
+                            </Typography>
                         </Button>
                         {exerciseSelector}
                     </Grid>

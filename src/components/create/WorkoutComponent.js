@@ -54,9 +54,7 @@ const WorkoutComponent = ({
             setRenderedExerciseCount((count) => count + 1);
         };
 
-        useEffect(() => {
-            console.log(workoutName, renderedExerciseCount, state.exercises.length);
-    
+        useEffect(() => {    
             if (initialWorkoutData && renderedExerciseCount === initialWorkoutData.exercises.length) {
                 onInitialWorkoutDataLoad();
             };
