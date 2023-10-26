@@ -27,8 +27,8 @@ export const ProgrammeExerciseCard = ({
                         sx={{ 
                             minWidth: 0, 
                             borderRadius: '10px', 
-                            p: -0.5, 
-                            mx: -0.5 
+                            px: 1,  
+                            mx: 0.5 
                         }}
                     >
                         <Typography 
@@ -40,7 +40,7 @@ export const ProgrammeExerciseCard = ({
                             sx={{ 
                                 color: 'white', 
                                 width: '100%', 
-                                '&:hover': { color: 'grey.400' } 
+                                '&:hover': { color: 'grey.400' }
                             }}
                         >
                             {exerciseName}
