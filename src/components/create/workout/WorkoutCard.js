@@ -1,6 +1,7 @@
 import { Box, Button, Grid } from "@mui/material";
 import { ExerciseContextProvider } from "../../../context/exerciseContext";
 import Exercise from "../ExerciseComponent";
+import ExerciseSelector from "../ExerciseSelector";
 
 export const WorkoutCard = ({
     handleExerciseChange,
@@ -10,7 +11,9 @@ export const WorkoutCard = ({
     exerciseList,
     addExercise,
     onInitialExerciseDataLoad,
-    allInitialDataLoaded
+    allInitialDataLoaded,
+    openExerciseSelector,
+    onOpenDialog,
 }) => {
     return (
         <Box>
@@ -31,9 +34,17 @@ export const WorkoutCard = ({
             ))}
             <Grid container spacing={2} marginTop={0}>
                 <Grid item>
-                    <Button variant="contained" onClick={addExercise}>
+                    <Button variant="contained" onClick={() => onOpenDialog(true)}>
                         Add Exercise
                     </Button>
+                    {openExerciseSelector && (
+                        <ExerciseSelector 
+                            openExerciseSelector={openExerciseSelector} 
+                            onOpenDialog={onOpenDialog}
+                            onExerciseSelection={addExercise}
+                            exerciseList={exerciseList}
+                        />
+                    )}
                 </Grid>
             </Grid>
         </Box>

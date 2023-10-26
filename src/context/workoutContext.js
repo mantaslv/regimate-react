@@ -20,7 +20,12 @@ export const workoutReducer = (state, action) => {
         case "ADD_EXERCISE":
             return {
                 ...state,
-                exercises: [...state.exercises, { id: uuidv4(), exerciseName: "", sets: [{ reps: "", weight: "" }] }]
+                exercises: [
+                    ...state.exercises, 
+                    { 
+                        id: uuidv4(), 
+                        exerciseName: action.payload, 
+                        sets: [{ reps: "", weight: "" }] }]
             };
         case "UPDATE_EXERCISE":
             return {

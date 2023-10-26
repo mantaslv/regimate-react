@@ -5,9 +5,12 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { ExerciseContextProvider } from "../../../context/exerciseContext";
 import Exercise from "../ExerciseComponent";
 import ConsoleLogButton from "../../ConsoleLogButton";
+import ExerciseSelector from "../ExerciseSelector";
 
 export const ProgrammeSplitCard = ({
     handleWorkoutNameChange,
+    onOpenDialog,
+    openExerciseSelector,
     handleExerciseChange,
     handleExerciseDelete,
     handleDeleteWorkout,
@@ -68,7 +71,7 @@ export const ProgrammeSplitCard = ({
                 </ExerciseContextProvider>
             ))}
             <Button
-                onClick={addExercise}
+                onClick={() => onOpenDialog(true)}
                 sx={{
                     margin: 1,
                     borderRadius: '16px',
@@ -79,6 +82,14 @@ export const ProgrammeSplitCard = ({
             >
                 <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
             </Button>
+            {openExerciseSelector && (
+                <ExerciseSelector 
+                    openExerciseSelector={openExerciseSelector} 
+                    onOpenDialog={onOpenDialog}
+                    onExerciseSelection={addExercise}
+                    exerciseList={exerciseList}
+                />
+            )}
             <ConsoleLogButton print={workoutState} info="workout"/>
         </Box>
     )

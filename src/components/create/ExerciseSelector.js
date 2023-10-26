@@ -4,10 +4,8 @@ import { useState } from "react";
 const ExerciseSelector = ({ 
     exerciseList, 
     openExerciseSelector, 
-    setOpenExerciseSelector, 
-    handleExerciseSelection, 
-    handleDeleteExercise, 
-    exerciseNotYetChosen 
+    onOpenDialog, 
+    onExerciseSelection, 
 }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -20,9 +18,12 @@ const ExerciseSelector = ({
     };
 
     const handleCloseDialog = () => {
-        setOpenExerciseSelector(false);
+        onOpenDialog(false);
+    };
 
-        if (exerciseNotYetChosen) handleDeleteExercise();
+    const handleExerciseSelection = (exerciseName) => {
+        handleCloseDialog();
+        onExerciseSelection(exerciseName);
     };
 
     return(

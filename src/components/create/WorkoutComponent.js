@@ -15,13 +15,19 @@ const WorkoutComponent = ({
 }) => {
     const { state, dispatch } = useWorkoutContext();
     const [workoutName, setWorkoutName] = useState("");
+    const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
     
     const handleDeleteWorkout = () => {
         onWorkoutDelete();
     };
+    
+    const onOpenDialog = (value) => {
+        setOpenExerciseSelector(value);
+    }; 
 
-    const addExercise = () => {
-        dispatch({ type: "ADD_EXERCISE" });
+    const addExercise = (exerciseName) => {
+        console.log(exerciseName);
+        dispatch({ type: "ADD_EXERCISE", payload: exerciseName });
     };
 
     const handleExerciseDelete = (id) => {
@@ -73,6 +79,8 @@ const WorkoutComponent = ({
                 handleDeleteWorkout={handleDeleteWorkout}
                 addExercise={addExercise}
                 onInitialExerciseDataLoad={onInitialExerciseDataLoad}
+                onOpenDialog={onOpenDialog}
+                openExerciseSelector={openExerciseSelector}
             />
         );
     };
@@ -88,6 +96,8 @@ const WorkoutComponent = ({
                 addExercise={addExercise}
                 onInitialExerciseDataLoad={onInitialExerciseDataLoad}
                 allInitialDataLoaded={allInitialDataLoaded}
+                onOpenDialog={onOpenDialog}
+                openExerciseSelector={openExerciseSelector}
             />
         );
     };

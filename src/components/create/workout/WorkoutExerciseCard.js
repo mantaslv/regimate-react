@@ -15,7 +15,8 @@ export const WorkoutExerciseCard = ({
     workoutState,
     initialExerciseData,
     allInitialDataLoaded,
-    onInitialSetDataLoad
+    onInitialSetDataLoad,
+    exerciseName
 }) => {
     return (
         <Card sx={{ mt: 2, backgroundColor: 'grey.200' }}>
@@ -24,7 +25,7 @@ export const WorkoutExerciseCard = ({
                     <Grid item md={3}>
                         <Button onClick={() => setOpenExerciseSelector(true)}>
                             <Typography variant="h6" fontSize={16}>
-                                {exerciseState.exerciseName}
+                                {exerciseName}
                             </Typography>
                         </Button>
                         {exerciseSelector}

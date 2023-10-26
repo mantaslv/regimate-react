@@ -12,15 +12,20 @@ const Exercise = ({
     initialExerciseData,
     allInitialDataLoaded,
     onInitialExerciseDataLoad,
-    programme=false
+    programme=false,
+    exercise
 }) => {
     const { state: workoutState } = useWorkoutContext();
     const { dispatch, state } = useExerciseContext();
     const { sets } = state;
 
-    const [openExerciseSelector, setOpenExerciseSelector] = useState(true);
-    const [exerciseName, setExerciseName] = useState("");
+    const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
+    const [exerciseName, setExerciseName] = useState(exercise.exerciseName);
     const [renderedSetCount, setRenderedSetCount] = useState(0);
+
+    useEffect(() => {
+        handleExerciseNameChange(exerciseName);
+    }, []);
 
     useEffect(() => {
         if (initialExerciseData && !allInitialDataLoaded) {
@@ -80,22 +85,14 @@ const Exercise = ({
         setOpenExerciseSelector(false)
     };
 
-    const ExerciseSelectorWithActions = ({ exerciseNotYetChosen}) => {
+    const ExerciseSelectorWithActions = () => {
         return (
             <ExerciseSelector 
                 openExerciseSelector={openExerciseSelector} 
-                setOpenExerciseSelector={setOpenExerciseSelector}
-                handleExerciseSelection={handleExerciseNameChange}
-                handleDeleteExercise={handleDeleteExercise}
-                exerciseNotYetChosen={exerciseNotYetChosen}
+                onOpenDialog={setOpenExerciseSelector}
+                onExerciseSelection={handleExerciseNameChange}
                 exerciseList={exerciseList}
             />
-        );
-    };
-
-    if (exerciseName === "") {
-        return (
-            <ExerciseSelectorWithActions exerciseNotYetChosen={true}/>
         );
     };
 
@@ -117,6 +114,7 @@ const Exercise = ({
     if (!programme) {
         return (
             <WorkoutExerciseCard
+                exerciseName={exerciseName}
                 exerciseState={state}
                 workoutState={workoutState}
                 initialExerciseData={initialExerciseData}
