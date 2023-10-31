@@ -7,6 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/create/WorkoutComponent'
 import fetchExercises from "../logic/fetchExercises";
 import { CreateToolbar } from "../components/create/CreateToolbar";
+import saveWorkoutData from "../logic/saveWorkoutData";
 
 const NewWorkoutPage = () => {
     const navigate = useNavigate();
@@ -58,23 +59,15 @@ const NewWorkoutPage = () => {
     };
 
     const completeWorkout = async () => {
-        const res = await fetch(process.env.REACT_APP_API_URL + '/api/workouts', {
-            method: 'POST',
-            body: JSON.stringify({ id: state.id, workoutName: state.workoutName, exercises: state.exercises }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            }
+        saveWorkoutData({
+            token: user.token,
+            dataToSave: {
+                id: state.id, 
+                workoutName: state.workoutName, 
+                exercises: state.exercises,
+            },
+            onComplete: () => navigate('/view-workouts'),
         });
-        const json = await res.json();
-        console.log(json);
-
-        if (!res.ok) {
-            console.log(json);
-        };
-        if (res.ok) {
-            navigate('/view-workouts');
-        };
     };
 
     return (
