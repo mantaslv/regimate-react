@@ -7,6 +7,7 @@ import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
 import { CreateToolbar } from "../components/create/CreateToolbar";
+import saveWorkoutData from "../logic/saveWorkoutData";
 
 const NewProgrammePage = () => {
     const navigate = useNavigate();
@@ -56,20 +57,15 @@ const NewProgrammePage = () => {
     };
 
     const saveProgramme = async () => {
-        const res = await fetch(process.env.REACT_APP_API_URL + '/api/programmes', {
-            method: 'POST',
-            body: JSON.stringify({ programmeName: state.programmeName, workouts: state.workouts }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            }
+        saveWorkoutData({
+            token: user.token,
+            isProgramme: true,
+            dataToSave: {
+                programmeName: state.programmeName,
+                workouts: state.workouts,
+            },
+            onComplete: () => navigate('/view-programmes'),
         });
-
-        const json = await res.json();
-        console.log(json);
-
-        if (!res.ok) console.log(json);
-        if (res.ok) navigate('/view-programmes');
     };
 
     return (

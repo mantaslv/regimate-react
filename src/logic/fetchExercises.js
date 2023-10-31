@@ -6,11 +6,10 @@ const fetchExercises = async () => {
         if (res.ok) {
             return json;
         } else {
-            throw new Error('Error fetching exercises');
+            throw new Error('Error fetching exercises: ', json);
         };
     } catch (error) {
         console.error("Error fetching exercises:", error);
-        return [];
     };
 };
   
