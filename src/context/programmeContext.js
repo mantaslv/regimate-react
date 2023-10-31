@@ -10,12 +10,18 @@ const generateNewWorkout = () => ({
 });
 
 const initialState = {
+    exerciseList: [],
     programmeName: "",
     workouts: Array.from({ length: 3 }, () => generateNewWorkout())
 };
 
 export const programmeReducer = (state, action) => {
     switch (action.type) {
+        case "SET_EXERCISE_LIST":
+            return {
+                ...state,
+                exerciseList: action.payload
+            };
         case "SET_PROGRAMME":
             return action.payload;
         case "UPDATE_PROGRAMME_NAME":

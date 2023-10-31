@@ -16,6 +16,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 import { WorkoutContextProvider } from './context/workoutContext';
 import { ProgrammesContextProvider } from './context/programmesContext';
 import { ProgrammeContextProvider } from './context/programmeContext';
+import ProgrammeEditor from './pages/ProgrammeEditor';
 
 const theme = createTheme();
 
@@ -33,7 +34,7 @@ const App = () => {
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup/>: <Navigate to="/" />} />
                         <Route path='/create-workout' element={user ? <WorkoutContextProvider><NewWorkout /></WorkoutContextProvider> : <Navigate to="/login" />} />
-                        <Route path='/create-programme' element={<ProgrammeContextProvider><NewProgrammePage/></ProgrammeContextProvider>} />
+                        <Route path='/create-programme' element={<ProgrammeContextProvider><ProgrammeEditor/></ProgrammeContextProvider>} />
                         <Route path='/view-workouts' element={user ? <WorkoutContextProvider><Workouts/></WorkoutContextProvider> : <Navigate to="/login" />} />
                         <Route path='/view-programmes' element={user ? <ProgrammesContextProvider><Programmes/></ProgrammesContextProvider> : <Navigate to="/login" />} />
                     </Routes>
