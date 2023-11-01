@@ -7,7 +7,7 @@ import { downloadProgramme } from "../../logic/downloadProgramme";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import ConsoleLogButton from "../ConsoleLogButton";
 
-export const CreateToolbar = ({
+export const EditToolbar = ({
     nameInputValue,
     handleNameInputChange,
     stateType,

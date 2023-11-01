@@ -1,23 +1,60 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { EditToolbar } from "../components/create/EditToolbar";
+import saveWorkoutData from "../logic/saveWorkoutData";
 
 const ProgrammeEditor = () => {
     const { state, dispatch } = useProgrammeContext();
+    const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+    const [programmeName, setProgrammeName] = useState("Untitled Programme");
 
+    const navigate = useNavigate();
     const location = useLocation();
     const locationState = location.state || {};
-    const programmeDataFromState = locationState.programmeData || null;
+    const initialProgrammeData = locationState.programmeData || null;
 
     useEffect(() => {
-        if (programmeDataFromState) {
-            dispatch({ type: "SET_PROGRAMME", payload: programmeDataFromState });
+        if (initialProgrammeData) {
+            dispatch({ type: "SET_PROGRAMME", payload: initialProgrammeData });
+            setProgrammeName(initialProgrammeData.programmeName);
+            setInitialLoadComplete(true);
         };
-    }, [programmeDataFromState])
+    }, [initialProgrammeData]);
 
     useEffect(() => {
-        console.log(state);
-    }, [state])
+        initialLoadComplete && console.log(state);
+    }, [state]);
+
+    const handleProgrammeNameChange = (event) => {
+        setProgrammeName(event.target.value);
+        dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: event.target.value });
+    };
+
+    const saveProgramme = async () => {
+        saveWorkoutData({
+            token: user.token,
+            isProgramme: true,
+            dataToSave: {
+                programmeName: state.programmeName,
+                workouts: state.workouts,
+            },
+            onComplete: () => navigate('/view-programmes'),
+        });
+    };
+    
+    return (
+        <Box>
+            <EditToolbar
+                nameInputValue={programmeName}
+                handleNameInputChange={handleProgrammeNameChange}
+                stateType="programme"
+                saveState={saveProgramme}
+                state={state}
+            />
+        </Box>
+    )
 };
 
 export default ProgrammeEditor;

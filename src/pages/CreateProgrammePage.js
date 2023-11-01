@@ -6,7 +6,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
-import { CreateToolbar } from "../components/create/CreateToolbar";
+import { EditToolbar } from "../components/create/EditToolbar";
 import saveWorkoutData from "../logic/saveWorkoutData";
 
 const NewProgrammePage = () => {
