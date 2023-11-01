@@ -1,13 +1,19 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 
 const ExerciseSelector = ({ 
-    exerciseList, 
     openExerciseSelector, 
     onOpenDialog, 
     onExerciseSelection, 
 }) => {
+    const { state } = useProgrammeContext();
     const [searchTerm, setSearchTerm] = useState("");
+    const [exerciseList, setExerciseList] = useState([]);
+
+    useEffect(() => {
+        setExerciseList(state.exerciseList);
+    }, [state]);
 
     const filteredExercises = exerciseList.filter(exercise =>
         exercise.name.toLowerCase().includes(searchTerm.toLowerCase())

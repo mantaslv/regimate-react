@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import AddTrainingItemButton from "../components/AddTrainingItemButton";
 import Workout from "../components/Workout";
+import fetchExercises from "../logic/fetchExercises";
 
 const ProgrammeEditor = () => {
     const { state, dispatch } = useProgrammeContext();
@@ -16,6 +16,12 @@ const ProgrammeEditor = () => {
     const location = useLocation();
     const locationState = location.state || {};
     const initialProgrammeData = locationState.programmeData || null;
+
+    useEffect(() => {
+        fetchExercises()
+            .then(data => dispatch({ type: "SET_EXERCISE_LIST", payload: data }))
+            .catch(error => console.error("Error: ", error));
+    }, []);
 
     useEffect(() => {
         if (!initialLoadComplete && initialProgrammeData) {
@@ -67,7 +73,14 @@ const ProgrammeEditor = () => {
                     ))}
                     {state.workouts.length < 6 &&
                         <Grid item>
-                            <AddTrainingItemButton onClick={handleAddWorkout}/>
+                            <AddTrainingItemButton 
+                                onClick={handleAddWorkout} 
+                                sx={{ 
+                                    m: -1,
+                                    height: '100%',
+                                    maxWidth: '10px'
+                                }}
+                            />
                         </Grid>
                     }
                 </Grid>

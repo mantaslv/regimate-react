@@ -37,13 +37,32 @@ export const programmeReducer = (state, action) => {
                     generateNewWorkout()
                 ]
             };
-        case "UPDATE_WORKOUT":
+        case "UPDATE_WORKOUT_NAME":
             return {
                 ...state,
                 workouts: state.workouts.map((workout) => 
-                    workout.id === action.payload.id ? { ...workout, workoutName: action.payload.changes} : workout
+                    workout.id === action.payload.id ? { ...workout, workoutName: action.payload.newName} : workout
                 )
             };
+            case "ADD_EXERCISE":
+                return {
+                    ...state,
+                    workouts: state.workouts.map((workout) =>
+                        workout.id === action.payload.id
+                            ? {
+                                ...workout,
+                                exercises: [
+                                    ...workout.exercises,
+                                    {
+                                        id: uuidv4(),
+                                        exerciseName: action.payload.exerciseName,
+                                        sets: [{ reps: "", weight: "" }]
+                                    }
+                                ]
+                            }
+                            : workout
+                    )
+                };
         case "DELETE_WORKOUT":
             return {
                 ...state,

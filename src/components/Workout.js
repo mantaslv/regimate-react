@@ -3,23 +3,35 @@ import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { useEffect, useState } from "react";
 import ConsoleLogButton from "./ConsoleLogButton";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddTrainingItemButton from "./AddTrainingItemButton";
+import ExerciseSelector from "./create/ExerciseSelector";
 
 const Workout = ({ index, id }) => {
     const { state, dispatch } = useProgrammeContext();
     const [workoutName, setWorkoutName] = useState(state.workouts[index].workoutName);
     const [workoutData, setWorkoutData] = useState(state.workouts[index]);
+    const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
 
     useEffect(() => {
         setWorkoutData(state.workouts[index]);
     }, [state]);
 
+    const onOpenDialog = (value) => {
+        setOpenExerciseSelector(value);
+    }; 
+
     const handleWorkoutNameChange = (event) => {
-        setWorkoutName(event.target.value);
-        dispatch({ type: "UPDATE_WORKOUT", payload: { id: id, changes: event.target.value } });
+        const newName = event.target.value;
+        setWorkoutName(newName);
+        dispatch({ type: "UPDATE_WORKOUT", payload: { id, newName } });
     };
 
     const handleDeleteWorkout = () => {
         dispatch({ type: "DELETE_WORKOUT", payload: id });
+    };
+
+    const addExercise = (exerciseName) => {
+        dispatch({ type: "ADD_EXERCISE", payload: { id, exerciseName } });
     };
 
     return (
@@ -54,6 +66,17 @@ const Workout = ({ index, id }) => {
                     <RemoveCircleIcon/>
                 </IconButton>
             </Box>
+            <AddTrainingItemButton 
+                onClick={() => onOpenDialog(true)} 
+                sx={{ m: 1, width: '100%' }}
+            />
+            {openExerciseSelector && (
+                <ExerciseSelector 
+                    openExerciseSelector={openExerciseSelector} 
+                    onOpenDialog={onOpenDialog}
+                    onExerciseSelection={addExercise}
+                />
+            )}
             <ConsoleLogButton print={workoutData} info="workout"/>
         </Box>
     )
