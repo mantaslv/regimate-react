@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
-import { Box } from "@mui/material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Box, Button, Grid } from "@mui/material";
+import AddTrainingItemButton from "../components/AddTrainingItemButton";
 
 const ProgrammeEditor = () => {
     const { state, dispatch } = useProgrammeContext();
@@ -27,6 +29,10 @@ const ProgrammeEditor = () => {
         setProgrammeName(event.target.value);
         dispatch({ type: "UPDATE_PROGRAMME_NAME", payload: event.target.value });
     };
+
+    const handleAddWorkout = () => {
+        dispatch({ type: "ADD_WORKOUT" });
+    };
     
     return (
         <Box>
@@ -36,9 +42,23 @@ const ProgrammeEditor = () => {
                 trainingData={programmeData}
             />
             <Box sx={{ my: '105px' }}>
-
+                <Grid 
+                    container 
+                    display="flex" 
+                    justifyContent="center" 
+                    spacing={2} 
+                    alignItems="top" 
+                    sx={{ mt: 2, mb: 2 }}
+                >
+                    {state.workouts.length < 6 &&
+                        <Grid item>
+                            <AddTrainingItemButton onClick={handleAddWorkout}/>
+                        </Grid>
+                    }
+                </Grid>
             </Box>
         </Box>
+        
     )
 };
 
