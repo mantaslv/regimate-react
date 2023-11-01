@@ -47,11 +47,10 @@ const ProgrammeEditor = () => {
     return (
         <Box>
             <EditToolbar
+                state={state}
+                saveState={saveProgramme}
                 nameInputValue={programmeName}
                 handleNameInputChange={handleProgrammeNameChange}
-                stateType="programme"
-                saveState={saveProgramme}
-                state={state}
             />
         </Box>
     )

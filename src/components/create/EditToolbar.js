@@ -10,11 +10,13 @@ import ConsoleLogButton from "../ConsoleLogButton";
 export const EditToolbar = ({
     nameInputValue,
     handleNameInputChange,
-    stateType,
+    isWorkout=false,
     saveState,
     state
 }) => {
     const { user } = useAuthContext();
+
+    const stateType = isWorkout ? 'workout' : 'programme';
 
     return (
         <AppBar 
