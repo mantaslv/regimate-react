@@ -5,6 +5,7 @@ import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Box, Button, Grid } from "@mui/material";
 import AddTrainingItemButton from "../components/AddTrainingItemButton";
+import Workout from "../components/Workout";
 
 const ProgrammeEditor = () => {
     const { state, dispatch } = useProgrammeContext();
@@ -22,7 +23,9 @@ const ProgrammeEditor = () => {
             setProgrammeName(initialProgrammeData.programmeName);
             setProgrammeData(initialProgrammeData);
             setInitialLoadComplete(true);
-        }
+        } else {
+            setProgrammeData(state);
+        };
     }, [initialProgrammeData, initialLoadComplete, state]);
 
     const handleProgrammeNameChange = (event) => {
@@ -42,14 +45,26 @@ const ProgrammeEditor = () => {
                 trainingData={programmeData}
             />
             <Box sx={{ my: '105px' }}>
-                <Grid 
-                    container 
+                <Grid container 
                     display="flex" 
                     justifyContent="center" 
                     spacing={2} 
                     alignItems="top" 
                     sx={{ mt: 2, mb: 2 }}
                 >
+                    {state.workouts.map((workout, i) => (
+                        <Grid item key={workout.id} md={2} 
+                            sx={{ 
+                                pr: 2, 
+                                ...(i !== state.workouts.length - 1 && { 
+                                    borderRight: '3px dashed',
+                                    borderColor: 'grey.400'
+                                })
+                            }}
+                        >
+                            <Workout index={i} id={workout.id}/>
+                        </Grid>
+                    ))}
                     {state.workouts.length < 6 &&
                         <Grid item>
                             <AddTrainingItemButton onClick={handleAddWorkout}/>

@@ -41,7 +41,7 @@ export const programmeReducer = (state, action) => {
             return {
                 ...state,
                 workouts: state.workouts.map((workout) => 
-                    workout.id === action.payload.id ? { ...workout, ...action.payload.changes} : workout
+                    workout.id === action.payload.id ? { ...workout, workoutName: action.payload.changes} : workout
                 )
             };
         case "DELETE_WORKOUT":
