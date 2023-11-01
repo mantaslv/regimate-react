@@ -6,8 +6,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import ProgrammeComponent from "../components/create/ProgrammeComponent";
 import fetchExercises from "../logic/fetchExercises";
-import { EditToolbar } from "../components/create/EditToolbar";
-import saveWorkoutData from "../logic/saveWorkoutData";
+import { EditToolbar } from "../components/create/EditTrainingToolbar";
+import saveWorkoutData from "../logic/uploadTrainingData";
 
 const NewProgrammePage = () => {
     const navigate = useNavigate();

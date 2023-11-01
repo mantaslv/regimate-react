@@ -6,8 +6,8 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import WorkoutComponent from '../components/create/WorkoutComponent'
 import fetchExercises from "../logic/fetchExercises";
-import { EditToolbar } from "../components/create/EditToolbar";
-import saveWorkoutData from "../logic/saveWorkoutData";
+import { EditToolbar } from "../components/create/EditTrainingToolbar";
+import saveWorkoutData from "../logic/uploadTrainingData";
 
 const NewWorkoutPage = () => {
     const navigate = useNavigate();
