@@ -9,6 +9,12 @@ const generateNewWorkout = () => ({
     exercises: []
 });
 
+const generateNewSet = (reps) => ({
+    id: uuidv4(),
+    reps: reps,
+    weight: ""
+});
+
 const initialState = {
     exerciseList: [],
     programmeName: "",
@@ -37,6 +43,11 @@ export const programmeReducer = (state, action) => {
                     generateNewWorkout()
                 ]
             };
+        case "DELETE_WORKOUT":
+            return {
+                ...state,
+                workouts: state.workouts.filter((workout) => workout.id !== action.payload)
+            };
         case "UPDATE_WORKOUT_NAME":
             return {
                 ...state,
@@ -44,29 +55,79 @@ export const programmeReducer = (state, action) => {
                     workout.id === action.payload.id ? { ...workout, workoutName: action.payload.newName} : workout
                 )
             };
-            case "ADD_EXERCISE":
-                return {
-                    ...state,
-                    workouts: state.workouts.map((workout) =>
-                        workout.id === action.payload.id
-                            ? {
-                                ...workout,
-                                exercises: [
-                                    ...workout.exercises,
-                                    {
-                                        id: uuidv4(),
-                                        exerciseName: action.payload.exerciseName,
-                                        sets: [{ reps: "", weight: "" }]
-                                    }
-                                ]
-                            }
-                            : workout
-                    )
-                };
-        case "DELETE_WORKOUT":
+        case "ADD_EXERCISE":
             return {
                 ...state,
-                workouts: state.workouts.filter((workout) => workout.id !== action.payload)
+                workouts: state.workouts.map((workout) =>
+                    workout.id === action.payload.id
+                        ? {
+                            ...workout,
+                            exercises: [
+                                ...workout.exercises,
+                                {
+                                    id: uuidv4(),
+                                    exerciseName: action.payload.exerciseName,
+                                    sets: [{ reps: "", weight: "" }]
+                                }
+                            ]
+                        }
+                        : workout
+                )
+            };
+        case "UPDATE_EXERCISE_NAME":
+            return {
+                ...state,
+                workouts: state.workouts.map((workout) => (
+                    workout.id === action.payload.workoutId
+                        ? {
+                            ...workout,
+                            exercises: workout.exercises.map((exercise) => (
+                                exercise.id === action.payload.exerciseId
+                                    ? {
+                                        ...exercise,
+                                        exerciseName: action.payload.newName
+                                    }
+                                    : exercise
+                            ))
+                        }
+                        : workout
+                ))
+            };
+        case "DELETE_EXERCISE":
+            return {
+                ...state,
+                workouts: state.workouts.map((workout) => (
+                    workout.id === action.payload.workoutId
+                        ? {
+                            ...workout,
+                            exercises: workout.exercises.filter((exercise) => (
+                                exercise.id !== action.payload.exerciseId
+                            ))
+                        }
+                        : workout
+                ))
+            };
+        case "UPDATE_SETS_X_REPS":
+            return {
+                ...state,
+                workouts: state.workouts.map((workout) => (
+                    workout.id === action.payload.workoutId
+                        ? {
+                            ...workout,
+                            exercises: workout.exercises.map((exercise) => (
+                                exercise.id === action.payload.exerciseId
+                                    ? {
+                                        ...exercise,
+                                        sets: Array.from(
+                                            { length: action.payload.sets }, 
+                                            () => generateNewSet(action.payload.reps)
+                                        )
+                                    }
+                                    : exercise
+                            ))
+                        }
+                        : workout
+                ))
             };
         default:
             return state;

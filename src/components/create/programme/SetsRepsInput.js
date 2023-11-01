@@ -1,5 +1,46 @@
 import { Input, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
+import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+
+const SetsRepsInput = ({ workoutId, exerciseId }) => {
+    const { state, dispatch } = useProgrammeContext();
+
+    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const exercise = workout && workout.exercises.find((ex) => ex.id === exerciseId);
+
+    const [sets, setSets] = useState(exercise ? exercise.sets.length: 1);
+    const [reps, setReps] = useState(exercise ? exercise.sets[0].reps: 1);
+
+    useEffect(() => {
+        setSets(exercise ? exercise.sets.length: 1)
+        setReps(exercise ? exercise.sets[0].reps: 1);
+    }, [state]);
+
+    const handleSetsChange = (sets) => {
+        setSets(sets);
+    };
+
+    const handleRepsChange = (reps) => {
+        setReps(reps);
+    };
+
+    const handleSetsRepsChange = (sets, reps) => {
+        dispatch({ type: "UPDATE_SETS_X_REPS", payload: { workoutId, exerciseId, sets, reps } });
+    };
+
+    useEffect(() => {
+        handleSetsRepsChange(sets, reps);
+    }, [sets, reps]);
+
+    return (
+        <>
+            <NamedInput label='Sets' setVariable={handleSetsChange} value={sets}/>
+            <NamedInput label='Reps' setVariable={handleRepsChange} value={reps}/>
+        </>
+    );
+};
+
+export default SetsRepsInput;
 
 const NamedInput = ({label, value, setVariable}) => {
     const [variableValue, setVariableValue] = useState(value);
@@ -43,49 +84,3 @@ const NamedInput = ({label, value, setVariable}) => {
         </>
     );
 };
-
-const SetsRepsInput = ({ 
-    handleSetsRepsChange, 
-    initialExerciseData, 
-    onInitialSetDataLoad, 
-    allInitialDataLoaded 
-}) => {
-    const [sets, setSets] = useState(1);
-    const [reps, setReps] = useState(1);
-    const [initialSetDataLoaded, setInitialSetDataLoaded] = useState(false);
-
-    const handleSetsChange = (sets) => {
-        setSets(sets);
-    };
-
-    const handleRepsChange = (reps) => {
-        setReps(reps);
-    };
-
-    useEffect(() => {
-        handleSetsRepsChange(sets, reps);
-    }, [sets, reps]);
-
-    useEffect(() => {
-        if (initialExerciseData && !allInitialDataLoaded) {
-            setSets(initialExerciseData.sets.length);
-            setReps(initialExerciseData.sets[0].reps);
-            setInitialSetDataLoaded(true);
-        };
-    }, [initialExerciseData, allInitialDataLoaded]);
-
-    useEffect(() => {
-        if (initialSetDataLoaded) {
-            Array.from({ length: sets }, () => onInitialSetDataLoad());
-        };
-    }, [initialSetDataLoaded]);
-
-    return (
-        <>
-            <NamedInput label='Sets' setVariable={handleSetsChange} value={sets}/>
-            <NamedInput label='Reps' setVariable={handleRepsChange} value={reps}/>
-        </>
-    );
-};
-
-export default SetsRepsInput;

@@ -31,6 +31,7 @@ const ProgrammeEditor = () => {
             setInitialLoadComplete(true);
         } else {
             setProgrammeData(state);
+            console.log(state);
         };
     }, [initialProgrammeData, initialLoadComplete, state]);
 

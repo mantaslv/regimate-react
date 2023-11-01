@@ -5,6 +5,7 @@ import ConsoleLogButton from "./ConsoleLogButton";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddTrainingItemButton from "./AddTrainingItemButton";
 import ExerciseSelector from "./create/ExerciseSelector";
+import Exercise from "./Exercise";
 
 const Workout = ({ index, id }) => {
     const { state, dispatch } = useProgrammeContext();
@@ -66,6 +67,9 @@ const Workout = ({ index, id }) => {
                     <RemoveCircleIcon/>
                 </IconButton>
             </Box>
+            {workoutData.exercises && workoutData.exercises.map((ex) => (
+                <Exercise key={ex.id} exerciseId={ex.id} workoutId={id}/>
+            ))}
             <AddTrainingItemButton 
                 onClick={() => onOpenDialog(true)} 
                 sx={{ m: 1, width: '100%' }}
