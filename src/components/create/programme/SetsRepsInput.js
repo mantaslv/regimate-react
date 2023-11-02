@@ -12,20 +12,14 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
     const [reps, setReps] = useState(exercise ? exercise.sets[0].reps: 1);
 
     useEffect(() => {
-        setSets(exercise ? exercise.sets.length: 1)
-        setReps(exercise ? exercise.sets[0].reps: 1);
-    }, [state]);
-
-    const handleSetsChange = (sets) => {
-        setSets(sets);
-    };
-
-    const handleRepsChange = (reps) => {
-        setReps(reps);
-    };
+        handleSetsRepsChange(sets, reps);
+    }, [sets, reps]);
 
     const handleSetsRepsChange = (sets, reps) => {
-        dispatch({ type: "UPDATE_SETS_X_REPS", payload: { workoutId, exerciseId, sets, reps } });
+        dispatch({ 
+            type: "UPDATE_SETS_X_REPS", 
+            payload: { workoutId, exerciseId, sets, reps } 
+        });
     };
 
     useEffect(() => {
@@ -34,8 +28,8 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
 
     return (
         <>
-            <NamedInput label='Sets' setVariable={handleSetsChange} value={sets}/>
-            <NamedInput label='Reps' setVariable={handleRepsChange} value={reps}/>
+            <NamedInput label='Sets' setVariable={(val) => setSets(val)} value={sets}/>
+            <NamedInput label='Reps' setVariable={(val) => setReps(val)} value={reps}/>
         </>
     );
 };
