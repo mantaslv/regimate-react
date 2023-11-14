@@ -7,14 +7,17 @@ import AddTrainingItemButton from "./AddTrainingItemButton";
 import ExerciseSelector from "./create/ExerciseSelector";
 import Exercise from "./Exercise";
 
-const Workout = ({ index, workoutId }) => {
+const Workout = ({ workoutId }) => {
     const { state, dispatch } = useProgrammeContext();
-    const [workoutName, setWorkoutName] = useState(state.workouts[index].workoutName);
-    const [workoutData, setWorkoutData] = useState(state.workouts[index]);
+
+    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const [workoutData, setWorkoutData] = useState(workout);
+    const [workoutName, setWorkoutName] = useState(workout.workoutName);
+    
     const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
 
     useEffect(() => {
-        setWorkoutData(state.workouts[index]);
+        setWorkoutData(workout);
     }, [state]);
 
     const onOpenDialog = (value) => {
