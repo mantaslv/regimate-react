@@ -15,9 +15,30 @@ const ExerciseSelector = ({
         setExerciseList(state.exerciseList);
     }, [state]);
 
-    const filteredExercises = exerciseList.filter(exercise =>
+    const exactMatchFilteredExercises = exerciseList.filter(exercise => 
         exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const splitMatchFilteredExercises = exerciseList.filter(exercise => 
+        !exactMatchFilteredExercises.includes(exercise) &&
+        searchTerm.toLowerCase().split(" ").every(word => 
+            exercise.name.toLowerCase().split(" ").includes(word)
+        )
+    );
+
+    const partialMatchFilteredExercises = exerciseList.filter(exercise => 
+        !exactMatchFilteredExercises.includes(exercise) &&
+        !splitMatchFilteredExercises.includes(exercise) &&
+        searchTerm.toLowerCase().split(" ").some(word =>
+            exercise.name.toLowerCase().split(" ").includes(word)
+        )
+    );
+    
+    const filteredExercises = [
+        ...exactMatchFilteredExercises, 
+        ...splitMatchFilteredExercises, 
+        ...partialMatchFilteredExercises
+    ]
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
