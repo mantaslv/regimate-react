@@ -12,11 +12,6 @@ const Exercise = ({ exerciseId, workoutId }) => {
     const workout = state.workouts.find((wo) => wo.id === workoutId);
     const exercise = workout && workout.exercises.find((ex) => ex.id === exerciseId);
     const [exerciseName, setExerciseName] = useState(exercise ? exercise.exerciseName : "");
-    const [exerciseData, setExerciseData] = useState(exercise);
-
-    useEffect(() => {
-        setExerciseData(exercise);
-    }, [state]);
 
     const handleExerciseNameChange = (newName) => {
         setExerciseName(newName);
