@@ -40,11 +40,9 @@ const Programmes = () => {
     }, [user]);
 
     return (
-        <Box sx={{ mb: 2 }}>   
+        <Box sx={{ mb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>            
             {loading ? (
-                <Box sx={{ display: 'flex' }}>
-                    <CircularProgress />
-                </Box>
+                <CircularProgress size={80} sx={{ mt: 10 }}/>
             ) : programmes && programmes.length > 0 ? (
                 <>
                     {programmes.map((programme) => (
@@ -56,11 +54,13 @@ const Programmes = () => {
                     No programmes found.
                 </Typography>
             )}
-            <Grid container spacing={1} marginTop={0}>
-                <Grid item>
-                    <ConsoleLogButton print={programmes} info="programmes"/>
+            {!loading && (
+                <Grid container spacing={1} marginTop={0}>
+                    <Grid item>
+                        <ConsoleLogButton print={programmes} info="programmes"/>
+                    </Grid>
                 </Grid>
-            </Grid>
+            )}
         </Box>
     );
 };
