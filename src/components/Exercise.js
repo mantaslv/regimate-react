@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { Box, Button, Card, CardContent, CardHeader, Grid, IconButton, Typography } from "@mui/material";
 import ExerciseSelector from "./create/ExerciseSelector";
@@ -6,6 +6,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import SetsRepsInput from "./create/programme/SetsRepsInput";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import ConsoleLogButton from "./ConsoleLogButton";
+import Set from "./Set";
 
 const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
     const { state, dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -14,6 +15,11 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
     const workout = inWorkout ? state : state.workouts.find((wo) => wo.id === workoutId);
     const exercise = workout && workout.exercises.find((ex) => ex.id === exerciseId);
     const [exerciseName, setExerciseName] = useState(exercise ? exercise.exerciseName : "");
+    const [exerciseData, setExerciseData] = useState(exercise);
+
+    useEffect(() => {
+        setExerciseData(exercise);
+    }, [state]);
 
     const handleExerciseNameChange = (newName) => {
         setExerciseName(newName);
@@ -25,12 +31,16 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
         dispatch({ type: "DELETE_EXERCISE", payload: { workoutId, exerciseId } });
     };
 
+    const addSet = () => {
+        dispatch({ type: "ADD_SET", payload: { exerciseId } });
+    };
+
     if (inWorkout) {
         return (
             <Card sx={{ mt: 2, /*backgroundColor: 'grey.200'*/}}> 
                 <CardHeader 
                     title={
-                        <Button>
+                        <Button onClick={() => setOpenExerciseSelector(true)}>
                             <Typography variant="h6" fontSize={16}>
                                 {exerciseName}
                             </Typography>
@@ -38,10 +48,13 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
                     }>
                 </CardHeader>
                 <CardContent>
+                    {exerciseData.sets && exerciseData.sets.map(set => (
+                        <Set key={set.id} exerciseId={exerciseId} setId={set.id}/>
+                    ))}
                     <Grid container spacing={1} marginTop={0} alignItems="center">
-                        {/* <Grid item>
+                        <Grid item>
                             <Button variant="contained" onClick={addSet}>Add Set</Button>
-                        </Grid> */}
+                        </Grid>
                         <Grid item>
                             <Button 
                                 variant="contained" 
@@ -59,7 +72,14 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
                         <Grid item>
                             <ConsoleLogButton print={exercise} info="exercise"/>
                         </Grid>
-                    </Grid>  
+                    </Grid>
+                    {openExerciseSelector && (
+                        <ExerciseSelector inWorkout
+                            openExerciseSelector={openExerciseSelector} 
+                            onOpenDialog={setOpenExerciseSelector}
+                            onExerciseSelection={handleExerciseNameChange}
+                        />
+                    )}
                 </CardContent>
             </Card>
         )

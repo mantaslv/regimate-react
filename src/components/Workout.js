@@ -1,4 +1,4 @@
-import { Box, IconButton, Input } from "@mui/material"
+import { Box, Button, Grid, IconButton, Input } from "@mui/material"
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { useEffect, useState } from "react";
 import ConsoleLogButton from "./ConsoleLogButton";
@@ -6,11 +6,12 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddTrainingItemButton from "./AddTrainingItemButton";
 import ExerciseSelector from "./create/ExerciseSelector";
 import Exercise from "./Exercise";
+import { useWorkoutContext } from "../hooks/useWorkoutContext";
 
-const Workout = ({ workoutId }) => {
-    const { state, dispatch } = useProgrammeContext();
+const Workout = ({ workoutId, inWorkout=false }) => {
+    const { state, dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
 
-    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const workout = inWorkout ? state : state.workouts.find((wo) => wo.id === workoutId);
     const [workoutData, setWorkoutData] = useState(workout);
     const [workoutName, setWorkoutName] = useState(workout.workoutName);
     
@@ -38,8 +39,32 @@ const Workout = ({ workoutId }) => {
         dispatch({ type: "ADD_EXERCISE", payload: { workoutId, exerciseName } });
     };
 
+    if (inWorkout) {
+        return (
+            <Box sx={{ my: '105px' }}>
+                {state.exercises.map((exercise, i) => (
+                    <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
+                ))}
+                <Grid container spacing={2} marginTop={0}>
+                    <Grid item>
+                        <Button variant="contained" onClick={() => onOpenDialog(true)}>
+                            Add Exercise
+                        </Button>
+                        {openExerciseSelector && (
+                            <ExerciseSelector inWorkout
+                                openExerciseSelector={openExerciseSelector} 
+                                onOpenDialog={onOpenDialog}
+                                onExerciseSelection={addExercise}
+                            />
+                        )}
+                    </Grid>
+                </Grid>
+            </Box>
+        )
+    }
+
     return (
-        <Box
+        <Box 
             sx={{
                 display: 'flex',
                 flexDirection: 'column', 

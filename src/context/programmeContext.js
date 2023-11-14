@@ -52,7 +52,9 @@ export const programmeReducer = (state, action) => {
             return {
                 ...state,
                 workouts: state.workouts.map((workout) => 
-                    workout.id === action.payload.workoutId ? { ...workout, workoutName: action.payload.newName} : workout
+                    workout.id === action.payload.workoutId 
+                        ? { ...workout, workoutName: action.payload.newName} 
+                        : workout
                 )
             };
         case "ADD_EXERCISE":

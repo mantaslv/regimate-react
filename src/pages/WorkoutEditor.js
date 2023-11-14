@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
 import Exercise from "../components/Exercise";
+import Workout from "../components/Workout";
+import fetchExercises from "../logic/fetchExercises";
 
 const WorkoutEditor = () => {
     const { state, dispatch } = useWorkoutContext();
@@ -14,6 +16,12 @@ const WorkoutEditor = () => {
     const location = useLocation();
     const locationState = location.state || {};
     const initialWorkoutData = locationState.workoutData || null;
+
+    useEffect(() => {
+        fetchExercises()
+            .then(data => dispatch({ type: "SET_EXERCISE_LIST", payload: data }))
+            .catch(error => console.error("Error: ", error));
+    }, []);
 
     const handleWorkoutNameChange = (event) => {
         setWorkoutName(event.target.value);
@@ -40,11 +48,7 @@ const WorkoutEditor = () => {
                 trainingData={workoutData}
                 isWorkout
             />
-            <Box sx={{ my: '105px' }}>
-                {state.exercises.map((exercise, i) => (
-                    <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
-                ))}
-            </Box>
+            <Workout inWorkout/>
         </Box>
     )
 }
