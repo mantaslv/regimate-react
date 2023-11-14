@@ -69,7 +69,7 @@ export const programmeReducer = (state, action) => {
                                 {
                                     id: uuidv4(),
                                     exerciseName: action.payload.exerciseName,
-                                    sets: [{ reps: "", weight: "" }]
+                                    sets: [{ reps: 1, weight: 0 }]
                                 }
                             ]
                         }
