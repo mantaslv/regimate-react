@@ -7,7 +7,7 @@ import AddTrainingItemButton from "./AddTrainingItemButton";
 import ExerciseSelector from "./create/ExerciseSelector";
 import Exercise from "./Exercise";
 
-const Workout = ({ index, id }) => {
+const Workout = ({ index, workoutId }) => {
     const { state, dispatch } = useProgrammeContext();
     const [workoutName, setWorkoutName] = useState(state.workouts[index].workoutName);
     const [workoutData, setWorkoutData] = useState(state.workouts[index]);
@@ -24,15 +24,15 @@ const Workout = ({ index, id }) => {
     const handleWorkoutNameChange = (event) => {
         const newName = event.target.value;
         setWorkoutName(newName);
-        dispatch({ type: "UPDATE_WORKOUT", payload: { id, newName } });
+        dispatch({ type: "UPDATE_WORKOUT_NAME", payload: { workoutId, newName } });
     };
 
     const handleDeleteWorkout = () => {
-        dispatch({ type: "DELETE_WORKOUT", payload: id });
+        dispatch({ type: "DELETE_WORKOUT", payload: workoutId });
     };
 
     const addExercise = (exerciseName) => {
-        dispatch({ type: "ADD_EXERCISE", payload: { id, exerciseName } });
+        dispatch({ type: "ADD_EXERCISE", payload: { workoutId, exerciseName } });
     };
 
     return (
@@ -68,7 +68,7 @@ const Workout = ({ index, id }) => {
                 </IconButton>
             </Box>
             {workoutData.exercises && workoutData.exercises.map((ex) => (
-                <Exercise key={ex.id} exerciseId={ex.id} workoutId={id}/>
+                <Exercise key={ex.id} exerciseId={ex.id} workoutId={workoutId}/>
             ))}
             <AddTrainingItemButton 
                 onClick={() => onOpenDialog(true)} 

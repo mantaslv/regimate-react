@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ExerciseSelector from "./create/ExerciseSelector";

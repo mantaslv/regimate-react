@@ -69,7 +69,7 @@ const ProgrammeEditor = () => {
                                 })
                             }}
                         >
-                            <Workout index={i} id={workout.id}/>
+                            <Workout index={i} workoutId={workout.id}/>
                         </Grid>
                     ))}
                     {state.workouts.length < 6 &&
