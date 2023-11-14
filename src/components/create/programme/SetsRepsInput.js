@@ -1,11 +1,12 @@
 import { Input, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
-const SetsRepsInput = ({ workoutId, exerciseId }) => {
-    const { state, dispatch } = useProgrammeContext();
+const SetsRepsInput = ({ workoutId, exerciseId, inWorkout=false }) => {
+    const { state, dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
 
-    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const workout = inWorkout ? state : state.workouts.find((wo) => wo.id === workoutId);
     const exercise = workout && workout.exercises.find((ex) => ex.id === exerciseId);
 
     const [sets, setSets] = useState(exercise ? exercise.sets.length: 1);

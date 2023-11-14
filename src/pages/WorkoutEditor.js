@@ -3,7 +3,7 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext"
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
-import Exercise from "../components/create/ExerciseComponent";
+import Exercise from "../components/Exercise";
 
 const WorkoutEditor = () => {
     const { state, dispatch } = useWorkoutContext();
@@ -42,7 +42,7 @@ const WorkoutEditor = () => {
             />
             <Box sx={{ my: '105px' }}>
                 {state.exercises.map((exercise, i) => (
-                    <h1>{exercise.exerciseName}</h1>
+                    <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
                 ))}
             </Box>
         </Box>
