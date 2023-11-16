@@ -1,6 +1,6 @@
 # Regimate-Web
 
-Regimate-Web is a web application built using ReactJS, designed to provide an easy way for users to create and manage their workouts.
+Regimate-Web is a web application built using ReactJS, designed to provide an easy way for users to create and manage their workouts and workout programmes.
 
 The application provides users with a simple and intuitive interface for recording their workouts and saves them in database so they can be accessed anywhere.
 
@@ -15,6 +15,7 @@ The application provides users with a simple and intuitive interface for recordi
 ## Features
 
 - Easy-to-use interface for creating and tracking workouts
+- Intuitive interface for creating and editing workout programmes
 - Create an account and sign in to view your workouts
 - Log your exercises, sets, and reps for each workout
 - Track your progress over time
