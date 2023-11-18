@@ -7,6 +7,7 @@ import AddTrainingItemButton from "./AddTrainingItemButton";
 import ExerciseSelector from "./create/ExerciseSelector";
 import Exercise from "./Exercise";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import { WorkoutCard } from "./create/workout/WorkoutCard";
 
 const Workout = ({ workoutId, inWorkout=false }) => {
     const { state, dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -41,25 +42,11 @@ const Workout = ({ workoutId, inWorkout=false }) => {
 
     if (inWorkout) {
         return (
-            <Box sx={{ my: '105px' }}>
-                {state.exercises.map((exercise, i) => (
-                    <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
-                ))}
-                <Grid container spacing={2} marginTop={0}>
-                    <Grid item>
-                        <Button variant="contained" onClick={() => onOpenDialog(true)}>
-                            Add Exercise
-                        </Button>
-                        {openExerciseSelector && (
-                            <ExerciseSelector inWorkout
-                                openExerciseSelector={openExerciseSelector} 
-                                onOpenDialog={onOpenDialog}
-                                onExerciseSelection={addExercise}
-                            />
-                        )}
-                    </Grid>
-                </Grid>
-            </Box>
+            <WorkoutCard
+                addExercise={addExercise}
+                openExerciseSelector={openExerciseSelector}
+                onOpenDialog={onOpenDialog}
+            />
         )
     }
 

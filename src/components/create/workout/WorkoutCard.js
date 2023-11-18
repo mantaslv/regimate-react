@@ -1,36 +1,19 @@
 import { Box, Button, Grid } from "@mui/material";
-import { ExerciseContextProvider } from "../../../context/exerciseContext";
-import Exercise from "../ExerciseComponent";
+import Exercise from "../../Exercise";
 import ExerciseSelector from "../ExerciseSelector";
+import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
 export const WorkoutCard = ({
-    handleExerciseChange,
-    handleExerciseDelete,
-    initialWorkoutData,
-    workoutState,
-    exerciseList,
     addExercise,
-    onInitialExerciseDataLoad,
-    allInitialDataLoaded,
     openExerciseSelector,
     onOpenDialog,
 }) => {
+    const { state } = useWorkoutContext();
+
     return (
-        <Box>
-            {workoutState.exercises && workoutState.exercises.map((exercise, i) => (
-                <ExerciseContextProvider key={exercise.id}>
-                    <Exercise
-                        exercise={exercise}
-                        exerciseList={exerciseList}
-                        initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
-                        onExerciseDelete={() => handleExerciseDelete(exercise.id)}
-                        onExerciseChange={
-                            (updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)
-                        }
-                        onInitialExerciseDataLoad={onInitialExerciseDataLoad}
-                        allInitialDataLoaded={allInitialDataLoaded}
-                    />
-                </ExerciseContextProvider>
+        <Box sx={{ my: '105px' }}>
+            {state.exercises.map((exercise) => (
+                <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
             ))}
             <Grid container spacing={2} marginTop={0}>
                 <Grid item>
@@ -38,11 +21,10 @@ export const WorkoutCard = ({
                         Add Exercise
                     </Button>
                     {openExerciseSelector && (
-                        <ExerciseSelector 
+                        <ExerciseSelector inWorkout
                             openExerciseSelector={openExerciseSelector} 
                             onOpenDialog={onOpenDialog}
                             onExerciseSelection={addExercise}
-                            exerciseList={exerciseList}
                         />
                     )}
                 </Grid>

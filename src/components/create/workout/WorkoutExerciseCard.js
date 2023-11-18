@@ -18,7 +18,7 @@ export const WorkoutExerciseCard = ({
     const exercise = state && state.exercises.find((ex) => ex.id === exerciseId);
 
     return (
-        <Card sx={{ mt: 2, /*backgroundColor: 'grey.200'*/}}> 
+        <Card sx={{ mt: 2 }}> 
             <CardHeader 
                 title={
                     <Button onClick={handleOpenExerciseSelector}>
