@@ -3,7 +3,6 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext"
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
-import Exercise from "../components/Exercise";
 import Workout from "../components/Workout";
 import fetchExercises from "../logic/fetchExercises";
 
