@@ -1,6 +1,6 @@
 import { Button, Grid } from "@mui/material";
-import { useProgrammeContext } from "../../hooks/useProgrammeContext";
-import { WorkoutContextProvider } from "../../context/workoutContext";
+import { useProgrammeContext } from "../hooks/useProgrammeContext";
+import { WorkoutContextProvider } from "../context/workoutContext";
 import WorkoutComponent from "./WorkoutComponent";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 

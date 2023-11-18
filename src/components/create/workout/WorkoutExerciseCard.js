@@ -1,8 +1,8 @@
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import ConsoleLogButton from "../../ConsoleLogButton";
+import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
 import { Button, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 import ExerciseSelector from '../ExerciseSelector';
-import Set from '../../Set';
+import Set from '../Set';
 import { useWorkoutContext } from '../../../hooks/useWorkoutContext';
 
 export const WorkoutExerciseCard = ({

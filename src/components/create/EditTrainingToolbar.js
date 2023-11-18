@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ConsoleLogButton from "../ConsoleLogButton";
+import ConsoleLogButton from "../styled-components/ConsoleLogButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import uploadTrainingData from "../../logic/uploadTrainingData";
 import { downloadProgramme } from "../../logic/downloadProgramme";

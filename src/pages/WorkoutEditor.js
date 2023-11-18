@@ -3,7 +3,7 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext"
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
-import Workout from "../components/Workout";
+import Workout from "../components/create/Workout";
 import fetchExercises from "../logic/fetchExercises";
 
 const WorkoutEditor = () => {

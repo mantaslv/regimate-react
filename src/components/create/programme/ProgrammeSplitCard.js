@@ -1,9 +1,9 @@
 import { Box, IconButton, Input } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import Exercise from "../../Exercise";
-import ConsoleLogButton from "../../ConsoleLogButton";
+import Exercise from "../Exercise";
+import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
 import ExerciseSelector from "../ExerciseSelector";
-import AddTrainingItemButton from "../../AddTrainingItemButton";
+import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 

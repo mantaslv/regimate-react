@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useWorkoutContext } from "../hooks/useWorkoutContext";
-import { useProgrammeContext } from "../hooks/useProgrammeContext";
-import { ProgrammeSplitCard } from "./create/programme/ProgrammeSplitCard";
-import { WorkoutCard } from "./create/workout/WorkoutCard";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
+import { useProgrammeContext } from "../../hooks/useProgrammeContext";
+import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
+import { WorkoutCard } from "./workout/WorkoutCard";
 
 const Workout = ({ workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();

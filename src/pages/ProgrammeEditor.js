@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { useProgrammeContext } from "../hooks/useProgrammeContext";
 import EditTrainingToolbar from "../components/create/EditTrainingToolbar";
 import { Box, Grid } from "@mui/material";
-import AddTrainingItemButton from "../components/AddTrainingItemButton";
-import Workout from "../components/Workout";
+import AddTrainingItemButton from "../components/styled-components/AddTrainingItemButton";
+import Workout from "../components/create/Workout";
 import fetchExercises from "../logic/fetchExercises";
 
 const ProgrammeEditor = () => {

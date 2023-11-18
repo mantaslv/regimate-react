@@ -3,12 +3,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { createTheme } from './theme';
 
-import Home from './pages/HomePage';
 import Navbar from './components/layout/Navbar';
 import Signup from './pages/SignupPage';
 import Login from './pages/LoginPage';
-import NewWorkout from './pages/CreateWorkoutPage';
-import NewProgrammePage from './pages/CreateProgrammePage';
 import Programmes from './pages/ViewProgrammesPage';
 import Workouts from './pages/ViewWorkoutsPage';
 

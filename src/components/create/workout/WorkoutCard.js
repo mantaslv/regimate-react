@@ -1,5 +1,5 @@
 import { Box, Button, Grid } from "@mui/material";
-import Exercise from "../../Exercise";
+import Exercise from "../Exercise";
 import ExerciseSelector from "../ExerciseSelector";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 

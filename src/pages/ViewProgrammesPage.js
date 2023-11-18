@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import ConsoleLogButton from "../components/ConsoleLogButton";
+import ConsoleLogButton from "../components/styled-components/ConsoleLogButton";
 import ProgrammeCard from "../components/view/ProgrammeCard";
 import { useProgrammesContext } from "../hooks/useProgrammesContext";
 

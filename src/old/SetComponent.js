@@ -4,7 +4,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import { useSetContext } from "../../hooks/useSetContext";
 import { useExerciseContext } from "../../hooks/useExerciseContext";
-import ConsoleLogButton from "../ConsoleLogButton";
+import ConsoleLogButton from "../components/styled-components/ConsoleLogButton";
 
 const Set = ({ 
     onSetChange, 

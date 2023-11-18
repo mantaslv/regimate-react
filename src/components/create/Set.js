@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import ConsoleLogButton from "./ConsoleLogButton";
-import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import ConsoleLogButton from "../styled-components/ConsoleLogButton";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 
 const Set = ({ exerciseId, setId }) => {
     const { state, dispatch } = useWorkoutContext();

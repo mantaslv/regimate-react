@@ -1,4 +1,4 @@
-import { SetContext } from "../context/setContext";
+import { SetContext } from "./setContext";
 import { useContext } from "react";
 
 export const useSetContext = () => {
