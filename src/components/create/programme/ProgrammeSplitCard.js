@@ -1,29 +1,25 @@
-import { Box, Button, IconButton, Input } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { Box, IconButton, Input } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
-import { ExerciseContextProvider } from "../../../context/exerciseContext";
-import Exercise from "../ExerciseComponent";
+import Exercise from "../../Exercise";
 import ConsoleLogButton from "../../ConsoleLogButton";
 import ExerciseSelector from "../ExerciseSelector";
+import AddTrainingItemButton from "../../AddTrainingItemButton";
+
+import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
 export const ProgrammeSplitCard = ({
     handleWorkoutNameChange,
     onOpenDialog,
     openExerciseSelector,
-    handleExerciseChange,
-    handleExerciseDelete,
     handleDeleteWorkout,
-    initialWorkoutData,
-    allInitialDataLoaded,
-    workoutState,
-    exerciseList,
     addExercise,
-    workoutName,
-    onInitialExerciseDataLoad
+    workoutId
 }) => {
+    const { state } = useProgrammeContext();
+    const workout = state.workouts.find((wo) => wo.id === workoutId);
+
     return (
-        <Box
+        <Box 
             sx={{
                 display: 'flex',
                 flexDirection: 'column', 
@@ -39,7 +35,7 @@ export const ProgrammeSplitCard = ({
                 <Input
                     disableUnderline
                     placeholder="workout name"
-                    value={workoutName}
+                    value={workout.workoutName}
                     onChange={handleWorkoutNameChange}
                     sx={{
                         width: '70%',
@@ -54,43 +50,21 @@ export const ProgrammeSplitCard = ({
                     <RemoveCircleIcon/>
                 </IconButton>
             </Box>
-            {workoutState.exercises && workoutState.exercises.map((exercise, i) => (
-                <ExerciseContextProvider key={exercise.id}>
-                    <Exercise
-                        programme={true}
-                        exercise={exercise}
-                        exerciseList={exerciseList}
-                        allInitialDataLoaded={allInitialDataLoaded}
-                        initialExerciseData={initialWorkoutData && initialWorkoutData.exercises[i]}
-                        onExerciseDelete={() => handleExerciseDelete(exercise.id)}
-                        onExerciseChange={
-                            (updatedExercise) => handleExerciseChange(updatedExercise, exercise.id)
-                        }
-                        onInitialExerciseDataLoad={onInitialExerciseDataLoad}
-                    />
-                </ExerciseContextProvider>
+            {workout.exercises && workout.exercises.map((ex) => (
+                <Exercise key={ex.id} exerciseId={ex.id} workoutId={workoutId}/>
             ))}
-            <Button
-                onClick={() => onOpenDialog(true)}
-                sx={{
-                    margin: 1,
-                    borderRadius: '16px',
-                    border: `3px dashed`,
-                    borderColor: `grey.400`,
-                    width: '100%'
-                }}
-            >
-                <AddCircleOutlineIcon sx={{ color: 'grey.400', fontSize: 30 }}/>
-            </Button>
+            <AddTrainingItemButton 
+                onClick={() => onOpenDialog(true)} 
+                sx={{ m: 1, width: '100%' }}
+            />
             {openExerciseSelector && (
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
                     onOpenDialog={onOpenDialog}
                     onExerciseSelection={addExercise}
-                    exerciseList={exerciseList}
                 />
             )}
-            <ConsoleLogButton print={workoutState} info="workout"/>
+            <ConsoleLogButton print={workout} info="workout"/>
         </Box>
     )
 }
