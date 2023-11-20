@@ -1,9 +1,11 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, ButtonGroup, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import SetsRepsInput from "../programme/SetsRepsInput";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import ExerciseSelector from "../ExerciseSelector";
 import { useEffect, useState } from "react";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export const ProgrammeExerciseCard = ({ 
     workoutId,
@@ -13,6 +15,8 @@ export const ProgrammeExerciseCard = ({
     handleExerciseNameChange,
     handleDeleteExercise,
     openExerciseSelector,
+    handleMoveExercise,
+    index
 }) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
@@ -81,6 +85,22 @@ export const ProgrammeExerciseCard = ({
                     workoutId={workoutId} 
                     exerciseId={exerciseId}
                 />
+                <ButtonGroup orientation="vertical" variant="contained" sx={{ mr: 0.5 }}>
+                    <Button 
+                        onClick={() => handleMoveExercise('up')} 
+                        disabled={index === 0}
+                        sx={{ padding: 0 }}
+                    >
+                        <KeyboardArrowUpIcon fontSize="6"/>
+                    </Button>
+                    <Button 
+                        onClick={() => handleMoveExercise('down')} 
+                        disabled={index === workout.exercises.length - 1}
+                        sx={{ padding: 0 }}
+                    >
+                        <KeyboardArrowDownIcon fontSize="6"/>
+                    </Button>
+                </ButtonGroup>
             </Box>
             {openExerciseSelector && (
                 <ExerciseSelector

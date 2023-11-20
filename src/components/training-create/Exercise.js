@@ -4,7 +4,7 @@ import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
 import { ProgrammeExerciseCard } from "./programme/ProgrammeExerciseCard";
 
-const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
+const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
     const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
 
@@ -23,6 +23,11 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
 
     const handleOpenExerciseSelector = () => {
         setOpenExerciseSelector(true);
+    };
+
+    const handleMoveExercise = (direction) => {
+        const endIndex = direction === 'up' ? index - 1 : index + 1;
+        dispatch({ type: "REORDER_EXERCISES", payload: { startIndex: index, endIndex, workoutId }})
     };
 
     if (inWorkout) {
@@ -48,6 +53,8 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
             handleExerciseNameChange={handleExerciseNameChange}
             handleDeleteExercise={handleDeleteExercise}
             openExerciseSelector={openExerciseSelector}
+            handleMoveExercise={handleMoveExercise}
+            index={index}
         />
     )
 };

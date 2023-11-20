@@ -141,6 +141,29 @@ export const programmeReducer = (state, action) => {
                 ...state,
                 workouts: reorderedWorkouts
             };
+        case "REORDER_EXERCISES":
+            const {
+                workoutId,
+                startIndex: exerciseStartIndex,
+                endIndex: exerciseEndIndex
+            } = action.payload;
+
+            return {
+                ...state,
+                workouts: state.workouts.map((workout) => {
+                    if (workout.id === workoutId) {
+                        const reorderedExercises = [...workout.exercises];
+                        const [movedExercise] = reorderedExercises.splice(exerciseStartIndex, 1);
+                        reorderedExercises.splice(exerciseEndIndex, 0, movedExercise);
+
+                        return {
+                            ...workout,
+                            exercises: reorderedExercises
+                        };
+                    }
+                    return workout;
+                })
+            };
         default:
             return state;
     };
