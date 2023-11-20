@@ -52,10 +52,12 @@ const TrainingEditor = ({ isWorkout=false }) => {
                 trainingData={trainingData}
                 isWorkout
             />
-            {isWorkout 
-                ? <Workout inWorkout/>
-                : <ProgrammeWhiteboard handleAddWorkout={handleAddWorkout}/>
-            }
+            <Box sx={{ my: '105px' }}>
+                {isWorkout 
+                    ? <Workout inWorkout/>
+                    : <ProgrammeWhiteboard handleAddWorkout={handleAddWorkout}/>
+                }
+            </Box>
         </Box>
     )
 };

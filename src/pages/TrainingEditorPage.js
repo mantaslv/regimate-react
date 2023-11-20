@@ -1,4 +1,4 @@
-import TrainingEditor from "../components/create/TrainingEditor";
+import TrainingEditor from "../components/training-create/TrainingEditor";
 import { ProgrammeContextProvider } from "../context/programmeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
 

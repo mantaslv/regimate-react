@@ -11,7 +11,7 @@ export const WorkoutCard = ({
     const { state } = useWorkoutContext();
 
     return (
-        <Box sx={{ my: '105px' }}>
+        <Box>
             {state.exercises.map((exercise) => (
                 <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
             ))}

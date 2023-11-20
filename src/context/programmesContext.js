@@ -4,7 +4,7 @@ export const ProgrammesContext = createContext();
 
 export const programmesReducer = (state, action) => {
     switch (action.type) {
-        case 'SET_PROGRAMMES':
+        case 'SET_TRAINING_DATA':
             return { programmes: action.payload };
         case 'CREATE_PROGRAMME':
             return { programmes: [action.payload, ...state.programmes] };
