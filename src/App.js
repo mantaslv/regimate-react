@@ -8,13 +8,11 @@ import Signup from './pages/SignupPage';
 import Login from './pages/LoginPage';
 import Programmes from './pages/ViewProgrammesPage';
 import Workouts from './pages/ViewWorkoutsPage';
+import TrainingEditorPage from './pages/TrainingEditorPage';
 
 import { useAuthContext } from './hooks/useAuthContext';
-import { WorkoutContextProvider } from './context/workoutContext';
 import { ProgrammesContextProvider } from './context/programmesContext';
-import { ProgrammeContextProvider } from './context/programmeContext';
-import ProgrammeEditor from './pages/ProgrammeEditor';
-import WorkoutEditor from './pages/WorkoutEditor';
+import { WorkoutsContextProvider } from './context/workoutsContext';
 
 const theme = createTheme();
 
@@ -31,9 +29,9 @@ const App = () => {
                         <Route path='/' element={user ? <Navigate to="/view-programmes" /> : <Navigate to="/create-programme" />} />
                         <Route path='/login' element={!user ? <Login/> : <Navigate to="/" />} />
                         <Route path='/signup' element={!user ? <Signup/>: <Navigate to="/" />} />
-                        <Route path='/create-workout' element={user ? <WorkoutContextProvider><WorkoutEditor /></WorkoutContextProvider> : <Navigate to="/login" />} />
-                        <Route path='/create-programme' element={<ProgrammeContextProvider><ProgrammeEditor/></ProgrammeContextProvider>} />
-                        <Route path='/view-workouts' element={user ? <WorkoutContextProvider><Workouts/></WorkoutContextProvider> : <Navigate to="/login" />} />
+                        <Route path='/create-workout' element={user ? <TrainingEditorPage isWorkout/> : <Navigate to="/login" />} />
+                        <Route path='/create-programme' element={<TrainingEditorPage isProgramme/>} />
+                        <Route path='/view-workouts' element={user ? <WorkoutsContextProvider><Workouts/></WorkoutsContextProvider> : <Navigate to="/login" />} />
                         <Route path='/view-programmes' element={user ? <ProgrammesContextProvider><Programmes/></ProgrammesContextProvider> : <Navigate to="/login" />} />
                     </Routes>
                     </Box>

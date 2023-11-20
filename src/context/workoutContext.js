@@ -16,9 +16,9 @@ export const workoutReducer = (state, action) => {
                 ...state,
                 exerciseList: action.payload
             };
-        case "SET_WORKOUT":
+        case "SET_INITIAL_TRAINING":
             return action.payload;
-        case "UPDATE_WORKOUT_NAME":
+        case "UPDATE_TRAINING_NAME":
             return {
                 ...state,
                 workoutName: action.payload

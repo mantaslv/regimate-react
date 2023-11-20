@@ -56,11 +56,11 @@ const ProgrammeCard = ({ programme, sx }) => {
     };
 
     const handleClickEdit = () => {
-        navigate(`/create-programme/`, {state: { programmeData: programme } });
+        navigate(`/create-programme/`, { state: programme });
     };
 
     const handleStartWorkout = (workout) => {
-        navigate(`/create-workout/`, {state: { workoutData: workout } });
+        navigate(`/create-workout/`, { state: workout });
     };
 
     return (

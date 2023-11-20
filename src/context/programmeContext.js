@@ -28,9 +28,9 @@ export const programmeReducer = (state, action) => {
                 ...state,
                 exerciseList: action.payload
             };
-        case "SET_PROGRAMME":
+        case "SET_INITIAL_TRAINING":
             return action.payload;
-        case "UPDATE_PROGRAMME_NAME":
+        case "UPDATE_TRAINING_NAME":
             return {
                 ...state,
                 programmeName: action.payload
