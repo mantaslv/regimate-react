@@ -15,7 +15,7 @@ const TrainingEditor = ({ isWorkout=false }) => {
     const [trainingData, setTrainingData] = useState(null);
 
     const location = useLocation();
-    const initialData = location.state || {};
+    const initialData = location.state || null;
 
     useEffect(() => {
         fetchExercises()
