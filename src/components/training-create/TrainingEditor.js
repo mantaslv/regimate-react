@@ -31,11 +31,10 @@ const TrainingEditor = ({ isWorkout=false }) => {
             setInitialLoadComplete(true);
         } else {
             setTrainingData(state);
-            console.log(state);
         };
     }, [initialData, initialLoadComplete, state]);
 
-    const handleWorkoutNameChange = (event) => {
+    const handleTrainingNameChange = (event) => {
         setTrainingName(event.target.value);
         dispatch({ type: "UPDATE_TRAINING_NAME", payload: event.target.value });
     };
@@ -48,9 +47,9 @@ const TrainingEditor = ({ isWorkout=false }) => {
         <Box>
             <EditTrainingToolbar
                 nameInputValue={trainingName}
-                handleNameInputChange={handleWorkoutNameChange}
+                handleNameInputChange={handleTrainingNameChange}
                 trainingData={trainingData}
-                isWorkout
+                isWorkout={isWorkout}
             />
             <Box sx={{ my: '105px' }}>
                 {isWorkout 
