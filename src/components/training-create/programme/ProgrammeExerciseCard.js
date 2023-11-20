@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, IconButton, Typography } from "@mui/material";
+import { Box, Button, ButtonGroup, Grid, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import SetsRepsInput from "../programme/SetsRepsInput";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
@@ -6,6 +6,7 @@ import ExerciseSelector from "../ExerciseSelector";
 import { useEffect, useState } from "react";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 export const ProgrammeExerciseCard = ({ 
     workoutId,
@@ -63,13 +64,13 @@ export const ProgrammeExerciseCard = ({
                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
                     <IconButton
                         onClick={handleDeleteExercise} 
-                        sx={{ color: 'white' }}
+                        sx={{ color: '#FEF0C7' }}
                     >
                         <RemoveCircleIcon sx={{ 
                             ml: -1, 
                             mt: -0.5, 
                             mr: -0.5, 
-                            fontSize: '16px' 
+                            fontSize: '17px' 
                         }}/>
                     </IconButton>
                 </Box>
@@ -85,22 +86,36 @@ export const ProgrammeExerciseCard = ({
                     workoutId={workoutId} 
                     exerciseId={exerciseId}
                 />
-                <ButtonGroup orientation="vertical" variant="contained" sx={{ mr: 0.5 }}>
-                    <Button 
-                        onClick={() => handleMoveExercise('up')} 
-                        disabled={index === 0}
-                        sx={{ padding: 0 }}
-                    >
-                        <KeyboardArrowUpIcon fontSize="6"/>
-                    </Button>
-                    <Button 
-                        onClick={() => handleMoveExercise('down')} 
-                        disabled={index === workout.exercises.length - 1}
-                        sx={{ padding: 0 }}
-                    >
-                        <KeyboardArrowDownIcon fontSize="6"/>
-                    </Button>
-                </ButtonGroup>
+                <Grid container direction="column" sx={{ width: 30, mr: -1.1 }}>
+                    <Grid item>
+                        <IconButton 
+                            onClick={() => handleMoveExercise('up')} 
+                            disabled={index === 0}
+                            sx={{ color: 'white', p: 0 }}
+                        >
+                            <ArrowCircleLeftIcon sx={{ 
+                                mt: -0.5, 
+                                mr: -0.5, 
+                                fontSize: '17px',
+                                transform: 'rotate(90deg)'
+                            }}/>
+                        </IconButton>
+                    </Grid>
+                    <Grid item>
+                        <IconButton
+                            onClick={() => handleMoveExercise('down')} 
+                            disabled={index === workout.exercises.length - 1}
+                            sx={{ color: 'white', p: 0 }}
+                        >
+                            <ArrowCircleLeftIcon sx={{ 
+                                mt: -0.5, 
+                                mr: -0.5, 
+                                fontSize: '17px',
+                                transform: 'rotate(270deg)'
+                            }}/>
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </Box>
             {openExerciseSelector && (
                 <ExerciseSelector
