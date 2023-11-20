@@ -1,17 +1,46 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useProgrammeContext } from "../../hooks/useProgrammeContext";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 
 const ExerciseSelector = ({ 
-    exerciseList, 
     openExerciseSelector, 
     onOpenDialog, 
     onExerciseSelection, 
+    inWorkout=false
 }) => {
+    const { state } = inWorkout ? useWorkoutContext() : useProgrammeContext();
     const [searchTerm, setSearchTerm] = useState("");
+    const [exerciseList, setExerciseList] = useState([]);
 
-    const filteredExercises = exerciseList.filter(exercise =>
+    useEffect(() => {
+        setExerciseList(state.exerciseList);
+    }, [state]);
+
+    const exactMatchFilteredExercises = exerciseList.filter(exercise => 
         exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const splitMatchFilteredExercises = exerciseList.filter(exercise => 
+        !exactMatchFilteredExercises.includes(exercise) &&
+        searchTerm.toLowerCase().split(" ").every(word => 
+            exercise.name.toLowerCase().split(" ").includes(word)
+        )
+    );
+
+    const partialMatchFilteredExercises = exerciseList.filter(exercise => 
+        !exactMatchFilteredExercises.includes(exercise) &&
+        !splitMatchFilteredExercises.includes(exercise) &&
+        searchTerm.toLowerCase().split(" ").some(word =>
+            exercise.name.toLowerCase().split(" ").includes(word)
+        )
+    );
+    
+    const filteredExercises = [
+        ...exactMatchFilteredExercises, 
+        ...splitMatchFilteredExercises, 
+        ...partialMatchFilteredExercises
+    ]
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);

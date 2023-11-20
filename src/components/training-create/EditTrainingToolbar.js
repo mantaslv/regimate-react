@@ -1,20 +1,41 @@
+import { useNavigate } from "react-router-dom";
+import ConsoleLogButton from "../styled-components/ConsoleLogButton";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import uploadTrainingData from "../../logic/uploadTrainingData";
+import { downloadProgramme } from "../../logic/downloadProgramme";
 import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
 import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
 import { Stack } from "@mui/system";
 
-import { downloadProgramme } from "../../logic/downloadProgramme";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import ConsoleLogButton from "../ConsoleLogButton";
-
-export const CreateToolbar = ({
+const EditTrainingToolbar = ({
     nameInputValue,
     handleNameInputChange,
-    stateType,
-    saveState,
-    state
+    isWorkout=false,
+    trainingData
 }) => {
     const { user } = useAuthContext();
+    const navigate = useNavigate();
+
+    const trainingDataType = isWorkout ? 'workout' : 'programme';
+
+    const saveTrainingData = async () => {
+        const dataToSave = isWorkout ? {
+            id: trainingData.id, 
+            workoutName: trainingData.workoutName, 
+            exercises: trainingData.exercises,
+        } : {
+            programmeName: trainingData.programmeName,
+            workouts: trainingData.workouts,
+        };
+
+        uploadTrainingData({
+            token: user.token,
+            dataToSave: dataToSave,
+            dataType: trainingDataType + "s",
+            onComplete: () => navigate('/view-programmes'),
+        });
+    };
 
     return (
         <AppBar 
@@ -46,25 +67,27 @@ export const CreateToolbar = ({
                 <ButtonGroup sx={{ height: '32px' }}>
                 {user && (
                         <Button 
-                            onClick={saveState}
-                            title={`Save ${stateType}`}
+                            onClick={saveTrainingData}
+                            title={`Save ${trainingDataType}`}
                         >
                             <SaveIcon/>
                         </Button>
                     )}
                     <Button 
-                        onClick={() => downloadProgramme(state)}
-                        title={`Download ${stateType}`}
+                        onClick={() => downloadProgramme(trainingData)}
+                        title={`Download ${trainingDataType}`}
                     >
                         <DownloadIcon/>
                     </Button>
                     <ConsoleLogButton 
-                        print={state}
+                        print={trainingData}
                         variant="outlined"
-                        info={stateType}
+                        info={trainingDataType}
                     />
                 </ButtonGroup>
             </Box>
         </AppBar>
-    )
-}
+    );
+};
+
+export default EditTrainingToolbar;

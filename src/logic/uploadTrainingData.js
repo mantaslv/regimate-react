@@ -1,11 +1,9 @@
-const saveWorkoutData = async ({ 
+const uploadTrainingData = async ({ 
     token, 
-    isProgramme = false, 
     onComplete, 
-    dataToSave 
+    dataToSave,
+    dataType
 }) => {
-    const dataType = isProgramme ? 'programmes' : 'workouts';
-
     try {
         const res = await fetch(process.env.REACT_APP_API_URL + '/api/' + dataType, {
             method: 'POST',
@@ -29,4 +27,4 @@ const saveWorkoutData = async ({
     };
 };
 
-export default saveWorkoutData;
+export default uploadTrainingData;

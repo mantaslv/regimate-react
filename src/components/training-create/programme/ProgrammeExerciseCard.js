@@ -1,18 +1,27 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
 import SetsRepsInput from "../programme/SetsRepsInput";
+import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import ExerciseSelector from "../ExerciseSelector";
+import { useEffect, useState } from "react";
 
 export const ProgrammeExerciseCard = ({ 
-    exerciseSelector, 
-    handleOpenSelector, 
-    initialExerciseData, 
-    handleSetsRepsChange, 
+    workoutId,
+    exerciseId,
+    setOpenExerciseSelector,
+    handleOpenExerciseSelector,
+    handleExerciseNameChange,
     handleDeleteExercise,
-    onInitialSetDataLoad,
-    allInitialDataLoaded,
-    exerciseName
+    openExerciseSelector,
 }) => {
+    const { state } = useProgrammeContext();
+    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const [exercise, setExercise] = useState(workout && workout.exercises.find((ex) => ex.id === exerciseId))
+    
+    useEffect(() => {
+        setExercise(workout && workout.exercises.find((ex) => ex.id === exerciseId))
+    }, [state])
+
     return (
         <Box sx={{ 
             borderRadius: '10px', 
@@ -23,7 +32,7 @@ export const ProgrammeExerciseCard = ({
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ display: 'flex', flexGrow: 1 }}>
                     <Button 
-                        onClick={handleOpenSelector} 
+                        onClick={handleOpenExerciseSelector} 
                         sx={{ 
                             minWidth: 0, 
                             borderRadius: '10px', 
@@ -43,12 +52,12 @@ export const ProgrammeExerciseCard = ({
                                 '&:hover': { color: 'grey.400' }
                             }}
                         >
-                            {exerciseName}
+                            {exercise.exerciseName}
                         </Typography>
                     </Button>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                    <IconButton 
+                    <IconButton
                         onClick={handleDeleteExercise} 
                         sx={{ color: 'white' }}
                     >
@@ -68,13 +77,18 @@ export const ProgrammeExerciseCard = ({
                 mt: -1.5 
             }}>
                 <SetsRepsInput 
-                    handleSetsRepsChange={handleSetsRepsChange}
-                    initialExerciseData={initialExerciseData}
-                    onInitialSetDataLoad={onInitialSetDataLoad}
-                    allInitialDataLoaded={allInitialDataLoaded}
+                    key={exerciseId} 
+                    workoutId={workoutId} 
+                    exerciseId={exerciseId}
                 />
             </Box>
-            {exerciseSelector}
+            {openExerciseSelector && (
+                <ExerciseSelector
+                    openExerciseSelector={openExerciseSelector} 
+                    onOpenDialog={setOpenExerciseSelector}
+                    onExerciseSelection={handleExerciseNameChange}
+                />
+            )}
         </Box>
     );
 };
