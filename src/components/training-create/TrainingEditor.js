@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useProgrammeContext } from "../../hooks/useProgrammeContext";
-import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import EditTrainingToolbar from "./EditTrainingToolbar";
-import Workout from "./Workout";
+
+import { useProgrammeContext } from "../../hooks/useProgrammeContext";
+import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import ProgrammeWhiteboard from "./programme/ProgrammeWhiteboard";
+import EditTrainingToolbar from "./EditTrainingToolbar";
 import fetchExercises from "../../logic/fetchExercises";
+import Workout from "./Workout";
+import Programme from "./Programme";
 
 const TrainingEditor = ({ isWorkout=false }) => {
     const { state, dispatch } = isWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -39,10 +41,6 @@ const TrainingEditor = ({ isWorkout=false }) => {
         dispatch({ type: "UPDATE_TRAINING_NAME", payload: event.target.value });
     };
 
-    const handleAddWorkout = () => {
-        dispatch({ type: "ADD_WORKOUT" });
-    };
-
     return (
         <Box>
             <EditTrainingToolbar
@@ -54,7 +52,7 @@ const TrainingEditor = ({ isWorkout=false }) => {
             <Box sx={{ my: '105px' }}>
                 {isWorkout 
                     ? <Workout inWorkout/>
-                    : <ProgrammeWhiteboard handleAddWorkout={handleAddWorkout}/>
+                    : <Programme/>
                 }
             </Box>
         </Box>

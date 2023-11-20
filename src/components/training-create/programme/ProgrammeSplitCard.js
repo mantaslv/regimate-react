@@ -1,19 +1,22 @@
-import { Box, IconButton, Input } from "@mui/material";
+import { Box, Button, Grid, IconButton, Input } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Exercise from "../Exercise";
 import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
 import ExerciseSelector from "../ExerciseSelector";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
-
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 export const ProgrammeSplitCard = ({
     handleWorkoutNameChange,
     onOpenDialog,
     openExerciseSelector,
     handleDeleteWorkout,
+    handleMoveWorkout,
     addExercise,
-    workoutId
+    workoutId,
+    index
 }) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
@@ -64,7 +67,36 @@ export const ProgrammeSplitCard = ({
                     onExerciseSelection={addExercise}
                 />
             )}
-            <ConsoleLogButton print={workout} info="workout"/>
+            <Grid container 
+                spacing={2} 
+                sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'center' 
+                }}
+            >
+                <Grid item>
+                    <Button 
+                        variant="outlined"
+                        onClick={() => handleMoveWorkout('left')}
+                        disabled={index === 0}
+                    >
+                        <KeyboardArrowLeftIcon/>
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <ConsoleLogButton print={workout} info="workout"/>
+                </Grid>
+                <Grid item>
+                    <Button 
+                        variant="outlined"
+                        onClick={() => handleMoveWorkout('right')}
+                        disabled={index === state.workouts.length - 1}
+                    >
+                        <KeyboardArrowRightIcon/>
+                    </Button>
+                </Grid>
+            </Grid>
+            
         </Box>
     )
 }

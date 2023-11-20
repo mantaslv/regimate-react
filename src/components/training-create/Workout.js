@@ -4,7 +4,7 @@ import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
 import { WorkoutCard } from "./workout/WorkoutCard";
 
-const Workout = ({ workoutId, inWorkout=false }) => {
+const Workout = ({ index, workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
     const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
 
@@ -25,6 +25,11 @@ const Workout = ({ workoutId, inWorkout=false }) => {
         dispatch({ type: "ADD_EXERCISE", payload: { workoutId, exerciseName } });
     };
 
+    const handleMoveWorkout = (direction) => {
+        const endIndex = direction === 'left' ? index - 1 : index + 1;
+        dispatch({ type: "REORDER_WORKOUTS", payload: { startIndex: index, endIndex }})
+    };
+
     if (inWorkout) {
         return (
             <WorkoutCard
@@ -32,19 +37,21 @@ const Workout = ({ workoutId, inWorkout=false }) => {
                 openExerciseSelector={openExerciseSelector}
                 onOpenDialog={onOpenDialog}
             />
-        )
-    }
+        );
+    };
 
     return (
         <ProgrammeSplitCard
             handleWorkoutNameChange={handleWorkoutNameChange}
             onOpenDialog={onOpenDialog}
+            handleMoveWorkout={handleMoveWorkout}
             openExerciseSelector={openExerciseSelector}
             handleDeleteWorkout={handleDeleteWorkout}
             addExercise={addExercise}
             workoutId={workoutId}
+            index={index}
         />
-    )
+    );
 };
 
 export default Workout;
