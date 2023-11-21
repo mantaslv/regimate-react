@@ -31,12 +31,12 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_WORKOUTS", payload: { startIndex: index, endIndex }})
     };
 
-    const [, drop] = useDrop({
+    const [, drop] = useDrop(() => ({
         accept: 'exercise',
         drop: (item, monitor) => {
 
         },
-    });
+    }), []);
 
     const workoutCardProps = {
         addExercise,
