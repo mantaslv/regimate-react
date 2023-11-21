@@ -10,7 +10,7 @@ const Programme = () => {
     
     return (
         <ProgrammeWhiteboard
-            
+            handleAddWorkout={handleAddWorkout}
         />
     )
 };
