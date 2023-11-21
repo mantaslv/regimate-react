@@ -3,6 +3,7 @@ import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
 import { ProgrammeExerciseCard } from "./programme/ProgrammeExerciseCard";
+import { useDrag } from "react-dnd";
 
 const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -30,15 +31,27 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_EXERCISES", payload: { startIndex: index, endIndex, workoutId }})
     };
 
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: 'exercise',
+        item: { exerciseId, workoutId },
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    }));
+
+    const exerciseCardProps = {
+        exerciseId,
+        openExerciseSelector,
+        setOpenExerciseSelector,
+        handleOpenExerciseSelector,
+        handleExerciseNameChange,
+        handleDeleteExercise,
+    };
+
     if (inWorkout) {
         return (
             <WorkoutExerciseCard
-                exerciseId={exerciseId}
-                setOpenExerciseSelector={setOpenExerciseSelector}
-                handleOpenExerciseSelector={handleOpenExerciseSelector}
-                handleExerciseNameChange={handleExerciseNameChange}
-                handleDeleteExercise={handleDeleteExercise}
-                openExerciseSelector={openExerciseSelector}
+                {...exerciseCardProps}
                 addSet={addSet}
             />
         )
@@ -46,14 +59,9 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
 
     return (
         <ProgrammeExerciseCard
-            workoutId={workoutId}
-            exerciseId={exerciseId}
-            setOpenExerciseSelector={setOpenExerciseSelector}
-            handleOpenExerciseSelector={handleOpenExerciseSelector}
-            handleExerciseNameChange={handleExerciseNameChange}
-            handleDeleteExercise={handleDeleteExercise}
-            openExerciseSelector={openExerciseSelector}
+            {...exerciseCardProps}
             handleMoveExercise={handleMoveExercise}
+            workoutId={workoutId}
             index={index}
         />
     )

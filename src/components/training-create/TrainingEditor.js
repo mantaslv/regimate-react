@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
-import ProgrammeWhiteboard from "./programme/ProgrammeWhiteboard";
 import EditTrainingToolbar from "./EditTrainingToolbar";
 import fetchExercises from "../../logic/fetchExercises";
-import Workout from "./Workout";
 import Programme from "./Programme";
+import Workout from "./Workout";
 
 const TrainingEditor = ({ isWorkout=false }) => {
     const { state, dispatch } = isWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -50,10 +51,9 @@ const TrainingEditor = ({ isWorkout=false }) => {
                 isWorkout={isWorkout}
             />
             <Box sx={{ my: '105px' }}>
-                {isWorkout 
-                    ? <Workout inWorkout/>
-                    : <Programme/>
-                }
+                <DndProvider backend={HTML5Backend}>
+                    {isWorkout ? <Workout inWorkout/> : <Programme/>}
+                </DndProvider>
             </Box>
         </Box>
     )
