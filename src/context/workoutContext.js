@@ -31,7 +31,7 @@ export const workoutReducer = (state, action) => {
                     { 
                         id: uuidv4(), 
                         exerciseName: action.payload.exerciseName, 
-                        sets: [{ reps: "", weight: "" }] 
+                        sets: [{ id: uuidv4(), reps: "", weight: "" }] 
                     }
                 ]
             };
