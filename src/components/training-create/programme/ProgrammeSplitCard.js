@@ -68,13 +68,14 @@ export const ProgrammeSplitCard = ({
                 />
             )}
             <Grid container 
-                spacing={2} 
+                spacing={1} 
                 sx={{ 
                     display: 'flex', 
-                    justifyContent: 'center' 
+                    justifyContent: 'center',
+                    flexWrap: 'nowrap'
                 }}
             >
-                <Grid item>
+                <Grid item width="33%">
                     <Button 
                         variant="outlined"
                         onClick={() => handleMoveWorkout('left')}
@@ -83,10 +84,10 @@ export const ProgrammeSplitCard = ({
                         <KeyboardArrowLeftIcon/>
                     </Button>
                 </Grid>
-                <Grid item>
+                <Grid item width="33%">
                     <ConsoleLogButton print={workout} info="workout"/>
                 </Grid>
-                <Grid item>
+                <Grid item width="33%">
                     <Button 
                         variant="outlined"
                         onClick={() => handleMoveWorkout('right')}
@@ -96,7 +97,6 @@ export const ProgrammeSplitCard = ({
                     </Button>
                 </Grid>
             </Grid>
-            
         </Box>
     )
 }
