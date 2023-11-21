@@ -48,8 +48,8 @@ export const WorkoutExerciseCard = ({
                             aria-label="Delete Exercise"
                             title="Click to remove this exercise"
                         >
-                            <RemoveCircleIcon sx={{ mr: 1 }}/>
-                            DELETE EXERCISE
+                            <RemoveCircleIcon sx={{ mr: 1, ml: -1 }}/>
+                            Remove Exercise
                         </Button>
                     </Grid>
                     <Grid item>
