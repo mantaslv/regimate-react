@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import SetsRepsInput from "../programme/SetsRepsInput";
 import ExerciseSelector from "../ExerciseSelector";
+import MoveExerciseButton from "../../styled-components/MoveExerciseButton";
 
 export const ProgrammeExerciseCard = ({ 
+    index,
     workoutId,
     exerciseId,
     setOpenExerciseSelector,
@@ -14,39 +15,20 @@ export const ProgrammeExerciseCard = ({
     handleExerciseNameChange,
     handleDeleteExercise,
     openExerciseSelector,
-    handleMoveExercise,
-    index
+    handleMoveExercise
 }) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
-    const [exercise, setExercise] = useState(workout && workout.exercises.find((ex) => ex.id === exerciseId))
+    const [exercise, setExercise] = useState(null);
     
     useEffect(() => {
-        setExercise(workout && workout.exercises.find((ex) => ex.id === exerciseId))
-    }, [state])
+        setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
+    }, [state]);
 
-    const MoveExerciseButton = ({ direction }) => {
-        const rotate = direction === 'up' ? 90 : 270;
-        const disabled = direction === 'up' ? (
-            index === 0
-        ) : (
-            index === workout.exercises.length - 1
-        );
-
-        return (
-            <IconButton 
-                onClick={() => handleMoveExercise(direction)} 
-                disabled={disabled}
-                sx={{ color: 'white', p: 0 }}
-            >
-                <ArrowCircleLeftIcon sx={{ 
-                    mt: -0.5, 
-                    mr: -0.5, 
-                    fontSize: '17px',
-                    transform: `rotate(${rotate}deg)`
-                }}/>
-            </IconButton>
-        );
+    const moveExerciseProps = {
+        workout: workout,
+        index: index,
+        handleMoveExercise: handleMoveExercise
     };
 
     return (
@@ -79,7 +61,7 @@ export const ProgrammeExerciseCard = ({
                                 '&:hover': { color: 'grey.400' }
                             }}
                         >
-                            {exercise.exerciseName}
+                            {exercise?.exerciseName}
                         </Typography>
                     </Button>
                 </Box>
@@ -101,8 +83,12 @@ export const ProgrammeExerciseCard = ({
                     exerciseId={exerciseId}
                 />
                 <Grid container direction="column" sx={{ width: 30, mr: -1.1 }}>
-                    <Grid item><MoveExerciseButton direction='up'/></Grid>
-                    <Grid item><MoveExerciseButton direction='down'/></Grid>
+                    <Grid item>
+                        <MoveExerciseButton up {...moveExerciseProps}/>
+                    </Grid>
+                    <Grid item>
+                        <MoveExerciseButton down {...moveExerciseProps}/>
+                    </Grid>
                 </Grid>
             </Box>
             {openExerciseSelector && (
