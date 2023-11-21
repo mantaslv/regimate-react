@@ -11,24 +11,26 @@ export const WorkoutCard = ({
     const { state } = useWorkoutContext();
 
     return (
-        <Box>
-            {state.exercises.map((exercise) => (
-                <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
-            ))}
-            <Grid container spacing={2} marginTop={0}>
-                <Grid item>
-                    <Button variant="contained" onClick={() => onOpenDialog(true)}>
-                        Add Exercise
-                    </Button>
-                    {openExerciseSelector && (
-                        <ExerciseSelector inWorkout
-                            openExerciseSelector={openExerciseSelector} 
-                            onOpenDialog={onOpenDialog}
-                            onExerciseSelection={addExercise}
-                        />
-                    )}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box>
+                {state.exercises.map((exercise) => (
+                    <Exercise inWorkout key={exercise.id} exerciseId={exercise.id}/>
+                ))}
+                <Grid container spacing={2} marginTop={0} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Grid item>
+                        <Button variant="contained" onClick={() => onOpenDialog(true)}>
+                            Add Exercise
+                        </Button>
+                        {openExerciseSelector && (
+                            <ExerciseSelector inWorkout
+                                openExerciseSelector={openExerciseSelector} 
+                                onOpenDialog={onOpenDialog}
+                                onExerciseSelection={addExercise}
+                            />
+                        )}
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Box>
         </Box>
     );
 }

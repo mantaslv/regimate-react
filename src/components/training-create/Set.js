@@ -52,10 +52,10 @@ const Set = ({ exerciseId, setId }) => {
                     onChange={handleRepsChange}
                 />
             </Grid>
-            <Grid item md={1}>
+            <Grid item>
                 <Button 
                     variant="contained" 
-                    color="error" 
+                    color="secondary" 
                     onClick={handleDeleteSet}
                     disabled={exercise.sets.length <= 1}
                     aria-label="Delete Set"
@@ -64,7 +64,7 @@ const Set = ({ exerciseId, setId }) => {
                     <RemoveCircleIcon/>
                 </Button>
             </Grid>
-            <Grid item md={1}>
+            <Grid item>
                 <ConsoleLogButton print={set} info="set"/>
             </Grid>
         </Grid>

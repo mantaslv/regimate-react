@@ -26,9 +26,11 @@ export const WorkoutExerciseCard = ({
                             {exercise.exerciseName}
                         </Typography>
                     </Button>
-                }>
+                }
+                sx={{ mx: -2, my: -2.5 }}
+            >
             </CardHeader>
-            <CardContent>
+            <CardContent sx={{ mb: -1.5, mt: -6 }}>
                 {exercise.sets && exercise.sets.map(set => (
                     <Set key={set.id} exerciseId={exerciseId} setId={set.id}/>
                 ))}
@@ -39,7 +41,7 @@ export const WorkoutExerciseCard = ({
                     <Grid item>
                         <Button 
                             variant="contained" 
-                            color="error" 
+                            color="secondary" 
                             onClick={handleDeleteExercise}
                             disabled={state.exercises.length <= 1}
                             sx={{ justifyContent: "space-between" }}
