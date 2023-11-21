@@ -59,7 +59,7 @@ const TrainingList = ({ isWorkout=false }) => {
             {loading ? (
                 <CircularProgress size={80} sx={{ mt: 10 }}/>
             ) : (
-                trainingData && trainingData.length > 0 ? (
+                trainingData?.length > 0 ? (
                     <>
                         {trainingData.map(item => (
                             <TrainingCard key={item._id} training={item} sx={{ mb: 2 }}/>

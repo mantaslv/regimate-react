@@ -6,7 +6,7 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
     const { state, dispatch } = useProgrammeContext();
 
     const workout = state.workouts.find((wo) => wo.id === workoutId);
-    const exercise = workout && workout.exercises.find((ex) => ex.id === exerciseId);
+    const exercise = workout?.exercises.find((ex) => ex.id === exerciseId);
 
     const [sets, setSets] = useState(exercise.sets.length);
     const [reps, setReps] = useState(exercise.sets[0].reps);

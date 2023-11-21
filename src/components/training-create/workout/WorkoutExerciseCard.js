@@ -15,7 +15,7 @@ export const WorkoutExerciseCard = ({
     addSet
 }) => {
     const { state } = useWorkoutContext();
-    const exercise = state && state.exercises.find((ex) => ex.id === exerciseId);
+    const exercise = state?.exercises.find((ex) => ex.id === exerciseId);
 
     return (
         <Card sx={{ mt: 2 }}> 
@@ -31,7 +31,7 @@ export const WorkoutExerciseCard = ({
             >
             </CardHeader>
             <CardContent sx={{ mb: -1.5, mt: -6 }}>
-                {exercise.sets && exercise.sets.map(set => (
+                {exercise.sets?.map(set => (
                     <Set key={set.id} exerciseId={exerciseId} setId={set.id}/>
                 ))}
                 <Grid container spacing={1} marginTop={0} alignItems="center">

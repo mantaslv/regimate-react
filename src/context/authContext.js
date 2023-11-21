@@ -24,8 +24,6 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.removeItem('user');
     };
     
-    
-
     useEffect(() => {
         const startLogoutTimer = (expiryTimestamp) => {
             const currentTime = new Date().getTime();
@@ -36,7 +34,7 @@ export const AuthContextProvider = ({ children }) => {
 
         const user = JSON.parse(localStorage.getItem('user'));
 
-        if (user && user.token) {
+        if (user?.token) {
             const decodedToken = jwtDecode(user.token);
             const expiryTimestamp = decodedToken.exp;
 

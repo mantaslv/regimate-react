@@ -7,7 +7,7 @@ import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 const Set = ({ exerciseId, setId }) => {
     const { state, dispatch } = useWorkoutContext();
     const exercise = state.exercises.find(ex => ex.id === exerciseId);
-    const set = exercise && exercise.sets.find(set => set.id === setId);
+    const set = exercise?.sets.find(set => set.id === setId);
     const [reps, setReps] = useState(set ? set.reps : 0);
     const [weight, setWeight] = useState(set ? set.weight : 0);
 

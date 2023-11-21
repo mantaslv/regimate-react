@@ -53,7 +53,7 @@ export const ProgrammeSplitCard = ({
                     <RemoveCircleIcon/>
                 </IconButton>
             </Box>
-            {workout.exercises && workout.exercises.map((ex, i) => (
+            {workout?.exercises.map((ex, i) => (
                 <Exercise key={ex.id} index={i} exerciseId={ex.id} workoutId={workoutId}/>
             ))}
             <AddTrainingItemButton 
