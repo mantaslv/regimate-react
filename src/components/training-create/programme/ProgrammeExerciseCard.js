@@ -1,12 +1,10 @@
-import { Box, Button, ButtonGroup, Grid, IconButton, Typography } from "@mui/material";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import SetsRepsInput from "../programme/SetsRepsInput";
-import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
-import ExerciseSelector from "../ExerciseSelector";
 import { useEffect, useState } from "react";
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import SetsRepsInput from "../programme/SetsRepsInput";
+import ExerciseSelector from "../ExerciseSelector";
 
 export const ProgrammeExerciseCard = ({ 
     workoutId,
@@ -26,6 +24,30 @@ export const ProgrammeExerciseCard = ({
     useEffect(() => {
         setExercise(workout && workout.exercises.find((ex) => ex.id === exerciseId))
     }, [state])
+
+    const MoveExerciseButton = ({ direction }) => {
+        const rotate = direction === 'up' ? 90 : 270;
+        const disabled = direction === 'up' ? (
+            index === 0
+        ) : (
+            index === workout.exercises.length - 1
+        );
+
+        return (
+            <IconButton 
+                onClick={() => handleMoveExercise(direction)} 
+                disabled={disabled}
+                sx={{ color: 'white', p: 0 }}
+            >
+                <ArrowCircleLeftIcon sx={{ 
+                    mt: -0.5, 
+                    mr: -0.5, 
+                    fontSize: '17px',
+                    transform: `rotate(${rotate}deg)`
+                }}/>
+            </IconButton>
+        );
+    };
 
     return (
         <Box sx={{ 
@@ -62,16 +84,8 @@ export const ProgrammeExerciseCard = ({
                     </Button>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                    <IconButton
-                        onClick={handleDeleteExercise} 
-                        sx={{ color: '#FEF0C7' }}
-                    >
-                        <RemoveCircleIcon sx={{ 
-                            ml: -1, 
-                            mt: -0.5, 
-                            mr: -0.5, 
-                            fontSize: '17px' 
-                        }}/>
+                    <IconButton onClick={handleDeleteExercise} sx={{ color: '#FEF0C7' }}>
+                        <RemoveCircleIcon sx={{ m: -0.5, fontSize: '17px' }}/>
                     </IconButton>
                 </Box>
             </Box>
@@ -87,34 +101,8 @@ export const ProgrammeExerciseCard = ({
                     exerciseId={exerciseId}
                 />
                 <Grid container direction="column" sx={{ width: 30, mr: -1.1 }}>
-                    <Grid item>
-                        <IconButton 
-                            onClick={() => handleMoveExercise('up')} 
-                            disabled={index === 0}
-                            sx={{ color: 'white', p: 0 }}
-                        >
-                            <ArrowCircleLeftIcon sx={{ 
-                                mt: -0.5, 
-                                mr: -0.5, 
-                                fontSize: '17px',
-                                transform: 'rotate(90deg)'
-                            }}/>
-                        </IconButton>
-                    </Grid>
-                    <Grid item>
-                        <IconButton
-                            onClick={() => handleMoveExercise('down')} 
-                            disabled={index === workout.exercises.length - 1}
-                            sx={{ color: 'white', p: 0 }}
-                        >
-                            <ArrowCircleLeftIcon sx={{ 
-                                mt: -0.5, 
-                                mr: -0.5, 
-                                fontSize: '17px',
-                                transform: 'rotate(270deg)'
-                            }}/>
-                        </IconButton>
-                    </Grid>
+                    <Grid item><MoveExerciseButton direction='up'/></Grid>
+                    <Grid item><MoveExerciseButton direction='down'/></Grid>
                 </Grid>
             </Box>
             {openExerciseSelector && (
