@@ -33,7 +33,7 @@ const EditTrainingToolbar = ({
             token: user.token,
             dataToSave: dataToSave,
             dataType: trainingDataType + "s",
-            onComplete: () => navigate('/view-programmes'),
+            onComplete: () => navigate(`/view-${trainingDataType}s`),
         });
     };
 

@@ -20,10 +20,10 @@ const uploadTrainingData = async ({
             console.log(json);
             onComplete();
         } else {
-            throw new Error(`Error fetching ${dataType}: `, json);
+            throw new Error(`Error sending ${dataType}: `, json);
         };
     } catch (error) {
-        console.error(`Error fetching ${dataType}: `, error);
+        console.error(`Error sending ${dataType}: `, error);
     };
 };
 
