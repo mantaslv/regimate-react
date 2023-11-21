@@ -30,6 +30,8 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_WORKOUTS", payload: { startIndex: index, endIndex }})
     };
 
+    
+
     if (inWorkout) {
         return (
             <WorkoutCard

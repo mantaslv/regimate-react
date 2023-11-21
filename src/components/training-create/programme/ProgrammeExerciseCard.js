@@ -15,7 +15,8 @@ export const ProgrammeExerciseCard = ({
     handleExerciseNameChange,
     handleDeleteExercise,
     openExerciseSelector,
-    handleMoveExercise
+    handleMoveExercise,
+    sx
 }) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
@@ -36,7 +37,8 @@ export const ProgrammeExerciseCard = ({
             borderRadius: '10px', 
             backgroundColor: '#6366F1', 
             width: '100%', 
-            mt: 1 
+            mt: 1,
+            ...sx
         }}>
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ display: 'flex', flexGrow: 1 }}>

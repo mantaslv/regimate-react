@@ -46,6 +46,8 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
         handleOpenExerciseSelector,
         handleExerciseNameChange,
         handleDeleteExercise,
+        ref: drag,
+        sx: { opacity: isDragging ? 0.5 : 1, cursor: 'move' }
     };
 
     if (inWorkout) {
@@ -54,8 +56,8 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
                 {...exerciseCardProps}
                 addSet={addSet}
             />
-        )
-    }
+        );
+    };
 
     return (
         <ProgrammeExerciseCard
@@ -64,7 +66,7 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
             workoutId={workoutId}
             index={index}
         />
-    )
+    );
 };
 
 export default Exercise;
