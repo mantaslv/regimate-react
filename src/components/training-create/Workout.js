@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
-import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
+import ProgrammeSplitCard from "./programme/ProgrammeSplitCard";
 import { WorkoutCard } from "./workout/WorkoutCard";
 import { useDrop } from "react-dnd";
 

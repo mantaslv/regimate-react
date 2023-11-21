@@ -7,8 +7,9 @@ import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import React from "react";
 
-export const ProgrammeSplitCard = ({
+const ProgrammeSplitCard = React.forwardRef(({
     handleWorkoutNameChange,
     onOpenDialog,
     openExerciseSelector,
@@ -17,12 +18,13 @@ export const ProgrammeSplitCard = ({
     addExercise,
     workoutId,
     index
-}) => {
+}, ref) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
 
     return (
-        <Box 
+        <Box
+        ref={ref}
             sx={{
                 display: 'flex',
                 flexDirection: 'column', 
@@ -98,5 +100,7 @@ export const ProgrammeSplitCard = ({
                 </Grid>
             </Grid>
         </Box>
-    )
-}
+    );
+});
+
+export default ProgrammeSplitCard;
