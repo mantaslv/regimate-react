@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
-import { ProgrammeExerciseCard } from "./programme/ProgrammeExerciseCard";
+import ProgrammeExerciseCard from "./programme/ProgrammeExerciseCard";
 import { useDrag } from "react-dnd";
 
 const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {

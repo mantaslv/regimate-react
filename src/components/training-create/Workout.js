@@ -3,6 +3,7 @@ import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { ProgrammeSplitCard } from "./programme/ProgrammeSplitCard";
 import { WorkoutCard } from "./workout/WorkoutCard";
+import { useDrop } from "react-dnd";
 
 const Workout = ({ index, workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -30,26 +31,32 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_WORKOUTS", payload: { startIndex: index, endIndex }})
     };
 
-    
+    const [, drop] = useDrop({
+        accept: 'exercise',
+        drop: (item, monitor) => {
+
+        },
+    });
+
+    const workoutCardProps = {
+        addExercise,
+        onOpenDialog,
+        openExerciseSelector,
+        ref: drop,
+    };
 
     if (inWorkout) {
         return (
-            <WorkoutCard
-                addExercise={addExercise}
-                openExerciseSelector={openExerciseSelector}
-                onOpenDialog={onOpenDialog}
-            />
+            <WorkoutCard {...workoutCardProps} />
         );
     };
 
     return (
         <ProgrammeSplitCard
+            {...workoutCardProps}
             handleWorkoutNameChange={handleWorkoutNameChange}
-            onOpenDialog={onOpenDialog}
             handleMoveWorkout={handleMoveWorkout}
-            openExerciseSelector={openExerciseSelector}
             handleDeleteWorkout={handleDeleteWorkout}
-            addExercise={addExercise}
             workoutId={workoutId}
             index={index}
         />

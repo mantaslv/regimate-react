@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
@@ -6,7 +6,7 @@ import SetsRepsInput from "../programme/SetsRepsInput";
 import ExerciseSelector from "../ExerciseSelector";
 import MoveExerciseButton from "../../styled-components/MoveExerciseButton";
 
-export const ProgrammeExerciseCard = ({ 
+const ProgrammeExerciseCard = React.forwardRef(({ 
     index,
     workoutId,
     exerciseId,
@@ -17,7 +17,7 @@ export const ProgrammeExerciseCard = ({
     openExerciseSelector,
     handleMoveExercise,
     sx
-}) => {
+}, ref) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
     const [exercise, setExercise] = useState(null);
@@ -33,13 +33,16 @@ export const ProgrammeExerciseCard = ({
     };
 
     return (
-        <Box sx={{ 
-            borderRadius: '10px', 
-            backgroundColor: '#6366F1', 
-            width: '100%', 
-            mt: 1,
-            ...sx
-        }}>
+        <Box 
+            ref={ref}
+            sx={{
+                ...sx,
+                borderRadius: '10px', 
+                backgroundColor: '#6366F1', 
+                width: '100%', 
+                mt: 1
+            }}
+        >
             <Box sx={{ display: 'flex' }}>
                 <Box sx={{ display: 'flex', flexGrow: 1 }}>
                     <Button 
@@ -102,4 +105,6 @@ export const ProgrammeExerciseCard = ({
             )}
         </Box>
     );
-};
+});
+
+export default ProgrammeExerciseCard;
