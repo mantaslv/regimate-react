@@ -33,7 +33,7 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
 
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'exercise',
-        item: { exerciseId, workoutId },
+        item: { index, workoutId },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
