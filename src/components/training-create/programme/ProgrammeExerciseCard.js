@@ -28,10 +28,14 @@ const ProgrammeExerciseCard = React.forwardRef(({
         setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
     }, [state]);
 
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'exercise',
+        canDrop: item => {
+            return exerciseId !== item.exerciseId;
+        },
         collect: monitor => ({
             isOver: !!monitor.isOver(),
+            canDrop: !!monitor.canDrop(),
         })
     }));
 
@@ -44,7 +48,7 @@ const ProgrammeExerciseCard = React.forwardRef(({
     return (
         <Box ref={drop} sx={{ width: '100%' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                {isOver && (
+                {isOver && canDrop && (
                     <Box 
                         sx={{ 
                             border: '3px dashed', 
