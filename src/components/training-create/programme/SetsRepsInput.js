@@ -6,30 +6,42 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
     const { state, dispatch } = useProgrammeContext();
 
     const workout = state.workouts.find((wo) => wo.id === workoutId);
-    const exercise = workout?.exercises.find((ex) => ex.id === exerciseId);
-
-    const [sets, setSets] = useState(exercise.sets.length);
-    const [reps, setReps] = useState(exercise.sets[0].reps);
+    const [sets, setSets] = useState("");
+    const [reps, setReps] = useState("");
 
     useEffect(() => {
-        handleSetsRepsChange(sets, reps);
-    }, [sets, reps]);
+        const foundExercise = workout.exercises.find((ex) => ex.id === exerciseId);
+        if (foundExercise) {
+            setSets(foundExercise.sets.length);
+            setReps(foundExercise.sets[0].reps);
+        };
+    }, [workout, exerciseId]);
 
-    const handleSetsRepsChange = (sets, reps) => {
-        dispatch({ 
-            type: "UPDATE_SETS_X_REPS", 
-            payload: { workoutId, exerciseId, sets, reps } 
-        });
+    const handleSetsRepsChange = (newSets, newReps) => {
+        if (newSets !== sets || newReps !== reps) {
+            dispatch({ 
+                type: "UPDATE_SETS_X_REPS", 
+                payload: { workoutId, exerciseId, sets: newSets, reps: newReps } 
+            });
+        };
     };
 
-    useEffect(() => {
-        handleSetsRepsChange(sets, reps);
-    }, [sets, reps]);
+    const handleSetsChange = (event) => {
+        const newSets = event.target.value;
+        setSets(newSets);
+        handleSetsRepsChange(newSets, reps);
+    };
+
+    const handleRepsChange = (event) => {
+        const newReps = event.target.value;
+        setReps(newReps);
+        handleSetsRepsChange(sets, newReps);
+    };
 
     return (
         <>
-            <NamedInput label='Sets' setVariable={(val) => setSets(val)} value={sets}/>
-            <NamedInput label='Reps' setVariable={(val) => setReps(val)} value={reps}/>
+            <NamedInput label='Sets' value={sets} setVariable={handleSetsChange} />
+            <NamedInput label='Reps' value={reps} setVariable={handleRepsChange} />
         </>
     );
 };
