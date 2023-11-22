@@ -110,7 +110,7 @@ const ProgrammeExerciseCard = ({
                         </Button>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                        <IconButton onClick={handleDeleteExercise} sx={{ color: '#FEF0C7' }}>
+                        <IconButton onClick={handleDeleteExercise} sx={{ color: 'white' }}>
                             <RemoveCircleIcon sx={{ m: -0.5, fontSize: '17px' }}/>
                         </IconButton>
                     </Box>
@@ -126,14 +126,14 @@ const ProgrammeExerciseCard = ({
                         workoutId={workoutId} 
                         exerciseId={exerciseId}
                     />
-                    <Grid container direction="column" sx={{ width: 30, mr: -1.1 }}>
+                    {/* <Grid container direction="column" sx={{ width: 30, mr: -1.1 }}>
                         <Grid item>
                             <MoveExerciseButton up {...moveExerciseProps}/>
                         </Grid>
                         <Grid item>
                             <MoveExerciseButton down {...moveExerciseProps}/>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </Box>
                 {openExerciseSelector && (
                     <ExerciseSelector
