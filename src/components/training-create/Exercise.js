@@ -3,7 +3,6 @@ import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
 import ProgrammeExerciseCard from "./programme/ProgrammeExerciseCard";
-import { useDrag } from "react-dnd";
 
 const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
     const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -31,13 +30,10 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_EXERCISES", payload: { startIndex: index, endIndex, workoutId }})
     };
 
-    const [{ isDragging }, drag] = useDrag(() => ({
-        type: 'exercise',
-        item: { index, workoutId, exerciseId },
-        collect: (monitor) => ({
-            isDragging: !!monitor.isDragging(),
-        }),
-    }));
+    const handleDropExercise = (item) => {
+        const payload = { item, exerciseId, workoutId };
+        dispatch({ type: "MOVE_EXERCISE", payload });
+    };
 
     const exerciseCardProps = {
         exerciseId,
@@ -46,8 +42,7 @@ const Exercise = ({ index, exerciseId, workoutId, inWorkout=false }) => {
         handleOpenExerciseSelector,
         handleExerciseNameChange,
         handleDeleteExercise,
-        ref: drag,
-        sx: { opacity: isDragging ? 0.5 : 1, cursor: 'move' }
+        handleDropExercise,
     };
 
     if (inWorkout) {

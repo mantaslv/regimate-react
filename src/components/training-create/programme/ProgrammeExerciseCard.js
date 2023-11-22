@@ -5,10 +5,9 @@ import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import SetsRepsInput from "../programme/SetsRepsInput";
 import ExerciseSelector from "../ExerciseSelector";
 import MoveExerciseButton from "../../styled-components/MoveExerciseButton";
-import { useDrop } from "react-dnd";
-import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
+import { useDrag, useDrop } from "react-dnd";
 
-const ProgrammeExerciseCard = React.forwardRef(({ 
+const ProgrammeExerciseCard = ({
     index,
     workoutId,
     exerciseId,
@@ -18,20 +17,31 @@ const ProgrammeExerciseCard = React.forwardRef(({
     handleDeleteExercise,
     openExerciseSelector,
     handleMoveExercise,
-    sx
-}, ref) => {
+    handleDropExercise,
+}) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
-    const [exercise, setExercise] = useState(null);
+    const [exercise, setExercise] = useState(workout?.exercises.find((ex) => ex.id === exerciseId));
     
     useEffect(() => {
         setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
     }, [state]);
 
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: 'exercise',
+        item: { workoutId, exerciseId },
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    }));
+
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'exercise',
         canDrop: item => {
             return exerciseId !== item.exerciseId;
+        },
+        drop: item => {
+            handleDropExercise(item);
         },
         collect: monitor => ({
             isOver: !!monitor.isOver(),
@@ -62,9 +72,10 @@ const ProgrammeExerciseCard = React.forwardRef(({
                 )}
             </Box>
             <Box 
-                ref={ref}
+                ref={drag}
                 sx={{
-                    ...sx,
+                    opacity: isDragging ? 0.5 : 1, 
+                    cursor: 'move',
                     borderRadius: '10px', 
                     backgroundColor: '#6366F1', 
                     width: '100%', 
@@ -133,8 +144,7 @@ const ProgrammeExerciseCard = React.forwardRef(({
                 )}
             </Box>
         </Box>
-        
     );
-});
+};
 
 export default ProgrammeExerciseCard;

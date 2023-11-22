@@ -7,10 +7,10 @@ import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 
-const ProgrammeSplitCard = React.forwardRef(({
+const ProgrammeSplitCard = ({
     handleWorkoutNameChange,
     onOpenDialog,
     openExerciseSelector,
@@ -19,14 +19,20 @@ const ProgrammeSplitCard = React.forwardRef(({
     addExercise,
     workoutId,
     index
-}, ref) => {
+}) => {
     const { state } = useProgrammeContext();
-    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const [workout, setWorkout] = useState(state.workouts.find((wo) => wo.id === workoutId));
+
+    useEffect(() => {
+        setWorkout(state.workouts.find((wo) => wo.id === workoutId));
+    }, [state]);
 
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'exercise',
         canDrop: item => {
-            return workoutId !== item.workoutId || workout.exercises.length !== item.index + 1;
+            const isLastExercise = workout.exercises.length === item.index + 1;
+            const isSameWorkout = workoutId === item.workoutId;
+            return !isLastExercise || !isSameWorkout;
         },
         collect: monitor => ({
             isOver: !!monitor.isOver(),
@@ -36,7 +42,6 @@ const ProgrammeSplitCard = React.forwardRef(({
 
     return (
         <Box
-        ref={ref}
             sx={{
                 display: 'flex',
                 flexDirection: 'column', 
@@ -52,7 +57,7 @@ const ProgrammeSplitCard = React.forwardRef(({
                 <Input
                     disableUnderline
                     placeholder="workout name"
-                    value={workout.workoutName}
+                    value={workout?.workoutName}
                     onChange={handleWorkoutNameChange}
                     sx={{
                         width: '70%',
@@ -129,6 +134,6 @@ const ProgrammeSplitCard = React.forwardRef(({
             </Grid>
         </Box>
     );
-});
+};
 
 export default ProgrammeSplitCard;

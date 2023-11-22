@@ -142,11 +142,7 @@ export const programmeReducer = (state, action) => {
                 workouts: reorderedWorkouts
             };
         case "REORDER_EXERCISES":
-            const {
-                workoutId,
-                startIndex: exerciseStartIndex,
-                endIndex: exerciseEndIndex
-            } = action.payload;
+            let { workoutId, startIndex: exerciseStartIndex, endIndex: exerciseEndIndex } = action.payload;
 
             return {
                 ...state,
@@ -160,7 +156,73 @@ export const programmeReducer = (state, action) => {
                             ...workout,
                             exercises: reorderedExercises
                         };
-                    }
+                    };
+                    return workout;
+                })
+            };
+        case "MOVE_EXERCISE":
+            const { item, exerciseId: targetExerciseId, workoutId: targetWorkoutId } = action.payload;
+            const { exerciseId: originExerciseId, workoutId: originWorkoutId } = item;
+
+            const originIndex = state
+                .workouts.find(wo => wo.id === originWorkoutId)
+                .exercises.findIndex(ex => ex.id === originExerciseId)
+
+            const targetIndex = state
+                .workouts.find(wo => wo.id === targetWorkoutId)
+                .exercises.findIndex(ex => ex.id === targetExerciseId)
+
+            console.log({ originIndex, targetIndex, workoutMatch: originWorkoutId === targetWorkoutId });
+
+            if (originWorkoutId === targetWorkoutId) {
+                return {
+                    ...state,
+                    workouts: state.workouts.map((workout) => {
+                        if (workout.id === originWorkoutId) {
+                            const reorderedExercises = [...workout.exercises];
+                            const [movedExercise] = reorderedExercises.splice(originIndex, 1);
+                            const adjustedTargetIndex = targetIndex > originIndex ? targetIndex - 1 : targetIndex;
+                            reorderedExercises.splice(adjustedTargetIndex, 0, movedExercise);
+
+                            return {
+                                ...workout,
+                                exercises: reorderedExercises
+                            };
+                        };
+                        return workout;
+                    })
+                };
+            };
+            
+            let movingExercise;
+
+            const newState = {
+                ...state,
+                workouts: state.workouts.map((workout) => {
+                    if (workout.id === originWorkoutId) {
+                        const reorderedExercises = [...workout.exercises];
+                        const [removedExercise] = reorderedExercises.splice(originIndex, 1);
+                        movingExercise = removedExercise;
+                        return {
+                            ...workout,
+                            exercises: reorderedExercises
+                        };
+                    };
+                    return workout;
+                })
+            };
+
+            return {
+                ...newState,
+                workouts: newState.workouts.map((workout) => {
+                    if (workout.id === targetWorkoutId) {
+                        const reorderedExercises = [...workout.exercises];
+                        reorderedExercises.splice(targetIndex, 0, movingExercise);
+                        return {
+                            ...workout,
+                            exercises: reorderedExercises
+                        };
+                    };
                     return workout;
                 })
             };
