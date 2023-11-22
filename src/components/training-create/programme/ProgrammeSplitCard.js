@@ -23,10 +23,14 @@ const ProgrammeSplitCard = React.forwardRef(({
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
 
-    const [{ isOver }, drop] = useDrop(() => ({
+    const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'exercise',
+        canDrop: item => {
+            return workoutId !== item.workoutId || workout.exercises.length !== item.index + 1;
+        },
         collect: monitor => ({
             isOver: !!monitor.isOver(),
+            canDrop: !!monitor.canDrop(),
         })
     }));
 
@@ -68,7 +72,7 @@ const ProgrammeSplitCard = React.forwardRef(({
             ))}
             <Box ref={drop} sx={{ width: '100%' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    {isOver && (
+                    {isOver && canDrop && (
                         <Box 
                             sx={{ 
                                 border: '3px dashed', 
