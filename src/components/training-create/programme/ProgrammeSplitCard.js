@@ -8,6 +8,7 @@ import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import React from "react";
+import { useDrop } from "react-dnd";
 
 const ProgrammeSplitCard = React.forwardRef(({
     handleWorkoutNameChange,
@@ -21,6 +22,13 @@ const ProgrammeSplitCard = React.forwardRef(({
 }, ref) => {
     const { state } = useProgrammeContext();
     const workout = state.workouts.find((wo) => wo.id === workoutId);
+
+    const [{ isOver }, drop] = useDrop(() => ({
+        accept: 'exercise',
+        collect: monitor => ({
+            isOver: !!monitor.isOver(),
+        })
+    }));
 
     return (
         <Box
@@ -58,10 +66,26 @@ const ProgrammeSplitCard = React.forwardRef(({
             {workout?.exercises.map((ex, i) => (
                 <Exercise key={ex.id} index={i} exerciseId={ex.id} workoutId={workoutId}/>
             ))}
-            <AddTrainingItemButton 
-                onClick={() => onOpenDialog(true)} 
-                sx={{ m: 1, width: '100%' }}
-            />
+            <Box ref={drop} sx={{ width: '100%' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    {isOver && (
+                        <Box 
+                            sx={{ 
+                                border: '3px dashed', 
+                                borderColor: 'grey.400',
+                                borderRadius: '16px',
+                                height: 50,
+                                width: '100%',
+                                mt: 1
+                            }}
+                        />
+                    )}
+                </Box>
+                <AddTrainingItemButton 
+                    onClick={() => onOpenDialog(true)} 
+                    sx={{ my: 1, width: '100%' }}
+                />
+            </Box>
             {openExerciseSelector && (
                 <ExerciseSelector 
                     openExerciseSelector={openExerciseSelector} 
