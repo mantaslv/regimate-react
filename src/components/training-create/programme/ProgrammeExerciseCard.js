@@ -50,7 +50,7 @@ const ProgrammeExerciseCard = React.forwardRef(({
                             border: '3px dashed', 
                             borderColor: 'grey.400',
                             borderRadius: '16px',
-                            height: 40,
+                            height: 50,
                             width: '100%',
                             mt: 1
                         }}
