@@ -46,10 +46,16 @@ const ProgrammeExerciseDnd = ({
         <Box ref={dragRef} sx={{ width: '100%' }}>
             <DropBox 
                 handleDropExercise={handleDropExercise} 
-                exerciseIndex={exerciseIndex}
                 workoutId={workoutId}
+                exerciseId={exerciseId}
             >
-                <ProgrammeExerciseCard {...exerciseCardProps} />
+                <Box sx={{ 
+                    visibility: isDragging ? 'hidden' : 'visible',
+                    // height: isDragging && 0,
+                    // my: isDragging && 0,
+                }}>
+                    <ProgrammeExerciseCard {...exerciseCardProps} />
+                </Box>
             </DropBox>
         </Box>
     );
@@ -62,25 +68,41 @@ const HalfBoxDropArea = ({
     handleDropExercise,
     setIsOverTop,  
     setIsOverBottom, 
-    exerciseIndex, 
-    workoutId
+    workoutId,
+    exerciseId
 }) => {
     const dropRef = useRef(null);
+    const { state } = useProgrammeContext();
+    const workout = state.workouts.find((wo) => wo.id === workoutId);
+    const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
+    
+    useEffect(() => {
+        setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
+    }, [state]);
+
+    const dontMoveIfSamePosition = (monitor) => {
+        const dragItem = monitor.getItem();
+        const dragIndex = state.workouts
+            .find(wo => wo.id === dragItem.workoutId)?.exercises
+            .findIndex(ex => ex.id === dragItem.exerciseId);
+
+        const isSameWorkout = workoutId === dragItem.workoutId;   
+        const isSameExerciseIndex = exerciseIndex === dragIndex;
+        const isSameExercisePosition = position === 'top'
+            ? dragIndex === exerciseIndex - 1
+            : dragIndex === exerciseIndex + 1;
+
+        return !isSameWorkout || (!isSameExerciseIndex && !isSameExercisePosition);
+    };
+
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: 'exercise',
-        canDrop: item => {
-            const isSameWorkout = workoutId === item.workoutId;
-            const isSameExerciseIndex = exerciseIndex === item.exerciseIndex;
-            const isSameExercisePosition = position === 'top'
-                ? item.exerciseIndex === exerciseIndex - 1
-                : item.exerciseIndex === exerciseIndex + 1;
-            return !isSameWorkout || (!isSameExerciseIndex && !isSameExercisePosition);
-        },
-        drop: item => handleDropExercise(item, position), // change handleDropExercise to handle position
+        canDrop: (_, monitor) => dontMoveIfSamePosition(monitor),
+        drop: item => handleDropExercise(item, position),
         collect: monitor => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),
-        })
+        }),
     });
   
     drop(dropRef);
@@ -106,13 +128,13 @@ const HalfBoxDropArea = ({
     );
 };
 
-const DropBox = ({ children, handleDropExercise, exerciseIndex, workoutId }) => {
+const DropBox = ({ children, handleDropExercise, workoutId, exerciseId }) => {
     const [isOverTop, setIsOverTop] = useState(false);
     const [isOverBottom, setIsOverBottom] = useState(false);
     const halfBoxProps = { 
         handleDropExercise, 
-        exerciseIndex, 
         workoutId,
+        exerciseId,
         setIsOverTop, 
         setIsOverBottom 
     };
