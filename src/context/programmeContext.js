@@ -168,7 +168,7 @@ export const programmeReducer = (state, action) => {
                 .workouts.find(wo => wo.id === originWorkoutId)
                 .exercises.findIndex(ex => ex.id === originExerciseId)
 
-            const targetIndex = state
+            const targetIndex = targetExerciseId === 'last' ? 'last' : state
                 .workouts.find(wo => wo.id === targetWorkoutId)
                 .exercises.findIndex(ex => ex.id === targetExerciseId)
 
@@ -181,7 +181,11 @@ export const programmeReducer = (state, action) => {
                         if (workout.id === originWorkoutId) {
                             const reorderedExercises = [...workout.exercises];
                             const [movedExercise] = reorderedExercises.splice(originIndex, 1);
-                            const adjustedTargetIndex = targetIndex > originIndex ? targetIndex - 1 : targetIndex;
+                            const adjustedTargetIndex = targetIndex === 'last'
+                                ? reorderedExercises.length
+                                : targetIndex > originIndex 
+                                    ? targetIndex - 1 
+                                    : targetIndex;
                             reorderedExercises.splice(adjustedTargetIndex, 0, movedExercise);
 
                             return {
@@ -217,7 +221,10 @@ export const programmeReducer = (state, action) => {
                 workouts: newState.workouts.map((workout) => {
                     if (workout.id === targetWorkoutId) {
                         const reorderedExercises = [...workout.exercises];
-                        reorderedExercises.splice(targetIndex, 0, movingExercise);
+                        const adjustedTargetIndex = targetIndex === 'last'
+                            ? reorderedExercises.length
+                            : targetIndex;
+                        reorderedExercises.splice(adjustedTargetIndex, 0, movingExercise);
                         return {
                             ...workout,
                             exercises: reorderedExercises

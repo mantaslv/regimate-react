@@ -31,6 +31,10 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
         dispatch({ type: "REORDER_WORKOUTS", payload: { startIndex: index, endIndex }})
     };
 
+    const handleDropExercise = (item) => {
+        const payload = { item, exerciseId: 'last', workoutId };
+        dispatch({ type: "MOVE_EXERCISE", payload });
+    };
 
     const workoutCardProps = {
         addExercise,
@@ -50,6 +54,7 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
             handleWorkoutNameChange={handleWorkoutNameChange}
             handleMoveWorkout={handleMoveWorkout}
             handleDeleteWorkout={handleDeleteWorkout}
+            handleDropExercise={handleDropExercise}
             workoutId={workoutId}
             index={index}
         />

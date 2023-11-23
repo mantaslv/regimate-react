@@ -40,9 +40,7 @@ const ProgrammeExerciseCard = ({
         canDrop: item => {
             return exerciseId !== item.exerciseId;
         },
-        drop: item => {
-            handleDropExercise(item);
-        },
+        drop: item => handleDropExercise(item),
         collect: monitor => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),

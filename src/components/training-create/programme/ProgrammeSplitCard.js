@@ -15,6 +15,7 @@ const ProgrammeSplitCard = ({
     onOpenDialog,
     openExerciseSelector,
     handleDeleteWorkout,
+    handleDropExercise,
     handleMoveWorkout,
     addExercise,
     workoutId,
@@ -34,6 +35,7 @@ const ProgrammeSplitCard = ({
             const isSameWorkout = workoutId === item.workoutId;
             return !isLastExercise || !isSameWorkout;
         },
+        drop: item => handleDropExercise(item),
         collect: monitor => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),
@@ -89,11 +91,12 @@ const ProgrammeSplitCard = ({
                             }}
                         />
                     )}
+                    <AddTrainingItemButton 
+                        onClick={() => onOpenDialog(true)} 
+                        sx={{ my: 1, width: '100%' }}
+                    />
                 </Box>
-                <AddTrainingItemButton 
-                    onClick={() => onOpenDialog(true)} 
-                    sx={{ my: 1, width: '100%' }}
-                />
+                
             </Box>
             {openExerciseSelector && (
                 <ExerciseSelector 
