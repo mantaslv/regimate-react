@@ -51,8 +51,8 @@ const ProgrammeExerciseDnd = ({
             >
                 <Box sx={{ 
                     visibility: isDragging ? 'hidden' : 'visible',
-                    // height: isDragging && 0,
-                    // my: isDragging && 0,
+                    height: isDragging && 0,
+                    my: isDragging && -1,
                 }}>
                     <ProgrammeExerciseCard {...exerciseCardProps} />
                 </Box>
