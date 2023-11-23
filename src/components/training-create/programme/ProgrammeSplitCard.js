@@ -78,25 +78,26 @@ const ProgrammeSplitCard = ({
                 <Exercise key={ex.id} index={i} exerciseId={ex.id} workoutId={workoutId}/>
             ))}
             <Box ref={drop} sx={{ width: '100%' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                    {isOver && canDrop && (
-                        <Box 
-                            sx={{ 
-                                border: '3px dashed', 
-                                borderColor: 'grey.400',
-                                borderRadius: '16px',
-                                height: 50,
-                                width: '100%',
-                                mt: 1
-                            }}
-                        />
-                    )}
-                    <AddTrainingItemButton 
-                        onClick={() => onOpenDialog(true)} 
-                        sx={{ my: 1, width: '100%' }}
-                    />
+                <Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        {isOver && canDrop && (
+                            <Box 
+                                sx={{ 
+                                    border: '3px dashed', 
+                                    borderColor: 'grey.400',
+                                    borderRadius: '16px',
+                                    height: 50,
+                                    width: '100%',
+                                    mt: 1
+                                }}
+                            />
+                        )}
+                    </Box>    
                 </Box>
-                
+                <AddTrainingItemButton 
+                    onClick={() => onOpenDialog(true)} 
+                    sx={{ my: 1, width: '100%' }}
+                />
             </Box>
             {openExerciseSelector && (
                 <ExerciseSelector 
