@@ -26,7 +26,7 @@ const ProgrammeExerciseCard = ({
     return (
         <Box 
             sx={{
-                opacity: isDragging ? 0.5 : 1, 
+                // opacity: isDragging ? 0.9 : 1, 
                 cursor: 'move',
                 borderRadius: '10px', 
                 backgroundColor: '#6366F1', 

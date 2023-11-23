@@ -3,7 +3,7 @@ import { useDrag } from "react-dnd";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
-import BoxDropArea from "./DropBoxArea";
+import BoxDropArea from "./BoxDropArea";
 
 const ProgrammeExerciseDnd = ({
     workoutId,
@@ -54,12 +54,15 @@ const ProgrammeExerciseDnd = ({
                 workoutId={workoutId}
                 exerciseId={exerciseId}
                 setIsDraggedAway={setIsDraggedAway}
+                isDragging={isDragging}
             >
-                <Box sx={{ 
-                    visibility: isDragging && isDraggedAway && 'hidden',
-                    height: isDragging && isDraggedAway && 0,
-                    my: isDragging && isDraggedAway && -1,
-                }}>
+                <Box 
+                    sx={{ ...(isDragging && isDraggedAway) && { 
+                        visibility: 'hidden',
+                        height: 0,
+                        my: -1,
+                    }}}
+                >
                     <ProgrammeExerciseCard {...exerciseCardProps} />
                 </Box>
             </BoxDropArea>

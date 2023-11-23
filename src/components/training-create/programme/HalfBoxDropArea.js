@@ -47,13 +47,21 @@ const HalfBoxDropArea = ({
   
     drop(dropRef);
   
+    // useEffect(() => {
+    //     if (position === 'top') {
+    //         setIsOverTop(isOver && canDrop);
+    //     } else {
+    //         setIsOverBottom(isOver && canDrop);
+    //     }
+    // }, [isOver, canDrop, position, setIsOverTop, setIsOverBottom]);
+
     useEffect(() => {
-        if (position === 'top') {
-            setIsOverTop(isOver && canDrop);
+        if (isOver && canDrop) {
+            position === 'top' ? setIsOverTop(true) : setIsOverBottom(true);
         } else {
-            setIsOverBottom(isOver && canDrop);
-        }
-    }, [isOver, canDrop, position, setIsOverTop, setIsOverBottom]);
+            position === 'top' ? setIsOverTop(false) : setIsOverBottom(false);
+        };
+    }, [canDrop, isOver, position, setIsOverTop, setIsOverBottom]);
   
     return (
         <Box ref={dropRef} sx={{
