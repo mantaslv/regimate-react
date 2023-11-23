@@ -76,7 +76,7 @@ const HalfBoxDropArea = ({
                 : item.exerciseIndex === exerciseIndex + 1;
             return !isSameWorkout || (!isSameExerciseIndex && !isSameExercisePosition);
         },
-        drop: handleDropExercise,
+        drop: item => handleDropExercise(item, position), // change handleDropExercise to handle position
         collect: monitor => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),

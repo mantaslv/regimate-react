@@ -161,18 +161,25 @@ export const programmeReducer = (state, action) => {
                 })
             };
         case "MOVE_EXERCISE":
-            const { item, exerciseId: targetExerciseId, workoutId: targetWorkoutId } = action.payload;
+            const { 
+                item, 
+                position, 
+                exerciseId: targetExerciseId, 
+                workoutId: targetWorkoutId 
+            } = action.payload;
             const { exerciseId: originExerciseId, workoutId: originWorkoutId } = item;
 
             const originIndex = state
                 .workouts.find(wo => wo.id === originWorkoutId)
-                .exercises.findIndex(ex => ex.id === originExerciseId)
+                .exercises.findIndex(ex => ex.id === originExerciseId);
 
-            const targetIndex = targetExerciseId === 'last' ? 'last' : state
-                .workouts.find(wo => wo.id === targetWorkoutId)
-                .exercises.findIndex(ex => ex.id === targetExerciseId)
-
-            console.log({ originIndex, targetIndex, workoutMatch: originWorkoutId === targetWorkoutId });
+            let targetIndex = state
+                    .workouts.find(wo => wo.id === targetWorkoutId)
+                    .exercises.findIndex(ex => ex.id === targetExerciseId);
+            
+            if (position === 'bottom') {
+                targetIndex += 1;
+            };
 
             if (originWorkoutId === targetWorkoutId) {
                 return {
@@ -181,7 +188,7 @@ export const programmeReducer = (state, action) => {
                         if (workout.id === originWorkoutId) {
                             const reorderedExercises = [...workout.exercises];
                             const [movedExercise] = reorderedExercises.splice(originIndex, 1);
-                            const adjustedTargetIndex = targetIndex === 'last'
+                            const adjustedTargetIndex = targetIndex < 0
                                 ? reorderedExercises.length
                                 : targetIndex > originIndex 
                                     ? targetIndex - 1 

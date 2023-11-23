@@ -32,7 +32,7 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
     };
 
     const handleDropExercise = (item) => {
-        const payload = { item, exerciseId: 'last', workoutId };
+        const payload = { item, workoutId };
         dispatch({ type: "MOVE_EXERCISE", payload });
     };
 

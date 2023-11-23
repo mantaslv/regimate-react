@@ -26,8 +26,8 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
         setOpenExerciseSelector(true);
     };
 
-    const handleDropExercise = (item) => {
-        const payload = { item, exerciseId, workoutId };
+    const handleDropExercise = (item, position) => {
+        const payload = { item, position, exerciseId, workoutId };
         dispatch({ type: "MOVE_EXERCISE", payload });
     };
 
