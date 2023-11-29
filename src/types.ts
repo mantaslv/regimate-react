@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface ProgrammeType {
     _id: string;
     user_id: string;
@@ -30,4 +32,8 @@ export interface SetType {
     _id: string;
     reps: string;
     weight: string;
+}
+
+export interface FCWithChildrenType {
+    children: React.ReactNode;
 }
