@@ -53,5 +53,13 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "react-app-rewired": "^2.2.1",
     "webpack": "^5.76.3"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  }  
 }
