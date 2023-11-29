@@ -1,3 +1,7 @@
+if (!process.env.REACT_APP_API_URL) {
+  throw new Error('API_URL is not defined');
+};
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
