@@ -28,18 +28,18 @@ const ProgrammeWhiteboard = ({ handleAddWorkout }) => {
 					<Workout index={i} workoutId={workout.id}/>
 				</Grid>
 			))}
-			{state.workouts.length < 6 &&
-                <Grid item>
-                	<AddTrainingItemButton 
-                		onClick={handleAddWorkout} 
-                		sx={{ 
-                			m: -1,
-                			height: "100%",
-                			maxWidth: "10px"
-                		}}
-                	/>
-                </Grid>
-			}
+			{state.workouts.length < 6 && (
+				<Grid item>
+					<AddTrainingItemButton 
+						onClick={handleAddWorkout} 
+						sx={{ 
+							m: -1,
+							height: "100%",
+							maxWidth: "10px"
+						}}
+					/>
+				</Grid>
+			)}
 		</Grid>
 	);
 };

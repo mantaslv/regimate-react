@@ -131,7 +131,7 @@ export const programmeReducer = (state, action) => {
 					: workout
 			))
 		};
-	case "REORDER_WORKOUTS":
+	case "REORDER_WORKOUTS": {
 		const { startIndex, endIndex } = action.payload;
 		const reorderedWorkouts = [...state.workouts];
 		const [movedWorkout] = reorderedWorkouts.splice(startIndex, 1);
@@ -141,7 +141,8 @@ export const programmeReducer = (state, action) => {
 			...state,
 			workouts: reorderedWorkouts
 		};
-	case "REORDER_EXERCISES":
+	}
+	case "REORDER_EXERCISES": {
 		let { workoutId, startIndex: exerciseStartIndex, endIndex: exerciseEndIndex } = action.payload;
 
 		return {
@@ -160,7 +161,8 @@ export const programmeReducer = (state, action) => {
 				return workout;
 			})
 		};
-	case "MOVE_EXERCISE":
+	}
+	case "MOVE_EXERCISE": {
 		const { 
 			item, 
 			position, 
@@ -240,6 +242,7 @@ export const programmeReducer = (state, action) => {
 				return workout;
 			})
 		};
+	}
 	default:
 		return state;
 	}

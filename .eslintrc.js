@@ -9,7 +9,13 @@ module.exports = {
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended"
 	],
-	"overrides": [
+	overrides: [
+		{
+			files: ["*.js", "*.jsx"],
+			rules: {
+				"react/prop-types": "off",
+			},
+		},
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {

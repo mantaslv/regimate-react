@@ -98,7 +98,7 @@ const Login = () => {
 					<Grid container justifyContent="center" alignItems="center"> 
 						<Grid item>
 							<Link href="/signup">
-                                "Don't have an account? Sign Up"
+                                Don&apos;t have an account? Sign Up
 							</Link>
 						</Grid>
 					</Grid>

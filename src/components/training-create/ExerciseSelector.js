@@ -23,17 +23,17 @@ const ExerciseSelector = ({
 
 	const splitMatchFilteredExercises = exerciseList.filter(exercise => 
 		!exactMatchFilteredExercises.includes(exercise) &&
-        searchTerm.toLowerCase().split(" ").every(word => 
-        	exercise.name.toLowerCase().split(" ").includes(word)
-        )
+			searchTerm.toLowerCase().split(" ").every(word => 
+				exercise.name.toLowerCase().split(" ").includes(word)
+			)
 	);
 
 	const partialMatchFilteredExercises = exerciseList.filter(exercise => 
 		!exactMatchFilteredExercises.includes(exercise) &&
         !splitMatchFilteredExercises.includes(exercise) &&
-        searchTerm.toLowerCase().split(" ").some(word =>
-        	exercise.name.toLowerCase().split(" ").includes(word)
-        )
+			searchTerm.toLowerCase().split(" ").some(word =>
+				exercise.name.toLowerCase().split(" ").includes(word)
+			)
 	);
     
 	const filteredExercises = [
