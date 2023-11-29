@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 
 const Home = () => {
-    return (
-        <Box>
+	return (
+		<Box>
             Hello
-        </Box>
-    );
+		</Box>
+	);
     
 };
 
