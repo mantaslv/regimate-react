@@ -1,9 +1,12 @@
+import { ProgrammeType, WorkoutType } from "../types";
+
 type TrainingDataType = "programme" | "workout";
+type DataToSave = WorkoutType | ProgrammeType;
 
 interface UploadTrainingDataParams {
     token: string;
     onComplete: () => void;
-    dataToSave: unknown;
+    dataToSave: DataToSave;
     dataType: TrainingDataType;
 }
 
