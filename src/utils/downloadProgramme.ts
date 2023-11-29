@@ -1,4 +1,6 @@
-const formatProgrammeData = (state) => {
+import { ProgrammeType } from "../types";
+
+const formatProgrammeData = (state: ProgrammeType | null): string => {
 	if (!state || !state.programmeName || !state.workouts) {
 		return "No data available";
 	}
@@ -20,7 +22,7 @@ const formatProgrammeData = (state) => {
 	return formattedData;
 };
 
-export const downloadProgramme = (state) => {
+export const downloadProgramme = (state : ProgrammeType | null): void => {
 	const formattedData = formatProgrammeData(state);
 
 	const blob = new Blob([formattedData], { type: "text/plain" });
