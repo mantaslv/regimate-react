@@ -7,7 +7,6 @@ interface ProgrammesState {
 
 type Action = 
 	| { type: "SET_TRAINING_DATA"; payload: ProgrammeType[] }
-	| { type: "CREATE_PROGRAMME"; payload: ProgrammeType }
 	| { type: "DELETE_PROGRAMME"; payload: { _id: string } };
 
 export const programmesReducer = (state: ProgrammesState, action: Action): ProgrammesState => {
