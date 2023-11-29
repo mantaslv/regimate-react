@@ -1,11 +1,20 @@
+type TrainingDataType = 'programme' | 'workout';
+
+interface UploadTrainingDataParams {
+    token: string;
+    onComplete: () => void;
+    dataToSave: any;
+    dataType: TrainingDataType;
+};
+
 const uploadTrainingData = async ({ 
     token, 
     onComplete, 
     dataToSave,
     dataType
-}) => {
+}: UploadTrainingDataParams): Promise<void> => {
     try {
-        const res = await fetch(process.env.REACT_APP_API_URL + '/api/' + dataType, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/${dataType}`, {
             method: 'POST',
             body: JSON.stringify(dataToSave),
             headers: {
@@ -20,7 +29,7 @@ const uploadTrainingData = async ({
             console.log(json);
             onComplete();
         } else {
-            throw new Error(`Error sending ${dataType}: `, json);
+            throw new Error(`Error sending ${dataType}: ${JSON.stringify(json)}`);
         };
     } catch (error) {
         console.error(`Error sending ${dataType}: `, error);
