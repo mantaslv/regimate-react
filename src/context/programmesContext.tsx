@@ -14,8 +14,6 @@ export const programmesReducer = (state: ProgrammesState, action: Action): Progr
 	switch (action.type) {
 	case "SET_TRAINING_DATA":
 		return { programmes: action.payload };
-	case "CREATE_PROGRAMME":
-		return { programmes: [action.payload, ...state.programmes] };
 	case "DELETE_PROGRAMME":
 		return { programmes: state.programmes.filter(programme => programme._id !== action.payload._id) };
 	default: 
