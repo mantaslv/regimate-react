@@ -7,7 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import EditTrainingToolbar from "./EditTrainingToolbar";
-import fetchExercises from "../../logic/fetchExercises";
+import fetchExercises from "../../utils/fetchExercises";
 import Programme from "./Programme";
 import Workout from "./Workout";
 

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import ConsoleLogButton from "../styled-components/ConsoleLogButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import uploadTrainingData from "../../logic/uploadTrainingData";
-import { downloadProgramme } from "../../logic/downloadProgramme";
+import uploadTrainingData from "../../utils/uploadTrainingData";
+import { downloadProgramme } from "../../utils/downloadProgramme";
 import { AppBar, Box, Button, ButtonGroup, Input } from "@mui/material";
 import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
