@@ -3,7 +3,7 @@ type TrainingDataType = "programme" | "workout";
 interface UploadTrainingDataParams {
     token: string;
     onComplete: () => void;
-    dataToSave: any;
+    dataToSave: unknown;
     dataType: TrainingDataType;
 }
 
