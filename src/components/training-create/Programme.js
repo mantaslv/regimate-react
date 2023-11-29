@@ -1,3 +1,4 @@
+import React from "react";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import ProgrammeWhiteboard from "./programme/ProgrammeWhiteboard";
 

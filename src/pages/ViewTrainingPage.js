@@ -1,3 +1,4 @@
+import React from "react";
 import TrainingList from "../components/training-view/TrainingList";
 import { ProgrammesContextProvider } from "../context/programmesContext";
 import { WorkoutsContextProvider } from "../context/workoutsContext";

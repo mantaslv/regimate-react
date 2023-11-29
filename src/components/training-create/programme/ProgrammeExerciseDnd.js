@@ -1,7 +1,7 @@
 import ProgrammeExerciseCard from "./ProgrammeExerciseCard";
 import { useDrag } from "react-dnd";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import BoxDropArea from "./BoxDropArea";
 

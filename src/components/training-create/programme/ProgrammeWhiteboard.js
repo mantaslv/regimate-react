@@ -1,3 +1,4 @@
+import React from "react";
 import { Grid } from "@mui/material";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 import Workout from "../Workout";

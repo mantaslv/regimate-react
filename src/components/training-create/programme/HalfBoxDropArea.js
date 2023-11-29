@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 import { Box } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
 const HalfBoxDropArea = ({

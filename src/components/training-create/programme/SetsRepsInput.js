@@ -1,5 +1,5 @@
 import { Input, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
 const SetsRepsInput = ({ workoutId, exerciseId }) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import WorkoutCard from "./WorkoutCard";

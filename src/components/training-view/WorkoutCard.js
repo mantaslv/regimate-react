@@ -3,7 +3,7 @@ import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useState } from "react";
+import React, { useState } from "react";
 import { dateOptions } from "../../options/dateOptions";
 import { useNavigate } from "react-router-dom";
 

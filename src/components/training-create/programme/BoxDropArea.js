@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HalfBoxDropArea from "./HalfBoxDropArea";
 
 const BoxDropArea = ({ children, handleDropExercise, workoutId, exerciseId, setIsDraggedAway, isDragging }) => {
