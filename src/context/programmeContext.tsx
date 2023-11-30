@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import React, { Dispatch, createContext, useReducer } from "react";
-import { ProgrammeAction, ProgrammeState } from "../types";
+import { FCWithChildrenType, ProgrammeAction, ProgrammeState } from "../types";
 
 const generateNewWorkout = () => ({
 	id: uuidv4(),
@@ -245,7 +245,7 @@ const initialState = {
 	workouts: Array.from({ length: 3 }, () => generateNewWorkout())
 };
 
-export const ProgrammeContextProvider = ({ children }) => {
+export const ProgrammeContextProvider: React.FC<FCWithChildrenType> = ({ children }) => {
 	const [state, dispatch] = useReducer(programmeReducer, initialState);
 
 	return (
