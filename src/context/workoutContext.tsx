@@ -27,7 +27,7 @@ type WorkoutReducerAction =
 type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
 type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
 
-const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
+const updateSetInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
 	return {
 		...exercise,
 		sets: exercise.sets.map(set => 
@@ -35,6 +35,13 @@ const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateF
 				? updateFn(set, action)
 				: set
 		)
+	};
+};
+
+const deleteSetInExercise = (exercise: ExerciseType, action: SetAction): ExerciseType => {
+	return { 
+		...exercise,
+		sets: exercise.sets.filter(set => set.id !== action.payload.setId)
 	};
 };
 
@@ -93,24 +100,14 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 		}));
 	case "UPDATE_SET_METRICS":
 		return updateExercises(state, action, exercise =>  
-			updateSetsInExercise(exercise, action, set => (
+			updateSetInExercise(exercise, action, set => (
 				{ ...set, reps: action.payload.reps, weight: action.payload.weight }
 			))
 		);
 	case "DELETE_SET":
-		return {
-			...state,
-			exercises: state.exercises.map((exercise) => (
-				exercise.id === action.payload.exerciseId
-					? {
-						...exercise,
-						sets: exercise.sets.filter((set) => (
-							set.id !== action.payload.setId
-						))
-					}
-					: exercise
-			))
-		};
+		return updateExercises(state, action, exercise =>  
+			deleteSetInExercise(exercise, action)
+		);
 	default:
 		return state;
 	}
