@@ -1,21 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import React, { Dispatch, createContext, useReducer } from "react";
 import { FCWithChildrenType, WorkoutAction, WorkoutState } from "../types";
-
-const newSet = () => ({ id: uuidv4(), reps: "", weight: "" });
-
-const updateTrainingItem = <T extends { id: string; }, A>(
-	items: T[],
-	itemId: string,
-	action: A,
-	updateFn: (item: T, action: A) => T
-): T[] => {
-	return items.map(item => item.id === itemId ? updateFn(item, action) : item);
-};
-
-const filterTrainingItem = <T extends { id: string; }>(items: T[], idToRemove: string): T[] => {
-	return items.filter(item => item.id !== idToRemove);
-};
+import { filterTrainingItem, newSet, updateTrainingItem } from "../utils/reducerUtils";
 
 export const workoutReducer = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
 	switch (action.type) {
