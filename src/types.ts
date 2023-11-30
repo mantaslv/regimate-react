@@ -13,7 +13,7 @@ export interface ProgrammeType {
   
 export interface WorkoutType {
     id: string;
-    _id: string;
+    _id?: string;
     workoutName: string;
     createdAt: string;
     updatedAt: string;
@@ -22,14 +22,14 @@ export interface WorkoutType {
   
 export interface ExerciseType {
     id: string;
-    _id: string;
+    _id?: string;
     exerciseName: string;
     sets: SetType[];
 }
 
 export interface SetType {
     id: string;
-    _id: string;
+    _id?: string;
     reps: string;
     weight: string;
 }
