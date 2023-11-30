@@ -44,25 +44,56 @@ export interface WorkoutState {
 	exercises: ExerciseType[];
 }
 
+export interface ProgrammeState {
+	exerciseList: unknown[];
+	programmeName: string;
+	workouts: WorkoutType[];
+}
+
 export type SetAction = 
 	| { 
         type: "UPDATE_SET_METRICS"; 
-        payload: { exerciseId: string; setId: string; reps: string; weight: string } 
+        payload: { exerciseId: string; setId: string; reps: string; weight: string; };
     }
 	| { 
         type: "DELETE_SET"; 
-        payload: { exerciseId: string; setId: string } 
+        payload: { exerciseId: string; setId: string; }; 
     };
 
 export type ExerciseAction =
 	| SetAction
-	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
-	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
-	| { type: "ADD_SET"; payload: { exerciseId: string } };
+	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId?: string; }; }
+	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
+	| { type: "ADD_SET"; payload: { exerciseId: string; }; };
 
 export type WorkoutAction =
 	| ExerciseAction
-	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[] }
-	| { type: "INITIALISE_TRAINING"; payload: WorkoutState }
-	| { type: "UPDATE_TRAINING_NAME"; payload: string }
-	| { type: "ADD_EXERCISE"; payload: { exerciseName: string } };
+	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[]; }
+	| { type: "INITIALISE_TRAINING"; payload: WorkoutState; }
+	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
+	| { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId?: string; }; };
+
+export type ProgrammeAction =
+    | WorkoutAction
+    | { type: "INITIALISE_TRAINING"; payload: ProgrammeState; }
+	| { type: "ADD_WORKOUT"; }
+    | { type: "DELETE_WORKOUT"; payload: { workoutId: string; }; }
+    | { type: "UPDATE_WORKOUT_NAME"; payload: { workoutId: string; newName: string; }; }
+    | { type: "REORDER_WORKOUTS"; payload: { startIndex: number; endIndex: number; }; }
+    | { 
+        type: "UPDATE_SETS_X_REPS"; 
+        payload: { workoutId: string; exerciseId: string; reps: number; sets: number; } 
+    }
+    | { 
+        type: "REORDER_EXERCISES"; 
+        payload: { workoutId: string; startIndex: number; endIndex: number; }; 
+    }
+    | { 
+        type: "MOVE_EXERCISE"; 
+        payload: { 
+            workoutId: string;
+            exerciseId: string;
+            position: number;
+            item : { exerciseId: string; workoutId: string; };
+        }; 
+    };

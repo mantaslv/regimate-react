@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import React, { createContext, useReducer } from "react";
-
-export const ProgrammeContext = createContext();
+import React, { Dispatch, createContext, useReducer } from "react";
+import { ProgrammeAction, ProgrammeState } from "../types";
 
 const generateNewWorkout = () => ({
 	id: uuidv4(),
@@ -9,44 +8,29 @@ const generateNewWorkout = () => ({
 	exercises: []
 });
 
-const generateNewSet = (reps) => ({
+const generateNewSet = (reps: number) => ({
 	id: uuidv4(),
 	reps: reps,
 	weight: ""
 });
 
-const initialState = {
-	exerciseList: [],
-	programmeName: "",
-	workouts: Array.from({ length: 3 }, () => generateNewWorkout())
-};
-
-export const programmeReducer = (state, action) => {
+export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction ) => {
 	switch (action.type) {
 	case "INITIALISE_EXERCISE_LIST":
-		return {
-			...state,
-			exerciseList: action.payload
-		};
+		return { ...state, exerciseList: action.payload };
 	case "INITIALISE_TRAINING":
 		return action.payload;
 	case "UPDATE_TRAINING_NAME":
-		return {
-			...state,
-			programmeName: action.payload
-		};
+		return { ...state, programmeName: action.payload };
 	case "ADD_WORKOUT":
 		return {
 			...state,
-			workouts: [
-				...state.workouts, 
-				generateNewWorkout()
-			]
+			workouts: [...state.workouts, generateNewWorkout()]
 		};
 	case "DELETE_WORKOUT":
 		return {
 			...state,
-			workouts: state.workouts.filter((workout) => workout.id !== action.payload)
+			workouts: state.workouts.filter((workout) => workout.id !== action.payload.workoutId)
 		};
 	case "UPDATE_WORKOUT_NAME":
 		return {
@@ -143,7 +127,7 @@ export const programmeReducer = (state, action) => {
 		};
 	}
 	case "REORDER_EXERCISES": {
-		let { workoutId, startIndex: exerciseStartIndex, endIndex: exerciseEndIndex } = action.payload;
+		const { workoutId, startIndex: exerciseStartIndex, endIndex: exerciseEndIndex } = action.payload;
 
 		return {
 			...state,
@@ -246,6 +230,19 @@ export const programmeReducer = (state, action) => {
 	default:
 		return state;
 	}
+};
+
+interface ProgrammeContextType {
+	state: ProgrammeState;
+	dispatch: Dispatch<ProgrammeAction>;
+}
+
+export const ProgrammeContext = createContext<ProgrammeContextType | undefined>(undefined);
+
+const initialState = {
+	exerciseList: [],
+	programmeName: "",
+	workouts: Array.from({ length: 3 }, () => generateNewWorkout())
 };
 
 export const ProgrammeContextProvider = ({ children }) => {

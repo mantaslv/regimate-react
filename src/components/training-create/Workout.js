@@ -3,7 +3,6 @@ import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import ProgrammeSplitCard from "./programme/ProgrammeSplitCard";
 import { WorkoutCard } from "./workout/WorkoutCard";
-import { useDrop } from "react-dnd";
 
 const Workout = ({ index, workoutId, inWorkout=false }) => {
 	const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
@@ -19,7 +18,7 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
 	};
 
 	const handleDeleteWorkout = () => {
-		dispatch({ type: "DELETE_WORKOUT", payload: workoutId });
+		dispatch({ type: "DELETE_WORKOUT", payload: { workoutId } });
 	};
 
 	const addExercise = (exerciseName) => {
