@@ -25,26 +25,26 @@ type WorkoutReducerAction =
 	| ExerciseAction
 	| SetAction;
 
-// type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
-// type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
+type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
+type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
 
-// const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
-// 	return {
-// 		...exercise,
-// 		sets: exercise.sets.map(set => updateFn(set, action))
-// 	};
-// };
+const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
+	return {
+		...exercise,
+		sets: exercise.sets.map(set => updateFn(set, action))
+	};
+};
 
-// const updateExercises = (state: WorkoutState, action: ExerciseAction, updateFn: UpdateExerciseFn): WorkoutState => {
-// 	return {
-// 		...state,
-// 		exercises: state.exercises.map(exercise => 
-// 			exercise.id === action.payload.exerciseId
-// 				? updateFn(exercise, action)
-// 				: exercise
-// 		)
-// 	};
-// };
+const updateExercises = (state: WorkoutState, action: ExerciseAction, updateFn: UpdateExerciseFn): WorkoutState => {
+	return {
+		...state,
+		exercises: state.exercises.map(exercise => 
+			exercise.id === action.payload.exerciseId
+				? updateFn(exercise, action)
+				: exercise
+		)
+	};
+};
 
 export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction): WorkoutState => {
 	switch (action.type) {
@@ -73,20 +73,9 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 			]
 		};
 	case "UPDATE_EXERCISE_NAME":
-		return {
-			...state,
-			exercises: state.exercises.map((exercise) => 
-				exercise.id === action.payload.exerciseId 
-					? { ...exercise, exerciseName: action.payload.newName } 
-					: exercise
-			)
-		};
-		// return updateExercises(state, action, exercise => {
-		// 	return {
-		// 		...exercise,
-		// 		exerciseName: action.payload.newName
-		// 	};
-		// });
+		return updateExercises(state, action, exercise => (
+			{ ...exercise, exerciseName: action.payload.newName }
+		));
 	case "DELETE_EXERCISE":
 		return {
 			...state,
