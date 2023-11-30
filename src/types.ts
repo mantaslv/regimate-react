@@ -37,3 +37,32 @@ export interface SetType {
 export interface FCWithChildrenType {
     children: React.ReactNode;
 }
+
+export interface WorkoutState {
+	exerciseList: unknown[];
+	workoutName: string;
+	exercises: ExerciseType[];
+}
+
+export type SetAction = 
+	| { 
+        type: "UPDATE_SET_METRICS"; 
+        payload: { exerciseId: string; setId: string; reps: string; weight: string } 
+    }
+	| { 
+        type: "DELETE_SET"; 
+        payload: { exerciseId: string; setId: string } 
+    };
+
+export type ExerciseAction =
+	| SetAction
+	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
+	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
+	| { type: "ADD_SET"; payload: { exerciseId: string } };
+
+export type WorkoutReducerAction =
+	| ExerciseAction
+	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[] }
+	| { type: "INITIALISE_TRAINING"; payload: WorkoutState }
+	| { type: "UPDATE_TRAINING_NAME"; payload: string }
+	| { type: "ADD_EXERCISE"; payload: { exerciseName: string } };

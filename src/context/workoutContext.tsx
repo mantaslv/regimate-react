@@ -1,31 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import React, { Dispatch, createContext, useReducer } from "react";
-import { ExerciseType, FCWithChildrenType, SetType } from "../types";
-
-interface WorkoutState {
-	exerciseList: unknown[];
-	workoutName: string;
-	exercises: ExerciseType[];
-}
-type SetAction = 
-	| { type: "UPDATE_SET_METRICS"; payload: { exerciseId: string; setId: string; reps: string; weight: string } }
-	| { type: "DELETE_SET"; payload: { exerciseId: string; setId: string } };
-
-type ExerciseAction =
-	| SetAction
-	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
-	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
-	| { type: "ADD_SET"; payload: { exerciseId: string } };
-
-type WorkoutReducerAction =
-	| ExerciseAction
-	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[] }
-	| { type: "INITIALISE_TRAINING"; payload: WorkoutState }
-	| { type: "UPDATE_TRAINING_NAME"; payload: string }
-	| { type: "ADD_EXERCISE"; payload: { exerciseName: string } };
+import { ExerciseAction, ExerciseType, FCWithChildrenType, SetAction, SetType, WorkoutReducerAction, WorkoutState } from "../types";
 	
 type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
 type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
+
+const newSet = () => ({ id: uuidv4(), reps: "", weight: "" });
 
 const updateSetInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
 	return {
@@ -38,15 +18,6 @@ const updateSetInExercise = (exercise: ExerciseType, action: SetAction, updateFn
 	};
 };
 
-const deleteSetInExercise = (exercise: ExerciseType, action: SetAction): ExerciseType => {
-	return { 
-		...exercise,
-		sets: exercise.sets.filter(set => set.id !== action.payload.setId)
-	};
-};
-
-const newSet = () => ({ id: uuidv4(), reps: "", weight: "" });
-
 const updateExercises = (state: WorkoutState, action: ExerciseAction, updateFn: UpdateExerciseFn): WorkoutState => {
 	return {
 		...state,
@@ -58,30 +29,33 @@ const updateExercises = (state: WorkoutState, action: ExerciseAction, updateFn: 
 	};
 };
 
+// const updateTrainingItemById = <T extends { id: string; }, A>(
+// 	items: T[],
+// 	itemId: string,
+// 	action: A,
+// 	updateFn: (item: T, action: A) => T
+// ): T[] => {
+// 	return items.map(item => itemId ? updateFn(item, action) : item);
+// };
+
+const filterById = <T extends { id: string; }>(items: T[], idToRemove: string): T[] => {
+	return items.filter(item => item.id !== idToRemove);
+};
+
 export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction): WorkoutState => {
 	switch (action.type) {
 	case "INITIALISE_EXERCISE_LIST":
-		return {
-			...state,
-			exerciseList: action.payload
-		};
+		return { ...state, exerciseList: action.payload };
 	case "INITIALISE_TRAINING":
 		return action.payload;
 	case "UPDATE_TRAINING_NAME":
-		return {
-			...state,
-			workoutName: action.payload
-		};
+		return { ...state, workoutName: action.payload };
 	case "ADD_EXERCISE":
 		return {
 			...state,
 			exercises: [
 				...state.exercises, 
-				{ 
-					id: uuidv4(), 
-					exerciseName: action.payload.exerciseName, 
-					sets: [newSet()] 
-				}
+				{ id: uuidv4(), exerciseName: action.payload.exerciseName, sets: [newSet()] }
 			]
 		};
 	case "UPDATE_EXERCISE_NAME":
@@ -91,7 +65,7 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 	case "DELETE_EXERCISE":
 		return {
 			...state,
-			exercises: state.exercises.filter((exercise) => exercise.id !== action.payload.exerciseId)
+			exercises: filterById(state.exercises, action.payload.exerciseId)
 		};
 	case "ADD_SET":
 		return updateExercises(state, action, exercise => ({ 
@@ -105,9 +79,10 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 			))
 		);
 	case "DELETE_SET":
-		return updateExercises(state, action, exercise =>  
-			deleteSetInExercise(exercise, action)
-		);
+		return updateExercises(state, action, exercise => ({
+			...exercise,
+			sets: filterById(exercise.sets, action.payload.setId)
+		}));
 	default:
 		return state;
 	}
