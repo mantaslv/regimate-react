@@ -7,33 +7,38 @@ interface WorkoutState {
 	workoutName: string;
 	exercises: ExerciseType[];
 }
-
-type ExerciseAction =
-	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
-	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
-	| { type: "ADD_SET"; payload: { exerciseId: string } }
-
 type SetAction = 
 	| { type: "UPDATE_SET_METRICS"; payload: { exerciseId: string; setId: string; reps: string; weight: string } }
 	| { type: "DELETE_SET"; payload: { exerciseId: string; setId: string } };
 
+type ExerciseAction =
+	| SetAction
+	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
+	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
+	| { type: "ADD_SET"; payload: { exerciseId: string } };
+
 type WorkoutReducerAction =
+	| ExerciseAction
 	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[] }
 	| { type: "INITIALISE_TRAINING"; payload: WorkoutState }
 	| { type: "UPDATE_TRAINING_NAME"; payload: string }
-	| { type: "ADD_EXERCISE"; payload: { exerciseName: string } }
-	| ExerciseAction
-	| SetAction;
-
+	| { type: "ADD_EXERCISE"; payload: { exerciseName: string } };
+	
 type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
-type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction | null) => ExerciseType;
+type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
 
 const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
 	return {
 		...exercise,
-		sets: exercise.sets.map(set => updateFn(set, action))
+		sets: exercise.sets.map(set => 
+			set.id === action.payload.setId
+				? updateFn(set, action)
+				: set
+		)
 	};
 };
+
+const newSet = () => ({ id: uuidv4(), reps: "", weight: "" });
 
 const updateExercises = (state: WorkoutState, action: ExerciseAction, updateFn: UpdateExerciseFn): WorkoutState => {
 	return {
@@ -68,7 +73,7 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 				{ 
 					id: uuidv4(), 
 					exerciseName: action.payload.exerciseName, 
-					sets: [{ id: uuidv4(), reps: "", weight: "" }] 
+					sets: [newSet()] 
 				}
 			]
 		};
@@ -84,28 +89,14 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 	case "ADD_SET":
 		return updateExercises(state, action, exercise => ({ 
 			...exercise, 
-			sets: [...exercise.sets, { id: uuidv4(), reps: "", weight: "" }]
+			sets: [...exercise.sets, newSet()]
 		}));
 	case "UPDATE_SET_METRICS":
-		return { 
-			...state, 
-			exercises: state.exercises.map(exercise => (
-				exercise.id === action.payload.exerciseId
-					? {
-						...exercise,
-						sets: exercise.sets.map(set => (
-							set.id === action.payload.setId
-								? {
-									...set,
-									reps: action.payload.reps,
-									weight: action.payload.weight
-								}
-								: set
-						))
-					}
-					: exercise
-			)) 
-		};
+		return updateExercises(state, action, exercise =>  
+			updateSetsInExercise(exercise, action, set => (
+				{ ...set, reps: action.payload.reps, weight: action.payload.weight }
+			))
+		);
 	case "DELETE_SET":
 		return {
 			...state,
