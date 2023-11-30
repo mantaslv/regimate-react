@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import React, { Dispatch, createContext, useReducer } from "react";
-import { FCWithChildrenType, ProgrammeAction, ProgrammeState } from "../types";
+import { ExerciseType, FCWithChildrenType, MoveExercisePayload, ProgrammeReducerAction, ProgrammeState } from "../types";
 
 const generateNewWorkout = () => ({
 	id: uuidv4(),
@@ -10,11 +10,11 @@ const generateNewWorkout = () => ({
 
 const generateNewSet = (reps: number) => ({
 	id: uuidv4(),
-	reps: reps,
+	reps: reps.toString(),
 	weight: ""
 });
 
-export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction ) => {
+export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducerAction ): ProgrammeState => {
 	switch (action.type) {
 	case "INITIALISE_EXERCISE_LIST":
 		return { ...state, exerciseList: action.payload };
@@ -53,7 +53,7 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction 
 							{
 								id: uuidv4(),
 								exerciseName: action.payload.exerciseName,
-								sets: [{ id: uuidv4(), reps: 1, weight: 0 }]
+								sets: [{ id: uuidv4(), reps: "", weight: "" }]
 							}
 						]
 					}
@@ -152,17 +152,19 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction 
 			position, 
 			exerciseId: targetExerciseId, 
 			workoutId: targetWorkoutId 
-		} = action.payload;
+		} = action.payload as MoveExercisePayload;
 		const { exerciseId: originExerciseId, workoutId: originWorkoutId } = item;
 
-		const originIndex = state
-			.workouts.find(wo => wo.id === originWorkoutId)
-			.exercises.findIndex(ex => ex.id === originExerciseId);
+		const originWorkout = state.workouts.find(wo => wo.id === originWorkoutId);
+		const targetWorkout = state.workouts.find(wo => wo.id === targetWorkoutId);
 
-		let targetIndex = state
-			.workouts.find(wo => wo.id === targetWorkoutId)
-			.exercises.findIndex(ex => ex.id === targetExerciseId);
-            
+		if (!originWorkout || !targetWorkout) {
+			return state;
+		}
+
+		const originIndex = originWorkout.exercises.findIndex(ex => ex.id === originExerciseId);
+		let targetIndex = targetWorkout.exercises.findIndex(ex => ex.id === targetExerciseId);
+
 		if (position === "bottom") {
 			targetIndex += 1;
 		}
@@ -191,7 +193,7 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction 
 			};
 		}
             
-		let movingExercise;
+		let movingExercise: ExerciseType;
 
 		const newState = {
 			...state,
@@ -214,9 +216,10 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction 
 			workouts: newState.workouts.map((workout) => {
 				if (workout.id === targetWorkoutId) {
 					const reorderedExercises = [...workout.exercises];
-					const adjustedTargetIndex = targetIndex === "last"
+					const adjustedTargetIndex = !position
 						? reorderedExercises.length
 						: targetIndex;
+						
 					reorderedExercises.splice(adjustedTargetIndex, 0, movingExercise);
 					return {
 						...workout,
@@ -234,7 +237,7 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeAction 
 
 interface ProgrammeContextType {
 	state: ProgrammeState;
-	dispatch: Dispatch<ProgrammeAction>;
+	dispatch: Dispatch<ProgrammeReducerAction>;
 }
 
 export const ProgrammeContext = createContext<ProgrammeContextType | undefined>(undefined);

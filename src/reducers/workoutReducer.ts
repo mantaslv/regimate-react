@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import { WorkoutAction, WorkoutState } from "../types";
+import { WorkoutReducerAction, WorkoutState } from "../types";
 import { filterTrainingItem, newSet, updateTrainingItem } from "../utils/reducerUtils";
 
-export const workoutReducer = (state: WorkoutState, action: WorkoutAction): WorkoutState => {
+export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction): WorkoutState => {
 	switch (action.type) {
 	case "INITIALISE_EXERCISE_LIST":
 		return { ...state, exerciseList: action.payload };
