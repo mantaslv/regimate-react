@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { WorkoutReducerAction, WorkoutState } from "../types";
-import { filterTrainingItem, newSet, updateTrainingItem } from "../utils/reducerUtils";
+import { filterTrainingItem, generateNewEmptySet, updateTrainingItem } from "../utils/reducerUtils";
 
 export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction): WorkoutState => {
 	switch (action.type) {
@@ -15,7 +15,7 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 			...state,
 			exercises: [
 				...state.exercises, 
-				{ id: uuidv4(), exerciseName: action.payload.exerciseName, sets: [newSet()] }
+				{ id: uuidv4(), exerciseName: action.payload.exerciseName, sets: [generateNewEmptySet()] }
 			]
 		};
 	case "UPDATE_EXERCISE_NAME":
@@ -34,7 +34,7 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 		return {
 			...state,
 			exercises: updateTrainingItem(state.exercises, action.payload.exerciseId, action, exercise => (
-				{ ...exercise, sets: [...exercise.sets, newSet()] }
+				{ ...exercise, sets: [...exercise.sets, generateNewEmptySet()] }
 			))
 		};
 	case "UPDATE_SET_METRICS":
