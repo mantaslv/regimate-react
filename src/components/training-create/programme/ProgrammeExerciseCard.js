@@ -42,7 +42,8 @@ const ProgrammeExerciseCard = ({
 							minWidth: 0, 
 							borderRadius: "10px", 
 							px: 1,  
-							mx: 0.5 
+							mx: 0.5,
+							zIndex: 2
 						}}
 					>
 						<Typography 

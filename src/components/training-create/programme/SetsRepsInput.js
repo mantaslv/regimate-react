@@ -26,14 +26,14 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
 		}
 	};
 
-	const handleSetsChange = (event) => {
-		const newSets = event.target.value;
-		setSets(newSets);
-		handleSetsRepsChange(newSets, reps);
+	const handleSetsChange = (newSets) => {
+		if (newSets !== "") {
+			setSets(newSets);
+			handleSetsRepsChange(newSets, reps);
+		}
 	};
 
-	const handleRepsChange = (event) => {
-		const newReps = event.target.value;
+	const handleRepsChange = (newReps) => {
 		setReps(newReps);
 		handleSetsRepsChange(sets, newReps);
 	};
@@ -85,6 +85,7 @@ const NamedInput = ({label, value, setVariable}) => {
 					backgroundColor: "#4338CA", 
 					"& input": { textAlign: "center" },
 					"&:hover": { backgroundColor: "#312E81" },
+					zIndex: 2
 				}}
 			/>
 		</>
