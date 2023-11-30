@@ -26,10 +26,7 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 			))
 		};
 	case "DELETE_EXERCISE":
-		return {
-			...state,
-			exercises: filterTrainingItem(state.exercises, action.payload.exerciseId)
-		};
+		return { ...state, exercises: filterTrainingItem(state.exercises, action.payload.exerciseId) };
 	case "ADD_SET":
 		return {
 			...state,

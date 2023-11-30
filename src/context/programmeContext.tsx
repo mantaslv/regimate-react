@@ -1,13 +1,7 @@
-import { v4 as uuidv4 } from "uuid";
 import React, { Dispatch, createContext, useReducer } from "react";
 import { FCWithChildrenType, ProgrammeReducerAction, ProgrammeState } from "../types";
 import { programmeReducer } from "../reducers/programmeReducer";
-
-const generateNewWorkout = () => ({
-	id: uuidv4(),
-	workoutName: "",
-	exercises: []
-});
+import { generateNewWorkout } from "../utils/reducerUtils";
 
 interface ProgrammeContextType {
 	state: ProgrammeState;

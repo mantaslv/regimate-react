@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { ProgrammeExerciseInWorkoutAction, WorkoutType } from "../types";
 
 export const generateNewEmptySet = () => ({ id: uuidv4(), reps: "", weight: "" });
 
@@ -25,4 +26,17 @@ export const updateTrainingItem = <T extends { id: string; }, A>(
 
 export const filterTrainingItem = <T extends { id: string; }>(items: T[], idToRemove: string): T[] => {
 	return items.filter(item => item.id !== idToRemove);
+};
+
+export const updateExerciseInWorkout = (
+	workouts: WorkoutType[], 
+	action: ProgrammeExerciseInWorkoutAction, 
+	changes: object
+) => {
+	return updateTrainingItem(workouts, action.payload.workoutId, action, workout => ({
+		...workout, 
+		exercises: updateTrainingItem(workout.exercises, action.payload.exerciseId, action, exercise => (
+			{ ...exercise, ...changes }
+		))
+	}));
 };

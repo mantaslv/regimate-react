@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { ExerciseType, MoveExercisePayload, ProgrammeReducerAction, ProgrammeState } from "../types";
-import { generateNewSetWithReps, generateNewWorkout } from "../utils/reducerUtils";
+import { filterTrainingItem, generateNewSetWithReps, generateNewWorkout, updateExerciseInWorkout, updateTrainingItem } from "../utils/reducerUtils";
 
 export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducerAction ): ProgrammeState => {
 	switch (action.type) {
@@ -11,97 +11,51 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 	case "UPDATE_TRAINING_NAME":
 		return { ...state, programmeName: action.payload };
 	case "ADD_WORKOUT":
-		return {
-			...state,
-			workouts: [...state.workouts, generateNewWorkout()]
-		};
+		return { ...state, workouts: [...state.workouts, generateNewWorkout()] };
 	case "DELETE_WORKOUT":
-		return {
-			...state,
-			workouts: state.workouts.filter((workout) => workout.id !== action.payload.workoutId)
-		};
+		return { ...state, workouts: filterTrainingItem(state.workouts, action.payload.workoutId) };
 	case "UPDATE_WORKOUT_NAME":
 		return {
 			...state,
-			workouts: state.workouts.map((workout) => 
-				workout.id === action.payload.workoutId 
-					? { ...workout, workoutName: action.payload.newName} 
-					: workout
-			)
+			workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => (
+				{ ...workout, workoutName: action.payload.newName} 
+			))
 		};
 	case "ADD_EXERCISE":
 		return {
 			...state,
-			workouts: state.workouts.map((workout) =>
-				workout.id === action.payload.workoutId
-					? {
-						...workout,
-						exercises: [
-							...workout.exercises,
-							{
-								id: uuidv4(),
-								exerciseName: action.payload.exerciseName,
-								sets: [{ id: uuidv4(), reps: "", weight: "" }]
-							}
-						]
+			workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
+				...workout,
+				exercises: [
+					...workout.exercises, {
+						id: uuidv4(),
+						exerciseName: action.payload.exerciseName,
+						sets: [{ id: uuidv4(), reps: "", weight: "" }]
 					}
-					: workout
-			)
+				]
+			}))
 		};
 	case "UPDATE_EXERCISE_NAME":
 		return {
-			...state,
-			workouts: state.workouts.map((workout) => (
-				workout.id === action.payload.workoutId
-					? {
-						...workout,
-						exercises: workout.exercises.map((exercise) => (
-							exercise.id === action.payload.exerciseId
-								? {
-									...exercise,
-									exerciseName: action.payload.newName
-								}
-								: exercise
-						))
-					}
-					: workout
-			))
+			...state, 
+			workouts: updateExerciseInWorkout(state.workouts, action, { exerciseName: action.payload.newName })
 		};
 	case "DELETE_EXERCISE":
 		return {
 			...state,
-			workouts: state.workouts.map((workout) => (
-				workout.id === action.payload.workoutId
-					? {
-						...workout,
-						exercises: workout.exercises.filter((exercise) => (
-							exercise.id !== action.payload.exerciseId
-						))
-					}
-					: workout
-			))
+			workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
+				...workout, exercises: filterTrainingItem(workout.exercises, action.payload.exerciseId)
+			}))
 		};
 	case "UPDATE_SETS_X_REPS":
 		return {
-			...state,
-			workouts: state.workouts.map((workout) => (
-				workout.id === action.payload.workoutId
-					? {
-						...workout,
-						exercises: workout.exercises.map((exercise) => (
-							exercise.id === action.payload.exerciseId
-								? {
-									...exercise,
-									sets: Array.from(
-										{ length: action.payload.sets }, 
-										() => generateNewSetWithReps(action.payload.reps)
-									)
-								}
-								: exercise
-						))
-					}
-					: workout
-			))
+			...state, 
+			workouts: updateExerciseInWorkout(state.workouts, action, { 
+				sets: Array.from(
+					{ length: action.payload.sets }, 
+					() => generateNewSetWithReps(action.payload.reps)
+				)
+			})
 		};
 	case "REORDER_WORKOUTS": {
 		const { startIndex, endIndex } = action.payload;
@@ -109,28 +63,19 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 		const [movedWorkout] = reorderedWorkouts.splice(startIndex, 1);
 		reorderedWorkouts.splice(endIndex, 0, movedWorkout);
 
-		return {
-			...state,
-			workouts: reorderedWorkouts
-		};
+		return { ...state, workouts: reorderedWorkouts };
 	}
 	case "REORDER_EXERCISES": {
 		const { workoutId, startIndex: exerciseStartIndex, endIndex: exerciseEndIndex } = action.payload;
 
 		return {
 			...state,
-			workouts: state.workouts.map((workout) => {
-				if (workout.id === workoutId) {
-					const reorderedExercises = [...workout.exercises];
-					const [movedExercise] = reorderedExercises.splice(exerciseStartIndex, 1);
-					reorderedExercises.splice(exerciseEndIndex, 0, movedExercise);
+			workouts: updateTrainingItem(state.workouts, workoutId, action, workout => {
+				const reorderedExercises = [...workout.exercises];
+				const [movedExercise] = reorderedExercises.splice(exerciseStartIndex, 1);
+				reorderedExercises.splice(exerciseEndIndex, 0, movedExercise);
 
-					return {
-						...workout,
-						exercises: reorderedExercises
-					};
-				}
-				return workout;
+				return { ...workout, exercises: reorderedExercises };
 			})
 		};
 	}
@@ -160,23 +105,19 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 		if (originWorkoutId === targetWorkoutId) {
 			return {
 				...state,
-				workouts: state.workouts.map((workout) => {
-					if (workout.id === originWorkoutId) {
-						const reorderedExercises = [...workout.exercises];
-						const [movedExercise] = reorderedExercises.splice(originIndex, 1);
-						const adjustedTargetIndex = targetIndex < 0
-							? reorderedExercises.length
-							: targetIndex > originIndex 
-								? targetIndex - 1 
-								: targetIndex;
-						reorderedExercises.splice(adjustedTargetIndex, 0, movedExercise);
+				workouts: updateTrainingItem(state.workouts, originWorkoutId, action, workout => {
+					const reorderedExercises = [...workout.exercises];
+					const [movedExercise] = reorderedExercises.splice(originIndex, 1);
 
-						return {
-							...workout,
-							exercises: reorderedExercises
-						};
-					}
-					return workout;
+					const adjustedTargetIndex = targetIndex < 0
+						? reorderedExercises.length
+						: targetIndex > originIndex 
+							? targetIndex - 1 
+							: targetIndex;
+
+					reorderedExercises.splice(adjustedTargetIndex, 0, movedExercise);
+
+					return { ...workout, exercises: reorderedExercises };
 				})
 			};
 		}
@@ -185,36 +126,26 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 
 		const newState = {
 			...state,
-			workouts: state.workouts.map((workout) => {
-				if (workout.id === originWorkoutId) {
-					const reorderedExercises = [...workout.exercises];
-					const [removedExercise] = reorderedExercises.splice(originIndex, 1);
-					movingExercise = removedExercise;
-					return {
-						...workout,
-						exercises: reorderedExercises
-					};
-				}
-				return workout;
+			workouts: updateTrainingItem(state.workouts, originWorkoutId, action, workout => {
+				const reorderedExercises = [...workout.exercises];
+				const [removedExercise] = reorderedExercises.splice(originIndex, 1);
+				movingExercise = removedExercise;
+
+				return { ...workout, exercises: reorderedExercises };
 			})
 		};
 
 		return {
 			...newState,
-			workouts: newState.workouts.map((workout) => {
-				if (workout.id === targetWorkoutId) {
-					const reorderedExercises = [...workout.exercises];
-					const adjustedTargetIndex = !position
-						? reorderedExercises.length
-						: targetIndex;
-						
-					reorderedExercises.splice(adjustedTargetIndex, 0, movingExercise);
-					return {
-						...workout,
-						exercises: reorderedExercises
-					};
-				}
-				return workout;
+			workouts: updateTrainingItem(newState.workouts, targetWorkoutId, action, workout => {
+				const reorderedExercises = [...workout.exercises];
+				const adjustedTargetIndex = !position
+					? reorderedExercises.length
+					: targetIndex;
+                    
+				reorderedExercises.splice(adjustedTargetIndex, 0, movingExercise);
+                
+				return { ...workout, exercises: reorderedExercises };
 			})
 		};
 	}
