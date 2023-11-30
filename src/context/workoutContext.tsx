@@ -11,9 +11,9 @@ interface WorkoutState {
 type ExerciseAction =
 	| { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string } }
 	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
+	| { type: "ADD_SET"; payload: { exerciseId: string } }
 
 type SetAction = 
-	| { type: "ADD_SET"; payload: { exerciseId: string } }
 	| { type: "UPDATE_SET_METRICS"; payload: { exerciseId: string; setId: string; reps: string; weight: string } }
 	| { type: "DELETE_SET"; payload: { exerciseId: string; setId: string } };
 
@@ -26,7 +26,7 @@ type WorkoutReducerAction =
 	| SetAction;
 
 type UpdateSetFn = (set: SetType, action: SetAction) => SetType;
-type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction) => ExerciseType;
+type UpdateExerciseFn = (exercise: ExerciseType, action: ExerciseAction | null) => ExerciseType;
 
 const updateSetsInExercise = (exercise: ExerciseType, action: SetAction, updateFn: UpdateSetFn): ExerciseType => {
 	return {
@@ -82,24 +82,10 @@ export const workoutReducer = (state: WorkoutState, action: WorkoutReducerAction
 			exercises: state.exercises.filter((exercise) => exercise.id !== action.payload.exerciseId)
 		};
 	case "ADD_SET":
-		return {
-			...state, 
-			exercises: state.exercises.map(exercise => (
-				exercise.id === action.payload.exerciseId
-					? {
-						...exercise,
-						sets: [
-							...exercise.sets,
-							{
-								id: uuidv4(),
-								weight: "",
-								reps: "", 
-							}
-						]
-					}
-					: exercise
-			))
-		};
+		return updateExercises(state, action, exercise => ({ 
+			...exercise, 
+			sets: [...exercise.sets, { id: uuidv4(), reps: "", weight: "" }]
+		}));
 	case "UPDATE_SET_METRICS":
 		return { 
 			...state, 
