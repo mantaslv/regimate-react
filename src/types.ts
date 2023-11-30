@@ -60,7 +60,7 @@ export type ExerciseAction =
 	| { type: "DELETE_EXERCISE"; payload: { exerciseId: string } }
 	| { type: "ADD_SET"; payload: { exerciseId: string } };
 
-export type WorkoutReducerAction =
+export type WorkoutAction =
 	| ExerciseAction
 	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[] }
 	| { type: "INITIALISE_TRAINING"; payload: WorkoutState }
