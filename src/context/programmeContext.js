@@ -23,12 +23,12 @@ const initialState = {
 
 export const programmeReducer = (state, action) => {
 	switch (action.type) {
-	case "SET_EXERCISE_LIST":
+	case "INITIALISE_EXERCISE_LIST":
 		return {
 			...state,
 			exerciseList: action.payload
 		};
-	case "SET_INITIAL_TRAINING":
+	case "INITIALISE_TRAINING":
 		return action.payload;
 	case "UPDATE_TRAINING_NAME":
 		return {

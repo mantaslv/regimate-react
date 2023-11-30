@@ -13,7 +13,7 @@ const Set = ({ exerciseId, setId }) => {
 
 	useEffect(() => {
 		dispatch({ 
-			type: "SET_SET_INFO", 
+			type: "UPDATE_SET_METRICS", 
 			payload: { reps, weight, exerciseId, setId } 
 		});
 	}, [reps, weight]);

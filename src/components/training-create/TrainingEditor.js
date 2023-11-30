@@ -22,13 +22,13 @@ const TrainingEditor = ({ isWorkout=false }) => {
 
 	useEffect(() => {
 		fetchExercises()
-			.then(data => dispatch({ type: "SET_EXERCISE_LIST", payload: data }))
+			.then(data => dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data }))
 			.catch(error => console.error("Error: ", error));
 	}, []);
 
 	useEffect(() => {
 		if (!initialLoadComplete && initialData) {
-			dispatch({ type: "SET_INITIAL_TRAINING", payload: initialData });
+			dispatch({ type: "INITIALISE_TRAINING", payload: initialData });
 			setTrainingName(isWorkout ? initialData.workoutName : initialData.programmeName);
 			setTrainingData(initialData);
 			setInitialLoadComplete(true);
