@@ -38,6 +38,25 @@ export interface FCWithChildrenType {
     children: React.ReactNode;
 }
 
+export interface UserState {
+	_id: string;
+	email: string;
+	token: string;
+}
+
+export interface AuthState {
+	user: UserState | null
+}
+
+export type AuthReducerAction =
+	| { type: "LOGIN"; payload: UserState }
+	| { type: "LOGOUT"; payload: null }
+
+export interface AuthContextType {
+    state: AuthState;
+    dispatch: Dispatch<AuthReducerAction>;
+}
+
 export interface WorkoutState {
 	exerciseList: unknown[];
 	workoutName: string;

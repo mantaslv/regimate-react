@@ -1,22 +1,8 @@
-import React, { createContext, useReducer, useEffect, Dispatch } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import jwtDecode from "jwt-decode";
-import { FCWithChildrenType } from "../types";
+import { AuthContextType, AuthReducerAction, AuthState, FCWithChildrenType } from "../types";
 
-interface UserState {
-	_id: string;
-	email: string;
-	token: string;
-}
-
-interface AuthState {
-	user: UserState | null
-}
-
-type Action =
-	| { type: "LOGIN"; payload: UserState }
-	| { type: "LOGOUT"; payload: null }
-
-export const authReducer = (state: AuthState, action: Action): AuthState => {
+export const authReducer = (state: AuthState, action: AuthReducerAction): AuthState => {
 	switch (action.type) {
 	case "LOGIN":
 		return { user: action.payload };
@@ -26,11 +12,6 @@ export const authReducer = (state: AuthState, action: Action): AuthState => {
 		return state;
 	}
 };
-
-interface AuthContextType {
-	state: AuthState;
-	dispatch: Dispatch<Action>;
-}
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
