@@ -60,6 +60,19 @@ export interface ProgrammeContextType {
 	dispatch: Dispatch<ProgrammeReducerAction>;
 }
 
+export interface WorkoutsState {
+	workouts: WorkoutType[];
+}
+
+export type WorkoutsReducerAction = 
+	| { type: "SET_TRAINING_DATA"; payload: WorkoutType[] }
+	| { type: "DELETE_WORKOUT"; payload: { _id: string } };
+
+export interface WorkoutsContextType {
+    state: WorkoutsState;
+    dispatch: Dispatch<WorkoutsReducerAction>;
+}
+
 export interface ProgrammesState {
 	programmes: ProgrammeType[];
 }

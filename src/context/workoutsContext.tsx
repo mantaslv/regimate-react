@@ -1,15 +1,7 @@
-import React, { Dispatch, createContext, useReducer } from "react";
-import { FCWithChildrenType, WorkoutType } from "../types";
+import React, { createContext, useReducer } from "react";
+import { FCWithChildrenType, WorkoutsContextType, WorkoutsReducerAction, WorkoutsState } from "../types";
 
-interface WorkoutsState {
-	workouts: WorkoutType[];
-}
-
-type Action = 
-	| { type: "SET_TRAINING_DATA"; payload: WorkoutType[] }
-	| { type: "DELETE_WORKOUT"; payload: { _id: string } };
-
-export const workoutsReducer = (state: WorkoutsState, action: Action): WorkoutsState => {
+export const workoutsReducer = (state: WorkoutsState, action: WorkoutsReducerAction): WorkoutsState => {
 	switch (action.type) {
 	case "SET_TRAINING_DATA":
 		return { workouts: action.payload };
@@ -19,11 +11,6 @@ export const workoutsReducer = (state: WorkoutsState, action: Action): WorkoutsS
 		return state;
 	}
 };
-
-interface WorkoutsContextType {
-	state: WorkoutsState;
-	dispatch: Dispatch<Action>;
-}
 
 export const WorkoutsContext = createContext<WorkoutsContextType | undefined>(undefined);
 
