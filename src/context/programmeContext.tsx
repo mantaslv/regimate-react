@@ -1,12 +1,7 @@
-import React, { Dispatch, createContext, useReducer } from "react";
-import { FCWithChildrenType, ProgrammeReducerAction, ProgrammeState } from "../types";
+import React, { createContext, useReducer } from "react";
+import { FCWithChildrenType, ProgrammeContextType } from "../types";
 import { programmeReducer } from "../reducers/programmeReducer";
 import { generateNewWorkout } from "../utils/reducerUtils";
-
-interface ProgrammeContextType {
-	state: ProgrammeState;
-	dispatch: Dispatch<ProgrammeReducerAction>;
-}
 
 export const ProgrammeContext = createContext<ProgrammeContextType | undefined>(undefined);
 

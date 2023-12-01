@@ -55,6 +55,11 @@ export interface ProgrammeState {
 	workouts: WorkoutType[];
 }
 
+export interface ProgrammeContextType {
+	state: ProgrammeState;
+	dispatch: Dispatch<ProgrammeReducerAction>;
+}
+
 export type SetAction = 
 	| { 
         type: "UPDATE_SET_METRICS"; 
