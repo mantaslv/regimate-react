@@ -1,7 +1,8 @@
 import { WorkoutContext } from "../context/workoutContext";
 import { useContext } from "react";
+import { WorkoutContextType } from "../types";
 
-export const useWorkoutContext = () => {
+export const useWorkoutContext = (): WorkoutContextType => {
 	const context = useContext(WorkoutContext);
 
 	if (!context) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch } from "react";
 
 export interface ProgrammeType {
     _id: string;
@@ -42,6 +42,11 @@ export interface WorkoutState {
 	exerciseList: unknown[];
 	workoutName: string;
 	exercises: ExerciseType[];
+}
+
+export interface WorkoutContextType {
+	state: WorkoutState;
+	dispatch: Dispatch<WorkoutReducerAction>;
 }
 
 export interface ProgrammeState {

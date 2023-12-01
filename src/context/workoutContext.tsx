@@ -1,11 +1,6 @@
-import React, { Dispatch, createContext, useReducer } from "react";
-import { FCWithChildrenType, WorkoutReducerAction, WorkoutState } from "../types";
+import React, { createContext, useReducer } from "react";
+import { FCWithChildrenType, WorkoutContextType } from "../types";
 import { workoutReducer } from "../reducers/workoutReducer";
-
-interface WorkoutContextType {
-	state: WorkoutState;
-	dispatch: Dispatch<WorkoutReducerAction>;
-}
 
 export const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
