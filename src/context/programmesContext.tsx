@@ -1,15 +1,7 @@
-import React, { Dispatch, createContext, useReducer } from "react";
-import { ProgrammeType, FCWithChildrenType } from "../types";
+import React, { createContext, useReducer } from "react";
+import { FCWithChildrenType, ProgrammesContextType, ProgrammesReducerAction, ProgrammesState } from "../types";
 
-interface ProgrammesState {
-	programmes: ProgrammeType[];
-}
-
-type Action = 
-	| { type: "SET_TRAINING_DATA"; payload: ProgrammeType[] }
-	| { type: "DELETE_PROGRAMME"; payload: { _id: string } };
-
-export const programmesReducer = (state: ProgrammesState, action: Action): ProgrammesState => {
+export const programmesReducer = (state: ProgrammesState, action: ProgrammesReducerAction): ProgrammesState => {
 	switch (action.type) {
 	case "SET_TRAINING_DATA":
 		return { programmes: action.payload };
@@ -19,11 +11,6 @@ export const programmesReducer = (state: ProgrammesState, action: Action): Progr
 		return state;
 	}
 };
-
-interface ProgrammesContextType {
-	state: ProgrammesState;
-	dispatch: Dispatch<Action>;
-}
 
 export const ProgrammesContext = createContext<ProgrammesContextType | undefined>(undefined);
 

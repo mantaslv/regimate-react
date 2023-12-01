@@ -1,7 +1,8 @@
 import { ProgrammesContext } from "../context/programmesContext";
 import { useContext } from "react";
+import { ProgrammesContextType } from "../types";
 
-export const useProgrammesContext = () => {
+export const useProgrammesContext = (): ProgrammesContextType => {
 	const context = useContext(ProgrammesContext);
 
 	if (!context) {
