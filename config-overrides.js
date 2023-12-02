@@ -1,6 +1,7 @@
-import { DefinePlugin } from "webpack";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { DefinePlugin } = require("webpack");
 
-export default function override(config, env) {
+const override = (config, env) => {
 	config.resolve.alias = {
 		...config.resolve.alias,
 		"process.env": JSON.stringify(process.env),
@@ -16,4 +17,6 @@ export default function override(config, env) {
 		}));
 	}
 	return config;
-}
+};
+
+module.exports = override;
