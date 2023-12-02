@@ -50,7 +50,7 @@ export interface AuthState {
 
 export type AuthReducerAction =
 	| { type: "LOGIN"; payload: UserState }
-	| { type: "LOGOUT"; payload: null }
+	| { type: "LOGOUT"; }
 
 export interface AuthContextType {
     state: AuthState;

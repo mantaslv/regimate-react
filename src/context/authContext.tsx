@@ -21,7 +21,7 @@ export const AuthContextProvider: React.FC<FCWithChildrenType> = ({ children }) 
 	});
 
 	const logout = () => {
-		dispatch({ type: "LOGOUT", payload: null });
+		dispatch({ type: "LOGOUT" });
 		localStorage.removeItem("user");
 	};
     
