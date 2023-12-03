@@ -1,15 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 
-const AddTrainingItemButton = ({ onClick, sx }) => {
+interface AddTrainingItemButtonProps {
+	onClick: () => void;
+	sx?: ButtonProps["sx"];
+}
+
+const AddTrainingItemButton: FC<AddTrainingItemButtonProps> = ({ onClick, sx }) => {
 	return (
 		<Button 
 			onClick={onClick}
 			sx={{ 
 				border: "3px dashed", 
 				borderColor: "grey.400",
-				borderRadius: "16px",
+				borderRadius: "16px",								
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
