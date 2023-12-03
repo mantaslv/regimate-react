@@ -168,3 +168,11 @@ export type ProgrammeReducerAction =
         type: "MOVE_EXERCISE"; 
         payload: MoveExercisePayload;
     };
+
+export type AllTrainingTypes =
+    | ProgrammeType[]
+    | ProgrammeType
+    | WorkoutType[]
+    | WorkoutType
+    | ExerciseType
+    | SetType

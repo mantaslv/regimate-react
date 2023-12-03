@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { Button, ButtonProps } from "@mui/material";
 import TerminalIcon from "@mui/icons-material/Terminal";
+import { AllTrainingTypes } from "../../types";
 
 interface ConsoleLogButtonProps {
-	print: never;
+	print: AllTrainingTypes
 	info: string;
 	sx?: ButtonProps["sx"];
 	size?: ButtonProps["size"];
