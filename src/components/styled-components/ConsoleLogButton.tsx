@@ -3,7 +3,7 @@ import { Button, ButtonProps } from "@mui/material";
 import TerminalIcon from "@mui/icons-material/Terminal";
 
 interface ConsoleLogButtonProps {
-	print: object;
+	print: never;
 	info: string;
 	sx?: ButtonProps["sx"];
 	size?: ButtonProps["size"];
