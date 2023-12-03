@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { Box, CircularProgress, Grid, Typography } from "@mui/material";
-import WorkoutCard from "./WorkoutCard";
-import ConsoleLogButton from "../styled-components/ConsoleLogButton";
-import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
+import React, { FC, useEffect, useState } from "react";
+import { Box, CardProps, CircularProgress, Grid, Typography } from "@mui/material";
 import { useProgrammesContext } from "../../hooks/useProgrammesContext";
+import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
+import ConsoleLogButton from "../styled-components/ConsoleLogButton";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { ProgrammesState, WorkoutsState } from "../../types";
 import ProgrammeCard from "./ProgrammeCard";
+import WorkoutCard from "./WorkoutCard";
 
-const TrainingList = ({ isWorkout=false }) => {
+interface TrainingListProps {
+	isWorkout: boolean;
+}
+
+const TrainingList: FC<TrainingListProps> = ({ isWorkout=false }) => {
 	const { user } = useAuthContext();
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState<boolean>(true);
 	const { state, dispatch } = isWorkout ? useWorkoutsContext() : useProgrammesContext();
-	const trainingData = isWorkout ? state.workouts : state.programmes;
+	const trainingData = isWorkout 
+		? (state as WorkoutsState).workouts 
+		: (state as ProgrammesState).programmes;
 	const trainingType = isWorkout ? "workouts" : "programmes";
     
 	useEffect(() => {
@@ -20,7 +27,7 @@ const TrainingList = ({ isWorkout=false }) => {
 				const res = await fetch(process.env.REACT_APP_API_URL + "/api/" + trainingType, {
 					mode: "cors",
 					headers: {
-						"Authorization": `Bearer ${user.token}`,
+						"Authorization": `Bearer ${user?.token}`,
 						credentials: "include"
 					}
 				});
@@ -40,7 +47,12 @@ const TrainingList = ({ isWorkout=false }) => {
 		if (user) fetchTrainingData();
 	}, [user]);
 
-	const TrainingCard = ({ training, sx }) => {
+	interface TrainingCardProps {
+		training: unknown;
+		sx?: CardProps["sx"];
+	}
+
+	const TrainingCard: FC<TrainingCardProps> = ({ training, sx }) => {
 		if (isWorkout) {
 			return <WorkoutCard workout={training} sx={sx} />;
 		} else {
