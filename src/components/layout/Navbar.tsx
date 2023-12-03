@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { AppBar, Box, Button, Stack } from "@mui/material";
@@ -6,7 +6,7 @@ import { items } from "../../options/navOptions";
 import { Logo } from "../styled-components/Logo";
 import { useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar: FC = () => {
 	const { logout } = useLogout();
 	const { user } = useAuthContext();
 	const location = useLocation();
