@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
-export const Logo = () => {
+export const Logo: FC = () => {
 	return (
 		<Box sx={{ display: "inline-flex", alignItems: "center", verticalAlign: "middle" }}>
 			<Icon/>
@@ -17,7 +17,7 @@ export const Logo = () => {
 	);
 };
 
-const Icon = () => {
+const Icon: FC = () => {
 	return (
 		<Box position="relative" display="flex" sx={{ mr: ".3rem" }}>
 			<CalendarTodayIcon sx={{ fontSize: "1.5rem" }} />
