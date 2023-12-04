@@ -1,13 +1,19 @@
-import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Alert, Button, ButtonProps, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { dateOptions } from "../../options/dateOptions";
 import { useNavigate } from "react-router-dom";
+import { WorkoutType } from "../../types";
 
-const WorkoutCard = ({ workout, sx }) => {
+interface WorkoutCardProps {
+	workout: WorkoutType;
+	sx: ButtonProps["sx"];
+}
+
+const WorkoutCard: FC<WorkoutCardProps> = ({ workout, sx }) => {
 	const { dispatch } = useWorkoutsContext();
 	const { user } = useAuthContext();
 	const navigate = useNavigate();
@@ -15,7 +21,7 @@ const WorkoutCard = ({ workout, sx }) => {
 
 	const handleClick = async () => {
 		if (!user) {
-			return;
+			return null;
 		}
 
 		setShowAlert(true);
@@ -23,7 +29,7 @@ const WorkoutCard = ({ workout, sx }) => {
 
 	const handleConfirmDelete = async () => {
 		if (!user) {
-			return;
+			return null;
 		}
 
 		const res = await fetch(process.env.REACT_APP_API_URL + "/api/workouts/" + workout._id, {
@@ -50,11 +56,15 @@ const WorkoutCard = ({ workout, sx }) => {
 		navigate("/create-workout/", { state: workout });
 	};
 
+	const formattedDate = workout.createdAt
+		? new Date(workout.createdAt).toLocaleDateString("en-GB", dateOptions)
+		: "Date not available";
+
 	return (
 		<Card sx={sx} >
 			<CardHeader
 				title={workout.workoutName === "" ? "Workout" : workout.workoutName}
-				subheader={new Date(workout.createdAt).toLocaleDateString("en-GB", dateOptions)}
+				subheader={formattedDate}
 				action={
 					<>
 						<IconButton aria-label="edit" onClick={handleClickEdit}>
