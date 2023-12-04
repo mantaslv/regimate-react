@@ -1,23 +1,28 @@
 import { Input, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
-const SetsRepsInput = ({ workoutId, exerciseId }) => {
+interface SetsRepsInputProps {
+	workoutId: string;
+	exerciseId: string;
+}
+
+const SetsRepsInput: FC<SetsRepsInputProps> = ({ workoutId, exerciseId }) => {
 	const { state, dispatch } = useProgrammeContext();
+	const [sets, setSets] = useState<string>("");
+	const [reps, setReps] = useState<string>("");
 
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
-	const [sets, setSets] = useState("");
-	const [reps, setReps] = useState("");
 
 	useEffect(() => {
-		const foundExercise = workout.exercises.find((ex) => ex.id === exerciseId);
+		const foundExercise = workout?.exercises.find((ex) => ex.id === exerciseId);
 		if (foundExercise) {
-			setSets(foundExercise.sets.length);
+			setSets(foundExercise.sets.length.toString());
 			setReps(foundExercise.sets[0].reps);
 		}
 	}, [workout, exerciseId]);
 
-	const handleSetsRepsChange = (newSets, newReps) => {
+	const handleSetsRepsChange = (newSets: string, newReps: string) => {
 		if (newSets !== sets || newReps !== reps) {
 			dispatch({ 
 				type: "UPDATE_SETS_X_REPS", 
@@ -26,14 +31,14 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
 		}
 	};
 
-	const handleSetsChange = (newSets) => {
+	const handleSetsChange = (newSets: string) => {
 		if (newSets !== "") {
 			setSets(newSets);
 			handleSetsRepsChange(newSets, reps);
 		}
 	};
 
-	const handleRepsChange = (newReps) => {
+	const handleRepsChange = (newReps: string) => {
 		setReps(newReps);
 		handleSetsRepsChange(sets, newReps);
 	};
@@ -48,10 +53,16 @@ const SetsRepsInput = ({ workoutId, exerciseId }) => {
 
 export default SetsRepsInput;
 
-const NamedInput = ({label, value, setVariable}) => {
+interface NamedInputProps {
+	label: string;
+	value: string;
+	setVariable: (filteredValue: string) => void;
+}
+
+const NamedInput: FC<NamedInputProps> = ({label, value, setVariable}) => {
 	const [variableValue, setVariableValue] = useState(value);
 
-	const handleInputChange = (event) => {
+	const handleInputChange = (event: { target: { value: string; }; }) => {
 		const inputValue = event.target.value;
 		const filteredValue = inputValue.replace(/[^0-9]/g, "").substring(0, 2);
 		event.target.value = filteredValue;

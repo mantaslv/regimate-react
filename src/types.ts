@@ -147,7 +147,7 @@ export type ProgrammeExerciseInWorkoutAction =
     | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId: string; }; }
     | { 
         type: "UPDATE_SETS_X_REPS"; 
-        payload: { workoutId: string; exerciseId: string; reps: number; sets: number; } 
+        payload: { workoutId: string; exerciseId: string; reps: string; sets: string; } 
     }
 
 export type ProgrammeReducerAction =

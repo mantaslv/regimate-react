@@ -52,8 +52,8 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 			...state, 
 			workouts: updateExerciseInWorkout(state.workouts, action, { 
 				sets: Array.from(
-					{ length: action.payload.sets }, 
-					() => generateNewSetWithReps(action.payload.reps)
+					{ length: +action.payload.sets }, 
+					() => generateNewSetWithReps(+action.payload.reps)
 				)
 			})
 		};
