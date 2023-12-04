@@ -56,7 +56,7 @@ const TrainingList: FC<TrainingListProps> = ({ isWorkout=false }) => {
 		if (isWorkout) {
 			return <WorkoutCard workout={training as WorkoutType} sx={sx} />;
 		} else {
-			return <ProgrammeCard programme={training} sx={sx} />;
+			return <ProgrammeCard programme={training as ProgrammeType} sx={sx} />;
 		}
 	};
 

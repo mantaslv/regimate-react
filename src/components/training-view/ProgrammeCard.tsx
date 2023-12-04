@@ -1,18 +1,40 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert, Button, Card, CardContent, CardHeader, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-
-import { useAuthContext } from "../../hooks/useAuthContext";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useProgrammesContext } from "../../hooks/useProgrammesContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { ProgrammeType, WorkoutType } from "../../types";
+import { 
+	Alert, 
+	Button, 
+	ButtonProps, 
+	Card, 
+	CardContent, 
+	CardHeader, 
+	IconButton, 
+	Paper, 
+	Table, 
+	TableBody, 
+	TableCell, 
+	TableContainer, 
+	TableFooter, 
+	TableHead, 
+	TableRow 
+} from "@mui/material";
 
-const ProgrammeCard = ({ programme, sx }) => {
+interface ProgrammeCardProps {
+	programme: ProgrammeType;
+	sx: ButtonProps["sx"];
+}
+
+const ProgrammeCard: FC<ProgrammeCardProps> = ({ programme, sx }) => {
 	const { user } = useAuthContext();
 	const { dispatch } = useProgrammesContext();
 	const navigate = useNavigate();
 	const [showAlert, setShowAlert] = useState(false);
+	const daySplit = programme.workouts.length;
 
 	let maxExerciseCount = 0;
 
@@ -59,7 +81,7 @@ const ProgrammeCard = ({ programme, sx }) => {
 		navigate("/create-programme/", { state: programme });
 	};
 
-	const handleStartWorkout = (workout) => {
+	const handleStartWorkout = (workout: WorkoutType) => {
 		navigate("/create-workout/", { state: workout });
 	};
 
@@ -94,7 +116,7 @@ const ProgrammeCard = ({ programme, sx }) => {
 					<Table>
 						<TableHead>
 							<TableRow>
-								{programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
+								{programme.workouts.slice(0, daySplit).map((workout, i) => (
 									<TableCell key={i} align="center">
                                         Day {i + 1}{ workout.workoutName !== "" && ` - ${workout.workoutName}` }
 									</TableCell>
@@ -104,7 +126,7 @@ const ProgrammeCard = ({ programme, sx }) => {
 						<TableBody>
 							{Array.from({ length: maxExerciseCount}, (_, i) => 
 								<TableRow key={i}>
-									{programme.workouts.slice(0, programme.daySplit).map((workout, cellIndex) => {
+									{programme.workouts.slice(0, daySplit).map((workout, cellIndex) => {
 										const sets = workout.exercises[i]?.sets;
 										const firstSetReps = sets?.[0]?.reps;
 
@@ -121,9 +143,13 @@ const ProgrammeCard = ({ programme, sx }) => {
 						</TableBody>
 						<TableFooter>
 							<TableRow>
-								{programme.workouts.slice(0, programme.daySplit).map((workout, i) => (
+								{programme.workouts.slice(0, daySplit).map((workout, i) => (
 									<TableCell key={i} align="center">
-										<Button variant="contained" endIcon={<PlayCircleIcon/>} onClick={() => handleStartWorkout(workout)}>
+										<Button 
+											variant="contained" 
+											endIcon={<PlayCircleIcon/>} 
+											onClick={() => handleStartWorkout(workout)}
+										>
                                             Start Workout
 										</Button>
 									</TableCell>
