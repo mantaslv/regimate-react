@@ -4,7 +4,7 @@ import { useProgrammesContext } from "../../hooks/useProgrammesContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import ConsoleLogButton from "../styled-components/ConsoleLogButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { ProgrammesState, WorkoutsState } from "../../types";
+import { ProgrammeType, ProgrammesState, WorkoutType, WorkoutsState } from "../../types";
 import ProgrammeCard from "./ProgrammeCard";
 import WorkoutCard from "./WorkoutCard";
 
@@ -48,13 +48,13 @@ const TrainingList: FC<TrainingListProps> = ({ isWorkout=false }) => {
 	}, [user]);
 
 	interface TrainingCardProps {
-		training: unknown;
+		training: WorkoutType | ProgrammeType;
 		sx?: CardProps["sx"];
 	}
 
 	const TrainingCard: FC<TrainingCardProps> = ({ training, sx }) => {
 		if (isWorkout) {
-			return <WorkoutCard workout={training} sx={sx} />;
+			return <WorkoutCard workout={training as WorkoutType} sx={sx} />;
 		} else {
 			return <ProgrammeCard programme={training} sx={sx} />;
 		}
