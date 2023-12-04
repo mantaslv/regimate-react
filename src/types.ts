@@ -1,14 +1,14 @@
 import React, { Dispatch } from "react";
 
 export interface ProgrammeType {
-    _id: string;
-    user_id: string;
+    _id?: string;
+    user_id?: string;
     programmeName: string;
     workouts: WorkoutType[];
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-    exerciseList: unknown;
+    createdAt?: string;
+    updatedAt?: string;
+    __v?: number;
+    exerciseList?: unknown;
 }
   
 export interface WorkoutType {

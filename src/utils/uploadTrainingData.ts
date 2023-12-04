@@ -1,6 +1,6 @@
 import { ProgrammeType, WorkoutType } from "../types";
 
-type TrainingDataType = "programme" | "workout";
+type TrainingDataType = "programmes" | "workouts";
 type DataToSave = WorkoutType | ProgrammeType;
 
 interface UploadTrainingDataParams {
