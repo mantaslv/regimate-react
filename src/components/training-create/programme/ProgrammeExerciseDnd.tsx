@@ -1,18 +1,29 @@
 import ProgrammeExerciseCard from "./ProgrammeExerciseCard";
 import { useDrag } from "react-dnd";
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import BoxDropArea from "./BoxDropArea";
 
-const ProgrammeExerciseDnd = ({
+interface ProgrammeExerciseDndProps {
+	workoutId: string;
+	exerciseId: string;
+	isExerciseSelectorOpen: boolean;
+	setIsExerciseSelectorOpen: () => void;
+	handleOpenExerciseSelector: () => void;
+	handleExerciseNameChange: () => void;
+	handleDeleteExercise: () => void;
+	handleDropExercise: () => void;
+}
+
+const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	workoutId,
 	exerciseId,
-	setOpenExerciseSelector,
+	isExerciseSelectorOpen,
+	setIsExerciseSelectorOpen,
 	handleOpenExerciseSelector,
 	handleExerciseNameChange,
 	handleDeleteExercise,
-	openExerciseSelector,
 	handleDropExercise,
 }) => {
 	const { state } = useProgrammeContext();
@@ -38,8 +49,8 @@ const ProgrammeExerciseDnd = ({
 	const exerciseCardProps = {
 		workoutId,
 		exerciseId,
-		openExerciseSelector,
-		setOpenExerciseSelector,
+		isExerciseSelectorOpen,
+		setIsExerciseSelectorOpen,
 		handleOpenExerciseSelector,
 		handleExerciseNameChange,
 		handleDeleteExercise,

@@ -8,22 +8,22 @@ import ExerciseSelector from "../ExerciseSelector";
 interface ProgrammeExerciseCardProps {
 	workoutId: string;
 	exerciseId: string;
-	setOpenExerciseSelector: () => void;
+	setIsExerciseSelectorOpen: () => void;
 	handleOpenExerciseSelector: () => void;
 	handleExerciseNameChange: () => void;
 	handleDeleteExercise: () => void;
-	openExerciseSelector: () => void;
+	isExerciseSelectorOpen: boolean;
 	// isDragging: boolean;
 }
 
 const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	workoutId,
 	exerciseId,
-	setOpenExerciseSelector,
+	setIsExerciseSelectorOpen,
 	handleOpenExerciseSelector,
 	handleExerciseNameChange,
 	handleDeleteExercise,
-	openExerciseSelector,
+	isExerciseSelectorOpen,
 	// isDragging
 }) => {
 	const { state } = useProgrammeContext();
@@ -91,10 +91,10 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					exerciseId={exerciseId}
 				/>
 			</Box>
-			{openExerciseSelector && (
+			{isExerciseSelectorOpen && (
 				<ExerciseSelector
-					openExerciseSelector={openExerciseSelector} 
-					onOpenDialog={setOpenExerciseSelector}
+					isExerciseSelectorOpen={isExerciseSelectorOpen} 
+					onOpenDialog={setIsExerciseSelectorOpen}
 					onExerciseSelection={handleExerciseNameChange}
 				/>
 			)}
