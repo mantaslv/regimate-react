@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
-import SetsRepsInput from "../programme/SetsRepsInput";
+import SetsRepsInput from "./SetsRepsInput";
 import ExerciseSelector from "../ExerciseSelector";
 
-const ProgrammeExerciseCard = ({
+interface ProgrammeExerciseCardProps {
+	workoutId: string;
+	exerciseId: string;
+	setOpenExerciseSelector: () => void;
+	handleOpenExerciseSelector: () => void;
+	handleExerciseNameChange: () => void;
+	handleDeleteExercise: () => void;
+	openExerciseSelector: () => void;
+	// isDragging: boolean;
+}
+
+const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	workoutId,
 	exerciseId,
 	setOpenExerciseSelector,
@@ -13,7 +24,7 @@ const ProgrammeExerciseCard = ({
 	handleExerciseNameChange,
 	handleDeleteExercise,
 	openExerciseSelector,
-	isDragging
+	// isDragging
 }) => {
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
