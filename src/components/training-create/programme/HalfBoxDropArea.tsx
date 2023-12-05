@@ -1,9 +1,24 @@
-import { useDrop } from "react-dnd";
+import { useDrop, DropTargetMonitor } from "react-dnd";
 import { Box } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
-const HalfBoxDropArea = ({
+interface DraggedExercise {
+	workoutId: string;
+	exerciseId: string;
+	exerciseIndex: string;
+}	
+
+interface HalfBoxDropAreaProps {
+	position: "top" | "bottom";
+	handleDropExercise: (item: unknown, position: "top" | "bottom") => void;
+	setIsOverTop: (value: boolean) => void;  
+	setIsOverBottom: (value: boolean) => void;
+	workoutId: string;
+	exerciseId: string;
+}
+
+const HalfBoxDropArea: FC<HalfBoxDropAreaProps> = ({
 	position,
 	handleDropExercise,
 	setIsOverTop,  
@@ -14,20 +29,25 @@ const HalfBoxDropArea = ({
 	const dropRef = useRef(null);
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
-	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
+	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId) ?? -1);
     
 	useEffect(() => {
-		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
+		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId) ?? -1);
 	}, [state]);
 
-	const dontMoveIfSamePosition = (monitor) => {
-		const dragItem = monitor.getItem();
+	
+
+	const dontMoveIfSamePosition = (monitor: DropTargetMonitor) => {
+		const dragItem: DraggedExercise = monitor.getItem();
 		const dragIndex = state.workouts
 			.find(wo => wo.id === dragItem.workoutId)?.exercises
 			.findIndex(ex => ex.id === dragItem.exerciseId);
 
 		const isSameWorkout = workoutId === dragItem.workoutId;   
 		const isSameExerciseIndex = exerciseIndex === dragIndex;
+
+		if (exerciseIndex === -1) return false;
+
 		const isSameExercisePosition = position === "top"
 			? dragIndex === exerciseIndex - 1
 			: dragIndex === exerciseIndex + 1;
