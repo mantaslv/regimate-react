@@ -6,10 +6,10 @@ import { WorkoutCard } from "./workout/WorkoutCard";
 
 const Workout = ({ index, workoutId, inWorkout=false }) => {
 	const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
-	const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
+	const [isExerciseSelectorOpen, setIsExerciseSelectorOpen] = useState(false);
 
 	const onOpenDialog = (value) => {
-		setOpenExerciseSelector(value);
+		setIsExerciseSelectorOpen(value);
 	}; 
 
 	const handleWorkoutNameChange = (event) => {
@@ -38,7 +38,7 @@ const Workout = ({ index, workoutId, inWorkout=false }) => {
 	const workoutCardProps = {
 		addExercise,
 		onOpenDialog,
-		openExerciseSelector,
+		isExerciseSelectorOpen,
 	};
 
 	if (inWorkout) {

@@ -8,11 +8,11 @@ import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
 export const WorkoutExerciseCard = ({
 	exerciseId,
-	setOpenExerciseSelector,
+	setIsExerciseSelectorOpen,
 	handleOpenExerciseSelector,
 	handleExerciseNameChange,
 	handleDeleteExercise,
-	openExerciseSelector,
+	isExerciseSelectorOpen,
 	addSet
 }) => {
 	const { state } = useWorkoutContext();
@@ -57,10 +57,10 @@ export const WorkoutExerciseCard = ({
 						<ConsoleLogButton print={exercise} info="exercise"/>
 					</Grid>
 				</Grid>
-				{openExerciseSelector && (
+				{isExerciseSelectorOpen && (
 					<ExerciseSelector inWorkout
-						openExerciseSelector={openExerciseSelector} 
-						onOpenDialog={setOpenExerciseSelector}
+						isExerciseSelectorOpen={isExerciseSelectorOpen} 
+						onOpenDialog={setIsExerciseSelectorOpen}
 						onExerciseSelection={handleExerciseNameChange}
 					/>
 				)}

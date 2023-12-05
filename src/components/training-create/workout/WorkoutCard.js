@@ -6,7 +6,7 @@ import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
 export const WorkoutCard = ({
 	addExercise,
-	openExerciseSelector,
+	isExerciseSelectorOpen,
 	onOpenDialog,
 }) => {
 	const { state } = useWorkoutContext();
@@ -22,9 +22,9 @@ export const WorkoutCard = ({
 						<Button variant="contained" onClick={() => onOpenDialog(true)}>
                             Add Exercise
 						</Button>
-						{openExerciseSelector && (
+						{isExerciseSelectorOpen && (
 							<ExerciseSelector inWorkout
-								openExerciseSelector={openExerciseSelector} 
+								isExerciseSelectorOpen={isExerciseSelectorOpen} 
 								onOpenDialog={onOpenDialog}
 								onExerciseSelection={addExercise}
 							/>

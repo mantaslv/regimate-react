@@ -13,7 +13,7 @@ import { useDrop } from "react-dnd";
 const ProgrammeSplitCard = ({
 	handleWorkoutNameChange,
 	onOpenDialog,
-	openExerciseSelector,
+	isExerciseSelectorOpen,
 	handleDeleteWorkout,
 	handleDropExercise,
 	handleMoveWorkout,
@@ -99,9 +99,9 @@ const ProgrammeSplitCard = ({
 					sx={{ my: 1, width: "100%" }}
 				/>
 			</Box>
-			{openExerciseSelector && (
+			{isExerciseSelectorOpen && (
 				<ExerciseSelector 
-					openExerciseSelector={openExerciseSelector} 
+					isExerciseSelectorOpen={isExerciseSelectorOpen} 
 					onOpenDialog={onOpenDialog}
 					onExerciseSelection={addExercise}
 				/>

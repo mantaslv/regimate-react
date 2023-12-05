@@ -4,7 +4,7 @@ import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 
 const ExerciseSelector = ({ 
-	openExerciseSelector, 
+	isExerciseSelectorOpen, 
 	onOpenDialog, 
 	onExerciseSelection, 
 	inWorkout=false
@@ -57,7 +57,7 @@ const ExerciseSelector = ({
 
 	return(
 		<Dialog 
-			open={openExerciseSelector} 
+			open={isExerciseSelectorOpen} 
 			onClose={handleCloseDialog}
 			slotProps={{ backdrop: { sx: { backgroundColor: "rgba(0, 0, 0, 0.1)" } } }}
 		>

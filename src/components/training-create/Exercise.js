@@ -7,11 +7,11 @@ import ProgrammeExerciseDnd from "./programme/ProgrammeExerciseDnd";
 
 const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
 	const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
-	const [openExerciseSelector, setOpenExerciseSelector] = useState(false);
+	const [isExerciseSelectorOpen, setIsExerciseSelectorOpen] = useState(false);
 
 	const handleExerciseNameChange = (newName) => {
 		dispatch({ type: "UPDATE_EXERCISE_NAME", payload: { workoutId, exerciseId, newName} });
-		setOpenExerciseSelector(false);
+		setIsExerciseSelectorOpen(false);
 	};
 
 	const handleDeleteExercise = () => {
@@ -23,7 +23,7 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
 	};
 
 	const handleOpenExerciseSelector = () => {
-		setOpenExerciseSelector(true);
+		setIsExerciseSelectorOpen(true);
 	};
 
 	const handleDropExercise = (item, position) => {
@@ -34,8 +34,8 @@ const Exercise = ({ exerciseId, workoutId, inWorkout=false }) => {
 	const exerciseCardProps = {
 		workoutId,
 		exerciseId,
-		openExerciseSelector,
-		setOpenExerciseSelector,
+		isExerciseSelectorOpen,
+		setIsExerciseSelectorOpen,
 		handleOpenExerciseSelector,
 		handleExerciseNameChange,
 		handleDeleteExercise,
