@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
 import { Button, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
@@ -6,17 +6,27 @@ import ExerciseSelector from "../ExerciseSelector";
 import Set from "../Set";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
-export const WorkoutExerciseCard = ({
+interface WorkoutExerciseCardProps {
+	exerciseId: string;
+	isExerciseSelectorOpen: boolean;
+	setIsExerciseSelectorOpen: () => void;
+	handleOpenExerciseSelector: () => void;
+	handleExerciseNameChange: () => void;
+	handleDeleteExercise: () => void;
+	addSet: () => void;
+}
+
+export const WorkoutExerciseCard: FC<WorkoutExerciseCardProps> = ({
 	exerciseId,
+	isExerciseSelectorOpen,
 	setIsExerciseSelectorOpen,
 	handleOpenExerciseSelector,
 	handleExerciseNameChange,
 	handleDeleteExercise,
-	isExerciseSelectorOpen,
 	addSet
 }) => {
 	const { state } = useWorkoutContext();
-	const exercise = state?.exercises.find((ex) => ex.id === exerciseId);
+	const exercise = state?.exercises.find((ex) => ex.id === exerciseId) || null;
 
 	return (
 		<Card sx={{ mt: 2 }}> 
@@ -24,7 +34,7 @@ export const WorkoutExerciseCard = ({
 				title={
 					<Button onClick={handleOpenExerciseSelector}>
 						<Typography variant="h6" fontSize={16}>
-							{exercise.exerciseName}
+							{exercise?.exerciseName}
 						</Typography>
 					</Button>
 				}
@@ -32,7 +42,7 @@ export const WorkoutExerciseCard = ({
 			>
 			</CardHeader>
 			<CardContent sx={{ mb: -1.5, mt: -6 }}>
-				{exercise.sets?.map(set => (
+				{exercise?.sets?.map(set => (
 					<Set key={set.id} exerciseId={exerciseId} setId={set.id}/>
 				))}
 				<Grid container spacing={1} marginTop={0} alignItems="center">

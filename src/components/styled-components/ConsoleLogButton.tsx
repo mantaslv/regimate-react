@@ -4,7 +4,7 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 import { AllTrainingTypes } from "../../types";
 
 interface ConsoleLogButtonProps {
-	print: AllTrainingTypes | null;
+	print: AllTrainingTypes;
 	info: string;
 	sx?: ButtonProps["sx"];
 	size?: ButtonProps["size"];
