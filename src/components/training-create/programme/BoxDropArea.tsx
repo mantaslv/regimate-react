@@ -1,10 +1,26 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import HalfBoxDropArea from "./HalfBoxDropArea";
 
-const BoxDropArea = ({ children, handleDropExercise, workoutId, exerciseId, setIsDraggedAway, isDragging }) => {
-	const [isOverTop, setIsOverTop] = useState(false);
-	const [isOverBottom, setIsOverBottom] = useState(false);
+interface BoxDropAreaProps {
+	children?: React.ReactNode;
+	workoutId: string;
+	exerciseId: string;
+	isDragging: boolean;
+	handleDropExercise: () => void;
+	setIsDraggedAway: (value: boolean) => void;
+}
+
+const BoxDropArea: FC<BoxDropAreaProps> = ({ 
+	children,
+	workoutId,
+	exerciseId,
+	isDragging,
+	handleDropExercise,
+	setIsDraggedAway
+}) => {
+	const [isOverTop, setIsOverTop] = useState<boolean>(false);
+	const [isOverBottom, setIsOverBottom] = useState<boolean>(false);
 
 	useEffect(() => {
 		setIsDraggedAway(!isOverTop && !isOverBottom);
