@@ -1,13 +1,14 @@
 import { Box } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import HalfBoxDropArea from "./HalfBoxDropArea";
+import { DraggedExercise } from "../../../types";
 
 interface BoxDropAreaProps {
 	children?: React.ReactNode;
 	workoutId: string;
 	exerciseId: string;
 	isDragging: boolean;
-	handleDropExercise: () => void;
+	handleDropExercise: (item: DraggedExercise, position: "top" | "bottom") => void;
 	setIsDraggedAway: (value: boolean) => void;
 }
 

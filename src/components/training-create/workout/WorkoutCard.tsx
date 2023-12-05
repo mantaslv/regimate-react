@@ -1,12 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Button, Grid } from "@mui/material";
 import Exercise from "../Exercise";
 import ExerciseSelector from "../ExerciseSelector";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 
-export const WorkoutCard = ({
-	addExercise,
+interface WorkoutCardProps {
+	isExerciseSelectorOpen: boolean;
+	addExercise: () => void;
+	onOpenDialog: (value: boolean) => void;
+}
+
+export const WorkoutCard: FC<WorkoutCardProps> = ({
 	isExerciseSelectorOpen,
+	addExercise,
 	onOpenDialog,
 }) => {
 	const { state } = useWorkoutContext();

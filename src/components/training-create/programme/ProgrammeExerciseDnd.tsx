@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import BoxDropArea from "./BoxDropArea";
+import { DraggedExercise } from "../../../types";
 
 interface ProgrammeExerciseDndProps {
 	workoutId: string;
@@ -13,7 +14,7 @@ interface ProgrammeExerciseDndProps {
 	handleOpenExerciseSelector: () => void;
 	handleExerciseNameChange: () => void;
 	handleDeleteExercise: () => void;
-	handleDropExercise: () => void;
+	handleDropExercise: (item: DraggedExercise, position: "top" | "bottom") => void;
 }
 
 const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({

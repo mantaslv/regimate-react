@@ -6,7 +6,7 @@ import { DraggedExercise } from "../../../types";
 
 interface HalfBoxDropAreaProps {
 	position: "top" | "bottom";
-	handleDropExercise: (item: unknown, position: "top" | "bottom") => void;
+	handleDropExercise: (item: DraggedExercise, position: "top" | "bottom") => void;
 	setIsOverTop: (value: boolean) => void;  
 	setIsOverBottom: (value: boolean) => void;
 	workoutId: string;
@@ -51,7 +51,7 @@ const HalfBoxDropArea: FC<HalfBoxDropAreaProps> = ({
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: "exercise",
 		canDrop: (_, monitor) => dontMoveIfSamePosition(monitor),
-		drop: item => handleDropExercise(item, position),
+		drop: (item: DraggedExercise) => handleDropExercise(item, position),
 		collect: monitor => ({
 			isOver: !!monitor.isOver(),
 			canDrop: !!monitor.canDrop(),

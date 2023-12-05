@@ -130,10 +130,21 @@ type WorkoutAction =
 	| { type: "UPDATE_TRAINING_NAME"; payload: string; };
 
 export type WorkoutReducerAction =  
-    | WorkoutAction 
+    // | WorkoutAction 
+    | { 
+        type: "UPDATE_SET_METRICS"; 
+        payload: { exerciseId: string; setId: string; reps: string; weight: string; };
+    }
+	| { 
+        type: "DELETE_SET"; 
+        payload: { exerciseId: string; setId: string; }; 
+    }
+    | { type: "ADD_SET"; payload: { exerciseId: string; }; }
+    | { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[]; }
+	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
     | { type: "INITIALISE_TRAINING"; payload: WorkoutState; }
-    | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; }; }
-    | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; }; }
+    | { type: "UPDATE_EXERCISE_NAME"; payload: { workoutId: undefined; exerciseId: string; newName: string; }; }
+    | { type: "DELETE_EXERCISE"; payload: { workoutId: undefined; exerciseId: string; }; }
     | { type: "ADD_EXERCISE"; payload: { exerciseName: string; }; };
 
 export interface MoveExercisePayload {
