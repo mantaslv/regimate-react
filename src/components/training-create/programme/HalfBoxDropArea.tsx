@@ -2,12 +2,7 @@ import { useDrop, DropTargetMonitor } from "react-dnd";
 import { Box } from "@mui/material";
 import React, { FC, useEffect, useRef, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
-
-interface DraggedExercise {
-	workoutId: string;
-	exerciseId: string;
-	exerciseIndex: string;
-}	
+import { DraggedExercise } from "../../../types";
 
 interface HalfBoxDropAreaProps {
 	position: "top" | "bottom";
@@ -34,8 +29,6 @@ const HalfBoxDropArea: FC<HalfBoxDropAreaProps> = ({
 	useEffect(() => {
 		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId) ?? -1);
 	}, [state]);
-
-	
 
 	const dontMoveIfSamePosition = (monitor: DropTargetMonitor) => {
 		const dragItem: DraggedExercise = monitor.getItem();

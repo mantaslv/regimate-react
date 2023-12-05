@@ -4,7 +4,7 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 import { AllTrainingTypes } from "../../types";
 
 interface ConsoleLogButtonProps {
-	print: AllTrainingTypes
+	print: AllTrainingTypes | null;
 	info: string;
 	sx?: ButtonProps["sx"];
 	size?: ButtonProps["size"];
@@ -12,7 +12,7 @@ interface ConsoleLogButtonProps {
 }
 
 const ConsoleLogButton: FC<ConsoleLogButtonProps> = ({ print, info, sx, size, variant="contained" }) => {
-	if (process.env.NODE_ENV === "development") {
+	if (print && process.env.NODE_ENV === "development") {
 		return (
 			<Button
 				variant={variant} 

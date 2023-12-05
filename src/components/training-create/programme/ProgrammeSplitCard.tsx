@@ -7,31 +7,44 @@ import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
+import { DraggedExercise } from "../../../types";
 
-const ProgrammeSplitCard = ({
-	handleWorkoutNameChange,
-	onOpenDialog,
+interface ProgrammeSplitCardProps {
+	index: number;
+	workoutId: string;
+	isExerciseSelectorOpen: boolean;
+	handleWorkoutNameChange: () => void;
+	handleDeleteWorkout: () => void;
+	handleDropExercise: (exercise: DraggedExercise) => void;
+	handleMoveWorkout: (direction: "left" | "right") => void;
+	onOpenDialog: (value: boolean) => void;
+	addExercise: () => void;	
+}
+
+const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
+	index,
+	workoutId,
 	isExerciseSelectorOpen,
+	handleWorkoutNameChange,
 	handleDeleteWorkout,
 	handleDropExercise,
 	handleMoveWorkout,
+	onOpenDialog,
 	addExercise,
-	workoutId,
-	index
 }) => {
 	const { state } = useProgrammeContext();
-	const [workout, setWorkout] = useState(state.workouts.find((wo) => wo.id === workoutId));
+	const [workout, setWorkout] = useState(state.workouts.find((wo) => wo.id === workoutId) || null);
 
 	useEffect(() => {
-		setWorkout(state.workouts.find((wo) => wo.id === workoutId));
+		setWorkout(state.workouts.find((wo) => wo.id === workoutId) || null);
 	}, [state]);
 
 	const [{ isOver, canDrop }, drop] = useDrop(() => ({
 		accept: "exercise",
-		canDrop: item => {
-			const isLastExercise = workout.exercises.length === item.index + 1;
+		canDrop: (item: DraggedExercise) => {
+			const isLastExercise = workout?.exercises.length === item.exerciseIndex + 1;
 			const isSameWorkout = workoutId === item.workoutId;
 			return !isLastExercise || !isSameWorkout;
 		},
@@ -74,8 +87,8 @@ const ProgrammeSplitCard = ({
 					<RemoveCircleIcon/>
 				</IconButton>
 			</Box>
-			{workout?.exercises.map((ex, i) => (
-				<Exercise key={ex.id} index={i} exerciseId={ex.id} workoutId={workoutId}/>
+			{workout?.exercises.map((ex) => (
+				<Exercise key={ex.id} exerciseId={ex.id} workoutId={workoutId}/>
 			))}
 			<Box ref={drop} sx={{ width: "100%" }}>
 				<Box>
