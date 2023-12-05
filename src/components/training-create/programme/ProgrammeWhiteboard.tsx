@@ -1,10 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import { Grid } from "@mui/material";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 import Workout from "../Workout";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 
-const ProgrammeWhiteboard = ({ handleAddWorkout }) => { 
+interface ProgrammeWhiteboardProps {
+	handleAddWorkout: () => void;
+}
+
+const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout }) => { 
 	const { state } = useProgrammeContext();
 
 	return (
