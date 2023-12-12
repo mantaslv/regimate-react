@@ -190,7 +190,8 @@ export type AllTrainingTypes =
     | WorkoutType
     | ExerciseType
     | SetType
-    | null;
+    | null
+    | undefined;
 
 export interface DraggedExercise {
     workoutId: string;
