@@ -168,7 +168,7 @@ export type ProgrammeReducerAction =
     | { type: "INITIALISE_EXERCISE_LIST"; payload: ExerciseListObjectType[]; }
 	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
     | { type: "INITIALISE_TRAINING"; payload: ProgrammeState; }
-	| { type: "ADD_WORKOUT"; payload: undefined }
+	| { type: "ADD_WORKOUT"; }
     | { type: "DELETE_WORKOUT"; payload: { workoutId: string; }; }
     | { type: "UPDATE_WORKOUT_NAME"; payload: { workoutId: string; newName: string; }; }
     | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId: string; }; }
