@@ -9,9 +9,9 @@ import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 interface WorkoutExerciseCardProps {
 	exerciseId: string;
 	isExerciseSelectorOpen: boolean;
-	setIsExerciseSelectorOpen: () => void;
+	setIsExerciseSelectorOpen: (value: boolean) => void;
 	handleOpenExerciseSelector: () => void;
-	handleExerciseNameChange: () => void;
+	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	addSet: () => void;
 }

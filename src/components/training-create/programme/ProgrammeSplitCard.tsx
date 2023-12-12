@@ -9,7 +9,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import React, { FC, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
-import { DraggedExercise } from "../../../types";
+import { DraggedExercise, ProgrammeReducerAction } from "../../../types";
 
 interface ProgrammeSplitCardProps {
 	index: number;
@@ -34,7 +34,7 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 	onOpenDialog,
 	addExercise,
 }) => {
-	const { state } = useProgrammeContext();
+	const { state, dispatch } = useProgrammeContext();
 	const [workout, setWorkout] = useState(state.workouts.find((wo) => wo.id === workoutId) || null);
 
 	useEffect(() => {
@@ -88,7 +88,7 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				</IconButton>
 			</Box>
 			{workout?.exercises.map((ex) => (
-				<Exercise key={ex.id} exerciseId={ex.id} workoutId={workoutId}/>
+				<Exercise key={ex.id} inWorkout={false} exerciseId={ex.id} workoutId={workoutId} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
 			))}
 			<Box ref={drop} sx={{ width: "100%" }}>
 				<Box>

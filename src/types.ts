@@ -58,7 +58,7 @@ export interface AuthContextType {
 }
 
 export interface WorkoutState {
-	exerciseList: unknown[];
+	exerciseList: object[];
 	workoutName: string;
 	exercises: ExerciseType[];
 }
@@ -69,7 +69,7 @@ export interface WorkoutContextType {
 }
 
 export interface ProgrammeState {
-	exerciseList: unknown[];
+	exerciseList: object[];
 	programmeName: string;
 	workouts: WorkoutType[];
 }
@@ -124,13 +124,7 @@ export type ExerciseAction =
 	| SetAction
 	| { type: "ADD_SET"; payload: { exerciseId: string; }; };
 
-type WorkoutAction =
-	| ExerciseAction
-	| { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[]; }
-	| { type: "UPDATE_TRAINING_NAME"; payload: string; };
-
-export type WorkoutReducerAction =  
-    // | WorkoutAction 
+export type WorkoutAction =  
     | { 
         type: "UPDATE_SET_METRICS"; 
         payload: { exerciseId: string; setId: string; reps: string; weight: string; };
@@ -140,36 +134,41 @@ export type WorkoutReducerAction =
         payload: { exerciseId: string; setId: string; }; 
     }
     | { type: "ADD_SET"; payload: { exerciseId: string; }; }
-    | { type: "INITIALISE_EXERCISE_LIST"; payload: unknown[]; }
-	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
+    | { type: "INITIALISE_EXERCISE_LIST"; payload: object[]; }
+	| { type: "UPDATE_TRAINING_NAME"; payload: string; };
+
+export type WorkoutReducerAction =
+    | WorkoutAction
     | { type: "INITIALISE_TRAINING"; payload: WorkoutState; }
-    | { type: "UPDATE_EXERCISE_NAME"; payload: { workoutId: undefined; exerciseId: string; newName: string; }; }
-    | { type: "DELETE_EXERCISE"; payload: { workoutId: undefined; exerciseId: string; }; }
+    | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId?: string }; }
+    | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
     | { type: "ADD_EXERCISE"; payload: { exerciseName: string; }; };
+
+export type ProgrammeExerciseInWorkoutAction =
+    | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId?: string; }; }
+    | { 
+        type: "UPDATE_SETS_X_REPS"; 
+        payload: { workoutId: string; exerciseId: string; reps: string; sets: string; } 
+    };
 
 export interface MoveExercisePayload {
     item: { exerciseId: string; workoutId: string };
     position: "top" | "bottom";
     exerciseId: string;
     workoutId: string;
-}
-
-export type ProgrammeExerciseInWorkoutAction =
-    | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId: string; }; }
-    | { 
-        type: "UPDATE_SETS_X_REPS"; 
-        payload: { workoutId: string; exerciseId: string; reps: string; sets: string; } 
-    }
+}    
 
 export type ProgrammeReducerAction =
-    | WorkoutAction
+    // | WorkoutAction
     | ProgrammeExerciseInWorkoutAction
+    | { type: "INITIALISE_EXERCISE_LIST"; payload: object[]; }
+	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
     | { type: "INITIALISE_TRAINING"; payload: ProgrammeState; }
-	| { type: "ADD_WORKOUT"; }
+	| { type: "ADD_WORKOUT"; payload: undefined }
     | { type: "DELETE_WORKOUT"; payload: { workoutId: string; }; }
     | { type: "UPDATE_WORKOUT_NAME"; payload: { workoutId: string; newName: string; }; }
     | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId: string; }; }
-    | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId: string; }; }
+    | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
     | { type: "REORDER_WORKOUTS"; payload: { startIndex: number; endIndex: number; }; }
     | { 
         type: "REORDER_EXERCISES"; 

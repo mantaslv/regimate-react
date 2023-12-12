@@ -10,9 +10,9 @@ interface ProgrammeExerciseDndProps {
 	workoutId: string;
 	exerciseId: string;
 	isExerciseSelectorOpen: boolean;
-	setIsExerciseSelectorOpen: () => void;
+	setIsExerciseSelectorOpen: (value: boolean) => void;
 	handleOpenExerciseSelector: () => void;
-	handleExerciseNameChange: () => void;
+	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	handleDropExercise: (item: DraggedExercise, position: "top" | "bottom") => void;
 }

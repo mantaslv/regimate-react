@@ -40,13 +40,19 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 			...state, 
 			workouts: updateExerciseInWorkout(state.workouts, action, { exerciseName: action.payload.newName })
 		};
-	case "DELETE_EXERCISE":
-		return {
-			...state,
-			workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
-				...workout, exercises: filterTrainingItem(workout.exercises, action.payload.exerciseId)
-			}))
-		};
+	case "DELETE_EXERCISE": {
+		const workoutId = action.payload.workoutId;
+		if (!workoutId) {
+			return state;
+		} else {
+			return {
+				...state,
+				workouts: updateTrainingItem(state.workouts, workoutId, action, workout => ({
+					...workout, exercises: filterTrainingItem(workout.exercises, action.payload.exerciseId)
+				}))
+			};
+		}
+	}
 	case "UPDATE_SETS_X_REPS":
 		return {
 			...state, 

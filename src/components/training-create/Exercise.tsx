@@ -1,31 +1,43 @@
 import React, { FC, useState } from "react";
-import { useProgrammeContext } from "../../hooks/useProgrammeContext";
-import { useWorkoutContext } from "../../hooks/useWorkoutContext";
 import { WorkoutExerciseCard } from "./workout/WorkoutExerciseCard";
 import ProgrammeExerciseDnd from "./programme/ProgrammeExerciseDnd";
-import { DraggedExercise } from "../../types";
+import { DraggedExercise, ProgrammeReducerAction, WorkoutReducerAction } from "../../types";
 
-interface ExerciseProps {
-	exerciseId: string;
+interface WorkoutExerciseProps {
+    inWorkout: true;
+    exerciseId: string;
 	workoutId?: string;
-	inWorkout?: boolean;
+    dispatch: React.Dispatch<WorkoutReducerAction>;
 }
 
-const Exercise: FC<ExerciseProps> = ({ exerciseId, workoutId, inWorkout=false }) => {
-	const { dispatch } = inWorkout ? useWorkoutContext() : useProgrammeContext();
+interface ProgrammeExerciseProps {
+    inWorkout: false;
+    exerciseId: string;
+    workoutId?: string;
+    dispatch: React.Dispatch<ProgrammeReducerAction>;
+}
+
+type ExerciseProps = WorkoutExerciseProps | ProgrammeExerciseProps;
+
+const Exercise: FC<ExerciseProps> = (props) => {
+	const { exerciseId, inWorkout, dispatch, workoutId } = props;
 	const [isExerciseSelectorOpen, setIsExerciseSelectorOpen] = useState(false);
 
 	const handleExerciseNameChange = (newName: string) => {
-		dispatch({ type: "UPDATE_EXERCISE_NAME", payload: { workoutId, exerciseId, newName} });
+		const payload = { exerciseId, newName, workoutId };
+		dispatch({ type: "UPDATE_EXERCISE_NAME", payload });
 		setIsExerciseSelectorOpen(false);
 	};
 
 	const handleDeleteExercise = () => {
-		dispatch({ type: "DELETE_EXERCISE", payload: { workoutId, exerciseId } });
+		const payload = { exerciseId, workoutId };
+		dispatch({ type: "DELETE_EXERCISE", payload });
 	};
 
 	const addSet = () => {
-		dispatch({ type: "ADD_SET", payload: { exerciseId } });
+		if (inWorkout) {
+			dispatch({ type: "ADD_SET", payload: { exerciseId } });
+		}
 	};
 
 	const handleOpenExerciseSelector = () => {
@@ -33,26 +45,28 @@ const Exercise: FC<ExerciseProps> = ({ exerciseId, workoutId, inWorkout=false })
 	};
 
 	const handleDropExercise = (item: DraggedExercise, position: "top" | "bottom") => {
-		const payload = { item, position, exerciseId, workoutId };
-		dispatch({ type: "MOVE_EXERCISE", payload });
+		if (!inWorkout && workoutId !== undefined) {
+			const payload = { item, position, exerciseId, workoutId };
+			dispatch({ type: "MOVE_EXERCISE", payload });
+		}
 	};
 
 	const exerciseCardProps = {
-		workoutId,
 		exerciseId,
 		isExerciseSelectorOpen,
 		setIsExerciseSelectorOpen,
 		handleOpenExerciseSelector,
 		handleExerciseNameChange,
 		handleDeleteExercise,
-		// handleDropExercise,
+		handleDropExercise,
 		addSet,
 	};
 
 	if (inWorkout) {
 		return <WorkoutExerciseCard {...exerciseCardProps} />;
-	}
-	return  <ProgrammeExerciseDnd handleDropExercise={handleDropExercise} {...exerciseCardProps} />;
+	} else if (workoutId) {
+		return <ProgrammeExerciseDnd workoutId={workoutId} {...exerciseCardProps} />;
+	} else return null;
 };
 
 export default Exercise;

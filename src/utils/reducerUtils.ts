@@ -33,10 +33,14 @@ export const updateExerciseInWorkout = (
 	action: ProgrammeExerciseInWorkoutAction, 
 	changes: object
 ) => {
-	return updateTrainingItem(workouts, action.payload.workoutId, action, workout => ({
-		...workout, 
-		exercises: updateTrainingItem(workout.exercises, action.payload.exerciseId, action, exercise => (
-			{ ...exercise, ...changes }
-		))
-	}));
+	if (action.payload.workoutId) {
+		return updateTrainingItem(workouts, action.payload.workoutId, action, workout => ({
+			...workout, 
+			exercises: updateTrainingItem(workout.exercises, action.payload.exerciseId, action, exercise => (
+				{ ...exercise, ...changes }
+			))
+		}));
+	} else {
+		throw new Error("Update exercise in workout function requires workoutId");
+	}
 };

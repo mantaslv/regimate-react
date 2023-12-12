@@ -8,9 +8,9 @@ import ExerciseSelector from "../ExerciseSelector";
 interface ProgrammeExerciseCardProps {
 	workoutId: string;
 	exerciseId: string;
-	setIsExerciseSelectorOpen: () => void;
+	setIsExerciseSelectorOpen: (value: boolean) => void;
 	handleOpenExerciseSelector: () => void;
-	handleExerciseNameChange: () => void;
+	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	isExerciseSelectorOpen: boolean;
 	// isDragging: boolean;
@@ -74,7 +74,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					</Button>
 				</Box>
 				<Box sx={{ display: "flex", alignItems: "flex-start" }}>
-					<IconButton onClick={handleDeleteExercise} sx={{ color: "white" }}>
+					<IconButton onClick={handleDeleteExercise} sx={{ color: "white", zIndex: 2 }}>
 						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px" }}/>
 					</IconButton>
 				</Box>
