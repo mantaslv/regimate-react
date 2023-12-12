@@ -1,23 +1,29 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
+import { ExerciseListObjectType } from "../../types";
 
-const ExerciseSelector = ({ 
+interface ExerciseSelectorProps {
+	isExerciseSelectorOpen: boolean;
+	onOpenDialog: (value: boolean) => void;
+	onExerciseSelection: (exerciseName: string) => void;
+	inWorkout?: boolean;
+}
+
+const ExerciseSelector: FC<ExerciseSelectorProps> = ({ 
 	isExerciseSelectorOpen, 
 	onOpenDialog, 
 	onExerciseSelection, 
 	inWorkout=false
 }) => {
 	const { state } = inWorkout ? useWorkoutContext() : useProgrammeContext();
-	const [searchTerm, setSearchTerm] = useState("");
-	const [exerciseList, setExerciseList] = useState([]);
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [exerciseList, setExerciseList] = useState<ExerciseListObjectType[]>([]);
 
-	useEffect(() => {
-		setExerciseList(state.exerciseList);
-	}, [state]);
+	useEffect(() => setExerciseList(state.exerciseList), [state]);
 
-	const exactMatchFilteredExercises = exerciseList.filter(exercise => 
+	const exactMatchFilteredExercises = exerciseList.filter((exercise: ExerciseListObjectType) => 
 		exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
@@ -42,7 +48,7 @@ const ExerciseSelector = ({
 		...partialMatchFilteredExercises
 	];
 
-	const handleSearchChange = (event) => {
+	const handleSearchChange = (event: { target: { value: string }; }) => {
 		setSearchTerm(event.target.value);
 	};
 
@@ -50,7 +56,7 @@ const ExerciseSelector = ({
 		onOpenDialog(false);
 	};
 
-	const handleExerciseSelection = (exerciseName) => {
+	const handleExerciseSelection = (exerciseName: string) => {
 		handleCloseDialog();
 		onExerciseSelection(exerciseName);
 	};

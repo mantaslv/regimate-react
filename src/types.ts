@@ -1,5 +1,9 @@
 import React, { Dispatch } from "react";
 
+export interface ExerciseListObjectType {
+	name: string;
+}
+
 export interface ProgrammeType {
     _id?: string;
     user_id?: string;
@@ -8,7 +12,7 @@ export interface ProgrammeType {
     createdAt?: string;
     updatedAt?: string;
     __v?: number;
-    exerciseList?: unknown;
+    exerciseList?: ExerciseListObjectType[];
 }
   
 export interface WorkoutType {
@@ -58,7 +62,7 @@ export interface AuthContextType {
 }
 
 export interface WorkoutState {
-	exerciseList: object[];
+	exerciseList: ExerciseListObjectType[];
 	workoutName: string;
 	exercises: ExerciseType[];
 }
@@ -69,7 +73,7 @@ export interface WorkoutContextType {
 }
 
 export interface ProgrammeState {
-	exerciseList: object[];
+	exerciseList: ExerciseListObjectType[];
 	programmeName: string;
 	workouts: WorkoutType[];
 }
@@ -134,7 +138,7 @@ export type WorkoutAction =
         payload: { exerciseId: string; setId: string; }; 
     }
     | { type: "ADD_SET"; payload: { exerciseId: string; }; }
-    | { type: "INITIALISE_EXERCISE_LIST"; payload: object[]; }
+    | { type: "INITIALISE_EXERCISE_LIST"; payload: ExerciseListObjectType[]; }
 	| { type: "UPDATE_TRAINING_NAME"; payload: string; };
 
 export type WorkoutReducerAction =
@@ -161,7 +165,7 @@ export interface MoveExercisePayload {
 export type ProgrammeReducerAction =
     // | WorkoutAction
     | ProgrammeExerciseInWorkoutAction
-    | { type: "INITIALISE_EXERCISE_LIST"; payload: object[]; }
+    | { type: "INITIALISE_EXERCISE_LIST"; payload: ExerciseListObjectType[]; }
 	| { type: "UPDATE_TRAINING_NAME"; payload: string; }
     | { type: "INITIALISE_TRAINING"; payload: ProgrammeState; }
 	| { type: "ADD_WORKOUT"; payload: undefined }
