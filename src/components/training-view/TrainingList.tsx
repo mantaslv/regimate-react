@@ -9,7 +9,7 @@ import ProgrammeCard from "./ProgrammeCard";
 import WorkoutCard from "./WorkoutCard";
 
 interface TrainingListProps {
-	isWorkout: boolean;
+	isWorkout?: boolean;
 }
 
 const TrainingList: FC<TrainingListProps> = ({ isWorkout=false }) => {
