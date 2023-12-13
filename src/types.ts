@@ -147,7 +147,7 @@ export type WorkoutReducerAction =
     | { type: "INITIALISE_TRAINING"; payload: WorkoutState; }
     | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId?: string }; }
     | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
-    | { type: "ADD_EXERCISE"; payload: { exerciseName: string; }; };
+    | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId?: string}; };
 
 export type ProgrammeExerciseInWorkoutAction =
     | { type: "UPDATE_EXERCISE_NAME"; payload: { exerciseId: string; newName: string; workoutId?: string; }; }
@@ -158,8 +158,8 @@ export type ProgrammeExerciseInWorkoutAction =
 
 export interface MoveExercisePayload {
     item: { exerciseId: string; workoutId: string };
-    position: "top" | "bottom";
-    exerciseId: string;
+    position?: "top" | "bottom";
+    exerciseId?: string;
     workoutId: string;
 }    
 
@@ -172,7 +172,7 @@ export type ProgrammeReducerAction =
 	| { type: "ADD_WORKOUT"; }
     | { type: "DELETE_WORKOUT"; payload: { workoutId: string; }; }
     | { type: "UPDATE_WORKOUT_NAME"; payload: { workoutId: string; newName: string; }; }
-    | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId: string; }; }
+    | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId?: string; }; }
     | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
     | { type: "REORDER_WORKOUTS"; payload: { startIndex: number; endIndex: number; }; }
     | { 

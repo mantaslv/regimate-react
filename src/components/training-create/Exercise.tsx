@@ -19,8 +19,7 @@ interface ProgrammeExerciseProps {
 
 type ExerciseProps = WorkoutExerciseProps | ProgrammeExerciseProps;
 
-const Exercise: FC<ExerciseProps> = (props) => {
-	const { exerciseId, inWorkout, dispatch, workoutId } = props;
+const Exercise: FC<ExerciseProps> = ({ exerciseId, inWorkout, dispatch, workoutId }) => {
 	const [isExerciseSelectorOpen, setIsExerciseSelectorOpen] = useState(false);
 
 	const handleExerciseNameChange = (newName: string) => {

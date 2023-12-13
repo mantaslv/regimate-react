@@ -3,13 +3,14 @@ import { Grid } from "@mui/material";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 import Workout from "../Workout";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import { ProgrammeReducerAction } from "../../../types";
 
 interface ProgrammeWhiteboardProps {
 	handleAddWorkout: () => void;
 }
 
 const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout }) => { 
-	const { state } = useProgrammeContext();
+	const { state, dispatch } = useProgrammeContext();
 
 	return (
 		<Grid container 
@@ -29,7 +30,7 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 						})
 					}}
 				>
-					<Workout index={i} workoutId={workout.id}/>
+					<Workout inWorkout={false} index={i} workoutId={workout.id} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
 				</Grid>
 			))}
 			{state.workouts.length < 6 && (

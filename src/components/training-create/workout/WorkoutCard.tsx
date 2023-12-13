@@ -7,7 +7,7 @@ import { WorkoutReducerAction } from "../../../types";
 
 interface WorkoutCardProps {
 	isExerciseSelectorOpen: boolean;
-	addExercise: () => void;
+	addExercise: (exerciseName: string) => void;
 	onOpenDialog: (value: boolean) => void;
 }
 

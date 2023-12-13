@@ -22,19 +22,22 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 			))
 		};
 	case "ADD_EXERCISE":
-		return {
-			...state,
-			workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
-				...workout,
-				exercises: [
-					...workout.exercises, {
-						id: uuidv4(),
-						exerciseName: action.payload.exerciseName,
-						sets: [{ id: uuidv4(), reps: "", weight: "" }]
-					}
-				]
-			}))
-		};
+		if (action.payload.workoutId) {
+			return {
+				...state,
+				workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
+					...workout,
+					exercises: [
+						...workout.exercises, {
+							id: uuidv4(),
+							exerciseName: action.payload.exerciseName,
+							sets: [{ id: uuidv4(), reps: "", weight: "" }]
+						}
+					]
+				}))
+			};
+		}
+		return state;
 	case "UPDATE_EXERCISE_NAME":
 		return {
 			...state, 

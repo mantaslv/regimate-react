@@ -15,12 +15,12 @@ interface ProgrammeSplitCardProps {
 	index: number;
 	workoutId: string;
 	isExerciseSelectorOpen: boolean;
-	handleWorkoutNameChange: () => void;
+	handleWorkoutNameChange: (event: { target: { value: string } } ) => void;
 	handleDeleteWorkout: () => void;
 	handleDropExercise: (exercise: DraggedExercise) => void;
 	handleMoveWorkout: (direction: "left" | "right") => void;
 	onOpenDialog: (value: boolean) => void;
-	addExercise: () => void;	
+	addExercise: (exerciseName: string) => void;	
 }
 
 const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
