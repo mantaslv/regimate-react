@@ -22,6 +22,7 @@ export interface WorkoutType {
     createdAt?: string;
     updatedAt?: string;
     exercises: ExerciseType[];
+    exerciseList?: ExerciseListObjectType[];
 }
   
 export interface ExerciseType {

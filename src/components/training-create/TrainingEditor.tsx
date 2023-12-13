@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import { DndProvider } from "react-dnd";
@@ -10,12 +10,17 @@ import EditTrainingToolbar from "./EditTrainingToolbar";
 import fetchExercises from "../../utils/fetchExercises";
 import Programme from "./Programme";
 import Workout from "./Workout";
+import { ProgrammeType, WorkoutType } from "../../types";
 
-const TrainingEditor = ({ isWorkout=false }) => {
+interface TrainingEditorProps {
+	isWorkout: boolean;
+}
+
+const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	const { state, dispatch } = isWorkout ? useWorkoutContext() : useProgrammeContext();
 	const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 	const [trainingName, setTrainingName] = useState(`Untitled ${isWorkout ? "Workout" : "Programme"}`);
-	const [trainingData, setTrainingData] = useState(null);
+	const [trainingData, setTrainingData] = useState<ProgrammeType | WorkoutType | null>(null);
 
 	const location = useLocation();
 	const initialData = location.state || null;
@@ -33,11 +38,11 @@ const TrainingEditor = ({ isWorkout=false }) => {
 			setTrainingData(initialData);
 			setInitialLoadComplete(true);
 		} else {
-			setTrainingData(state);
+			setTrainingData(isWorkout ? state as WorkoutType : state as ProgrammeType);
 		}
 	}, [initialData, initialLoadComplete, state]);
 
-	const handleTrainingNameChange = (event) => {
+	const handleTrainingNameChange = (event: { target: { value: string }; }) => {
 		setTrainingName(event.target.value);
 		dispatch({ type: "UPDATE_TRAINING_NAME", payload: event.target.value });
 	};
@@ -52,7 +57,7 @@ const TrainingEditor = ({ isWorkout=false }) => {
 			/>
 			<Box sx={{ my: "105px" }}>
 				<DndProvider backend={HTML5Backend}>
-					{isWorkout ? <Workout inWorkout/> : <Programme/>}
+					{isWorkout ? <Workout inWorkout index={undefined} workoutId={undefined}/> : <Programme/>}
 				</DndProvider>
 			</Box>
 		</Box>

@@ -12,9 +12,9 @@ import { ProgrammeType, WorkoutType } from "../../types";
 
 interface EditTrainingToolbarProps {
 	nameInputValue: string;
-	handleNameInputChange: () => void;
+	handleNameInputChange: (event: { target: { value: string }; }) => void;
 	isWorkout: boolean;
-	trainingData: WorkoutType | ProgrammeType;
+	trainingData: WorkoutType | ProgrammeType | null;
 }
 
 const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
