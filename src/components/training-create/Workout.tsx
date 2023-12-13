@@ -36,7 +36,7 @@ const Workout: FC<WorkoutProps> = ({ index, workoutId, inWorkout, dispatch }) =>
 		return (
 			<WorkoutCard {...workoutCardProps} />
 		);
-	} else if (workoutId && index) {
+	} else if (workoutId && index !== undefined) {
 		return (
 			<ProgrammeSplitCardWrapper
 				{...workoutCardProps}
@@ -45,7 +45,10 @@ const Workout: FC<WorkoutProps> = ({ index, workoutId, inWorkout, dispatch }) =>
 				dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>} 
 			/>
 		);
-	} else return null;
+	} else {
+		console.log(index, workoutId, "not rendered");
+		return null;
+	}
 };
 
 export default Workout;

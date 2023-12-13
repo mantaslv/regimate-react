@@ -30,7 +30,12 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 						})
 					}}
 				>
-					<Workout inWorkout={false} index={i} workoutId={workout.id} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
+					<Workout 
+						inWorkout={false} 
+						index={i} 
+						workoutId={workout.id} 
+						dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}
+					/>
 				</Grid>
 			))}
 			{state.workouts.length < 6 && (
