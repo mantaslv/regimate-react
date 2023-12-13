@@ -1,13 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import TrainingEditor from "../components/training-create/TrainingEditor";
 import { ProgrammeContextProvider } from "../context/programmeContext";
 import { WorkoutContextProvider } from "../context/workoutContext";
 
-const TrainingEditorPage = ({ isWorkout=false, isProgramme=false }) => {
+interface TrainingEditorPageProps {
+	isWorkout?: boolean;
+	isProgramme?: boolean;
+}
+
+const TrainingEditorPage: FC<TrainingEditorPageProps> = ({ isWorkout=false, isProgramme=false }) => {
 	if (isProgramme) {
 		return (
 			<ProgrammeContextProvider>
-				<TrainingEditor/>
+				<TrainingEditor isWorkout={false}/>
 			</ProgrammeContextProvider>
 		);
 	}
@@ -19,6 +24,8 @@ const TrainingEditorPage = ({ isWorkout=false, isProgramme=false }) => {
 			</WorkoutContextProvider>
 		);
 	}
+
+	return null;
 };
 
 export default TrainingEditorPage;
