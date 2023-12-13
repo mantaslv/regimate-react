@@ -12,7 +12,7 @@ const TrainingEditorPage: FC<TrainingEditorPageProps> = ({ isWorkout=false, isPr
 	if (isProgramme) {
 		return (
 			<ProgrammeContextProvider>
-				<TrainingEditor isWorkout={false}/>
+				<TrainingEditor/>
 			</ProgrammeContextProvider>
 		);
 	}

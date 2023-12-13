@@ -13,7 +13,7 @@ import Workout from "./Workout";
 import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 
 interface TrainingEditorProps {
-	isWorkout: boolean;
+	isWorkout?: boolean;
 }
 
 const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
