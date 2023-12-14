@@ -3,7 +3,7 @@
       "target": "es5",                          // Specify ECMAScript target version
       "module": "esnext",                       // Specify module code generation method
       "lib": ["dom", "dom.iterable", "esnext"], // Specify a list of library files to be included in the compilation
-      "allowJs": true,                          // Allow JavaScript files to be compiled
+      "allowJs": false,                          // Allow JavaScript files to be compiled
       "skipLibCheck": true,                     // Skip type checking of all declaration files (*.d.ts)
       "esModuleInterop": true,                  // Enables compatibility with Babel imports
       "allowSyntheticDefaultImports": true,     // Allow default imports from modules with no default export

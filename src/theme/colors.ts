@@ -1,6 +1,15 @@
 import { alpha } from "@mui/material/styles";
 
-const withAlphas = (color) => {
+type ColorWithAlphas = {
+	lightest: string;
+	light: string;
+	main: string;
+	dark: string;
+	darkest: string;
+	contrastText: string
+};
+
+const withAlphas = (color: ColorWithAlphas) => {
 	return {
 		...color,
 		alpha4: alpha(color.main, 0.04),

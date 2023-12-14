@@ -4,20 +4,53 @@ import {
 	inputLabelClasses,
 	outlinedInputClasses,
 	paperClasses,
-	tableCellClasses
+	tableCellClasses,
+	PaletteOptions,
 } from "@mui/material";
+
+interface ExtendedPaletteColorOptions {
+	lightest: string;
+	light: string;
+	main: string;
+	dark: string;
+	darkest: string;
+	contrastText: string;
+}
+
+interface NeutralPaletteOptions {
+	50: string;
+	100: string;
+	200: string;
+	300: string;
+	400: string;
+	500: string;
+	600: string;
+	700: string;
+	800: string;
+	900: string;
+}
+
+interface ExtendedPaletteOptions extends PaletteOptions {
+	neutral?: NeutralPaletteOptions;
+	primary?: ExtendedPaletteColorOptions;
+	error?: ExtendedPaletteColorOptions;
+}
 
 // Used only to create transitions
 const muiTheme = createTheme();
 
-export function createComponents(config) {
+interface Config {
+	palette: ExtendedPaletteOptions;
+}
+
+export function createComponents(config: Config) {
 	const { palette } = config;
 
 	return {
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					backgroundColor: palette.primary.dark
+					backgroundColor: palette.primary?.dark ?? "black"
 				}
 			}
 		},
@@ -34,7 +67,7 @@ export function createComponents(config) {
 			styleOverrides: {
 				root: {
 					borderRadius: "12px",
-					textTransform: "none"
+					textTransform: "none" as const
 				},
 				sizeSmall: {
 					padding: "6px 16px"
@@ -59,7 +92,7 @@ export function createComponents(config) {
 		MuiCard: {
 			styleOverrides: {
 				root: {
-					backgroundColor: palette.primary.light,
+					backgroundColor: palette.primary?.light ?? "white",
 					borderRadius: 20,
 					[`&.${paperClasses.elevation1}`]: {
 						boxShadow: "0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03)"
@@ -80,10 +113,10 @@ export function createComponents(config) {
 		MuiCardHeader: {
 			defaultProps: {
 				titleTypographyProps: {
-					variant: "h6"
+					variant: "h6" as const
 				},
 				subheaderTypographyProps: {
-					variant: "body2"
+					variant: "body2" as const
 				}
 			},
 			styleOverrides: {
@@ -123,7 +156,7 @@ export function createComponents(config) {
 					pointerEvents: "none"
 				},
 				"#nprogress .bar": {
-					backgroundColor: palette.primary.main,
+					backgroundColor: palette.primary?.main ?? "blue",
 					height: 3,
 					left: 0,
 					position: "fixed",
@@ -149,7 +182,7 @@ export function createComponents(config) {
 					fontWeight: 500,
 					lineHeight: "24px",
 					"&::placeholder": {
-						color: palette.text.secondary
+						color: palette.text?.secondary ?? "yellow"
 					}
 				}
 			}
@@ -162,13 +195,13 @@ export function createComponents(config) {
 					borderStyle: "solid",
 					borderWidth: 1,
 					overflow: "hidden",
-					borderColor: palette.neutral[200],
+					borderColor: palette.neutral?.[200] ?? "grey.200",
 					transition: muiTheme.transitions.create([
 						"border-color",
 						"box-shadow"
 					]),
 					"&:hover": {
-						backgroundColor: palette.action.hover
+						backgroundColor: palette.action?.hover ?? "purple"
 					},
 					"&:before": {
 						display: "none"
@@ -181,12 +214,12 @@ export function createComponents(config) {
 					},
 					[`&.${filledInputClasses.focused}`]: {
 						backgroundColor: "transparent",
-						borderColor: palette.primary.main,
-						boxShadow: `${palette.primary.main} 0 0 0 2px`
+						borderColor: palette.primary?.main ?? "blue",
+						boxShadow: `${palette.primary?.main ?? "blue"} 0 0 0 2px`
 					},
 					[`&.${filledInputClasses.error}`]: {
-						borderColor: palette.error.main,
-						boxShadow: `${palette.error.main} 0 0 0 2px`
+						borderColor: palette.error?.main ?? "blue",
+						boxShadow: `${palette.error?.main ?? "blue"} 0 0 0 2px`
 					}
 				},
 				input: {
@@ -200,22 +233,22 @@ export function createComponents(config) {
 			styleOverrides: {
 				root: {
 					"&:hover": {
-						backgroundColor: palette.action.hover,
+						backgroundColor: palette.action?.hover ?? "purple",
 						[`& .${outlinedInputClasses.notchedOutline}`]: {
-							borderColor: palette.neutral[200]
+							borderColor: palette.neutral?.[200] ?? "grey.200"
 						}
 					},
 					[`&.${outlinedInputClasses.focused}`]: {
 						backgroundColor: "transparent",
 						[`& .${outlinedInputClasses.notchedOutline}`]: {
-							borderColor: palette.primary.main,
-							boxShadow: `${palette.primary.main} 0 0 0 2px`
+							borderColor: palette.primary?.main ?? "blue",
+							boxShadow: `${palette.primary?.main ?? "blue"} 0 0 0 2px`
 						}
 					},
 					[`&.${filledInputClasses.error}`]: {
 						[`& .${outlinedInputClasses.notchedOutline}`]: {
-							borderColor: palette.error.main,
-							boxShadow: `${palette.error.main} 0 0 0 2px`
+							borderColor: palette.error?.main ?? "red",
+							boxShadow: `${palette.error?.main ?? "red"} 0 0 0 2px`
 						}
 					}
 				},
@@ -225,7 +258,7 @@ export function createComponents(config) {
 					lineHeight: "24px",
 				},
 				notchedOutline: {
-					borderColor: palette.neutral[200],
+					borderColor: palette.neutral?.[200] ?? "grey.200",
 					transition: muiTheme.transitions.create([
 						"border-color",
 						"box-shadow"
@@ -264,7 +297,7 @@ export function createComponents(config) {
 					minWidth: "auto",
 					paddingLeft: 0,
 					paddingRight: 0,
-					textTransform: "none",
+					textTransform: "none" as const,
 					"& + &": {
 						marginLeft: 24
 					}
@@ -285,8 +318,8 @@ export function createComponents(config) {
 					borderBottom: "none",
 					[`& .${tableCellClasses.root}`]: {
 						borderBottom: "none",
-						backgroundColor: palette.neutral[50],
-						color: palette.neutral[700],
+						backgroundColor: palette.neutral?.[50] ?? "grey.50",
+						color: palette.neutral?.[700] ?? "grey.700",
 						fontSize: 12,
 						fontWeight: 600,
 						lineHeight: 1,
@@ -302,7 +335,7 @@ export function createComponents(config) {
 		},
 		MuiTextField: {
 			defaultProps: {
-				variant: "filled"
+				variant: "filled" as const
 			}
 		}
 	};

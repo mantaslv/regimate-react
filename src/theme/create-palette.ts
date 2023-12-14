@@ -1,6 +1,7 @@
 import { common } from "@mui/material/colors";
 import { alpha } from "@mui/material/styles";
 import { error, indigo, info, neutral, success, warning } from "./colors";
+import { PaletteMode } from "@mui/material";
 
 export function createPalette() {
 	return {
@@ -19,7 +20,7 @@ export function createPalette() {
 		divider: "#F2F4F7",
 		error,
 		info,
-		mode: "light",
+		mode: "light" as PaletteMode,
 		neutral,
 		primary: indigo,
 		success,

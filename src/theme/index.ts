@@ -1,14 +1,15 @@
-import { createTheme as createMuiTheme } from "@mui/material";
+import { Shadows, createTheme as createMuiTheme } from "@mui/material";
 import { createPalette } from "./create-palette";
 import { createComponents } from "./create-components";
 import { createShadows } from "./create-shadows";
 import { createTypography } from "./create-typography";
+import { Typography } from "@mui/material/styles/createTypography";
 
 export function createTheme() {
 	const palette = createPalette();
 	const components = createComponents({ palette });
-	const shadows = createShadows();
-	const typography = createTypography();
+	const shadows = createShadows() as Shadows;
+	const typography = createTypography() as Typography;
 
 	return createMuiTheme({
 		breakpoints: {
