@@ -45,6 +45,7 @@ const Set: FC<SetProps> = ({ exerciseId, setId }) => {
 				<TextField
 					label="Weight (kg)" 
 					name="weight"
+					aria-label="weight-input"
 					value={weight}
 					onChange={handleWeightChange}
 				/>
@@ -53,6 +54,7 @@ const Set: FC<SetProps> = ({ exerciseId, setId }) => {
 				<TextField 
 					label="Reps" 
 					name="reps"
+					aria-label="reps-input"
 					value={reps}
 					onChange={handleRepsChange}
 				/>
@@ -63,7 +65,7 @@ const Set: FC<SetProps> = ({ exerciseId, setId }) => {
 					color="secondary" 
 					onClick={handleDeleteSet}
 					disabled={exercise === undefined ? false : exercise.sets.length <= 1}
-					aria-label="Delete Set"
+					aria-label="delete-set-btn"
 					title="Click to remove this set"
 				>
 					<RemoveCircleIcon/>

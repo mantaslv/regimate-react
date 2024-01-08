@@ -23,24 +23,24 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 
 	useEffect(() => setExerciseList(state.exerciseList), [state]);
 
-	const exactMatchFilteredExercises = exerciseList.filter((exercise: ExerciseListObjectType) => 
+	const exactMatchFilteredExercises = exerciseList?.filter((exercise: ExerciseListObjectType) => 
 		exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	) ?? [];
 
-	const splitMatchFilteredExercises = exerciseList.filter(exercise => 
+	const splitMatchFilteredExercises = exerciseList?.filter(exercise => 
 		!exactMatchFilteredExercises.includes(exercise) &&
 			searchTerm.toLowerCase().split(" ").every(word => 
 				exercise.name.toLowerCase().split(" ").includes(word)
 			)
-	);
+	) ?? [];
 
-	const partialMatchFilteredExercises = exerciseList.filter(exercise => 
+	const partialMatchFilteredExercises = exerciseList?.filter(exercise => 
 		!exactMatchFilteredExercises.includes(exercise) &&
         !splitMatchFilteredExercises.includes(exercise) &&
 			searchTerm.toLowerCase().split(" ").some(word =>
 				exercise.name.toLowerCase().split(" ").includes(word)
 			)
-	);
+	) ?? [];
     
 	const filteredExercises = [
 		...exactMatchFilteredExercises, 
@@ -71,7 +71,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 			<DialogContent>
 				<TextField label="Search" value={searchTerm} onChange={handleSearchChange} sx={{ mt: 1 }}/>
 				<List>
-					{filteredExercises.map((exercise, i) => 
+					{filteredExercises?.map((exercise, i) => 
 						<ListItemButton key={i} onClick={() => handleExerciseSelection(exercise.name)}>
 							<ListItemText primary={exercise.name}/>
 						</ListItemButton>

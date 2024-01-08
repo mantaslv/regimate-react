@@ -77,7 +77,8 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 			>
 				<Stack direction='row' gap={1}>
 					<Input
-						value={nameInputValue}
+						value={nameInputValue || ""}
+						aria-label="training-name-input"
 						size="small"
 						onChange={handleNameInputChange}
 					/>

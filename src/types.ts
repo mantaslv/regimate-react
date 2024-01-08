@@ -41,6 +41,7 @@ export interface SetType {
 
 export interface FCWithChildrenType {
     children: React.ReactNode;
+    testState?: boolean;
 }
 
 export interface UserState {

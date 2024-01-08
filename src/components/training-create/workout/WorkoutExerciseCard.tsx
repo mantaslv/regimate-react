@@ -29,7 +29,7 @@ export const WorkoutExerciseCard: FC<WorkoutExerciseCardProps> = ({
 	const exercise = state?.exercises.find((ex) => ex.id === exerciseId) || null;
 
 	return (
-		<Card sx={{ mt: 2 }}> 
+		<Card aria-label="exercise-card" sx={{ mt: 2 }}> 
 			<CardHeader 
 				title={
 					<Button onClick={handleOpenExerciseSelector}>
@@ -47,7 +47,7 @@ export const WorkoutExerciseCard: FC<WorkoutExerciseCardProps> = ({
 				))}
 				<Grid container spacing={1} marginTop={0} alignItems="center">
 					<Grid item>
-						<Button variant="contained" onClick={addSet}>Add Set</Button>
+						<Button variant="contained" aria-label="add-set-btn" onClick={addSet}>Add Set</Button>
 					</Grid>
 					<Grid item>
 						<Button 
@@ -56,7 +56,7 @@ export const WorkoutExerciseCard: FC<WorkoutExerciseCardProps> = ({
 							onClick={handleDeleteExercise}
 							disabled={state.exercises.length <= 1}
 							sx={{ justifyContent: "space-between" }}
-							aria-label="Delete Exercise"
+							aria-label="delete-exercise-btn"
 							title="Click to remove this exercise"
 						>
 							<RemoveCircleIcon sx={{ mr: 1, ml: -1 }}/>

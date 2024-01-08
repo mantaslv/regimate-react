@@ -21,12 +21,16 @@ export const WorkoutCard: FC<WorkoutCardProps> = ({
 	return (
 		<Box sx={{ display: "flex", justifyContent: "center" }}>
 			<Box>
-				{state.exercises.map((exercise) => (
+				{state.exercises?.map((exercise) => (
 					<Exercise inWorkout workoutId={undefined} key={exercise.id} exerciseId={exercise.id} dispatch={dispatch as React.Dispatch<WorkoutReducerAction>}/>
 				))}
 				<Grid container spacing={2} marginTop={0} sx={{ display: "flex", justifyContent: "center" }}>
 					<Grid item>
-						<Button variant="contained" onClick={() => onOpenDialog(true)}>
+						<Button 
+							variant="contained" 
+							aria-label="add-exercise-button"
+							onClick={() => onOpenDialog(true)}
+						>
                             Add Exercise
 						</Button>
 						{isExerciseSelectorOpen && (

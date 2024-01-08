@@ -10,12 +10,13 @@ const initialState = {
 	exercises: []
 };
 
-export const WorkoutContextProvider: React.FC<FCWithChildrenType> = ({ children }) => {
+export const WorkoutContextProvider: React.FC<FCWithChildrenType> = ({ children, testState }) => {
 	const [state, dispatch] = useReducer(workoutReducer, initialState);
 
 	return (
 		<WorkoutContext.Provider value={{ state, dispatch }}>
 			{children}
+			{testState && <div data-testid="testState">{JSON.stringify(state)}</div>}
 		</WorkoutContext.Provider>
 	);
 };
