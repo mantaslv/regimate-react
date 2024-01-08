@@ -18,8 +18,8 @@ const changeInputValue = async (labelText, newValue, elementIndex=0, within=scre
 	fireEvent.change(inputEl, { target: { value: newValue } });
 };
 
-const clickButton = (buttonLabel, elementIndex=0) => {
-	fireEvent.click(screen.getAllByLabelText(buttonLabel)[elementIndex]);
+const clickButton = (buttonText, elementIndex=0) => {
+	fireEvent.click(screen.getAllByRole("button", { name: buttonText })[elementIndex]);
 };
 
 const getState = () => {
@@ -123,7 +123,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
-		await act (async () => {
+		act(() => {
 			clickButton("add-exercise-btn");
 		});
 
@@ -156,7 +156,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[1].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
 		});
 
-		await act (async () => {
+		act(() => {
 			clickButton("delete-exercise-btn");
 		});
 
