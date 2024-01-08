@@ -13,6 +13,19 @@ jest.mock("react-router-dom", () => ({
 	useNavigate: jest.fn()
 }));
 
+const changeInputValue = async (labelText, newValue, elementIndex=0, within=screen) => {
+	const inputEl = within.getAllByLabelText(labelText)[elementIndex].querySelector("input");
+	fireEvent.change(inputEl, { target: { value: newValue } });
+};
+
+const clickButton = (buttonLabel, elementIndex=0) => {
+	fireEvent.click(screen.getAllByLabelText(buttonLabel)[elementIndex]);
+};
+
+const getState = () => {
+	return JSON.parse(screen.getByTestId("testState").textContent);
+};
+
 describe("Workout Editor", () => {
 	let mockNavigate;
 
@@ -45,16 +58,12 @@ describe("Workout Editor", () => {
 		);
 
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises.length).toEqual(0);
+			expect(getState().exercises.length).toEqual(0);
 		});
 		
 		await act(async () => {
-			const trainingNameInputEl = screen.getByLabelText("training-name-input").querySelector("input");
-			fireEvent.change(trainingNameInputEl, { target: { value: "Leg Day" } });
-
-			const addExerciseBtnEl = screen.getByLabelText("add-exercise-button");
-			fireEvent.click(addExerciseBtnEl);
+			await changeInputValue("training-name-input", "Leg Day");
+			clickButton("add-exercise-btn");
 		});
 
 		await waitFor(() => {
@@ -62,35 +71,29 @@ describe("Workout Editor", () => {
 		});
 
 		await act (async () => {
-			const frontSquatListBtn = await screen.findByText("Front Squats");
-			fireEvent.click(frontSquatListBtn);
+			fireEvent.click(await screen.findByText("Front Squats"));
 		});
 
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
 			expect(screen.getByText("Front Squats")).toBeInTheDocument();
-			expect(state.exercises.length).toEqual(1);
+			expect(getState().exercises.length).toEqual(1);
 		});
 
 		await act (async () => {
-			const weightEl = await screen.findAllByLabelText("weight-input");
-			expect(weightEl.length).toEqual(1);
-			fireEvent.change(weightEl[0].querySelector("input"), { target: { value: "50" } });
-			const repsEl = await screen.findAllByLabelText("reps-input");
-			fireEvent.change(repsEl[0].querySelector("input"), { target: { value: "10" } });
+			await changeInputValue("weight-input", "50");
+			await changeInputValue("reps-input", "10");
 		});
 		
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises.length).toEqual(1);
-			expect(state.exercises[0].sets.length).toEqual(1);
-			expect(state.exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "50", reps: "10" }));
-			expect(state.exercises[0]).toEqual(expect.objectContaining({ exerciseName: "Front Squats" }));
-			expect(state.workoutName).toEqual("Leg Day");
+			expect(getState().exercises.length).toEqual(1);
+			expect(getState().exercises[0].sets.length).toEqual(1);
+			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "50", reps: "10" }));
+			expect(getState().exercises[0]).toEqual(expect.objectContaining({ exerciseName: "Front Squats" }));
+			expect(getState().workoutName).toEqual("Leg Day");
 		});
 		
 		await act(async () => {
-			fireEvent.click(screen.getByLabelText("add-set-btn"));
+			clickButton("add-set-btn");
 		});
 		
 		let weightElements;
@@ -100,34 +103,28 @@ describe("Workout Editor", () => {
 		});
 
 		await act (async () => {
-			const weightEl = await screen.findAllByLabelText("weight-input");
-			fireEvent.change(weightEl[1].querySelector("input"), { target: { value: "55" } });
-			const repsEl = await screen.findAllByLabelText("reps-input");
-			fireEvent.change(repsEl[1].querySelector("input"), { target: { value: "8" } });
+			await changeInputValue("weight-input", "55", 1);
+			await changeInputValue("reps-input", "8", 1);
 		});
 
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises[0].sets.length).toEqual(2);
-			expect(state.exercises[0].sets[1]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
+			expect(getState().exercises[0].sets.length).toEqual(2);
+			expect(getState().exercises[0].sets[1]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
 		await act (async () => {
-			fireEvent.click(screen.getAllByLabelText("delete-set-btn")[0]);
+			clickButton("delete-set-btn");
 		});
 
 		await waitFor(async () => {
 			weightElements = await screen.findAllByLabelText("weight-input");
 			expect(weightElements.length).toEqual(1);
-
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises[0].sets.length).toEqual(1);
-			expect(state.exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
+			expect(getState().exercises[0].sets.length).toEqual(1);
+			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
 		await act (async () => {
-			const addExerciseBtnEl = screen.getByLabelText("add-exercise-button");
-			fireEvent.click(addExerciseBtnEl);
+			clickButton("add-exercise-btn");
 		});
 
 		await waitFor(() => {
@@ -135,44 +132,37 @@ describe("Workout Editor", () => {
 		});
 
 		await act (async () => {
-			const backSquatListBtn = await screen.findByText("Back Squats");
-			fireEvent.click(backSquatListBtn);
+			fireEvent.click(await screen.findByText("Back Squats"));
 		});
 
 		let exerciseCardElements;
 		await waitFor(async () => {
 			exerciseCardElements = await screen.findAllByLabelText("exercise-card");
 			expect(exerciseCardElements.length).toEqual(2);
-
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
 			expect(screen.getByText("Front Squats")).toBeInTheDocument();
-			expect(state.exercises.length).toEqual(2);
+			expect(getState().exercises.length).toEqual(2);
 		});
 
 		await act (async () => {
 			const withinCard = within(exerciseCardElements[1]);
-			const weightEl = await withinCard.findAllByLabelText("weight-input");
-			fireEvent.change(weightEl[0].querySelector("input"), { target: { value: "20" } });
-			const repsEl = await withinCard.findAllByLabelText("reps-input");
-			fireEvent.change(repsEl[0].querySelector("input"), { target: { value: "10" } });
+			await changeInputValue("weight-input", "20", 0, withinCard);
+			await changeInputValue("reps-input", "10", 0, withinCard);
 		});
 		
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises.length).toEqual(2);
-			expect(state.exercises[1].sets.length).toEqual(1);
-			expect(state.exercises[1]).toEqual(expect.objectContaining({ exerciseName: "Back Squats" }));
-			expect(state.exercises[1].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
+			expect(getState().exercises.length).toEqual(2);
+			expect(getState().exercises[1].sets.length).toEqual(1);
+			expect(getState().exercises[1]).toEqual(expect.objectContaining({ exerciseName: "Back Squats" }));
+			expect(getState().exercises[1].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
 		});
 
 		await act (async () => {
-			fireEvent.click(screen.getAllByLabelText("delete-exercise-btn")[0]);
+			clickButton("delete-exercise-btn");
 		});
 
 		await waitFor(() => {
-			const state = JSON.parse(screen.getByTestId("testState").textContent);
-			expect(state.exercises.length).toEqual(1);
-			expect(state.exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
+			expect(getState().exercises.length).toEqual(1);
+			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
 		});
 	});
 });

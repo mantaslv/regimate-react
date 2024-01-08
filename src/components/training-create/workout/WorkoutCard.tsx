@@ -28,7 +28,7 @@ export const WorkoutCard: FC<WorkoutCardProps> = ({
 					<Grid item>
 						<Button 
 							variant="contained" 
-							aria-label="add-exercise-button"
+							aria-label="add-exercise-btn"
 							onClick={() => onOpenDialog(true)}
 						>
                             Add Exercise
