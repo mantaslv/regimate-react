@@ -96,10 +96,10 @@ describe("Workout Editor", () => {
 			clickButton("add-set-btn");
 		});
 		
-		let weightElements;
+		let setElements;
 		await waitFor(async () => {
-			weightElements = await screen.findAllByLabelText("weight-input");
-			expect(weightElements.length).toEqual(2);
+			setElements = await screen.findAllByLabelText("set-element");
+			expect(setElements.length).toEqual(2);
 		});
 
 		await act (async () => {
@@ -117,8 +117,8 @@ describe("Workout Editor", () => {
 		});
 
 		await waitFor(async () => {
-			weightElements = await screen.findAllByLabelText("weight-input");
-			expect(weightElements.length).toEqual(1);
+			setElements = await screen.findAllByLabelText("weight-input");
+			expect(setElements.length).toEqual(1);
 			expect(getState().exercises[0].sets.length).toEqual(1);
 			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Box } from "@mui/material";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import ConsoleLogButton from "../styled-components/ConsoleLogButton";
 import { useWorkoutContext } from "../../hooks/useWorkoutContext";
@@ -36,45 +36,47 @@ const Set: FC<SetProps> = ({ exerciseId, setId }) => {
 	};
 
 	return (
-		<Grid container 
-			spacing={2} 
-			paddingY={1} 
-			alignItems="center"
-		>
-			<Grid item>
-				<TextField
-					label="Weight (kg)" 
-					name="weight"
-					aria-label="weight-input"
-					value={weight}
-					onChange={handleWeightChange}
-				/>
+		<Box aria-label="set-element">
+			<Grid container 
+				spacing={2} 
+				paddingY={1} 
+				alignItems="center"
+			>
+				<Grid item>
+					<TextField
+						label="Weight (kg)" 
+						name="weight"
+						aria-label="weight-input"
+						value={weight}
+						onChange={handleWeightChange}
+					/>
+				</Grid>
+				<Grid item>
+					<TextField 
+						label="Reps" 
+						name="reps"
+						aria-label="reps-input"
+						value={reps}
+						onChange={handleRepsChange}
+					/>
+				</Grid>
+				<Grid item>
+					<Button 
+						variant="contained" 
+						color="secondary" 
+						onClick={handleDeleteSet}
+						disabled={exercise === undefined ? false : exercise.sets.length <= 1}
+						aria-label="delete-set-btn"
+						title="Click to remove this set"
+					>
+						<RemoveCircleIcon/>
+					</Button>
+				</Grid>
+				<Grid item>
+					<ConsoleLogButton print={set} info="set"/>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<TextField 
-					label="Reps" 
-					name="reps"
-					aria-label="reps-input"
-					value={reps}
-					onChange={handleRepsChange}
-				/>
-			</Grid>
-			<Grid item>
-				<Button 
-					variant="contained" 
-					color="secondary" 
-					onClick={handleDeleteSet}
-					disabled={exercise === undefined ? false : exercise.sets.length <= 1}
-					aria-label="delete-set-btn"
-					title="Click to remove this set"
-				>
-					<RemoveCircleIcon/>
-				</Button>
-			</Grid>
-			<Grid item>
-				<ConsoleLogButton print={set} info="set"/>
-			</Grid>
-		</Grid>
+		</Box>
 	);
 };
 
