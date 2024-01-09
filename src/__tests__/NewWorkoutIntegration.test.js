@@ -7,24 +7,12 @@ import { screen, render, fireEvent, waitFor, within } from "@testing-library/rea
 import TrainingEditor from "../components/training-create/TrainingEditor";
 import { WorkoutContextProvider } from "../context/workoutContext";
 import { AuthContextProvider } from "../context/authContext";
+import { changeInputValue, clickButton, getState } from "./testHelper";
 
 jest.mock("react-router-dom", () => ({ 
 	useLocation: jest.fn(),
 	useNavigate: jest.fn()
 }));
-
-const changeInputValue = async (labelText, newValue, elementIndex=0, within=screen) => {
-	const inputEl = within.getAllByLabelText(labelText)[elementIndex].querySelector("input");
-	fireEvent.change(inputEl, { target: { value: newValue } });
-};
-
-const clickButton = (buttonText, elementIndex=0) => {
-	fireEvent.click(screen.getAllByRole("button", { name: buttonText })[elementIndex]);
-};
-
-const getState = () => {
-	return JSON.parse(screen.getByTestId("testState").textContent);
-};
 
 describe("Workout Editor", () => {
 	let mockNavigate;
