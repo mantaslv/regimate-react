@@ -38,7 +38,10 @@ describe("Workout Editor", () => {
 		global.fetch = jest.fn(() =>
 			Promise.resolve({
 				ok: true,
-				json: () => Promise.resolve([{ name: "Front Squats" }, { name: "Back Squats" }]),
+				json: () => Promise.resolve([
+					{ name: "Front Squats" }, 
+					{ name: "Back Squats" }
+				]),
 			})
 		);
 	});
@@ -46,9 +49,8 @@ describe("Workout Editor", () => {
 	afterEach(() => {
 		jest.clearAllMocks();
 	});
-	
 
-	test("Integration Test: Entering set values updates context states", async () => {
+	test("Integration Test: Creating new workout and editing fields updates context state", async () => {
 		render(
 			<AuthContextProvider>
 				<WorkoutContextProvider testState>
@@ -70,7 +72,7 @@ describe("Workout Editor", () => {
 			expect(screen.getByText("Select Exercise")).toBeInTheDocument();
 		});
 
-		await act (async () => {
+		await act(async () => {
 			fireEvent.click(await screen.findByText("Front Squats"));
 		});
 
@@ -79,7 +81,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises.length).toEqual(1);
 		});
 
-		await act (async () => {
+		await act(async () => {
 			await changeInputValue("weight-input", "50");
 			await changeInputValue("reps-input", "10");
 		});
@@ -102,7 +104,7 @@ describe("Workout Editor", () => {
 			expect(setElements.length).toEqual(2);
 		});
 
-		await act (async () => {
+		await act(async () => {
 			await changeInputValue("weight-input", "55", 1);
 			await changeInputValue("reps-input", "8", 1);
 		});
@@ -112,9 +114,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[0].sets[1]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
-		await act (async () => {
-			clickButton("delete-set-btn");
-		});
+		await act(async () =>  clickButton("delete-set-btn"));
 
 		await waitFor(async () => {
 			setElements = await screen.findAllByLabelText("weight-input");
@@ -123,15 +123,13 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
-		act(() => {
-			clickButton("add-exercise-btn");
-		});
+		act(() => clickButton("add-exercise-btn"));
 
 		await waitFor(() => {
 			expect(screen.getByText("Select Exercise")).toBeInTheDocument();
 		});
 
-		await act (async () => {
+		await act(async () => {
 			fireEvent.click(await screen.findByText("Back Squats"));
 		});
 
@@ -143,7 +141,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises.length).toEqual(2);
 		});
 
-		await act (async () => {
+		await act(async () => {
 			const withinCard = within(exerciseCardElements[1]);
 			await changeInputValue("weight-input", "20", 0, withinCard);
 			await changeInputValue("reps-input", "10", 0, withinCard);
@@ -156,9 +154,7 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[1].sets[0]).toEqual(expect.objectContaining({ weight: "20", reps: "10" }));
 		});
 
-		act(() => {
-			clickButton("delete-exercise-btn");
-		});
+		act(() => clickButton("delete-exercise-btn"));
 
 		await waitFor(() => {
 			expect(getState().exercises.length).toEqual(1);
