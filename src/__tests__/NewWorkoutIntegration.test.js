@@ -7,7 +7,7 @@ import { screen, render, fireEvent, waitFor, within } from "@testing-library/rea
 import TrainingEditor from "../components/training-create/TrainingEditor";
 import { WorkoutContextProvider } from "../context/workoutContext";
 import { AuthContextProvider } from "../context/authContext";
-import { changeInputValue, clickButton, getState } from "./testHelper";
+import { changeInputValue, clickButton, getState } from "../utils/testHelper";
 
 jest.mock("react-router-dom", () => ({ 
 	useLocation: jest.fn(),
@@ -57,6 +57,7 @@ describe("Workout Editor", () => {
 		});
 
 		await waitFor(() => {
+			expect(getState().workoutName).toEqual("Leg Day");
 			expect(screen.getByText("Select Exercise")).toBeInTheDocument();
 		});
 
@@ -102,10 +103,10 @@ describe("Workout Editor", () => {
 			expect(getState().exercises[0].sets[1]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
 		});
 		
-		await act(async () =>  clickButton("delete-set-btn"));
+		await act(async () => clickButton("delete-set-btn"));
 
 		await waitFor(async () => {
-			setElements = await screen.findAllByLabelText("weight-input");
+			setElements = await screen.findAllByLabelText("set-element");
 			expect(setElements.length).toEqual(1);
 			expect(getState().exercises[0].sets.length).toEqual(1);
 			expect(getState().exercises[0].sets[0]).toEqual(expect.objectContaining({ weight: "55", reps: "8" }));
@@ -125,7 +126,7 @@ describe("Workout Editor", () => {
 		await waitFor(async () => {
 			exerciseCardElements = await screen.findAllByLabelText("exercise-card");
 			expect(exerciseCardElements.length).toEqual(2);
-			expect(screen.getByText("Front Squats")).toBeInTheDocument();
+			expect(screen.getByText("Back Squats")).toBeInTheDocument();
 			expect(getState().exercises.length).toEqual(2);
 		});
 

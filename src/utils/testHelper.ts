@@ -8,11 +8,11 @@ export const changeInputValue = async (labelText: string, newValue: string, elem
 	fireEvent.change(inputEl, { target: { value: newValue } });
 };
 
-export const clickButton = (buttonText: string, elementIndex=0) => {
+export const clickButton = (buttonText: string, elementIndex=0, within=screen) => {
 	if (!buttonText) {
 		throw new Error(`Element with button text ${buttonText} not found.`);
 	}
-	fireEvent.click(screen.getAllByRole("button", { name: buttonText })[elementIndex]);
+	fireEvent.click(within.getAllByRole("button", { name: buttonText })[elementIndex]);
 };
 
 export const getState = () => {
