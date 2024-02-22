@@ -12,8 +12,8 @@ const AddTrainingItemButton: FC<AddTrainingItemButtonProps> = ({ onClick, sx }) 
 		<Button 
 			onClick={onClick}
 			sx={{ 
-				border: "3px dashed", 
-				borderColor: "grey.400",
+				// border: "3px dashed", 
+				// borderColor: "grey.400",
 				borderRadius: "16px",								
 				display: "flex",
 				justifyContent: "center",
