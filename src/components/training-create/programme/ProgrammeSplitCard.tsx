@@ -119,7 +119,7 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 					onExerciseSelection={addExercise}
 				/>
 			)}
-			<Grid container 
+			{/* <Grid container 
 				spacing={1} 
 				sx={{ 
 					display: "flex", 
@@ -148,7 +148,7 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 						<KeyboardArrowRightIcon/>
 					</Button>
 				</Grid>
-			</Grid>
+			</Grid> */}
 		</Box>
 	);
 };
