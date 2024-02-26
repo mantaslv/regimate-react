@@ -24,10 +24,10 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 				<Grid item key={workout.id} md={2} 
 					sx={{ 
 						pr: 2, 
-						...(i !== state.workouts.length - 1 && { 
-							borderRight: "3px dashed",
-							borderColor: "grey.400"
-						})
+						// ...(i !== state.workouts.length - 1 && { 
+						// 	borderRight: "3px dashed",
+						// 	borderColor: "grey.400"
+						// })
 					}}
 				>
 					<Workout 
