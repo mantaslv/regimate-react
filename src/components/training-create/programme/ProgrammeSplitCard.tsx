@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Input } from "@mui/material";
+import { Box, Button, Grid, IconButton, Input, Typography } from "@mui/material";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import Exercise from "../Exercise";
 import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
@@ -69,24 +69,28 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				alignItems: "center", 
 				width: "100%" 
 			}}>
-				<Input
-					disableUnderline
-					placeholder="workout name"
-					value={workout?.workoutName}
-					onChange={handleWorkoutNameChange}
-					sx={{
-						width: "70%",
-						borderRadius: "10px",
-						border: "2px solid",
-						borderColor: "grey.300",
-						"& input": { textAlign: "center" },
-						"&:hover": { backgroundColor: "#e6f2f1" },
-					}}
-				/>
+				<Typography variant="h5" sx={{ color: "#39413c" }}>
+					Day {index+1}
+				</Typography>
+				
 				<IconButton onClick={handleDeleteWorkout}>
 					<RemoveCircleIcon/>
 				</IconButton>
 			</Box>
+			<Input
+				disableUnderline
+				placeholder="workout name"
+				value={workout?.workoutName}
+				onChange={handleWorkoutNameChange}
+				sx={{
+					width: "70%",
+					borderRadius: "10px",
+					border: "2px solid",
+					borderColor: "grey.300",
+					"& input": { textAlign: "center" },
+					"&:hover": { backgroundColor: "#e6f2f1" },
+				}}
+			/>
 			{workout?.exercises.map((ex) => (
 				<Exercise key={ex.id} inWorkout={false} exerciseId={ex.id} workoutId={workoutId} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
 			))}
