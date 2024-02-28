@@ -82,14 +82,14 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				placeholder="workout name"
 				value={workout?.workoutName}
 				onChange={handleWorkoutNameChange}
-				sx={{
-					width: "70%",
-					borderRadius: "10px",
-					border: "2px solid",
-					borderColor: "grey.300",
-					"& input": { textAlign: "center" },
-					"&:hover": { backgroundColor: "#e6f2f1" },
-				}}
+				// sx={{
+				// 	width: "70%",
+				// 	borderRadius: "10px",
+				// 	border: "2px solid",
+				// 	borderColor: "grey.300",
+				// 	"& input": { textAlign: "center" },
+				// 	"&:hover": { backgroundColor: "#e6f2f1" },
+				// }}
 			/>
 			{workout?.exercises.map((ex) => (
 				<Exercise key={ex.id} inWorkout={false} exerciseId={ex.id} workoutId={workoutId} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
