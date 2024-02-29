@@ -33,12 +33,12 @@ export const neutral = {
 	900: "#111927"
 };
 
-export const indigo = withAlphas({
-	lightest: "#F5F7FF",
-	light: "#EBEEFE",
-	main: "#6366F1",
-	dark: "#4338CA",
-	darkest: "#312E81",
+export const emerald = withAlphas({
+	lightest: "#E6F4EA",
+	light: "#AEDDC2",
+	main: "#4cb88a",
+	dark: "#1c4c34",
+	darkest: "#163D29",
 	contrastText: "#FFFFFF"
 });
 
