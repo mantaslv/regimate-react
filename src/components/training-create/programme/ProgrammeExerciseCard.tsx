@@ -40,7 +40,8 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 				// opacity: isDragging ? 0.9 : 1, 
 				cursor: "move",
 				borderRadius: "10px", 
-				backgroundColor: "#6366F1", 
+				backgroundColor: "white",
+				border: "1px solid #f0f0f0", 
 				width: "100%", 
 				mt: 1
 			}}
@@ -64,7 +65,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 							textAlign="left"
 							textTransform="none"
 							sx={{ 
-								color: "white", 
+								// color: "white", 
 								width: "100%", 
 								"&:hover": { color: "grey.400" }
 							}}
@@ -74,7 +75,13 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					</Button>
 				</Box>
 				<Box sx={{ display: "flex", alignItems: "flex-start" }}>
-					<IconButton onClick={handleDeleteExercise} sx={{ color: "white", zIndex: 2 }}>
+					<IconButton 
+						onClick={handleDeleteExercise} 
+						sx={{ 
+							// color: "white", 
+							zIndex: 2 
+						}}
+					>
 						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px" }}/>
 					</IconButton>
 				</Box>

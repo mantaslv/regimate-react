@@ -69,8 +69,8 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				alignItems: "center", 
 				width: "100%" 
 			}}>
-				<Typography variant="h5" sx={{ color: "#39413c" }}>
-					Day {index+1}
+				<Typography variant="h6" sx={{ color: "#39413c" }}>
+					Workout {index+1}
 				</Typography>
 				
 				<IconButton onClick={handleDeleteWorkout}>
@@ -78,7 +78,7 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				</IconButton>
 			</Box>
 			<Input
-				disableUnderline
+				// disableUnderline
 				placeholder="workout name"
 				value={workout?.workoutName}
 				onChange={handleWorkoutNameChange}

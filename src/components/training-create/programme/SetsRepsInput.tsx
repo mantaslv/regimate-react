@@ -79,21 +79,24 @@ const NamedInput: FC<NamedInputProps> = ({label, value, setVariable}) => {
 				fontSize={15} 
 				fontWeight={500} 
 				textTransform="none" 
-				sx={{ color: "white", mr: -0.5 }}
+				sx={{ 
+					// color: "white", 
+					mr: -0.5 
+				}}
 			>
 				{label}
 			</Typography>
 			<Input
-				disableUnderline
+				// disableUnderline
 				value={variableValue}
 				onChange={handleInputChange}
 				sx={{
 					m: 1,
 					width: 35,
 					fontSize: 15,
-					color: "white",
-					borderRadius: "10px",
-					backgroundColor: "#4338CA", 
+					// color: "white",
+					// borderRadius: "10px",
+					// backgroundColor: "#4338CA", 
 					"& input": { textAlign: "center" },
 					"&:hover": { backgroundColor: "#312E81" },
 					zIndex: 2
