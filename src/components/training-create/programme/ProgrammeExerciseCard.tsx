@@ -43,7 +43,8 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 				backgroundColor: "white",
 				border: "1px solid #f0f0f0", 
 				width: "100%", 
-				mt: 1
+				mt: 1, 
+				boxShadow: 3,
 			}}
 		>
 			<Box sx={{ display: "flex" }}>
