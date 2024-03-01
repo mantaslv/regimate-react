@@ -13,6 +13,7 @@ interface ProgrammeExerciseCardProps {
 	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	isExerciseSelectorOpen: boolean;
+	opacity?: number;
 	// isDragging: boolean;
 }
 
@@ -24,6 +25,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	handleExerciseNameChange,
 	handleDeleteExercise,
 	isExerciseSelectorOpen,
+	opacity,
 	// isDragging
 }) => {
 	const { state } = useProgrammeContext();
@@ -37,7 +39,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	return (
 		<Box 
 			sx={{
-				// opacity: isDragging ? 0.9 : 1, 
+				// opacity: opacity,
 				cursor: "move",
 				borderRadius: "10px", 
 				backgroundColor: "white",

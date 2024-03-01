@@ -36,16 +36,26 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
 	}, [state]);
 
-	const [{ isDragging }, dragRef] = useDrag(() => ({
+	const [{ isDragging }, dragRef, preview] = useDrag(() => ({
 		type: "exercise",
 		item: () => {
 			return { workoutId, exerciseId, exerciseIndex };
 		},
-		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
-		}),
-		end: () => setIsDraggedAway(false),
+		collect: (monitor) => {
+			return ({
+				isDragging: !!monitor.isDragging(),
+			});
+		},
+		end: () => {
+			setIsDraggedAway(false);
+		},
 	}));
+
+	const emptyImage = new Image();
+
+	useEffect(() => {
+		preview(emptyImage, { captureDraggingState: true });
+	}, [preview]);
 
 	const exerciseCardProps = {
 		workoutId,
@@ -68,13 +78,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 				setIsDraggedAway={setIsDraggedAway}
 				isDragging={isDragging}
 			>
-				<Box 
-					sx={{ ...(isDragging && isDraggedAway) && { 
-						visibility: "hidden",
-						height: 0,
-						my: -1,
-					}}}
-				>
+				<Box>
 					<ProgrammeExerciseCard {...exerciseCardProps} />
 				</Box>
 			</BoxDropArea>
