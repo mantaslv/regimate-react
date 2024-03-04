@@ -32,6 +32,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
 	const [dragItemWidth, setDragItemWidth] = useState(0);
 	const innerBoxRef = useRef<HTMLDivElement>(null);
+	const [elementHidden, setElementHidden] = useState(false);
     
 	useEffect(() => {
 		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
@@ -54,6 +55,12 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 				isDragging: !!monitor.isDragging(),
 			});
 		},
+		end: (item, monitor) => {
+			const didDrop = monitor.didDrop();
+			if (didDrop) {
+				setElementHidden(true);
+			}
+		}
 	}), [dragItemWidth]);
 
 	const emptyImage = new Image();
@@ -75,7 +82,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	};
 
 	return (
-		<Box ref={dragRef} sx={{ width: "100%" }}>
+		<Box ref={dragRef} sx={{ width: "100%", visibility: elementHidden ? "hidden" : "visible" }}>
 			<Box ref={innerBoxRef} sx={{ width: "100%" }}>
 				<BoxDropArea 
 					handleDropExercise={handleDropExercise} 
@@ -83,7 +90,10 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 					exerciseId={exerciseId}
 					isDragging={isDragging}
 				>
-					<Box sx={{ opacity: isDragging ? 0.4 : 1 }}>
+					<Box sx={{
+						transition: "opacity 0.5s ease-in-out",
+						opacity: isDragging ? 0.5 : 1,
+					}}>
 						<ProgrammeExerciseCard {...exerciseCardProps} />
 					</Box>
 				</BoxDropArea>
