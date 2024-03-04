@@ -61,6 +61,7 @@ interface NamedInputProps {
 
 const NamedInput: FC<NamedInputProps> = ({label, value, setVariable}) => {
 	const [variableValue, setVariableValue] = useState(value);
+	const [inputWidth, setInputWidth] = useState("20px");
 
 	const handleInputChange = (event: { target: { value: string; }; }) => {
 		const inputValue = event.target.value;
@@ -72,6 +73,11 @@ const NamedInput: FC<NamedInputProps> = ({label, value, setVariable}) => {
 
 	useEffect(() => setVariableValue(value), [value]);
 
+	useEffect(() => {
+		const newWidth = Math.max(20, 10 + variableValue.length * 8) + "px";
+		setInputWidth(newWidth);
+	}, [variableValue]);
+
 	return (
 		<>
 			<Typography 
@@ -79,26 +85,25 @@ const NamedInput: FC<NamedInputProps> = ({label, value, setVariable}) => {
 				fontSize={15} 
 				fontWeight={500} 
 				textTransform="none" 
-				sx={{ 
-					// color: "white", 
-					mr: -0.5 
-				}}
+				sx={{ mr: -0.5, color: "#39413c" }}
 			>
 				{label}
 			</Typography>
 			<Input
-				// disableUnderline
+				disableUnderline
 				value={variableValue}
 				onChange={handleInputChange}
 				sx={{
 					m: 1,
-					width: 35,
+					minWidth: 20,
+					width: inputWidth,
+					height: 20,
 					fontSize: 15,
-					// color: "white",
-					// borderRadius: "10px",
-					// backgroundColor: "#4338CA", 
+					color: "#39413c",
+					borderRadius: "5px",
+					backgroundColor: "#f0f0f0", 
 					"& input": { textAlign: "center" },
-					"&:hover": { backgroundColor: "#312E81" },
+					"&:hover": { backgroundColor: "#d5d5d5" },
 					zIndex: 2
 				}}
 			/>

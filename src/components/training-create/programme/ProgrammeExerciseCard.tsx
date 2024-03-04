@@ -86,7 +86,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 				display: "flex", 
 				justifyContent: "flex-end", 
 				alignItems: "center", 
-				mt: -1.5 
+				mt: -1
 			}}>
 				<SetsRepsInput 
 					key={exerciseId} 

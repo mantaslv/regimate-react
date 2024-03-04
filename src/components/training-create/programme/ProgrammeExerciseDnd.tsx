@@ -55,7 +55,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 				isDragging: !!monitor.isDragging(),
 			});
 		},
-		end: (item, monitor) => {
+		end: (_, monitor) => {
 			const didDrop = monitor.didDrop();
 			if (didDrop) {
 				setElementHidden(true);
