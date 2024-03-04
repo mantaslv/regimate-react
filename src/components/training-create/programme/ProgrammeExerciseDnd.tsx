@@ -60,6 +60,9 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 			if (didDrop) {
 				setElementHidden(true);
 			}
+			setTimeout(() => {
+				setElementHidden(false);
+			}, 500); 
 		}
 	}), [dragItemWidth]);
 
