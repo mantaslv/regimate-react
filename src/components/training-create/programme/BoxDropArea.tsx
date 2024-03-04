@@ -29,9 +29,6 @@ const BoxDropArea: FC<BoxDropAreaProps> = ({
 	};
 
 	const placeholderBoxSx = { 
-		border: "3px dashed", 
-		borderColor: "grey.400",
-		borderRadius: "16px",
 		height: 50,
 		width: "100%",
 		mt: 1,
