@@ -7,7 +7,6 @@ interface DragItem {
     workoutId: string;
     exerciseId: string;
 	dragItemWidth: number;
-    // ... other properties that you might be passing
 }
 
   

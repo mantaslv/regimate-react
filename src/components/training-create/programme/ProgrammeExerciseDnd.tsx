@@ -30,7 +30,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
 	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
-	const [, setIsDraggedAway] = useState(false);
 	const [dragItemWidth, setDragItemWidth] = useState(0);
 	const innerBoxRef = useRef<HTMLDivElement>(null);
     
@@ -55,9 +54,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 			return ({
 				isDragging: !!monitor.isDragging(),
 			});
-		},
-		end: () => {
-			setIsDraggedAway(false);
 		},
 	}), [dragItemWidth]);
 
@@ -86,7 +82,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 					handleDropExercise={handleDropExercise} 
 					workoutId={workoutId}
 					exerciseId={exerciseId}
-					setIsDraggedAway={setIsDraggedAway}
 					isDragging={isDragging}
 				>
 					<Box sx={{ opacity: isDragging ? 0.4 : 1 }}>
