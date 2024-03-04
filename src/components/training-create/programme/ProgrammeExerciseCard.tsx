@@ -13,8 +13,6 @@ interface ProgrammeExerciseCardProps {
 	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	isExerciseSelectorOpen: boolean;
-	opacity?: number;
-	// isDragging: boolean;
 }
 
 const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
@@ -25,8 +23,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	handleExerciseNameChange,
 	handleDeleteExercise,
 	isExerciseSelectorOpen,
-	opacity,
-	// isDragging
 }) => {
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
@@ -39,7 +35,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	return (
 		<Box 
 			sx={{
-				// opacity: opacity,
 				cursor: "move",
 				borderRadius: "10px", 
 				backgroundColor: "white",
@@ -68,7 +63,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 							textAlign="left"
 							textTransform="none"
 							sx={{ 
-								// color: "white", 
 								width: "100%", 
 								"&:hover": { color: "grey.400" }
 							}}
@@ -81,7 +75,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					<IconButton 
 						onClick={handleDeleteExercise} 
 						sx={{ 
-							// color: "white", 
 							zIndex: 2 
 						}}
 					>
