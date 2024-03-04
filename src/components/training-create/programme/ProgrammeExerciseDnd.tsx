@@ -78,7 +78,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 				setIsDraggedAway={setIsDraggedAway}
 				isDragging={isDragging}
 			>
-				<Box>
+				<Box sx={{ opacity: isDragging ? 0.4 : 1 }}>
 					<ProgrammeExerciseCard {...exerciseCardProps} />
 				</Box>
 			</BoxDropArea>
