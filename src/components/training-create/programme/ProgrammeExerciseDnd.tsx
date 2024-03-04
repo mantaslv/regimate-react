@@ -1,7 +1,7 @@
 import ProgrammeExerciseCard from "./ProgrammeExerciseCard";
 import { useDrag } from "react-dnd";
 import { Box } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import BoxDropArea from "./BoxDropArea";
 import { DraggedExercise } from "../../../types";
@@ -30,16 +30,26 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
 	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
-	const [isDraggedAway, setIsDraggedAway] = useState(false);
+	const [, setIsDraggedAway] = useState(false);
+	const [dragItemWidth, setDragItemWidth] = useState(0);
+	const innerBoxRef = useRef<HTMLDivElement>(null);
     
 	useEffect(() => {
 		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
 	}, [state]);
 
+	useEffect(() => {
+		if (innerBoxRef.current) {
+			setDragItemWidth(innerBoxRef.current.getBoundingClientRect().width);
+			console.log(innerBoxRef.current.getBoundingClientRect().width);
+		}
+	}, []);
+
 	const [{ isDragging }, dragRef, preview] = useDrag(() => ({
 		type: "exercise",
+		canDrag: dragItemWidth > 0,
 		item: () => {
-			return { workoutId, exerciseId, exerciseIndex };
+			return { workoutId, exerciseId, exerciseIndex, dragItemWidth };
 		},
 		collect: (monitor) => {
 			return ({
@@ -49,7 +59,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 		end: () => {
 			setIsDraggedAway(false);
 		},
-	}));
+	}), [dragItemWidth]);
 
 	const emptyImage = new Image();
 
@@ -71,17 +81,19 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 
 	return (
 		<Box ref={dragRef} sx={{ width: "100%" }}>
-			<BoxDropArea 
-				handleDropExercise={handleDropExercise} 
-				workoutId={workoutId}
-				exerciseId={exerciseId}
-				setIsDraggedAway={setIsDraggedAway}
-				isDragging={isDragging}
-			>
-				<Box sx={{ opacity: isDragging ? 0.4 : 1 }}>
-					<ProgrammeExerciseCard {...exerciseCardProps} />
-				</Box>
-			</BoxDropArea>
+			<Box ref={innerBoxRef} sx={{ width: "100%" }}>
+				<BoxDropArea 
+					handleDropExercise={handleDropExercise} 
+					workoutId={workoutId}
+					exerciseId={exerciseId}
+					setIsDraggedAway={setIsDraggedAway}
+					isDragging={isDragging}
+				>
+					<Box sx={{ opacity: isDragging ? 0.4 : 1 }}>
+						<ProgrammeExerciseCard {...exerciseCardProps} />
+					</Box>
+				</BoxDropArea>
+			</Box>
 		</Box>
 	);
 };

@@ -6,6 +6,7 @@ import { usePreview } from "react-dnd-preview";
 interface DragItem {
     workoutId: string;
     exerciseId: string;
+	dragItemWidth: number;
     // ... other properties that you might be passing
 }
 
@@ -21,6 +22,8 @@ const ProgrammeExercisePreview = () => {
 	const { item, style } = preview;
 	const dragItem = item as DragItem;
 
+	console.log(item);
+
 	const simplifiedProps = {
 		workoutId: dragItem.workoutId,
 		exerciseId: dragItem.exerciseId,
@@ -33,7 +36,13 @@ const ProgrammeExercisePreview = () => {
 	};
 
 	return (
-		<div style={{ ...style, opacity: 1, pointerEvents: "none", zIndex: 10000 }}>
+		<div style={{ 
+			...style, 
+			opacity: 1, 
+			pointerEvents: "none", 
+			zIndex: 10000, 
+			width: dragItem.dragItemWidth 
+		}}>
 			<ProgrammeExerciseCard {...simplifiedProps} />
 		</div>
 	);
