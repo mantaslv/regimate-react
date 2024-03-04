@@ -78,7 +78,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 							zIndex: 2 
 						}}
 					>
-						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px" }}/>
+						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px", color: "#c6c6c6" }}/>
 					</IconButton>
 				</Box>
 			</Box>
