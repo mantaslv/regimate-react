@@ -40,7 +40,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	useEffect(() => {
 		if (innerBoxRef.current) {
 			setDragItemWidth(innerBoxRef.current.getBoundingClientRect().width);
-			console.log(innerBoxRef.current.getBoundingClientRect().width);
 		}
 	}, []);
 

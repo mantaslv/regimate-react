@@ -12,16 +12,11 @@ interface DragItem {
   
 const ProgrammeExercisePreview = () => {
 	const preview = usePreview();
-	console.log(preview);
 	
-	if (!preview.display) {
-		return <div/>;
-	}
+	if (!preview.display) return <div/>;
 
 	const { item, style } = preview;
 	const dragItem = item as DragItem;
-
-	console.log(item);
 
 	const simplifiedProps = {
 		workoutId: dragItem.workoutId,

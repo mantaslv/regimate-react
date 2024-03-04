@@ -12,7 +12,6 @@ import Programme from "./Programme";
 import Workout from "./Workout";
 import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 import ProgrammeExercisePreview from "./programme/ProgrammeExerciseCustomDragLayer";
-import { Preview } from "react-dnd-preview";
 
 interface TrainingEditorProps {
 	isWorkout?: boolean;
