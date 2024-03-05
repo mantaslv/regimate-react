@@ -15,13 +15,19 @@ interface EditTrainingToolbarProps {
 	handleNameInputChange: (event: { target: { value: string }; }) => void;
 	isWorkout: boolean;
 	trainingData: WorkoutType | ProgrammeType | null;
+	children: React.ReactNode;
+	open: boolean;
+	drawerWidth: number;
 }
 
 const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 	nameInputValue,
 	handleNameInputChange,
 	isWorkout=false,
-	trainingData
+	trainingData,
+	children,
+	open, 
+	drawerWidth
 }) => {
 	const { user } = useAuthContext();
 	const navigate = useNavigate();
@@ -59,11 +65,17 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 
 	return (
 		<AppBar 
-			position="fixed" 
+			position="absolute" 
 			sx={{ 
-				top: "45px", 
+				top: "45px",
+				ml: open ? `${drawerWidth}px` : 0,
 				height: "45px", 
 				backgroundColor: "#e1e1e1",
+				width: open ? `calc(100% - ${drawerWidth}px)` : "100%", // Adjust width
+				transition: (theme) => theme.transitions.create(["margin", "width"], {
+					easing: theme.transitions.easing.sharp,
+					duration: theme.transitions.duration.enteringScreen,
+				}),
 			}}
 		>
 			<Box 
@@ -76,6 +88,7 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 				}}
 			>
 				<Stack direction='row' gap={1}>
+					{children}
 					<Input
 						value={nameInputValue || ""}
 						aria-label="training-name-input"
