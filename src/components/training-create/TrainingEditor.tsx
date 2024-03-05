@@ -11,6 +11,7 @@ import fetchExercises from "../../utils/fetchExercises";
 import Programme from "./Programme";
 import Workout from "./Workout";
 import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
+import ProgrammeExercisePreview from "./programme/ProgrammeExerciseCustomDragLayer";
 
 interface TrainingEditorProps {
 	isWorkout?: boolean;
@@ -57,6 +58,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 			/>
 			<Box sx={{ my: "105px" }}>
 				<DndProvider backend={HTML5Backend}>
+					<ProgrammeExercisePreview />
 					{isWorkout 
 						? <Workout inWorkout dispatch={dispatch as React.Dispatch<WorkoutReducerAction>}/> 
 						: <Programme/>

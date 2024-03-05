@@ -1,7 +1,7 @@
 import ProgrammeExerciseCard from "./ProgrammeExerciseCard";
 import { useDrag } from "react-dnd";
 import { Box } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import BoxDropArea from "./BoxDropArea";
 import { DraggedExercise } from "../../../types";
@@ -30,22 +30,47 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
 	const [exerciseIndex, setExerciseIndex] = useState(workout?.exercises.findIndex(ex => ex.id === exerciseId));
-	const [isDraggedAway, setIsDraggedAway] = useState(false);
+	const [dragItemWidth, setDragItemWidth] = useState(0);
+	const innerBoxRef = useRef<HTMLDivElement>(null);
+	const [elementHidden, setElementHidden] = useState(false);
     
 	useEffect(() => {
 		setExerciseIndex(workout?.exercises.findIndex(ex => ex.id === exerciseId));
 	}, [state]);
 
-	const [{ isDragging }, dragRef] = useDrag(() => ({
+	useEffect(() => {
+		if (innerBoxRef.current) {
+			setDragItemWidth(innerBoxRef.current.getBoundingClientRect().width);
+		}
+	}, []);
+
+	const [{ isDragging }, dragRef, preview] = useDrag(() => ({
 		type: "exercise",
+		canDrag: dragItemWidth > 0,
 		item: () => {
-			return { workoutId, exerciseId, exerciseIndex };
+			return { workoutId, exerciseId, exerciseIndex, dragItemWidth };
 		},
-		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
-		}),
-		end: () => setIsDraggedAway(false),
-	}));
+		collect: (monitor) => {
+			return ({
+				isDragging: !!monitor.isDragging(),
+			});
+		},
+		end: (_, monitor) => {
+			const didDrop = monitor.didDrop();
+			if (didDrop) {
+				setElementHidden(true);
+			}
+			setTimeout(() => {
+				setElementHidden(false);
+			}, 500); 
+		}
+	}), [dragItemWidth]);
+
+	const emptyImage = new Image();
+
+	useEffect(() => {
+		preview(emptyImage, { captureDraggingState: true });
+	}, [preview]);
 
 	const exerciseCardProps = {
 		workoutId,
@@ -60,24 +85,22 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 	};
 
 	return (
-		<Box ref={dragRef} sx={{ width: "100%" }}>
-			<BoxDropArea 
-				handleDropExercise={handleDropExercise} 
-				workoutId={workoutId}
-				exerciseId={exerciseId}
-				setIsDraggedAway={setIsDraggedAway}
-				isDragging={isDragging}
-			>
-				<Box 
-					sx={{ ...(isDragging && isDraggedAway) && { 
-						visibility: "hidden",
-						height: 0,
-						my: -1,
-					}}}
+		<Box ref={dragRef} sx={{ width: "100%", visibility: elementHidden ? "hidden" : "visible" }}>
+			<Box ref={innerBoxRef} sx={{ width: "100%" }}>
+				<BoxDropArea 
+					handleDropExercise={handleDropExercise} 
+					workoutId={workoutId}
+					exerciseId={exerciseId}
+					isDragging={isDragging}
 				>
-					<ProgrammeExerciseCard {...exerciseCardProps} />
-				</Box>
-			</BoxDropArea>
+					<Box sx={{
+						transition: "opacity 0.5s ease-in-out",
+						opacity: isDragging ? 0.5 : 1,
+					}}>
+						<ProgrammeExerciseCard {...exerciseCardProps} />
+					</Box>
+				</BoxDropArea>
+			</Box>
 		</Box>
 	);
 };

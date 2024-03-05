@@ -63,7 +63,7 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 			sx={{ 
 				top: "45px", 
 				height: "45px", 
-				backgroundColor: "#EBEEFE",
+				backgroundColor: "#e1e1e1",
 			}}
 		>
 			<Box 

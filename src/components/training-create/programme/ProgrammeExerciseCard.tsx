@@ -13,7 +13,6 @@ interface ProgrammeExerciseCardProps {
 	handleExerciseNameChange: (newName: string) => void;
 	handleDeleteExercise: () => void;
 	isExerciseSelectorOpen: boolean;
-	// isDragging: boolean;
 }
 
 const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
@@ -24,7 +23,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	handleExerciseNameChange,
 	handleDeleteExercise,
 	isExerciseSelectorOpen,
-	// isDragging
 }) => {
 	const { state } = useProgrammeContext();
 	const workout = state.workouts.find((wo) => wo.id === workoutId);
@@ -37,12 +35,13 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	return (
 		<Box 
 			sx={{
-				// opacity: isDragging ? 0.9 : 1, 
 				cursor: "move",
 				borderRadius: "10px", 
-				backgroundColor: "#6366F1", 
+				backgroundColor: "white",
+				border: "1px solid #f0f0f0", 
 				width: "100%", 
-				mt: 1
+				mt: 1, 
+				boxShadow: 3,
 			}}
 		>
 			<Box sx={{ display: "flex" }}>
@@ -64,7 +63,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 							textAlign="left"
 							textTransform="none"
 							sx={{ 
-								color: "white", 
 								width: "100%", 
 								"&:hover": { color: "grey.400" }
 							}}
@@ -74,8 +72,13 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					</Button>
 				</Box>
 				<Box sx={{ display: "flex", alignItems: "flex-start" }}>
-					<IconButton onClick={handleDeleteExercise} sx={{ color: "white", zIndex: 2 }}>
-						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px" }}/>
+					<IconButton 
+						onClick={handleDeleteExercise} 
+						sx={{ 
+							zIndex: 2 
+						}}
+					>
+						<RemoveCircleIcon sx={{ m: -0.5, fontSize: "17px", color: "#c6c6c6" }}/>
 					</IconButton>
 				</Box>
 			</Box>
@@ -83,7 +86,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 				display: "flex", 
 				justifyContent: "flex-end", 
 				alignItems: "center", 
-				mt: -1.5 
+				mt: -1
 			}}>
 				<SetsRepsInput 
 					key={exerciseId} 
