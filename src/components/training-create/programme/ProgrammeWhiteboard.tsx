@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 import Workout from "../Workout";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
@@ -13,25 +13,25 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 	const { state, dispatch } = useProgrammeContext();
 
 	return (
-		<Grid container 
+		<Box
 			display="flex" 
 			justifyContent="flex-start" 
-			spacing={2} 
+			gap={2} 
 			alignItems="flex-start" 
 			sx={{ mt: 1, mb: 2, ml: 1 }}
 		>
 			{state.workouts.map((workout, i) => (
-				<Grid item key={workout.id} sx={{ pr: 2, width: "220px" }}>
+				<Box key={workout.id} sx={{ pr: 2, width: "220px" }}>
 					<Workout 
 						inWorkout={false} 
 						index={i} 
 						workoutId={workout.id} 
 						dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}
 					/>
-				</Grid>
+				</Box>
 			))}
-			{state.workouts.length < 6 && (
-				<Grid item>
+			{state.workouts.length < 7 && (
+				<Box>
 					<AddTrainingItemButton 
 						onClick={handleAddWorkout} 
 						sx={{
@@ -40,9 +40,9 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 							maxWidth: "10px"
 						}}
 					/>
-				</Grid>
+				</Box>
 			)}
-		</Grid>
+		</Box>
 	);
 };
 
