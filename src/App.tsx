@@ -20,7 +20,7 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
 				<Navbar />
-				<Box sx={{ mx: 2, mt: 7 }}>
+				<Box>
 					<Routes>
 						{/* <Route path='/' element={user ? <Home /> : <Navigate to="/login" />} /> */}
 						<Route path='/' element={user ? <Navigate to="/view-programmes" /> : <Navigate to="/create-programme" />} />

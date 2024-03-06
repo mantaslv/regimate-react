@@ -15,21 +15,13 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 	return (
 		<Grid container 
 			display="flex" 
-			justifyContent="center" 
+			justifyContent="flex-start" 
 			spacing={2} 
-			alignItems="top" 
-			sx={{ mt: 2, mb: 2 }}
+			alignItems="flex-start" 
+			sx={{ mt: 1, mb: 2, ml: 1 }}
 		>
 			{state.workouts.map((workout, i) => (
-				<Grid item key={workout.id} md={2} 
-					sx={{ 
-						pr: 2, 
-						// ...(i !== state.workouts.length - 1 && { 
-						// 	borderRight: "3px dashed",
-						// 	borderColor: "grey.400"
-						// })
-					}}
-				>
+				<Grid item key={workout.id} sx={{ pr: 2, width: "220px" }}>
 					<Workout 
 						inWorkout={false} 
 						index={i} 
@@ -42,7 +34,7 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 				<Grid item>
 					<AddTrainingItemButton 
 						onClick={handleAddWorkout} 
-						sx={{ 
+						sx={{
 							m: -1,
 							height: "100%",
 							maxWidth: "10px"

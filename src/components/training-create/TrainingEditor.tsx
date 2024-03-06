@@ -62,7 +62,11 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 			<DndProvider backend={HTML5Backend}>
 				<PersistentDrawerLeft open={open} drawerWidth={drawerWidth}/>
 				<ProgrammeExercisePreview/>
-				<Box sx={{ flexGrow: 1, p: 3, ml: open ? `${drawerWidth}px` : 0 }}>	
+				<Box sx={{ 
+					// flexGrow: 1, 
+					// p: 1, 
+					// ml: !open ? `-${drawerWidth}px` : 0 
+				}}>	
 					<EditTrainingToolbar
 						nameInputValue={trainingName}
 						handleNameInputChange={handleTrainingNameChange}
@@ -81,7 +85,13 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 							<MenuIcon />
 						</IconButton>
 					</EditTrainingToolbar>
-					<Box sx={{ my: "105px" }}>
+					<Box sx={{ 
+						flexGrow: 1,
+						p: 1,
+						mt: "105px",
+						ml: !open ? `-${drawerWidth}px` : 0 ,
+						
+					}}>
 						{isWorkout 
 							? <Workout inWorkout dispatch={dispatch as React.Dispatch<WorkoutReducerAction>}/> 
 							: <Programme/>

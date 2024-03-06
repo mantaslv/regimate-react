@@ -65,10 +65,10 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 
 	return (
 		<AppBar 
-			position="absolute" 
+			position="fixed" 
 			sx={{ 
 				top: "45px",
-				ml: open ? `${drawerWidth}px` : 0,
+				// ml: open ? `${drawerWidth}px` : 0,
 				height: "45px", 
 				backgroundColor: "#e1e1e1",
 				width: open ? `calc(100% - ${drawerWidth}px)` : "100%", // Adjust width
