@@ -81,22 +81,26 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 			<Box 
 				sx={{ 
 					height: "45px", 
-					mx: 3, 
+					mr: 2, 
 					display: "flex", 
 					justifyContent: "space-between", 
 					alignItems: "center" 
 				}}
 			>
-				<Stack direction='row' gap={1}>
-					{children}
+				<Stack direction='row' gap={1} sx={{ height: "100%", borderRight: "1px solid #dcdcdc" }}>
+					<Box sx={{ borderRight: "1px solid #dcdcdc" }}>
+						{children}
+					</Box>
 					<Input
 						value={nameInputValue || ""}
+						disableUnderline
 						aria-label="training-name-input"
 						size="small"
 						onChange={handleNameInputChange}
+						sx={{ width: drawerWidth }}
 					/>
 				</Stack>
-				<ButtonGroup sx={{ height: "32px" }}>
+				<ButtonGroup sx={{ height: "100%" }}>
 					{user && (
 						<Button 
 							onClick={saveTrainingData}
