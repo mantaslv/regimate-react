@@ -12,7 +12,7 @@ import Programme from "./Programme";
 import Workout from "./Workout";
 import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
-import PersistentDrawerLeft from "./exercise-selector/ExerciseSelectorSidebar";
+import PersistentDrawerLeft from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
 
 interface TrainingEditorProps {
@@ -24,7 +24,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 	const [trainingName, setTrainingName] = useState(`Untitled ${isWorkout ? "Workout" : "Programme"}`);
 	const [trainingData, setTrainingData] = useState<ProgrammeType | WorkoutType | null>(null);
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(true);
 
 	const location = useLocation();
 	const initialData = location.state || null;
@@ -58,15 +58,15 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	const drawerWidth = 240;
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box sx={{ 
+			display: "flex", 
+			height: "100vh", 
+			width: "100vh" 
+		}}>
 			<DndProvider backend={HTML5Backend}>
 				<PersistentDrawerLeft open={open} drawerWidth={drawerWidth}/>
 				<ProgrammeExercisePreview/>
-				<Box sx={{ 
-					// flexGrow: 1, 
-					// p: 1, 
-					// ml: !open ? `-${drawerWidth}px` : 0 
-				}}>	
+				<Box>
 					<EditTrainingToolbar
 						nameInputValue={trainingName}
 						handleNameInputChange={handleTrainingNameChange}
@@ -89,9 +89,12 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 						component="main"
 						sx={{ 
 							flexGrow: 1,
-							p: 0,
 							mt: "90px",
 							ml: !open ? `-${drawerWidth}px` : 0,
+							height: "calc(100vh - 90px)",
+							width: open ? `calc(100vw - ${drawerWidth}px)` : "100vw",
+							position: "relative",
+							overflow: "auto",
 							transition: (theme) => theme.transitions.create(["margin", "width"], {
 								easing: theme.transitions.easing.sharp,
 								duration: theme.transitions.duration.enteringScreen,
