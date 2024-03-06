@@ -15,6 +15,7 @@ import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
 import PersistentDrawerLeft from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
+import SquareIconButton from "../styled-components/SquareIconButton";
 
 interface TrainingEditorProps {
 	isWorkout?: boolean;
@@ -57,22 +58,6 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	};
 
 	const drawerWidth = 280;
-	
-	const SquareIconButton = styled(IconButton)({
-		borderRadius: 0,
-		"&:hover": {
-			borderRadius: 0,
-		},
-		"&.Mui-focusVisible": {
-			borderRadius: 0,
-		},
-		"& .MuiTouchRipple-root": {
-			borderRadius: 0,
-			"& span": {
-				borderRadius: 0,
-			},
-		},
-	});
 
 	return (
 		<Box sx={{ 
