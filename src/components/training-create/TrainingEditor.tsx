@@ -14,6 +14,7 @@ import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
 import PersistentDrawerLeft from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import styled from "@emotion/styled";
 
 interface TrainingEditorProps {
 	isWorkout?: boolean;
@@ -56,6 +57,22 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	};
 
 	const drawerWidth = 280;
+	
+	const SquareIconButton = styled(IconButton)({
+		borderRadius: 0,
+		"&:hover": {
+			borderRadius: 0,
+		},
+		"&.Mui-focusVisible": {
+			borderRadius: 0,
+		},
+		"& .MuiTouchRipple-root": {
+			borderRadius: 0,
+			"& span": {
+				borderRadius: 0,
+			},
+		},
+	});
 
 	return (
 		<Box sx={{ 
@@ -75,14 +92,16 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 						open={open}
 						drawerWidth={drawerWidth}
 					>
-						<IconButton
+						<SquareIconButton
 							aria-label="open drawer"
 							onClick={handleShowDrawer}
-							edge="start"
-							sx={{ mr: 2 }}
+							sx={{
+								width: "100%",
+								height: "100%",
+							}}
 						>
 							<MenuIcon />
-						</IconButton>
+						</SquareIconButton>
 					</EditTrainingToolbar>
 					<Box 
 						component="main"
