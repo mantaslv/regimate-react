@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogContent, DialogTitle, Input, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
+import { Box,  Input, Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
