@@ -18,9 +18,11 @@ const Navbar: FC = () => {
 	return (
 		<header>
 			<AppBar position="fixed" elevation={0} sx={{ height: "45px" }}>
-				<Box sx={{ display: "flex", mx: 2 }}>
-					<Box sx={{ p: 1, display: "flex", flexGrow: 1 }}>
-						<Logo/>
+				<Box sx={{ display: "flex", mr: 2 }}>
+					<Box sx={{ display: "flex", flexGrow: 1 }}>
+						<Box sx={{ display: "flex", justifyContent: "center" ,width: "280px" }}>
+							<Logo/>
+						</Box>
 					</Box>
 					<Stack direction='row' gap={0.5} >
 						{items
