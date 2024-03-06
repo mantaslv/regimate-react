@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
 import { Button, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
-import ExerciseSelector from "../ExerciseSelector";
+import ExerciseSelector from "../exercise-selector/ExerciseSelector";
 import Set from "../Set";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 

@@ -3,7 +3,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import SetsRepsInput from "./SetsRepsInput";
-import ExerciseSelector from "../ExerciseSelector";
+import ExerciseSelector from "../exercise-selector/ExerciseSelector";
 
 interface ProgrammeExerciseCardProps {
 	workoutId: string;

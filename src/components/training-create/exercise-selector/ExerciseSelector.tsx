@@ -1,8 +1,8 @@
 import { Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
-import { useProgrammeContext } from "../../hooks/useProgrammeContext";
-import { useWorkoutContext } from "../../hooks/useWorkoutContext";
-import { ExerciseListObjectType } from "../../types";
+import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
+import { ExerciseListObjectType } from "../../../types";
 
 interface ExerciseSelectorProps {
 	isExerciseSelectorOpen: boolean;

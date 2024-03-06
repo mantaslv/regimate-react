@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Box, Button, Grid } from "@mui/material";
 import Exercise from "../Exercise";
-import ExerciseSelector from "../ExerciseSelector";
+import ExerciseSelector from "../exercise-selector/ExerciseSelector";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 import { WorkoutReducerAction } from "../../../types";
 

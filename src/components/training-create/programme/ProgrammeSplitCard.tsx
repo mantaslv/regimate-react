@@ -2,7 +2,7 @@ import { Box, Button, Grid, IconButton, Input, Typography } from "@mui/material"
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import Exercise from "../Exercise";
 import ConsoleLogButton from "../../styled-components/ConsoleLogButton";
-import ExerciseSelector from "../ExerciseSelector";
+import ExerciseSelector from "../exercise-selector/ExerciseSelector";
 import AddTrainingItemButton from "../../styled-components/AddTrainingItemButton";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";

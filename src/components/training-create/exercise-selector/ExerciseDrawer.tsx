@@ -3,8 +3,8 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
+import ExerciseSelector from "./ExerciseSelectorNew";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
@@ -45,6 +45,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 						Exercise Drawer
 					</Typography>
 				</DrawerHeader>
+				<ExerciseSelector/>
 			</Drawer>
 		</Box>
 	);
