@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 
-const SquareIconButton = styled(IconButton)({
+const style = {
 	borderRadius: 0,
 	"&:hover": {
 		borderRadius: 0,
@@ -15,6 +15,8 @@ const SquareIconButton = styled(IconButton)({
 			borderRadius: 0,
 		},
 	},
-});
+};
 
-export default SquareIconButton;
+export const SquareIconButton = styled(IconButton)(style);
+
+export const SquareButton = styled(Button)(style);

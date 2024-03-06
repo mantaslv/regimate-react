@@ -9,7 +9,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import SaveIcon from "@mui/icons-material/Save";
 import { Stack } from "@mui/system";
 import { ProgrammeType, WorkoutType } from "../../types";
-import SquareIconButton from "../styled-components/SquareIconButton";
+import { SquareIconButton } from "../styled-components/SquareButtons";
 
 interface EditTrainingToolbarProps {
 	nameInputValue: string;
@@ -93,16 +93,17 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 					<Box sx={{ borderRight: "1px solid #dcdcdc" }}>
 						{children}
 					</Box>
+					
+				</Stack>
+				<Stack direction='row' sx={{ height: "100%" }}>
 					<Input
 						value={nameInputValue || ""}
 						disableUnderline
 						aria-label="training-name-input"
 						size="small"
 						onChange={handleNameInputChange}
-						sx={{ p: 1, width: drawerWidth }}
+						sx={{ p: 1, width: drawerWidth, borderLeft: "1px solid #dcdcdc" }}
 					/>
-				</Stack>
-				<Stack direction='row' sx={{ height: "100%" }}>
 					{!isWorkout && 
 						<SquareIconButton
 							onClick={saveTrainingData}

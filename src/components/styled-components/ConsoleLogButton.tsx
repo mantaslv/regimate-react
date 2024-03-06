@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Button, ButtonProps } from "@mui/material";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import { AllTrainingTypes } from "../../types";
-import SquareIconButton from "./SquareIconButton";
+import { SquareIconButton } from "./SquareButtons";
 
 interface ConsoleLogButtonProps {
 	print: AllTrainingTypes;

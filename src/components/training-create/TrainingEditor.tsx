@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { Dispatch, FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, IconButton } from "@mui/material";
 import { DndProvider } from "react-dnd";
@@ -10,12 +10,12 @@ import EditTrainingToolbar from "./EditTrainingToolbar";
 import fetchExercises from "../../utils/fetchExercises";
 import Programme from "./Programme";
 import Workout from "./Workout";
-import { ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
+import { ProgrammeReducerAction, ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
 import PersistentDrawerLeft from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
-import SquareIconButton from "../styled-components/SquareIconButton";
+import { SquareButton, SquareIconButton } from "../styled-components/SquareButtons";
 
 interface TrainingEditorProps {
 	isWorkout?: boolean;
@@ -57,6 +57,12 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 		dispatch({ type: "UPDATE_TRAINING_NAME", payload: event.target.value });
 	};
 
+	const handleAddWorkout = () => {
+		if (!isWorkout) {
+			(dispatch as Dispatch<ProgrammeReducerAction>)({ type: "ADD_WORKOUT" });
+		}
+	};
+
 	const drawerWidth = 280;
 
 	return (
@@ -83,10 +89,14 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 							sx={{
 								width: "45px",
 								height: "100%",
+								borderRight: "1px solid #dcdcdc"
 							}}
 						>
 							<MenuIcon />
 						</SquareIconButton>
+						<SquareButton onClick={handleAddWorkout}>
+							Add Workout
+						</SquareButton>
 					</EditTrainingToolbar>
 					<Box 
 						component="main"

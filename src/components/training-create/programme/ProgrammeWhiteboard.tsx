@@ -30,7 +30,7 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 					/>
 				</Box>
 			))}
-			{state.workouts.length < 7 && (
+			{/* {state.workouts.length < 7 && (
 				<Box>
 					<AddTrainingItemButton 
 						onClick={handleAddWorkout} 
@@ -41,7 +41,7 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 						}}
 					/>
 				</Box>
-			)}
+			)} */}
 		</Box>
 	);
 };
