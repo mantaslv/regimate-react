@@ -76,7 +76,6 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 						drawerWidth={drawerWidth}
 					>
 						<IconButton
-							color="inherit"
 							aria-label="open drawer"
 							onClick={handleShowDrawer}
 							edge="start"

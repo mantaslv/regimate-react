@@ -4,13 +4,14 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
+import { Typography } from "@mui/material";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	padding: theme.spacing(0, 1),
 	...theme.mixins.toolbar,
-	justifyContent: "flex-end",
+	justifyContent: "center",
 }));
 
 interface ExerciseDrawerProps {
@@ -24,7 +25,6 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 			<CssBaseline />
 			<Drawer
 				sx={{
-					backgroundColor: "#f7f7f7",
 					width: drawerWidth,
 					flexShrink: 0,
 					"& .MuiDrawer-paper": {
@@ -32,16 +32,19 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 						backgroundColor: "#f7f7f7",
 						mt: "45px",
 						boxSizing: "border-box",
+						borderRight: "1px solid #dcdcdc", 
+						boxShadow: "inset -5px 0 15px #0000000d"
 					},
 				}}
 				variant="persistent"
 				anchor="left"
 				open={open}
 			>
-				<DrawerHeader>
-					
+				<DrawerHeader sx={{ "&": { borderBottom: "1px solid #dcdcdc", minHeight: "45px" }, height: "45px" }}>
+					<Typography variant="h6" sx={{ color: "#808080" }}>
+						Exercise Drawer
+					</Typography>
 				</DrawerHeader>
-				<Divider />
 			</Drawer>
 		</Box>
 	);
