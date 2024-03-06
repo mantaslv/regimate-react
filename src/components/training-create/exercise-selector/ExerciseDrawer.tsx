@@ -40,7 +40,13 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 				anchor="left"
 				open={open}
 			>
-				<DrawerHeader sx={{ "&": { borderBottom: "1px solid #dcdcdc", minHeight: "45px" }, height: "45px" }}>
+				<DrawerHeader sx={{ 
+					"&": { 
+						borderBottom: "1px solid #dcdcdc", 
+						minHeight: "45px" 
+					}, 
+					height: "45px" 
+				}}>
 					<Typography variant="h6" sx={{ color: "#808080" }}>
 						Exercise Drawer
 					</Typography>

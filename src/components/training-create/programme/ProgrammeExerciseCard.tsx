@@ -33,17 +33,15 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	}, [state]);
 
 	return (
-		<Box 
-			sx={{
-				cursor: "move",
-				borderRadius: "10px", 
-				backgroundColor: "white",
-				border: "1px solid #f0f0f0", 
-				width: "100%", 
-				mt: 1, 
-				boxShadow: 3,
-			}}
-		>
+		<Box sx={{
+			cursor: "move",
+			borderRadius: "10px", 
+			backgroundColor: "white",
+			border: "1px solid #f0f0f0", 
+			width: "100%", 
+			mt: 1, 
+			boxShadow: 3,
+		}}>
 			<Box sx={{ display: "flex" }}>
 				<Box sx={{ display: "flex", flexGrow: 1 }}>
 					<Button 

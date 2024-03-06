@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogContent, DialogTitle, List, ListItemButton, ListItemText, TextField } from "@mui/material";
+import { Box, Dialog, DialogContent, DialogTitle, Input, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
@@ -54,27 +54,65 @@ const ExerciseSelector = () => {
 		setSearchTerm(event.target.value);
 	};
 
-	const handleCloseDialog = () => {
-		// onOpenDialog(false);
-	};
-
-	const handleExerciseSelection = (exerciseName: string) => {
-		handleCloseDialog();
-		// onExerciseSelection(exerciseName);
-	};
-
 	return(
 		<Box>
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<TextField label="Search" value={searchTerm} onChange={handleSearchChange} sx={{ mt: 1 }}/>
+				<Input 
+					placeholder="Search" 
+					disableUnderline
+					value={searchTerm} 
+					onChange={handleSearchChange} 
+					sx={{ 
+						p: 1,
+						width: "100%",
+						borderBottom: "1px solid #dcdcdc", 
+					}}
+				/>
 			</Box>
-			<List>
+			<Box sx={{ 
+				maxHeight: "calc(100vh - 120px)",
+				overflowY: "auto",
+				display: "flex", 
+				flexDirection: "column",
+				alignItems: "center"
+			}}>
 				{filteredExercises?.map((exercise, i) => 
-					<ListItemButton key={i} onClick={() => handleExerciseSelection(exercise.name)}>
-						<ListItemText primary={exercise.name}/>
-					</ListItemButton>
+					<Box key={i} sx={{
+						cursor: "move",
+						borderRadius: "10px", 
+						backgroundColor: "white",
+						border: "1px solid #f0f0f0", 
+						width: "240px",
+						// minHeight: "40px", 
+						mt: 1, 
+						boxShadow: 3,
+					}}>
+						<Box sx={{ display: "flex", flexGrow: 1 }}>
+							<Box 
+								sx={{ 
+									minWidth: 0, 
+									borderRadius: "10px", 
+									px: 1,  
+									mx: 0.5,
+									my: 1,
+									zIndex: 2
+								}}
+							>
+								<Typography 
+									variant="h6" 
+									fontSize={13}
+									fontWeight={600}
+									textAlign="left"
+									textTransform="none"
+									sx={{ color: "#4cb88a" }}
+								>
+									{exercise.name}
+								</Typography>
+							</Box>
+						</Box>
+					</Box>
 				)}
-			</List>
+			</Box>
 		</Box>
 	);
 };
