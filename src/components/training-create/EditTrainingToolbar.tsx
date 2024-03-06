@@ -9,6 +9,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import SaveIcon from "@mui/icons-material/Save";
 import { Stack } from "@mui/system";
 import { ProgrammeType, WorkoutType } from "../../types";
+import SquareIconButton from "../styled-components/SquareIconButton";
 
 interface EditTrainingToolbarProps {
 	nameInputValue: string;
@@ -63,6 +64,8 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 		}
 	};
 
+	const rightBtnSx = { height: "100%", borderLeft: "1px solid #dcdcdc", width: "45px" };
+
 	return (
 		<AppBar 
 			position="fixed" 
@@ -81,13 +84,12 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 			<Box 
 				sx={{ 
 					height: "45px", 
-					mr: 2, 
 					display: "flex", 
 					justifyContent: "space-between", 
 					alignItems: "center" 
 				}}
 			>
-				<Stack direction='row' gap={1} sx={{ height: "100%", borderRight: "1px solid #dcdcdc" }}>
+				<Stack direction='row' sx={{ height: "100%" }}>
 					<Box sx={{ borderRight: "1px solid #dcdcdc" }}>
 						{children}
 					</Box>
@@ -97,10 +99,36 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 						aria-label="training-name-input"
 						size="small"
 						onChange={handleNameInputChange}
-						sx={{ width: drawerWidth }}
+						sx={{ p: 1, width: drawerWidth }}
 					/>
 				</Stack>
-				<ButtonGroup sx={{ height: "100%" }}>
+				<Stack direction='row' sx={{ height: "100%" }}>
+					{!isWorkout && 
+						<SquareIconButton
+							onClick={saveTrainingData}
+							title={`Save ${trainingDataType}`}
+							sx={rightBtnSx}
+						>
+							<SaveIcon/>
+						</SquareIconButton>
+					}
+					{!isWorkout &&
+						<SquareIconButton
+							onClick={() => downloadProgramme(trainingData as ProgrammeType)}
+							title={`Download ${trainingDataType}`}
+							sx={rightBtnSx}
+						>
+							<DownloadIcon/>
+						</SquareIconButton>
+					}
+					<ConsoleLogButton 
+						print={trainingData}
+						variant="outlined"
+						info={trainingDataType}
+						sx={rightBtnSx}
+					/>
+				</Stack>
+				{/* <ButtonGroup sx={{ height: "100%" }}>
 					{user && (
 						<Button 
 							onClick={saveTrainingData}
@@ -120,7 +148,7 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 						variant="outlined"
 						info={trainingDataType}
 					/>
-				</ButtonGroup>
+				</ButtonGroup> */}
 			</Box>
 		</AppBar>
 	);

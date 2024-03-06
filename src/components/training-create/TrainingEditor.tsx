@@ -81,7 +81,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 							aria-label="open drawer"
 							onClick={handleShowDrawer}
 							sx={{
-								width: "100%",
+								width: "45px",
 								height: "100%",
 							}}
 						>
