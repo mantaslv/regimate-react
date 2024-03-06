@@ -100,9 +100,6 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 						{isOver && canDrop && (
 							<Box 
 								sx={{ 
-									border: "3px dashed", 
-									borderColor: "grey.400",
-									borderRadius: "16px",
 									height: 50,
 									width: "100%",
 									mt: 1
