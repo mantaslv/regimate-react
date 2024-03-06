@@ -13,13 +13,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	justifyContent: "flex-end",
 }));
 
-interface ExercisesSelectorSidebarProps {
+interface ExerciseDrawerProps {
     open: boolean;
     drawerWidth: number;
 }
 
-const PersistentDrawerLeft: FC<ExercisesSelectorSidebarProps> = ({ open, drawerWidth }) => {
-
+const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -46,4 +45,4 @@ const PersistentDrawerLeft: FC<ExercisesSelectorSidebarProps> = ({ open, drawerW
 	);
 };
 
-export default PersistentDrawerLeft;
+export default ExerciseDrawer;
