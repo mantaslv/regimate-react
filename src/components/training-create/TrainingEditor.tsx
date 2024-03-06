@@ -12,7 +12,7 @@ import Programme from "./Programme";
 import Workout from "./Workout";
 import { ProgrammeReducerAction, ProgrammeType, WorkoutReducerAction, WorkoutType } from "../../types";
 import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
-import PersistentDrawerLeft from "./exercise-selector/ExerciseDrawer";
+import ExerciseDrawer from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
 import { SquareButton, SquareIconButton } from "../styled-components/SquareButtons";
@@ -72,7 +72,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 			width: "100vh" 
 		}}>
 			<DndProvider backend={HTML5Backend}>
-				<PersistentDrawerLeft open={open} drawerWidth={drawerWidth}/>
+				<ExerciseDrawer open={open} drawerWidth={drawerWidth} inWorkout={isWorkout}/>
 				<ProgrammeExercisePreview/>
 				<Box>
 					<EditTrainingToolbar

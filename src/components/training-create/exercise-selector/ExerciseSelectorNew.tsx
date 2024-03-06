@@ -4,22 +4,22 @@ import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import { useWorkoutContext } from "../../../hooks/useWorkoutContext";
 import { ExerciseListObjectType } from "../../../types";
 
-// interface ExerciseSelectorProps {
-// 	isExerciseSelectorOpen: boolean;
-// 	onOpenDialog: (value: boolean) => void;
-// 	onExerciseSelection: (exerciseName: string) => void;
-// 	inWorkout?: boolean;
-// }
+interface ExerciseSelectorProps {
+	// isExerciseSelectorOpen: boolean;
+	// onOpenDialog: (value: boolean) => void;
+	// onExerciseSelection: (exerciseName: string) => void;
+	inWorkout?: boolean;
+}
 
-// const ExerciseSelector: FC<ExerciseSelectorProps> = ({ 
-// 	isExerciseSelectorOpen, 
-// 	onOpenDialog, 
-// 	onExerciseSelection, 
-// 	inWorkout=false
-// }) => {
-const ExerciseSelector = () => {
-	// const { state } = inWorkout ? useWorkoutContext() : useProgrammeContext();
-	const { state } = useProgrammeContext();
+const ExerciseSelector: FC<ExerciseSelectorProps> = ({ 
+	// isExerciseSelectorOpen, 
+	// onOpenDialog, 
+	// onExerciseSelection, 
+	inWorkout=false
+}) => {
+// const ExerciseSelector = () => {
+	const { state } = inWorkout ? useWorkoutContext() : useProgrammeContext();
+	// const { state } = useProgrammeContext();
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [exerciseList, setExerciseList] = useState<ExerciseListObjectType[]>([]);
 

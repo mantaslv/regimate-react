@@ -17,9 +17,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 interface ExerciseDrawerProps {
     open: boolean;
     drawerWidth: number;
+	inWorkout: boolean;
 }
 
-const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
+const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth, inWorkout }) => {
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -51,7 +52,7 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 						Exercise Drawer
 					</Typography>
 				</DrawerHeader>
-				<ExerciseSelector/>
+				<ExerciseSelector inWorkout={inWorkout}/>
 			</Drawer>
 		</Box>
 	);
