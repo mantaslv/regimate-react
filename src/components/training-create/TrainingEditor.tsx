@@ -55,7 +55,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 		dispatch({ type: "UPDATE_TRAINING_NAME", payload: event.target.value });
 	};
 
-	const drawerWidth = 240;
+	const drawerWidth = 280;
 
 	return (
 		<Box sx={{ 

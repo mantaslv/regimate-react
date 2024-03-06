@@ -68,10 +68,9 @@ const EditTrainingToolbar: FC<EditTrainingToolbarProps> = ({
 			position="fixed" 
 			sx={{ 
 				top: "45px",
-				// ml: open ? `${drawerWidth}px` : 0,
 				height: "45px", 
 				backgroundColor: "#e1e1e1",
-				width: open ? `calc(100% - ${drawerWidth}px)` : "100%", // Adjust width
+				width: open ? `calc(100% - ${drawerWidth}px)` : "100%",
 				transition: (theme) => theme.transitions.create(["margin", "width"], {
 					easing: theme.transitions.easing.sharp,
 					duration: theme.transitions.duration.enteringScreen,

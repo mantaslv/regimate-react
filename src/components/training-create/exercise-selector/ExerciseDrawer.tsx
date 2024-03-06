@@ -24,10 +24,12 @@ const ExerciseDrawer: FC<ExerciseDrawerProps> = ({ open, drawerWidth }) => {
 			<CssBaseline />
 			<Drawer
 				sx={{
+					backgroundColor: "#f7f7f7",
 					width: drawerWidth,
 					flexShrink: 0,
 					"& .MuiDrawer-paper": {
 						width: drawerWidth,
+						backgroundColor: "#f7f7f7",
 						mt: "45px",
 						boxSizing: "border-box",
 					},
