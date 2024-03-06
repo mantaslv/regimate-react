@@ -26,7 +26,7 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 	const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 	const [trainingName, setTrainingName] = useState(`Untitled ${isWorkout ? "Workout" : "Programme"}`);
 	const [trainingData, setTrainingData] = useState<ProgrammeType | WorkoutType | null>(null);
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = React.useState(false);
 
 	const location = useLocation();
 	const initialData = location.state || null;
