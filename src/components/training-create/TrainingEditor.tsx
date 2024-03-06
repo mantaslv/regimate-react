@@ -87,8 +87,8 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 					</EditTrainingToolbar>
 					<Box sx={{ 
 						flexGrow: 1,
-						p: 1,
-						mt: "105px",
+						p: 0,
+						mt: "90px",
 						ml: !open ? `-${drawerWidth}px` : 0 ,
 						transition: (theme) => theme.transitions.create(["margin", "width"], {
 							easing: theme.transitions.easing.sharp,
