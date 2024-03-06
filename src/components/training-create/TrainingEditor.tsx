@@ -90,7 +90,10 @@ const TrainingEditor: FC<TrainingEditorProps> = ({ isWorkout=false }) => {
 						p: 1,
 						mt: "105px",
 						ml: !open ? `-${drawerWidth}px` : 0 ,
-						
+						transition: (theme) => theme.transitions.create(["margin", "width"], {
+							easing: theme.transitions.easing.sharp,
+							duration: theme.transitions.duration.enteringScreen,
+						}),
 					}}>
 						{isWorkout 
 							? <Workout inWorkout dispatch={dispatch as React.Dispatch<WorkoutReducerAction>}/> 
