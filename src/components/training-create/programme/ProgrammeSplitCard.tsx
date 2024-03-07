@@ -26,7 +26,6 @@ interface ProgrammeSplitCardProps {
 const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 	index,
 	workoutId,
-	isExerciseSelectorOpen,
 	handleWorkoutNameChange,
 	handleDeleteWorkout,
 	handleDropExercise,
@@ -63,7 +62,8 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 			sx={{
 				display: "flex",
 				flexDirection: "column", 
-				alignItems: "center"
+				alignItems: "center",
+				flexGrow: 1,
 			}}
 		>
 			<Box sx={{ 
@@ -81,41 +81,20 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 				</IconButton>
 			</Box>
 			<Input
-				// disableUnderline
 				placeholder="workout name"
 				value={workout?.workoutName}
 				onChange={handleWorkoutNameChange}
-				// sx={{
-				// 	width: "70%",
-				// 	borderRadius: "10px",
-				// 	border: "2px solid",
-				// 	borderColor: "grey.300",
-				// 	"& input": { textAlign: "center" },
-				// 	"&:hover": { backgroundColor: "#e6f2f1" },
-				// }}
+				sx={{ color: "#39413c" }}
 			/>
 			{workout?.exercises.map((ex) => (
 				<Exercise key={ex.id} inWorkout={false} exerciseId={ex.id} workoutId={workoutId} dispatch={dispatch as React.Dispatch<ProgrammeReducerAction>}/>
 			))}
-			<Box ref={drop} sx={{ width: "100%" }}>
-				<Box>
-					<Box sx={{ display: "flex", justifyContent: "center" }}>
-						{isOver && canDrop && (
-							<Box 
-								sx={{ 
-									height: 50,
-									width: "100%",
-									mt: 1
-								}}
-							/>
-						)}
-					</Box>    
-				</Box>
-				{/* <AddTrainingItemButton 
+			<Box ref={drop} sx={{ width: "100%", flexGrow: 1, minHeight: "100px" }} />
+			{/* <AddTrainingItemButton 
 					onClick={() => onOpenDialog(true)} 
 					sx={{ my: 1, width: "100%" }}
 				/> */}
-			</Box>
+			{/* </Box> */}
 			{/* {isExerciseSelectorOpen && (
 				<ExerciseSelector 
 					isExerciseSelectorOpen={isExerciseSelectorOpen} 

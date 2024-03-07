@@ -18,10 +18,18 @@ const ProgrammeWhiteboard: FC<ProgrammeWhiteboardProps> = ({ handleAddWorkout })
 			justifyContent="flex-start" 
 			alignItems="flex-start" 
 			gap={2} 
-			sx={{ ml: 2 }}
+			sx={{ ml: 2, height: "100%" }}
 		>
 			{state.workouts.map((workout, i) => (
-				<Box key={workout.id} sx={{ minWidth: "220px" }}>
+				<Box key={workout.id}
+					sx={{ 
+						minWidth: "220px", 
+						minHeight: "100%",
+						display: "flex",
+						flexDirection: "column",
+						
+
+					}}>
 					<Workout 
 						inWorkout={false} 
 						index={i} 
