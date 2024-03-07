@@ -35,7 +35,6 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 		if (!exerciseOption) {
 			setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
 		}
-		console.log(exerciseOption);
 	}, [state]);
 
 	return (

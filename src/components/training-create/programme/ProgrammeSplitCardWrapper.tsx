@@ -36,7 +36,8 @@ const ProgrammeSplitCardWrapper: FC<ProgrammeSplitCardWrapperProps> = ({
 
 	const handleDropExercise = (item: DraggedExercise) => {
 		if (item.exerciseOption) {
-			// empty
+			console.log(item.exerciseOption);
+			dispatch({ type: "ADD_EXERCISE", payload: { workoutId, exerciseName: item.exerciseOption.exerciseName } });
 		}
 		if (item.workoutId && item.exerciseId) {
 			const itemPayload = { exerciseId: item.exerciseId, workoutId: item.workoutId };
