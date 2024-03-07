@@ -196,7 +196,8 @@ export type AllTrainingTypes =
     | undefined;
 
 export interface DraggedExercise {
-    workoutId: string;
-    exerciseId: string;
-    exerciseIndex: number;
+    workoutId?: string;
+    exerciseId?: string;
+    exerciseIndex?: number;
+    exerciseOption?: ExerciseListObjectType;
 }

@@ -57,7 +57,9 @@ const HalfBoxDropArea: FC<HalfBoxDropAreaProps> = ({
 			}
 			return true;
 		},
-		drop: (item: DraggedExercise) => handleDropExercise(item, position),
+		drop: (item: DraggedExercise) => {
+			handleDropExercise(item, position);
+		},
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 			canDrop: !!monitor.canDrop(),

@@ -44,9 +44,12 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 	const [{ isOver, canDrop }, drop] = useDrop(() => ({
 		accept: "exercise",
 		canDrop: (item: DraggedExercise) => {
-			const isLastExercise = workout?.exercises.length === item.exerciseIndex + 1;
-			const isSameWorkout = workoutId === item.workoutId;
-			return !isLastExercise || !isSameWorkout;
+			if (item.exerciseIndex) {
+				const isLastExercise = workout?.exercises.length === item.exerciseIndex + 1;
+				const isSameWorkout = workoutId === item.workoutId;
+				return !isLastExercise || !isSameWorkout;
+			}
+			return true;
 		},
 		drop: item => handleDropExercise(item),
 		collect: monitor => ({
