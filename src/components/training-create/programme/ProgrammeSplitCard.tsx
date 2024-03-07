@@ -111,18 +111,18 @@ const ProgrammeSplitCard: FC<ProgrammeSplitCardProps> = ({
 						)}
 					</Box>    
 				</Box>
-				<AddTrainingItemButton 
+				{/* <AddTrainingItemButton 
 					onClick={() => onOpenDialog(true)} 
 					sx={{ my: 1, width: "100%" }}
-				/>
+				/> */}
 			</Box>
-			{isExerciseSelectorOpen && (
+			{/* {isExerciseSelectorOpen && (
 				<ExerciseSelector 
 					isExerciseSelectorOpen={isExerciseSelectorOpen} 
 					onOpenDialog={onOpenDialog}
 					onExerciseSelection={addExercise}
 				/>
-			)}
+			)} */}
 			{/* <Grid container 
 				spacing={1} 
 				sx={{ 
