@@ -62,6 +62,7 @@ const TrainingList: FC<TrainingListProps> = ({ isWorkout=false }) => {
 
 	return (
 		<Box sx={{ 
+			mt: "61px",
 			mb: 2, 
 			display: "flex", 
 			flexDirection: "column", 
