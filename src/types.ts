@@ -1,7 +1,7 @@
 import React, { Dispatch } from "react";
 
 export interface ExerciseListObjectType {
-	name: string;
+	exerciseName: string;
 }
 
 export interface ProgrammeType {

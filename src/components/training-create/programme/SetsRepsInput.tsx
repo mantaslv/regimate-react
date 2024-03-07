@@ -1,18 +1,20 @@
 import { Input, Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
+import { ExerciseListObjectType } from "../../../types";
 
 interface SetsRepsInputProps {
-	workoutId: string;
-	exerciseId: string;
+	workoutId?: string;
+	exerciseId?: string;
+	exerciseOption?: ExerciseListObjectType;
 }
 
-const SetsRepsInput: FC<SetsRepsInputProps> = ({ workoutId, exerciseId }) => {
+const SetsRepsInput: FC<SetsRepsInputProps> = ({ workoutId, exerciseId, exerciseOption }) => {
 	const { state, dispatch } = useProgrammeContext();
 	const [sets, setSets] = useState<string>("");
 	const [reps, setReps] = useState<string>("");
 
-	const workout = state.workouts.find((wo) => wo.id === workoutId);
+	const workout = workoutId ? state.workouts.find((wo) => wo.id === workoutId): null;
 
 	useEffect(() => {
 		const foundExercise = workout?.exercises.find((ex) => ex.id === exerciseId);
@@ -23,11 +25,13 @@ const SetsRepsInput: FC<SetsRepsInputProps> = ({ workoutId, exerciseId }) => {
 	}, [workout, exerciseId]);
 
 	const handleSetsRepsChange = (newSets: string, newReps: string) => {
-		if (newSets !== sets || newReps !== reps) {
-			dispatch({ 
-				type: "UPDATE_SETS_X_REPS", 
-				payload: { workoutId, exerciseId, sets: newSets, reps: newReps } 
-			});
+		if (workoutId && exerciseId) {
+			if (newSets !== sets || newReps !== reps) {
+				dispatch({ 
+					type: "UPDATE_SETS_X_REPS", 
+					payload: { workoutId, exerciseId, sets: newSets, reps: newReps } 
+				});
+			}
 		}
 	};
 

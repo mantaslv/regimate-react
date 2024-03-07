@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useDrag } from "react-dnd";
 import { ExerciseListObjectType } from "../../../types";
 
@@ -8,12 +8,12 @@ interface ExerciseOptionCardProps {
 }
 
 const ExerciseOptionCard: FC<ExerciseOptionCardProps> = ({ exercise }) => {
-	const exerciseName = exercise.name;
+	const exerciseName = exercise.exerciseName;
 
-	const [{ isDragging }, dragRef] = useDrag(() => ({
+	const [{ isDragging }, dragRef, preview] = useDrag(() => ({
 		type: "exerciseOption",
 		item: () => {
-			return { exerciseName };
+			return { exerciseOption: exercise };
 		},
 		collect: (monitor) => {
 			return ({
@@ -21,6 +21,12 @@ const ExerciseOptionCard: FC<ExerciseOptionCardProps> = ({ exercise }) => {
 			});
 		},
 	}));
+
+	const emptyImage = new Image();
+
+	useEffect(() => {
+		preview(emptyImage, { captureDraggingState: true });
+	}, [preview]);
 
 	return (
 		<Box ref={dragRef} sx={{

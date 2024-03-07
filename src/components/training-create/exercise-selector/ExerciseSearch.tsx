@@ -15,13 +15,13 @@ const ExerciseSearch: FC<ExerciseSearchProps> = ({ exerciseList, onFilter }) => 
 		setSearchTerm(term);
 
 		const exactMatchFilteredExercises = exerciseList?.filter((exercise: ExerciseListObjectType) => 
-			exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
+			exercise.exerciseName.toLowerCase().includes(searchTerm.toLowerCase())
 		) ?? [];
 
 		const splitMatchFilteredExercises = exerciseList?.filter(exercise => 
 			!exactMatchFilteredExercises.includes(exercise) &&
 			searchTerm.toLowerCase().split(" ").every(word => 
-				exercise.name.toLowerCase().split(" ").includes(word)
+				exercise.exerciseName.toLowerCase().split(" ").includes(word)
 			)
 		) ?? [];
 
@@ -29,7 +29,7 @@ const ExerciseSearch: FC<ExerciseSearchProps> = ({ exerciseList, onFilter }) => 
 			!exactMatchFilteredExercises.includes(exercise) &&
         !splitMatchFilteredExercises.includes(exercise) &&
 			searchTerm.toLowerCase().split(" ").some(word =>
-				exercise.name.toLowerCase().split(" ").includes(word)
+				exercise.exerciseName.toLowerCase().split(" ").includes(word)
 			)
 		) ?? [];
     

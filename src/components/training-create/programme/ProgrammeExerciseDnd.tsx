@@ -48,7 +48,7 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 		type: "exercise",
 		canDrag: dragItemWidth > 0,
 		item: () => {
-			return { workoutId, exerciseId, exerciseIndex, dragItemWidth };
+			return { workoutId, exerciseId, exerciseIndex };
 		},
 		collect: (monitor) => {
 			return ({

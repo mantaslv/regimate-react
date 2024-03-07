@@ -4,10 +4,12 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useProgrammeContext } from "../../../hooks/useProgrammeContext";
 import SetsRepsInput from "./SetsRepsInput";
 import ExerciseSelector from "../exercise-selector/ExerciseSelector";
+import { ExerciseListObjectType } from "../../../types";
 
 interface ProgrammeExerciseCardProps {
-	workoutId: string;
-	exerciseId: string;
+	exerciseOption?: ExerciseListObjectType;
+	workoutId?: string;
+	exerciseId?: string;
 	setIsExerciseSelectorOpen: (value: boolean) => void;
 	handleOpenExerciseSelector: () => void;
 	handleExerciseNameChange: (newName: string) => void;
@@ -16,6 +18,7 @@ interface ProgrammeExerciseCardProps {
 }
 
 const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
+	exerciseOption,
 	workoutId,
 	exerciseId,
 	setIsExerciseSelectorOpen,
@@ -25,11 +28,14 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 	isExerciseSelectorOpen,
 }) => {
 	const { state } = useProgrammeContext();
-	const workout = state.workouts.find((wo) => wo.id === workoutId);
-	const [exercise, setExercise] = useState(workout?.exercises.find((ex) => ex.id === exerciseId));
+	const workout = workoutId ? state.workouts.find((wo) => wo.id === workoutId) : null;
+	const [exercise, setExercise] = useState(exerciseOption || workout?.exercises.find((ex) => ex.id === exerciseId));
     
 	useEffect(() => {
-		setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
+		if (!exerciseOption) {
+			setExercise(workout?.exercises.find((ex) => ex.id === exerciseId));
+		}
+		console.log(exerciseOption);
 	}, [state]);
 
 	return (
@@ -90,6 +96,7 @@ const ProgrammeExerciseCard: FC<ProgrammeExerciseCardProps> = ({
 					key={exerciseId} 
 					workoutId={workoutId} 
 					exerciseId={exerciseId}
+					exerciseOption={exerciseOption}
 				/>
 			</Box>
 			{isExerciseSelectorOpen && (
