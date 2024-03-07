@@ -1,13 +1,29 @@
 import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
+import { useDrag } from "react-dnd";
+import { ExerciseListObjectType } from "../../../types";
 
 interface ExerciseOptionCardProps {
-    exerciseName: string;
+    exercise: ExerciseListObjectType;
 }
 
-const ExerciseOptionCard: FC<ExerciseOptionCardProps> = ({ exerciseName }) => {
+const ExerciseOptionCard: FC<ExerciseOptionCardProps> = ({ exercise }) => {
+	const exerciseName = exercise.name;
+
+	const [{ isDragging }, dragRef] = useDrag(() => ({
+		type: "exerciseOption",
+		item: () => {
+			return { exerciseName };
+		},
+		collect: (monitor) => {
+			return ({
+				isDragging: !!monitor.isDragging(),
+			});
+		},
+	}));
+
 	return (
-		<Box sx={{
+		<Box ref={dragRef} sx={{
 			cursor: "move",
 			borderRadius: "10px", 
 			backgroundColor: "white",

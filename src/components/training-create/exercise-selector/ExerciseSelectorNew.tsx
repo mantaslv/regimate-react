@@ -33,7 +33,7 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 				alignItems: "center"
 			}}>
 				{filteredExercises?.map((exercise, i) => 
-					<ExerciseOptionCard key={i} exerciseName={exercise.name} />
+					<ExerciseOptionCard key={i} exercise={exercise} />
 				)}
 			</Box>
 		</Box>
