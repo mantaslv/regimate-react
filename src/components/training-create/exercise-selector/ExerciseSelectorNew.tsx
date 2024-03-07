@@ -83,33 +83,27 @@ const ExerciseSelector: FC<ExerciseSelectorProps> = ({
 						backgroundColor: "white",
 						border: "1px solid #f0f0f0", 
 						width: "240px",
-						// minHeight: "40px", 
 						mt: 1, 
 						boxShadow: 3,
+						display: "flex",
+						p: 1
 					}}>
-						<Box sx={{ display: "flex", flexGrow: 1 }}>
-							<Box 
-								sx={{ 
-									minWidth: 0, 
-									borderRadius: "10px", 
-									px: 1,  
-									mx: 0.5,
-									my: 1,
-									zIndex: 2
-								}}
-							>
-								<Typography 
-									variant="h6" 
-									fontSize={13}
-									fontWeight={600}
-									textAlign="left"
-									textTransform="none"
-									sx={{ color: "#4cb88a" }}
-								>
-									{exercise.name}
-								</Typography>
-							</Box>
-						</Box>
+						<Typography 
+							variant="h6" 
+							fontSize={13}
+							fontWeight={600}
+							textAlign="left"
+							textTransform="none"
+							sx={{ 
+								color: "#4cb88a",
+								minWidth: 0,
+								flexGrow: 1,
+								borderRadius: "10px",
+								zIndex: 2
+							}}
+						>
+							{exercise.name}
+						</Typography>
 					</Box>
 				)}
 			</Box>
