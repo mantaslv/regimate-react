@@ -173,7 +173,12 @@ export type ProgrammeReducerAction =
 	| { type: "ADD_WORKOUT"; }
     | { type: "DELETE_WORKOUT"; payload: { workoutId: string; }; }
     | { type: "UPDATE_WORKOUT_NAME"; payload: { workoutId: string; newName: string; }; }
-    | { type: "ADD_EXERCISE"; payload: { exerciseName: string; workoutId?: string; }; }
+    | { type: "ADD_EXERCISE"; payload: { 
+        exerciseName: string; 
+        workoutId?: string; 
+        exerciseId?: string; 
+        position?: "top" | "bottom";
+    }; }
     | { type: "DELETE_EXERCISE"; payload: { exerciseId: string; workoutId?: string; }; }
     | { type: "REORDER_WORKOUTS"; payload: { startIndex: number; endIndex: number; }; }
     | { 

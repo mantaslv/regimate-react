@@ -45,7 +45,12 @@ const Exercise: FC<ExerciseProps> = ({ exerciseId, inWorkout, dispatch, workoutI
 
 	const handleDropExercise = (item: DraggedExercise, position: "top" | "bottom") => {
 		if (!inWorkout && item.exerciseOption) {
-			dispatch({ type: "ADD_EXERCISE", payload: { workoutId, exerciseName: item.exerciseOption.exerciseName } });
+			dispatch({ type: "ADD_EXERCISE", payload: { 
+				workoutId, 
+				exerciseId, 
+				position, 
+				exerciseName: item.exerciseOption.exerciseName 
+			} });
 		}
 		if (!inWorkout && workoutId !== undefined && item.workoutId && item.exerciseId) {
 			const itemPayload = { exerciseId: item.exerciseId, workoutId: item.workoutId };

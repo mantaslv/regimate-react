@@ -23,21 +23,47 @@ export const programmeReducer = (state: ProgrammeState, action: ProgrammeReducer
 		};
 	case "ADD_EXERCISE":
 		if (action.payload.workoutId) {
+			const dropWorkout = state.workouts.find(wo => wo.id === action.payload.workoutId);
+			if (!dropWorkout) {
+				return state;
+			}
+		
+			let newExercises: ExerciseType[];
+			if (action.payload.exerciseId && action.payload.position) {
+				let dropIndex = dropWorkout.exercises.findIndex(ex => ex.id === action.payload.exerciseId);
+				if (action.payload.position === "bottom") {
+					dropIndex += 1;
+				}
+				newExercises = [
+					...dropWorkout.exercises.slice(0, dropIndex),
+					{
+						id: uuidv4(),
+						exerciseName: action.payload.exerciseName,
+						sets: [{ id: uuidv4(), reps: "", weight: "" }]
+					},
+					...dropWorkout.exercises.slice(dropIndex)
+				];
+			} else {
+				newExercises = [
+					...dropWorkout.exercises, 
+					{
+						id: uuidv4(),
+						exerciseName: action.payload.exerciseName,
+						sets: [{ id: uuidv4(), reps: "", weight: "" }]
+					}
+				];
+			}
+		
 			return {
 				...state,
 				workouts: updateTrainingItem(state.workouts, action.payload.workoutId, action, workout => ({
 					...workout,
-					exercises: [
-						...workout.exercises, {
-							id: uuidv4(),
-							exerciseName: action.payload.exerciseName,
-							sets: [{ id: uuidv4(), reps: "", weight: "" }]
-						}
-					]
+					exercises: newExercises
 				}))
 			};
 		}
 		return state;
+		
 	case "UPDATE_EXERCISE_NAME":
 		return {
 			...state, 
