@@ -49,24 +49,22 @@ const HalfBoxDropArea: FC<HalfBoxDropAreaProps> = ({
 	};
 
 	const [{ isOver, canDrop }, drop] = useDrop({
-		accept: "exercise",
-		canDrop: (_, monitor) => dontMoveIfSamePosition(monitor),
+		accept: ["exercise", "exerciseOption"],
+		canDrop: (_, monitor) => {
+			const itemType = monitor.getItemType();
+			if (itemType === "exercise") {
+				return dontMoveIfSamePosition(monitor);
+			}
+			return true;
+		},
 		drop: (item: DraggedExercise) => handleDropExercise(item, position),
-		collect: monitor => ({
+		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 			canDrop: !!monitor.canDrop(),
 		}),
 	});
   
 	drop(dropRef);
-  
-	// useEffect(() => {
-	//     if (position === 'top') {
-	//         setIsOverTop(isOver && canDrop);
-	//     } else {
-	//         setIsOverBottom(isOver && canDrop);
-	//     }
-	// }, [isOver, canDrop, position, setIsOverTop, setIsOverBottom]);
 
 	useEffect(() => {
 		if (isOver && canDrop) {
