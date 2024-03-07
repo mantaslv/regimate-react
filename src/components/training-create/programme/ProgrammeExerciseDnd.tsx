@@ -81,7 +81,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 		handleExerciseNameChange,
 		handleDeleteExercise,
 		handleDropExercise,
-		isDragging
 	};
 
 	return (
@@ -91,7 +90,6 @@ const ProgrammeExerciseDnd: FC<ProgrammeExerciseDndProps> = ({
 					handleDropExercise={handleDropExercise} 
 					workoutId={workoutId}
 					exerciseId={exerciseId}
-					isDragging={isDragging}
 				>
 					<Box sx={{
 						transition: "opacity 0.5s ease-in-out",

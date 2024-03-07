@@ -7,7 +7,6 @@ interface BoxDropAreaProps {
 	children?: React.ReactNode;
 	workoutId: string;
 	exerciseId: string;
-	isDragging: boolean;
 	handleDropExercise: (item: DraggedExercise, position: "top" | "bottom") => void;
 }
 
