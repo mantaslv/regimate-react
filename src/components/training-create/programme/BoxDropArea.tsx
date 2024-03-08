@@ -28,7 +28,7 @@ const BoxDropArea: FC<BoxDropAreaProps> = ({
 	};
 
 	const placeholderBoxSx = { 
-		height: 50,
+		height: 64,
 		width: "100%",
 		mt: 1,
 		zIndex: 2,
