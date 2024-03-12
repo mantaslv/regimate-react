@@ -38,12 +38,12 @@ const Navbar: FC = () => {
 										<div style={{
 											width: 0,
 											height: 0,
-											bottom: 0,
+											bottom: "-3px",
 											left: "50%",
 											position: "absolute",
 											transform: "translateX(-50%)",
 											borderBottom: "8px solid white",
-											borderBottomColor: location.pathname.includes("create") ? "#EBEEFE" : "white",
+											borderBottomColor: location.pathname.includes("create") ? "#EBEEFE" : "#faf7f9",
 											borderLeft: "8px solid transparent",
 											borderRight: "8px solid transparent",
 										}}/>
@@ -58,6 +58,20 @@ const Navbar: FC = () => {
 								sx={{ color: "white", my: 0 }}
 							>
 								Admin
+								{location.pathname === "/admin" && (
+									<div style={{
+										width: 0,
+										height: 0,
+										bottom: "-3px",
+										left: "50%",
+										position: "absolute",
+										transform: "translateX(-50%)",
+										borderBottom: "8px solid",
+										borderBottomColor: location.pathname.includes("create") ? "#EBEEFE" : "#faf7f9",
+										borderLeft: "8px solid transparent",
+										borderRight: "8px solid transparent",
+									}}/>
+								)}
 							</Button>
 						)}
 						{user && (
