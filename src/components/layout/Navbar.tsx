@@ -43,7 +43,7 @@ const Navbar: FC = () => {
 											position: "absolute",
 											transform: "translateX(-50%)",
 											borderBottom: "8px solid white",
-											borderBottomColor: location.pathname.includes("create") ? "#EBEEFE" : "#faf7f9",
+											borderBottomColor: location.pathname.includes("create") ? "#FFFFFF" : "#faf7f9",
 											borderLeft: "8px solid transparent",
 											borderRight: "8px solid transparent",
 										}}/>
@@ -67,7 +67,7 @@ const Navbar: FC = () => {
 										position: "absolute",
 										transform: "translateX(-50%)",
 										borderBottom: "8px solid",
-										borderBottomColor: location.pathname.includes("create") ? "#EBEEFE" : "#faf7f9",
+										borderBottomColor: "#faf7f9",
 										borderLeft: "8px solid transparent",
 										borderRight: "8px solid transparent",
 									}}/>
