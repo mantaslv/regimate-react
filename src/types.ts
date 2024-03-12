@@ -48,6 +48,7 @@ export interface UserState {
 	_id: string;
 	email: string;
 	token: string;
+    role?: "admin";
 }
 
 export interface AuthState {

@@ -51,6 +51,15 @@ const Navbar: FC = () => {
 								</Button>
 							))
 						}
+						{user?.role === "admin" && (
+							<Button
+								key="admin"
+								href="/admin"
+								sx={{ color: "white", my: 0 }}
+							>
+								Admin
+							</Button>
+						)}
 						{user && (
 							<Button
 								key="logout"

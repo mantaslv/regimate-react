@@ -10,6 +10,7 @@ import Signup from "./pages/SignupPage";
 import Login from "./pages/LoginPage";
 import TrainingEditorPage from "./pages/TrainingEditorPage";
 import ViewTrainingPage from "./pages/ViewTrainingPage";
+import AdminPage from "./pages/AdminPage";
 
 const theme = createTheme();
 
@@ -30,6 +31,7 @@ const App = () => {
 						<Route path='/create-programme' element={<TrainingEditorPage isProgramme/>} />
 						<Route path='/view-workouts' element={user ? <ViewTrainingPage isWorkout/> : <Navigate to="/login" />} />
 						<Route path='/view-programmes' element={user ? <ViewTrainingPage isProgramme/> : <Navigate to="/login" />} />
+						<Route path='/admin' element={user?.role === "admin" ? <AdminPage /> : <Navigate to="/" />} />
 					</Routes>
 				</Box>
 			</BrowserRouter>
