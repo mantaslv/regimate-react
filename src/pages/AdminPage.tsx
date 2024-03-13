@@ -1,4 +1,4 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
 import fetchExercises from "../utils/fetchExercises";
@@ -8,7 +8,7 @@ const AdminPage = () => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
-	const handleChangePage = (newPage: number) => {
+	const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
 		setPage(newPage);
 	};
 
@@ -51,6 +51,15 @@ const AdminPage = () => {
 						</TableBody>
 					</Table>
 				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[10, 25, 100]}
+					component="div"
+					count={state.exerciseList.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onPageChange={handleChangePage}
+					onRowsPerPageChange={handleChangeRowsPerPage}
+				/>
 			</Paper>
 		</Box>
 	);
