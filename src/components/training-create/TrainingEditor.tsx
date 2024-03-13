@@ -1,6 +1,6 @@
 import React, { Dispatch, FC, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -14,7 +14,6 @@ import { ProgrammeReducerAction, ProgrammeType, WorkoutReducerAction, WorkoutTyp
 import ProgrammeExercisePreview from "./programme/ProgrammeExercisePreview";
 import ExerciseDrawer from "./exercise-selector/ExerciseDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import styled from "@emotion/styled";
 import { SquareButton, SquareIconButton } from "../styled-components/SquareButtons";
 
 interface TrainingEditorProps {
