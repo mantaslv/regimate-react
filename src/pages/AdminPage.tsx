@@ -2,6 +2,8 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
 import fetchExercises from "../utils/fetchExercises";
+import ConsoleLogButton from "../components/styled-components/ConsoleLogButton";
+import { ExerciseListObjectType } from "../types";
 
 const AdminPage = () => {
 	const { state, dispatch } = useAdminExerciseListContext();
@@ -23,27 +25,46 @@ const AdminPage = () => {
 			.catch(error => console.error("Error: ", error));
 	}, [state]);
 
+	const columnTitles = [
+		"exerciseName", 
+		"category", 
+		"equipment", 
+		"force",
+		"level",
+		"mechanic",
+		"primaryMuscles"
+	];
+
 	return (
-		<Box sx={{ mt: "55px", display: "flex", justifyContent: "center" }}>
+		<Box sx={{ mt: "55px", display: "flex", alignItems: "center", flexDirection: "column" }}>
 			<Paper sx={{ maxWidth: "1000px", overflow: "hidden" }}>
 				<TableContainer sx={{ maxHeight: 440 }}>
 					<Table stickyHeader aria-label="sticky table">
 						<TableHead>
 							<TableRow>
-								<TableCell>
-									Exercise Name
-								</TableCell>
+								{columnTitles.map((title, i) => {
+									return (
+										<TableCell key={i}>
+											{title}
+										</TableCell>
+									);
+								})}
+								
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							{state.exerciseList
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row, index) => {
+								.map((row) => {
 									return (
-										<TableRow key={index}>
-											<TableCell>
-												{row.exerciseName}
-											</TableCell>
+										<TableRow hover key={row._id}>
+											{columnTitles.map((title, i) => {
+												return (
+													<TableCell key={i}>
+														{row[title as keyof ExerciseListObjectType]}
+													</TableCell>
+												);
+											})}
 										</TableRow>
 									);
 								})
@@ -61,6 +82,10 @@ const AdminPage = () => {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</Paper>
+			<ConsoleLogButton
+				info="exercise list"
+				print={state.exerciseList}
+			/>
 		</Box>
 	);
 };

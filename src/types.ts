@@ -2,6 +2,7 @@ import React, { Dispatch } from "react";
 
 export interface ExerciseListObjectType {
 	exerciseName: string;
+    _id?: string;
 }
 
 export interface ProgrammeType {
@@ -202,6 +203,7 @@ export type ProgrammeReducerAction =
     };
 
 export type AllTrainingTypes =
+    | ExerciseListObjectType[]
     | ProgrammeType[]
     | ProgrammeType
     | WorkoutType[]
