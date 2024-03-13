@@ -112,11 +112,6 @@ export type ProgrammesReducerAction =
 	| { type: "SET_TRAINING_DATA"; payload: ProgrammeType[] }
 	| { type: "DELETE_PROGRAMME"; payload: { _id: string } };
 
-export interface ProgrammesContextType {
-    state: ProgrammesState;
-    dispatch: Dispatch<ProgrammesReducerAction>;
-}
-
 export type SetAction = 
 	| { 
         type: "UPDATE_SET_METRICS"; 
