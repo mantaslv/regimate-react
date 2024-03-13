@@ -112,6 +112,21 @@ export type ProgrammesReducerAction =
 	| { type: "SET_TRAINING_DATA"; payload: ProgrammeType[] }
 	| { type: "DELETE_PROGRAMME"; payload: { _id: string } };
 
+export interface AdminExerciseListState {
+    exerciseList: ExerciseListObjectType[];
+}
+
+export type AdminExerciseListReducerAction =
+    | {
+        type: "INITIALISE_EXERCISE_LIST";
+        payload: ExerciseListObjectType[];
+    };
+
+export interface AdminExerciseListContextType {
+    state: AdminExerciseListState;
+    dispatch: Dispatch<AdminExerciseListReducerAction>;
+}
+
 export type SetAction = 
 	| { 
         type: "UPDATE_SET_METRICS"; 
