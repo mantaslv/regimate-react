@@ -9,6 +9,7 @@ export interface ExerciseListObjectType {
     level: string;
     mechanic: string;
     primaryMuscles: string[];
+    secondaryMuscles: string[];
 }
 
 export interface ProgrammeType {

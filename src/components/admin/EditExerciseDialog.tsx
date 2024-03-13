@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, Input, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 
@@ -15,6 +15,27 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [force, setForce] = useState(exerciseToEdit.force);
 	const [level, setLevel] = useState(exerciseToEdit.level);
 	const [mechanic, setMechanic] = useState(exerciseToEdit.mechanic);
+	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>([]);
+
+	const muscles = [
+		"abdominals",
+		"abductors",
+		"adductors",
+		"biceps",
+		"calves",
+		"chest",
+		"forearms",
+		"glutes",
+		"hamstrings",
+		"lats",
+		"lower back",
+		"middle back",
+		"neck",
+		"quadriceps",
+		"shoulders",
+		"traps",
+		"triceps"
+	];
 
 	const handleChangeExerciseName = (event: { target: { value: string } }) => {
 		setExerciseName(event.target.value);
@@ -39,6 +60,10 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 		setMechanic(event.target.value);
 	};
 	
+	const handleChangePrimaryMuscles = (event: SelectChangeEvent<typeof muscles>) => {
+		const {target: { value }} = event;
+		setPrimaryMuscles(typeof value === "string" ? value.split(",") : value);
+	};
 
 	return (
 		<Dialog open={open}>
@@ -98,6 +123,23 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 							onChange={handleChangeMechanic}
 							sx={{ width: "100%" }}
 						/>
+					</Grid>
+					<Grid item md={6}>
+						<FormControl sx={{ width: "100%" }}>
+							<InputLabel>Primary Muscles</InputLabel>
+							<Select 
+								// multiple 
+								// value={primaryMuscles}
+								// onChange={handleChangePrimaryMuscles}
+								variant="standard"
+							>
+								{muscles.map(name => (
+									<MenuItem key={name}>
+										{name}
+									</MenuItem>
+								))}
+							</Select>
+						</FormControl>
 					</Grid>
 				</Grid>
 			</DialogContent>

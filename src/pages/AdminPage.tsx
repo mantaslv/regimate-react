@@ -26,6 +26,16 @@ const AdminPage = () => {
 		fetchExercises()
 			.then(data => dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data }))
 			.catch(error => console.error("Error: ", error));
+
+		// const uniqueMuscles = state.exerciseList.reduce<string[]>((acc, item) => {
+		// 	const allMuscles = acc.concat(item.primaryMuscles, item.secondaryMuscles);
+		// 	return allMuscles;
+		// }, []);
+			
+		// const uniqueMuscleSet = new Set(uniqueMuscles);
+		// const uniqueMuscleArray = Array.from(uniqueMuscleSet);
+			
+		// console.log(uniqueMuscleArray.sort());
 	}, [state]);
 
 	const columnTitles = [
