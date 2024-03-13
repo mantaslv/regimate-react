@@ -2,7 +2,13 @@ import React, { Dispatch } from "react";
 
 export interface ExerciseListObjectType {
 	exerciseName: string;
-    _id?: string;
+    _id: string;
+    category: string;
+    equipment: string;
+    force: string;
+    level: string;
+    mechanic: string;
+    primaryMuscles: string[];
 }
 
 export interface ProgrammeType {

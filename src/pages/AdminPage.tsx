@@ -4,12 +4,14 @@ import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContex
 import fetchExercises from "../utils/fetchExercises";
 import ConsoleLogButton from "../components/styled-components/ConsoleLogButton";
 import { ExerciseListObjectType } from "../types";
+import EditExerciseDialog from "../components/admin/EditExerciseDialog";
 
 const AdminPage = () => {
 	const { state, dispatch } = useAdminExerciseListContext();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
-	const [openDialog, setOpenDialog] = useState<number | null>(null);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [exerciseToEdit, setExerciseToEdit] = useState<ExerciseListObjectType | null>(null);
 
 	const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
 		setPage(newPage);
@@ -36,12 +38,14 @@ const AdminPage = () => {
 		"primaryMuscles",
 	];
 
-	const handleOpenDialog = (rowIndex: number) => {
-		setOpenDialog(rowIndex);
+	const handleOpenDialog = (exercise: ExerciseListObjectType) => {
+		setExerciseToEdit(exercise);
+		setOpenDialog(true);
 	};
 
 	const handleCloseDialog = () => {
-		setOpenDialog(null);
+		setOpenDialog(false);
+		setExerciseToEdit(null);
 	};
 
 	return (
@@ -63,9 +67,9 @@ const AdminPage = () => {
 						<TableBody>
 							{state.exerciseList
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row, rowIndex) => {
+								.map((row) => {
 									return (
-										<TableRow hover key={rowIndex}>
+										<TableRow hover key={row._id}>
 											{columnTitles.map((title, columnIndex) => {
 												return (
 													<TableCell key={columnIndex}>
@@ -74,7 +78,7 @@ const AdminPage = () => {
 												);
 											})}
 											<TableCell>
-												<Button size="small" onClick={() => handleOpenDialog(rowIndex)}>
+												<Button size="small" onClick={() => handleOpenDialog(row)}>
 													Edit
 												</Button>
 											</TableCell>
@@ -88,14 +92,14 @@ const AdminPage = () => {
 				<TablePagination
 					rowsPerPageOptions={[10, 25, 100]}
 					component="div"
-					count={state.exerciseList.length}
+					count={state.exerciseList?.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</Paper>
-			<Dialog open={openDialog ? true : false}>
+			{/* <Dialog open={openDialog ? true : false}>
 				<DialogTitle>Edit Exercise</DialogTitle>
 				<DialogContent>
 					{openDialog && (
@@ -105,7 +109,14 @@ const AdminPage = () => {
 				<DialogActions>
 					<Button onClick={handleCloseDialog}>Close Dialog</Button>
 				</DialogActions>
-			</Dialog>
+			</Dialog> */}
+			{exerciseToEdit && (
+				<EditExerciseDialog 
+					open={openDialog} 
+					handleCloseDialog={handleCloseDialog}
+					exerciseToEdit={exerciseToEdit}
+				/>
+			)}
 			<ConsoleLogButton
 				info="exercise list"
 				print={state.exerciseList}
