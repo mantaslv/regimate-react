@@ -1,4 +1,4 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
 import fetchExercises from "../utils/fetchExercises";
@@ -9,6 +9,7 @@ const AdminPage = () => {
 	const { state, dispatch } = useAdminExerciseListContext();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [openDialog, setOpenDialog] = useState<number | null>(null);
 
 	const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
 		setPage(newPage);
@@ -32,13 +33,21 @@ const AdminPage = () => {
 		"force",
 		"level",
 		"mechanic",
-		"primaryMuscles"
+		"primaryMuscles",
 	];
+
+	const handleOpenDialog = (rowIndex: number) => {
+		setOpenDialog(rowIndex);
+	};
+
+	const handleCloseDialog = () => {
+		setOpenDialog(null);
+	};
 
 	return (
 		<Box sx={{ mt: "55px", display: "flex", alignItems: "center", flexDirection: "column" }}>
 			<Paper sx={{ maxWidth: "1000px", overflow: "hidden" }}>
-				<TableContainer sx={{ maxHeight: 440 }}>
+				<TableContainer sx={{ maxHeight: "75vh" }}>
 					<Table stickyHeader aria-label="sticky table">
 						<TableHead>
 							<TableRow>
@@ -49,22 +58,26 @@ const AdminPage = () => {
 										</TableCell>
 									);
 								})}
-								
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							{state.exerciseList
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row) => {
+								.map((row, rowIndex) => {
 									return (
-										<TableRow hover key={row._id}>
-											{columnTitles.map((title, i) => {
+										<TableRow hover key={rowIndex}>
+											{columnTitles.map((title, columnIndex) => {
 												return (
-													<TableCell key={i}>
+													<TableCell key={columnIndex}>
 														{row[title as keyof ExerciseListObjectType]}
 													</TableCell>
 												);
 											})}
+											<TableCell>
+												<Button size="small" onClick={() => handleOpenDialog(rowIndex)}>
+													Edit
+												</Button>
+											</TableCell>
 										</TableRow>
 									);
 								})
@@ -82,6 +95,17 @@ const AdminPage = () => {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</Paper>
+			<Dialog open={openDialog ? true : false}>
+				<DialogTitle>Edit Exercise</DialogTitle>
+				<DialogContent>
+					{openDialog && (
+						<Box>ExerciseName: {state.exerciseList[openDialog].exerciseName}</Box>
+					)}
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleCloseDialog}>Close Dialog</Button>
+				</DialogActions>
+			</Dialog>
 			<ConsoleLogButton
 				info="exercise list"
 				print={state.exerciseList}
