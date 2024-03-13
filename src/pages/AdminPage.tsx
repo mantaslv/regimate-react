@@ -1,9 +1,27 @@
-import { Box, Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import React from "react";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
+import fetchExercises from "../utils/fetchExercises";
 
 const AdminPage = () => {
-	// const { state, dispatch } = 
+	const { state, dispatch } = useAdminExerciseListContext();
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
 
+	const handleChangePage = (newPage: number) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+		setRowsPerPage(+event.target.value);
+		setPage(0);
+	};
+
+	useEffect(() => {
+		fetchExercises()
+			.then(data => dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data }))
+			.catch(error => console.error("Error: ", error));
+	}, [state]);
 
 	return (
 		<Box sx={{ mt: "55px", display: "flex", justifyContent: "center" }}>
@@ -13,10 +31,24 @@ const AdminPage = () => {
 						<TableHead>
 							<TableRow>
 								<TableCell>
-									Hello World!
+									Exercise Name
 								</TableCell>
 							</TableRow>
 						</TableHead>
+						<TableBody>
+							{state.exerciseList
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map((row, index) => {
+									return (
+										<TableRow key={index}>
+											<TableCell>
+												{row.exerciseName}
+											</TableCell>
+										</TableRow>
+									);
+								})
+							}
+						</TableBody>
 					</Table>
 				</TableContainer>
 			</Paper>
