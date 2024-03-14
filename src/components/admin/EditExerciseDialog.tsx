@@ -18,6 +18,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [mechanic, setMechanic] = useState(exerciseToEdit.mechanic);
 	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles.map(x => toTitleCase(x)));
 	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles.map(x => toTitleCase(x)));
+	const [instructions, setInstructions] = useState<string[]>(exerciseToEdit.instructions);
 
 	const muscles = [
 		"Abdominals",
@@ -70,6 +71,12 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const handleChangeSecondaryMuscles = (event: SelectChangeEvent<typeof muscles>) => {
 		const { target: { value } } = event;
 		setSecondaryMuscles(value as string[]);
+	};
+
+	const handleChangeInstruction = (event: { target: { value: string } }, i: number) => {
+		const updatedInstructions = [...instructions];
+		updatedInstructions[i] = event.target.value;
+		setInstructions(updatedInstructions);
 	};
 
 	interface MultipleFieldSelectProps {
@@ -168,6 +175,16 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 							options={muscles}
 						/>
 					</Grid>
+					{instructions.map((instruction, i) => (
+						<Grid item key={i} md={12}>
+							<TextField multiline variant="standard"
+								label={`Instruction Line ${i + 1}`}
+								value={instruction}
+								onChange={(event) => handleChangeInstruction(event, i)}
+								sx={{ width: "100%" }}
+							/>
+						</Grid>
+					))}
 				</Grid>
 			</DialogContent>
 			<DialogActions>

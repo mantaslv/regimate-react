@@ -10,6 +10,7 @@ export interface ExerciseListObjectType {
     mechanic: string;
     primaryMuscles: string[];
     secondaryMuscles: string[];
+    instructions: string[];
 }
 
 export interface ProgrammeType {
