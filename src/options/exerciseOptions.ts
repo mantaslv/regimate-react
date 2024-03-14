@@ -17,3 +17,13 @@ export const muscles = [
 	"Traps",
 	"Triceps"
 ];
+
+export const category = [ 
+	"cardio", 
+	"olympic weightlifting", 
+	"plyometrics", 
+	"powerlifting", 
+	"strength", 
+	"stretching", 
+	"strongman" 
+];
