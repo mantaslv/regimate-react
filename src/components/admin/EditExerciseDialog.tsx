@@ -8,6 +8,10 @@ interface EditExerciseDialogProps {
 	exerciseToEdit: ExerciseListObjectType;
 }
 
+const toTitleCase = (str: string) => {
+	return str.replace(/\w\S*/g, (txt: string) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
+};
+
 const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDialog, exerciseToEdit }) => {
 	const [exerciseName, setExerciseName] = useState(exerciseToEdit.exerciseName);
 	const [category, setCategory] = useState(exerciseToEdit.category);
@@ -15,8 +19,8 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [force, setForce] = useState(exerciseToEdit.force);
 	const [level, setLevel] = useState(exerciseToEdit.level);
 	const [mechanic, setMechanic] = useState(exerciseToEdit.mechanic);
-	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles);
-	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles);
+	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles.map(x => toTitleCase(x)));
+	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles.map(x => toTitleCase(x)));
 
 	const muscles = [
 		"Abdominals",
