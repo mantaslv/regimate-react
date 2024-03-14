@@ -86,6 +86,11 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 		setInstructions(updatedInstructions);
 	};
 
+	const handleAddInstructionClick = () => {
+		const updatedInstructions = [...instructions, ""];
+		setInstructions(updatedInstructions);
+	};
+
 	interface MultipleFieldSelectProps {
 		label: string;
 		value: string[];
@@ -192,13 +197,20 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 									sx={{ width: "100%" }}
 								/>
 							</Grid>
-							<Grid item md={1} sx={{ display: "flex", justifyContent: "center", alignItems: "flex-end" }}>
+							<Grid item md={1} sx={{ 
+								display: "flex", 
+								justifyContent: "center", 
+								alignItems: "flex-end" 
+							}}>
 								<IconButton onClick={() => handleRemoveInstructionClick(i)}>
 									<RemoveCircleIcon sx={{ fontSize: "17px" }}/>
 								</IconButton>
 							</Grid>
 						</Grid>
 					))}
+					<Grid item md={12} sx={{ display: "flex", justifyContent: "center" }}>
+						<Button onClick={handleAddInstructionClick}>Add instruction line</Button>
+					</Grid>
 				</Grid>
 			</DialogContent>
 			<DialogActions>
