@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 import { toTitleCase } from "../../utils/helpers";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { muscles } from "../../options/exerciseOptions";
 
 interface EditExerciseDialogProps {
 	open: boolean;
@@ -20,26 +21,6 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles.map(x => toTitleCase(x)));
 	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles.map(x => toTitleCase(x)));
 	const [instructions, setInstructions] = useState<string[]>(exerciseToEdit.instructions);
-
-	const muscles = [
-		"Abdominals",
-		"Abductors",
-		"Adductors",
-		"Biceps",
-		"Calves",
-		"Chest",
-		"Forearms",
-		"Glutes",
-		"Hamstrings",
-		"Lats",
-		"Lower back",
-		"Middle back",
-		"Neck",
-		"Quadriceps",
-		"Shoulders",
-		"Traps",
-		"Triceps"
-	];
 
 	const handleChangeExerciseName = (event: { target: { value: string } }) => {
 		setExerciseName(event.target.value);
