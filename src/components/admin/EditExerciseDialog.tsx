@@ -1,9 +1,9 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, SelectChangeEvent, TextField } from "@mui/material";
-import React, { FC, useState } from "react";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import React, { ChangeEvent, FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 import { toTitleCase } from "../../utils/helpers";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { muscles } from "../../options/exerciseOptions";
+import { category, equipment, force, level, mechanic, muscles } from "../../options/exerciseOptions";
 import MultipleSelectField from "../styled-components/MultipleSelectField";
 
 interface EditExerciseDialogProps {
@@ -14,18 +14,22 @@ interface EditExerciseDialogProps {
 
 const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDialog, exerciseToEdit }) => {
 	const [exercise, setExercise] = useState({
-		exerciseName: exerciseToEdit.exerciseName,
-		category: exerciseToEdit.category,
-		equipment: exerciseToEdit.equipment,
-		force: exerciseToEdit.force,
-		level: exerciseToEdit.level,
-		mechanic: exerciseToEdit.mechanic,
-		primaryMuscles: exerciseToEdit.primaryMuscles.map(toTitleCase),
-		secondaryMuscles: exerciseToEdit.secondaryMuscles.map(toTitleCase),
-		instructions: exerciseToEdit.instructions
+		exerciseName: toTitleCase(exerciseToEdit.exerciseName) || "",
+		category: toTitleCase(exerciseToEdit.category) || "",
+		equipment: toTitleCase(exerciseToEdit.equipment) || "",
+		force: toTitleCase(exerciseToEdit.force) || "",
+		level: toTitleCase(exerciseToEdit.level) || "",
+		mechanic: toTitleCase(exerciseToEdit.mechanic) || "",
+		primaryMuscles: exerciseToEdit.primaryMuscles.map(toTitleCase) || [""],
+		secondaryMuscles: exerciseToEdit.secondaryMuscles.map(toTitleCase) || [""],
+		instructions: exerciseToEdit.instructions || [""]
 	});
 
-	const handleChange = (prop: keyof typeof exercise) => (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (prop: keyof typeof exercise) => (event: ChangeEvent<HTMLInputElement>) => {
+		setExercise({ ...exercise, [prop]: event.target.value });
+	};
+
+	const handleSelectChange = (prop: keyof typeof exercise) => (event: SelectChangeEvent<string>) => {
 		setExercise({ ...exercise, [prop]: event.target.value });
 	};
 
@@ -35,7 +39,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 		setExercise({ ...exercise, [prop]: event.target.value as string[] });
 	};
 
-	const handleInstructionChange = (i: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInstructionChange = (i: number) => (event: ChangeEvent<HTMLInputElement>) => {
 		const newInstructions = [...exercise.instructions];
 		newInstructions[i] = event.target.value;
 		setExercise({ ...exercise, instructions: newInstructions });
@@ -52,12 +56,12 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	};
 
 	const fields = [
-		{ label: "Exercise Name", md: 8, value: exercise.exerciseName, onChange: handleChange("exerciseName") },
-		{ label: "Category", md: 4, value: exercise.category, onChange: handleChange("category") },
-		{ label: "Equipment" , md: 6, value: exercise.equipment, onChange: handleChange("equipment") },
-		{ label: "Force" , md: 6, value: exercise.force, onChange: handleChange("force") },
-		{ label: "Level" , md: 6, value: exercise.level, onChange: handleChange("level") },
-		{ label: "Mechanic" , md: 6, value: exercise.mechanic, onChange: handleChange("mechanic") },
+		// { label: "Exercise Name", md: 8, value: exercise.exerciseName, onChange: handleChange("exerciseName") },
+		{ label: "Category", md: 4, value: exercise.category, onChange: handleSelectChange("category"), options: category },
+		{ label: "Equipment", md: 6, value: exercise.equipment, onChange: handleSelectChange("equipment"), options: equipment },
+		{ label: "Force", md: 6, value: exercise.force, onChange: handleSelectChange("force"), options: force },
+		{ label: "Level", md: 6, value: exercise.level, onChange: handleSelectChange("level"), options: level },
+		{ label: "Mechanic", md: 6, value: exercise.mechanic, onChange: handleSelectChange("mechanic"), options: mechanic },
 	];
 
 	return (
@@ -65,14 +69,39 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 			<DialogTitle>Edit Exercise</DialogTitle>
 			<DialogContent>
 				<Grid container spacing={3}>
-					{fields.map(({ label, md, value, onChange }) => (
+					<Grid item md={8}>
+						<TextField variant="standard" 
+							label={"Exercise Name"} 
+							value={exercise.exerciseName} 
+							onChange={handleInputChange("exerciseName")} 
+							sx={{ width: "100%" }} 
+						/>
+					</Grid>
+					{fields.map(({ label, md, value, onChange, options }) => (
 						<Grid item md={md} key={label}>
-							<TextField variant="standard" 
+							{/* <TextField variant="standard" 
 								label={label} 
 								value={value} 
 								onChange={onChange} 
 								sx={{ width: "100%" }} 
-							/>
+							/> */}
+							<FormControl variant="standard" sx={{ width: "100%" }} >
+								<InputLabel>{label}</InputLabel>
+								<Select
+									value={value}
+									onChange={onChange}
+									label={label}
+								>
+									<MenuItem value="">
+										<em>None</em>
+									</MenuItem>
+									{options.map(option => (
+										<MenuItem key={option} value={option}>
+											{option}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
 						</Grid>
 					))}
 					<Grid item md={6}>

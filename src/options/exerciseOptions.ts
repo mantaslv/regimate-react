@@ -25,7 +25,7 @@ export const category = [
 	"Powerlifting", 
 	"Strength", 
 	"Stretching", 
-	"Strongman" 
+	"Strongman",
 ];
 
 export const equipment = [
