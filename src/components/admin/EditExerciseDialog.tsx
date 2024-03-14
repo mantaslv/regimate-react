@@ -1,9 +1,10 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, IconButton, Input, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, SelectChangeEvent, TextField } from "@mui/material";
 import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 import { toTitleCase } from "../../utils/helpers";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { muscles } from "../../options/exerciseOptions";
+import MultipleSelectField from "../styled-components/MultipleSelectField";
 
 interface EditExerciseDialogProps {
 	open: boolean;
@@ -71,33 +72,6 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 		const updatedInstructions = [...instructions, ""];
 		setInstructions(updatedInstructions);
 	};
-
-	interface MultipleFieldSelectProps {
-		label: string;
-		value: string[];
-		onChange: (event: SelectChangeEvent<string[]>) => void;
-		options: string[];
-	}
-
-	const MultipleSelectField: FC<MultipleFieldSelectProps> = ({ label, value, onChange, options }) => (
-		<FormControl sx={{ width: "100%" }}>
-			<InputLabel sx={{ ml: "-14px", mt: "10px" }}>{label}</InputLabel>
-			<Select 
-				multiple 
-				value={value}
-				onChange={onChange}
-				variant="standard"
-				renderValue={(selected) => selected.join(", ")}
-			>
-				{options.map(name => (
-					<MenuItem key={name} value={name}>
-						<Checkbox checked={value.indexOf(name) > -1} />
-						<ListItemText primary={name} />
-					</MenuItem>
-				))}
-			</Select>
-		</FormControl>
-	);
 
 	return (
 		<Dialog open={open}>
