@@ -1,7 +1,8 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, Input, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, IconButton, Input, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 import { toTitleCase } from "../../utils/helpers";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 interface EditExerciseDialogProps {
 	open: boolean;
@@ -76,6 +77,12 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const handleChangeInstruction = (event: { target: { value: string } }, i: number) => {
 		const updatedInstructions = [...instructions];
 		updatedInstructions[i] = event.target.value;
+		setInstructions(updatedInstructions);
+	};
+
+	const handleRemoveInstructionClick = (i: number) => {
+		const updatedInstructions = [...instructions];
+		updatedInstructions.splice(i, 1);
 		setInstructions(updatedInstructions);
 	};
 
@@ -176,13 +183,20 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					{instructions.map((instruction, i) => (
-						<Grid item key={i} md={12}>
-							<TextField multiline variant="standard"
-								label={`Instruction Line ${i + 1}`}
-								value={instruction}
-								onChange={(event) => handleChangeInstruction(event, i)}
-								sx={{ width: "100%" }}
-							/>
+						<Grid item md={12} container key={i}>
+							<Grid item md={11}>
+								<TextField multiline variant="standard"
+									label={`Instruction Line ${i + 1}`}
+									value={instruction}
+									onChange={(event) => handleChangeInstruction(event, i)}
+									sx={{ width: "100%" }}
+								/>
+							</Grid>
+							<Grid item md={1} sx={{ display: "flex", justifyContent: "center", alignItems: "flex-end" }}>
+								<IconButton onClick={() => handleRemoveInstructionClick(i)}>
+									<RemoveCircleIcon sx={{ fontSize: "17px" }}/>
+								</IconButton>
+							</Grid>
 						</Grid>
 					))}
 				</Grid>
