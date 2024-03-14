@@ -27,3 +27,18 @@ export const category = [
 	"stretching", 
 	"strongman" 
 ];
+
+export const equipment = [
+	"bands",
+	"barbell",
+	"body only",
+	"cable",
+	"dumbbell",
+	"e-z curl bar",
+	"exercise ball",
+	"foam roll",
+	"kettlebells",
+	"machine",
+	"medicine ball",
+	"other"
+];
