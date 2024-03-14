@@ -15,7 +15,8 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [force, setForce] = useState(exerciseToEdit.force);
 	const [level, setLevel] = useState(exerciseToEdit.level);
 	const [mechanic, setMechanic] = useState(exerciseToEdit.mechanic);
-	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>([]);
+	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles);
+	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles);
 
 	const muscles = [
 		"Abdominals",
@@ -61,14 +62,41 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	};
 	
 	const handleChangePrimaryMuscles = (event: SelectChangeEvent<typeof muscles>) => {
-		const {
-			target: { value },
-		} = event;
-
-		console.log(value);
-	
+		const { target: { value } } = event;
 		setPrimaryMuscles(value as string[]);
 	};
+
+	const handleChangeSecondaryMuscles = (event: SelectChangeEvent<typeof muscles>) => {
+		const { target: { value } } = event;
+		setSecondaryMuscles(value as string[]);
+	};
+
+	interface MultipleFieldSelectProps {
+		label: string;
+		value: string[];
+		onChange: (event: SelectChangeEvent<string[]>) => void;
+		options: string[];
+	}
+
+	const MultipleSelectField: FC<MultipleFieldSelectProps> = ({ label, value, onChange, options }) => (
+		<FormControl sx={{ width: "100%" }}>
+			<InputLabel sx={{ ml: "-14px", mt: "10px" }}>{label}</InputLabel>
+			<Select 
+				multiple 
+				value={value}
+				onChange={onChange}
+				variant="standard"
+				renderValue={(selected) => selected.join(", ")}
+			>
+				{options.map(name => (
+					<MenuItem key={name} value={name}>
+						<Checkbox checked={value.indexOf(name) > -1} />
+						<ListItemText primary={name} />
+					</MenuItem>
+				))}
+			</Select>
+		</FormControl>
+	);
 
 	return (
 		<Dialog open={open}>
@@ -76,8 +104,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 			<DialogContent>
 				<Grid container spacing={3}>
 					<Grid item md={8}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Exercise Name" 
 							value={exerciseName} 
 							onChange={handleChangeExerciseName}
@@ -85,8 +112,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={4}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Category" 
 							value={category} 
 							onChange={handleChangeCategory}
@@ -94,8 +120,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={6}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Equipment" 
 							value={equipment} 
 							onChange={handleChangeEquipment}
@@ -103,8 +128,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={6}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Force" 
 							value={force} 
 							onChange={handleChangeForce}
@@ -112,8 +136,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={6}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Level" 
 							value={level} 
 							onChange={handleChangeLevel}
@@ -121,8 +144,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={6}>
-						<TextField 
-							variant="standard" 
+						<TextField variant="standard" 
 							label="Mechanic" 
 							value={mechanic} 
 							onChange={handleChangeMechanic}
@@ -130,23 +152,20 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						/>
 					</Grid>
 					<Grid item md={6}>
-						<FormControl sx={{ width: "100%" }}>
-							<InputLabel sx={{ ml: "-14px", mt: "10px" }}>Primary Muscles</InputLabel>
-							<Select 
-								multiple 
-								value={primaryMuscles}
-								onChange={handleChangePrimaryMuscles}
-								variant="standard"
-								renderValue={(selected) => selected.join(", ")}
-							>
-								{muscles.map(name => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={primaryMuscles.indexOf(name) > -1} />
-										<ListItemText primary={name} />
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
+						<MultipleSelectField
+							label="Primary Muscles"
+							value={primaryMuscles}
+							onChange={handleChangePrimaryMuscles}
+							options={muscles}
+						/>
+					</Grid>
+					<Grid item md={6}>
+						<MultipleSelectField
+							label="Secondary Muscles"
+							value={secondaryMuscles}
+							onChange={handleChangeSecondaryMuscles}
+							options={muscles}
+						/>
 					</Grid>
 				</Grid>
 			</DialogContent>
