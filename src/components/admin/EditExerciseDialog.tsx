@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, Input, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, Input, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
 
@@ -137,10 +137,12 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 								value={primaryMuscles}
 								onChange={handleChangePrimaryMuscles}
 								variant="standard"
+								renderValue={(selected) => selected.join(", ")}
 							>
 								{muscles.map(name => (
 									<MenuItem key={name} value={name}>
-										{name}
+										<Checkbox checked={primaryMuscles.indexOf(name) > -1} />
+										<ListItemText primary={name} />
 									</MenuItem>
 								))}
 							</Select>
