@@ -54,3 +54,8 @@ export const level = [
 	"expert",
 	"intermediate"
 ];
+
+export const mechanic = [
+	"compound",
+	"isolation",
+];
