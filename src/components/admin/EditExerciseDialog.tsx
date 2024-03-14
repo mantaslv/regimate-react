@@ -1,16 +1,13 @@
 import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, Input, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
 import React, { FC, useState } from "react";
 import { ExerciseListObjectType } from "../../types";
+import { toTitleCase } from "../../utils/helpers";
 
 interface EditExerciseDialogProps {
 	open: boolean;
 	handleCloseDialog: () => void;
 	exerciseToEdit: ExerciseListObjectType;
 }
-
-const toTitleCase = (str: string) => {
-	return str.replace(/\w\S*/g, (txt: string) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase());
-};
 
 const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDialog, exerciseToEdit }) => {
 	const [exerciseName, setExerciseName] = useState(exerciseToEdit.exerciseName);
