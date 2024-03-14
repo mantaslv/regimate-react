@@ -29,7 +29,9 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 		setExercise({ ...exercise, [prop]: event.target.value });
 	};
 
-	const handleMuscleChange = (prop: "primaryMuscles" | "secondaryMuscles") => (event: SelectChangeEvent<typeof muscles>) => {
+	const handleMuscleChange = (prop: "primaryMuscles" | "secondaryMuscles") => (
+		event: SelectChangeEvent<typeof muscles>
+	) => {
 		setExercise({ ...exercise, [prop]: event.target.value as string[] });
 	};
 
@@ -105,7 +107,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 								alignItems: "flex-end" 
 							}}>
 								<IconButton onClick={() => handleRemoveInstructionClick(i)}>
-									<RemoveCircleIcon sx={{ fontSize: "17px" }}/>
+									<RemoveCircleIcon sx={{ fontSize: "18px" }}/>
 								</IconButton>
 							</Grid>
 						</Grid>
