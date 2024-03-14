@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
 import fetchExercises from "../utils/fetchExercises";
@@ -26,16 +26,6 @@ const AdminPage = () => {
 		fetchExercises()
 			.then(data => dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data }))
 			.catch(error => console.error("Error: ", error));
-
-		// const uniqueMuscles = state.exerciseList.reduce<string[]>((acc, item) => {
-		// 	const allMuscles = acc.concat(item.primaryMuscles, item.secondaryMuscles);
-		// 	return allMuscles;
-		// }, []);
-			
-		// const uniqueMuscleSet = new Set(uniqueMuscles);
-		// const uniqueMuscleArray = Array.from(uniqueMuscleSet);
-			
-		// console.log(uniqueMuscleArray.sort());
 	}, [state]);
 
 	const columnTitles = [
@@ -109,17 +99,6 @@ const AdminPage = () => {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</Paper>
-			{/* <Dialog open={openDialog ? true : false}>
-				<DialogTitle>Edit Exercise</DialogTitle>
-				<DialogContent>
-					{openDialog && (
-						<Box>ExerciseName: {state.exerciseList[openDialog].exerciseName}</Box>
-					)}
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleCloseDialog}>Close Dialog</Button>
-				</DialogActions>
-			</Dialog> */}
 			{exerciseToEdit && (
 				<EditExerciseDialog 
 					open={openDialog} 
