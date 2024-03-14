@@ -131,7 +131,7 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 					</Grid>
 					<Grid item md={6}>
 						<FormControl sx={{ width: "100%" }}>
-							<InputLabel>Primary Muscles</InputLabel>
+							<InputLabel sx={{ ml: "-14px", mt: "10px" }}>Primary Muscles</InputLabel>
 							<Select 
 								multiple 
 								value={primaryMuscles}
