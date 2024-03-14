@@ -48,3 +48,9 @@ export const force = [
 	"push",
 	"static"
 ];
+
+export const level = [
+	"beginner",
+	"expert",
+	"intermediate"
+];
