@@ -9,8 +9,8 @@ export const muscles = [
 	"Glutes",
 	"Hamstrings",
 	"Lats",
-	"Lower back",
-	"Middle back",
+	"Lower Back",
+	"Middle Back",
 	"Neck",
 	"Quadriceps",
 	"Shoulders",
@@ -19,43 +19,43 @@ export const muscles = [
 ];
 
 export const category = [ 
-	"cardio", 
-	"olympic weightlifting", 
-	"plyometrics", 
-	"powerlifting", 
-	"strength", 
-	"stretching", 
-	"strongman" 
+	"Cardio", 
+	"Olympic Weightlifting", 
+	"Plyometrics", 
+	"Powerlifting", 
+	"Strength", 
+	"Stretching", 
+	"Strongman" 
 ];
 
 export const equipment = [
-	"bands",
-	"barbell",
-	"body only",
-	"cable",
-	"dumbbell",
-	"e-z curl bar",
-	"exercise ball",
-	"foam roll",
-	"kettlebells",
-	"machine",
-	"medicine ball",
-	"other"
+	"Bands",
+	"Barbell",
+	"Body only",
+	"Cable",
+	"Dumbbell",
+	"E-Z Curl Bar",
+	"Exercise Ball",
+	"Foam Roll",
+	"Kettlebells",
+	"Machine",
+	"Medicine Ball",
+	"Other"
 ];
 
 export const force = [
-	"pull",
-	"push",
-	"static"
+	"Pull",
+	"Push",
+	"Static"
 ];
 
 export const level = [
-	"beginner",
-	"expert",
-	"intermediate"
+	"Beginner",
+	"Expert",
+	"Intermediate"
 ];
 
 export const mechanic = [
-	"compound",
-	"isolation",
+	"Compound",
+	"Isolation",
 ];
