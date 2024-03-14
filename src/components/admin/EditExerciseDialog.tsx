@@ -11,11 +11,11 @@ interface EditExerciseDialogProps {
 
 const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDialog, exerciseToEdit }) => {
 	const [exerciseName, setExerciseName] = useState(exerciseToEdit.exerciseName);
-	const [category, setCategory] = useState(toTitleCase(exerciseToEdit.category));
-	const [equipment, setEquipment] = useState(toTitleCase(exerciseToEdit.equipment));
-	const [force, setForce] = useState(toTitleCase(exerciseToEdit.force));
-	const [level, setLevel] = useState(toTitleCase(exerciseToEdit.level));
-	const [mechanic, setMechanic] = useState(toTitleCase(exerciseToEdit.mechanic));
+	const [category, setCategory] = useState(exerciseToEdit.category);
+	const [equipment, setEquipment] = useState(exerciseToEdit.equipment);
+	const [force, setForce] = useState(exerciseToEdit.force);
+	const [level, setLevel] = useState(exerciseToEdit.level);
+	const [mechanic, setMechanic] = useState(exerciseToEdit.mechanic);
 	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>(exerciseToEdit.primaryMuscles.map(x => toTitleCase(x)));
 	const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>(exerciseToEdit.secondaryMuscles.map(x => toTitleCase(x)));
 
