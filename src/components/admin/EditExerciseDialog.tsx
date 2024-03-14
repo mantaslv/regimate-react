@@ -18,23 +18,23 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	const [primaryMuscles, setPrimaryMuscles] = useState<string[]>([]);
 
 	const muscles = [
-		"abdominals",
-		"abductors",
-		"adductors",
-		"biceps",
-		"calves",
-		"chest",
-		"forearms",
-		"glutes",
-		"hamstrings",
-		"lats",
-		"lower back",
-		"middle back",
-		"neck",
-		"quadriceps",
-		"shoulders",
-		"traps",
-		"triceps"
+		"Abdominals",
+		"Abductors",
+		"Adductors",
+		"Biceps",
+		"Calves",
+		"Chest",
+		"Forearms",
+		"Glutes",
+		"Hamstrings",
+		"Lats",
+		"Lower back",
+		"Middle back",
+		"Neck",
+		"Quadriceps",
+		"Shoulders",
+		"Traps",
+		"Triceps"
 	];
 
 	const handleChangeExerciseName = (event: { target: { value: string } }) => {
@@ -61,8 +61,13 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 	};
 	
 	const handleChangePrimaryMuscles = (event: SelectChangeEvent<typeof muscles>) => {
-		const {target: { value }} = event;
-		setPrimaryMuscles(typeof value === "string" ? value.split(",") : value);
+		const {
+			target: { value },
+		} = event;
+
+		console.log(value);
+	
+		setPrimaryMuscles(value as string[]);
 	};
 
 	return (
@@ -128,13 +133,13 @@ const EditExerciseDialog: FC<EditExerciseDialogProps> = ({ open, handleCloseDial
 						<FormControl sx={{ width: "100%" }}>
 							<InputLabel>Primary Muscles</InputLabel>
 							<Select 
-								// multiple 
-								// value={primaryMuscles}
-								// onChange={handleChangePrimaryMuscles}
+								multiple 
+								value={primaryMuscles}
+								onChange={handleChangePrimaryMuscles}
 								variant="standard"
 							>
 								{muscles.map(name => (
-									<MenuItem key={name}>
+									<MenuItem key={name} value={name}>
 										{name}
 									</MenuItem>
 								))}
