@@ -42,3 +42,9 @@ export const equipment = [
 	"medicine ball",
 	"other"
 ];
+
+export const force = [
+	"pull",
+	"push",
+	"static"
+];
