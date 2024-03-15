@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Box, Button, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAdminExerciseListContext } from "../hooks/useAdminExerciseListContext";
 import fetchExercises from "../utils/fetchExercises";
@@ -8,6 +8,7 @@ import EditExerciseDialog from "../components/admin/EditExerciseDialog";
 
 const AdminPage = () => {
 	const { state, dispatch } = useAdminExerciseListContext();
+	const [loading, setLoading] = useState<boolean>(true);
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [openDialog, setOpenDialog] = useState(false);
@@ -24,7 +25,10 @@ const AdminPage = () => {
 
 	useEffect(() => {
 		fetchExercises()
-			.then(data => dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data }))
+			.then(data => {
+				dispatch({ type: "INITIALISE_EXERCISE_LIST", payload: data });
+				setLoading(false);
+			})
 			.catch(error => console.error("Error: ", error));
 	}, [state]);
 
@@ -64,29 +68,40 @@ const AdminPage = () => {
 								})}
 							</TableRow>
 						</TableHead>
-						<TableBody>
-							{state.exerciseList
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row) => {
-									return (
-										<TableRow hover key={row._id}>
-											{columnTitles.map((title, columnIndex) => {
-												return (
-													<TableCell key={columnIndex}>
-														{row[title as keyof ExerciseListObjectType]}
-													</TableCell>
-												);
-											})}
-											<TableCell>
-												<Button size="small" onClick={() => handleOpenDialog(row)}>
-													Edit
-												</Button>
-											</TableCell>
-										</TableRow>
-									);
-								})
-							}
-						</TableBody>
+						{loading ? (
+							<TableBody>
+								<TableRow>
+									<TableCell colSpan={columnTitles.length + 1} sx={{ p: 0 }}>
+										<LinearProgress />
+									</TableCell>
+								</TableRow>
+							</TableBody>
+						) : (
+							<TableBody>
+								{state.exerciseList
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map((row) => {
+										return (
+											<TableRow hover key={row._id}>
+												{columnTitles.map((title, columnIndex) => {
+													return (
+														<TableCell key={columnIndex}>
+															{row[title as keyof ExerciseListObjectType]}
+														</TableCell>
+													);
+												})}
+												<TableCell>
+													<Button size="small" onClick={() => handleOpenDialog(row)}>
+														Edit
+													</Button>
+												</TableCell>
+											</TableRow>
+										);
+									})
+								}
+							</TableBody>
+						)}
+						
 					</Table>
 				</TableContainer>
 				<TablePagination
