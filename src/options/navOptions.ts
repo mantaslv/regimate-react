@@ -34,4 +34,9 @@ export const items = [
 		path: "/signup",
 		authRequired: null,
 	},
+	{
+		title: "Calendar",
+		path: "/calendar",
+		authRequired: true,
+	},
 ];
