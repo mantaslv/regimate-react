@@ -1,3 +1,4 @@
+# netlify redirect config
 [[redirects]]
   from = "/*"
   to = "/index.html"
