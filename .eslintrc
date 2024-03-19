@@ -1,5 +1,4 @@
 {
-    // Other ESLint configurations...
     "rules": {
       "react-hooks/exhaustive-deps": "off"
     }
