@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-
-const getWeekStart = (date: Date, weekStartDayNumber = 0): Date => {
-	const dayOfWeek = date.getDay();
-	const diff = dayOfWeek < weekStartDayNumber ? 7 - weekStartDayNumber + dayOfWeek : dayOfWeek - weekStartDayNumber;
-	return new Date(date.getFullYear(), date.getMonth(), date.getDate() - diff);
-};
-
-const addDays = (date: Date, days: number): Date => {
-	const result = new Date(date);
-	result.setDate(result.getDate() + days);
-	return result;
-};
+import { getWeekStart, measureScrollbarWidth } from "../utils/helpers";
+import { addDays } from "date-fns";
 
 const CalendarPage = () => {
 	const [currentWeekStart] = useState(getWeekStart(new Date(), 1));
@@ -21,23 +11,6 @@ const CalendarPage = () => {
 	const lightGreyBorder = `1px solid ${lightGrey}`;
 
 	useEffect(() => {
-		// Function to measure scrollbar width
-		const measureScrollbarWidth = () => {
-			const outer = document.createElement("div");
-			outer.style.visibility = "hidden";
-			outer.style.overflow = "scroll";
-			document.body.appendChild(outer);
-
-			const inner = document.createElement("div");
-			outer.appendChild(inner);
-
-			const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
-
-			outer.parentNode?.removeChild(outer);
-
-			return scrollbarWidth;
-		};
-
 		setScrollbarWidth(measureScrollbarWidth());
 	}, []);
 
@@ -104,7 +77,6 @@ const CalendarPage = () => {
 						<Grid key={iX} item xs sx={{ 
 							flexGrow: 1, 
 							maxWidth: "100%", 
-							// borderBottom: lightGreyBorder,
 						}}>
 							<Box sx={{ height: "10px", borderRight: iX === 6 ? lightGreyBorder: "" }}/>
 							{Array.from({ length: 24 }).map((_, iY) => (
