@@ -17,7 +17,7 @@ const CalendarPage = () => {
 	return (
 		<Box sx={{ mt: "45px",  }}>
 			<Grid container sx={{ 
-				borderTop: lightGreyBorder, 
+				// borderTop: lightGreyBorder, 
 				position: "fixed", 
 				top: "45px", 
 				height: "80px", 
@@ -64,9 +64,9 @@ const CalendarPage = () => {
 						borderRight: lightGreyBorder,
 						pr: "4px"
 					}}>
-						<Box sx={{ height: "3px" }}/>
+						<Box sx={{ height: "2px" }}/>
 						{Array.from({ length: 24 }).map((_, iY) => (
-							<Box key={iY} sx={{ height: "51px" }}>
+							<Box key={iY} sx={{ height: "52px" }}>
 								<Typography fontSize="12px" color="grey" align="right">
 									{iY}:00
 								</Typography>
@@ -77,11 +77,12 @@ const CalendarPage = () => {
 						<Grid key={iX} item xs sx={{ 
 							flexGrow: 1, 
 							maxWidth: "100%", 
+							position: "relative"
 						}}>
 							<Box sx={{ height: "10px", borderRight: iX === 6 ? lightGreyBorder: "" }}/>
 							{Array.from({ length: 24 }).map((_, iY) => (
 								<Box key={iY} sx={{ 
-									height: "50px", 
+									height: "51px", 
 									borderTop: lightGreyBorder, 
 									borderRight: lightGreyBorder, 
 								}}>
