@@ -39,4 +39,9 @@ export const items = [
 		path: "/calendar",
 		authRequired: true,
 	},
+	{
+		title: "Erg Scraper",
+		path: "/erg-scraper",
+		authRequired: true,
+	},
 ];

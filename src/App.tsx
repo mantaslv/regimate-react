@@ -13,6 +13,7 @@ import ViewTrainingPage from "./pages/ViewTrainingPage";
 import AdminPage from "./pages/AdminPage";
 import { AdminExerciseListContextProvider } from "./context/adminExerciseListContext";
 import CalendarPage from "./pages/CalendarPage";
+import ErgScraperPage from "./pages/ErgScraper";
 
 const theme = createTheme();
 
@@ -34,6 +35,7 @@ const App = () => {
 						<Route path='/view-workouts' element={user ? <ViewTrainingPage isWorkout/> : <Navigate to="/login" />} />
 						<Route path='/view-programmes' element={user ? <ViewTrainingPage isProgramme/> : <Navigate to="/login" />} />
 						<Route path='/calendar' element={user ? <CalendarPage/> : <Navigate to="/login" />} />
+						<Route path='/erg-scraper' element={user ? <ErgScraperPage/> : <Navigate to="/login" />} />
 						<Route path='/admin' element={
 							user?.role === "admin" 
 								? <AdminExerciseListContextProvider><AdminPage /></AdminExerciseListContextProvider> 

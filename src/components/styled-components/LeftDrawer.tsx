@@ -17,7 +17,7 @@ interface LeftDrawerProps {
     open: boolean;
     drawerWidth: number;
 	drawerHeader: string;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 const LeftDrawer: FC<LeftDrawerProps> = ({ open, drawerWidth, drawerHeader, children }) => {
